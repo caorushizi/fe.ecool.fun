@@ -1,5 +1,5 @@
 ---
-title: "First post"
+title: "测试博客"
 description: "Lorem ipsum dolor sit amet"
 pubDate: "Jul 08 2022"
 heroImage: "/placeholder-hero.jpg"

@@ -3,11 +3,24 @@ const today = new Date();
 ---
 
 <footer>
-  &copy; {today.getFullYear()} caorushizi. All rights reserved.
+  &copy; {today.getFullYear()} caorushizi | <a href="https://beian.miit.gov.cn/"
+    >豫ICP备20012967号-1</a
+  > | <a href="https://blog.ziying.site">士子的博客</a>
 </footer>
 <style>
   footer {
-    padding: 25px;
-    text-align: center;
+    padding-top: 0 25px;
   }
 </style>
+
+<script>
+  if (import.meta.env.MODE === "production") {
+    var _hmt: any = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a63eab657c133b5b439d5a8bea9e1c1f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode?.insertBefore(hm, s);
+    })();
+  }
+</script>
