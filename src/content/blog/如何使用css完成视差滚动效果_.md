@@ -1,0 +1,92 @@
+---
+title: 如何使用css完成视差滚动效果?
+pubDatetime: 2021-07-03T16:00:00.000Z
+author: caorushizi
+tags:
+  - css
+postSlug: 03e0ccf5c6348baff771d5c5e48c4e41
+description: >-
+  ![](https://static.vue-js.com/1b2d33e0-a18d-11eb-85f6-6fac77c0c9b3.png)预览一、是什么-----视差滚动（ParallaxScro
+difficulty: 2.5
+questionNumber: 75
+source: >-
+  https://fe.ecool.fun/topic-answer/fad85622-728a-4c93-bf22-d91f8902837d?orderBy=updateTime&order=desc&tagId=11
+---
+
+![](https://static.vue-js.com/1b2d33e0-a18d-11eb-85f6-6fac77c0c9b3.png)
+
+预览
+
+## 一、是什么
+
+视差滚动（Parallax Scrolling）是指多层背景以不同的速度移动，形成立体的运动效果，带来非常出色的视觉体验
+
+我们可以把网页解刨成：背景层、内容层、悬浮层
+
+![](https://static.vue-js.com/57c942a0-a1cc-11eb-85f6-6fac77c0c9b3.png)
+
+预览
+
+当滚动鼠标滑轮的时候，各个图层以不同的速度移动，形成视觉差的效果
+
+![](https://static.vue-js.com/e57ab280-a1dd-11eb-ab90-d9ae814b240d.png)
+
+预览
+
+## 二、实现方式
+
+使用`css`形式实现视觉差滚动效果的方式有：
+
+- background-attachment
+- transform:translate3D
+
+### background-attachment
+
+作用是设置背景图像是否固定或者随着页面的其余部分滚动
+
+值分别有如下：
+
+- scroll：默认值，背景图像会随着页面其余部分的滚动而移动
+- fixed：当页面的其余部分滚动时，背景图像不会移动
+- inherit：继承父元素 background-attachment 属性的值
+
+完成滚动视觉差就需要将`background-attachment`属性设置为`fixed`，让背景相对于视口固定。及时一个元素有滚动机制，背景也不会随着元素的内容而滚动
+
+也就是说，背景一开始就已经被固定在初始的位置
+
+核心的`css`代码如下：
+
+```typescript
+undefined;
+```
+
+整体例子如下：
+
+```typescript
+undefined;
+```
+
+### transform:translate3D
+
+同样，让我们先来看一下两个概念`transform`和`perspective`：
+
+- transform: css3 属性，可以对元素进行变换(2d/3d)，包括平移 translate,旋转 rotate,缩放 scale,等等
+- perspective: css3 属性，当元素涉及 3d 变换时，perspective 可以定义我们眼睛看到的 3d 立体效果，即空间感
+
+`3D`视角示意图如下所示：
+
+![](https://static.vue-js.com/24f37dd0-a18d-11eb-85f6-6fac77c0c9b3.png)
+
+预览
+
+举个例子：
+
+```typescript
+undefined;
+```
+
+而这种方式实现视觉差动的原理如下：
+
+- 容器设置上 transform-style: preserve-3d 和 perspective: xpx，那么处于这个容器的子元素就将位于 3D 空间中，
+- 子元素设置不同的 transform: translateZ()，这个时候，不同元素在 3D Z 轴方向距离屏幕（我们的眼睛）的距离也就不一样
+- 滚动滚动条，由于子元素设置了不同的 transform: translateZ()，那么他们滚动的上下距离 translateY 相对屏幕（我们的眼睛），也是不一样的，这就达到了滚动视差的效果

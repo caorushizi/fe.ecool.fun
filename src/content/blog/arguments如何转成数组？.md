@@ -1,0 +1,44 @@
+---
+title: arguments如何转成数组？
+pubDatetime: 2022-08-12T16:00:00.000Z
+author: caorushizi
+tags:
+  - javascript
+postSlug: ab30eefc96302aa384b7d80c85cde7ac
+description: >-
+  函数中的arguments是一个对象，不是一个数组，严格来说它是一个类数组对象。1、调用数组的原型方法来转换--------------```typescriptundefined```2、使用ES6
+difficulty: 1
+questionNumber: 85
+source: >-
+  https://fe.ecool.fun/topic-answer/c51ba9d2-f3d9-4b38-8f33-f962fa4983ea?orderBy=updateTime&order=desc&tagId=10
+---
+
+函数中的 arguments 是一个对象，不是一个数组，严格来说它是一个类数组对象。
+
+## 1、调用数组的原型方法来转换
+
+```typescript
+undefined;
+```
+
+## 2、使用 ES6 的新语法 `Array.from()` 来转换
+
+`Array.from` 方法用于将两类对象转为真正的数组：类似数组的对象和可遍历对象（包括 Set 和 Map）。
+
+```typescript
+undefined;
+```
+
+## 3、使用 for
+
+使用 for 循环挨个将 arguments 对象中的内容复制给新数组中
+
+```typescript
+undefined;
+```
+
+## 4、利用 ES6 中的 rest 参数转换
+
+```typescript
+undefined;
+```

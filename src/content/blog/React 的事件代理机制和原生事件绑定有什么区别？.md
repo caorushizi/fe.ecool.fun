@@ -1,0 +1,19 @@
+---
+title: React 的事件代理机制和原生事件绑定有什么区别？
+pubDatetime: 2021-07-04T16:00:00.000Z
+author: caorushizi
+tags:
+  - react
+postSlug: d1f44aa26734950fbd008070665c15a7
+description: >-
+  *事件传播与阻止事件的传播：React的合成事件并没有实现事件捕获只支持了事件冒泡。阻止事件传播React做了兼容性处理，只需要e.preventDefault()即可，原生存在兼容性问题。*事件类型
+difficulty: 2
+questionNumber: 87
+source: >-
+  https://fe.ecool.fun/topic-answer/116db48b-6ad5-40f1-9f60-c5a525673395?orderBy=updateTime&order=desc&tagId=13
+---
+
+- 事件传播与阻止事件的传播： React 的合成事件并没有实现事件捕获 只支持了事件冒泡。阻止事件传播 React 做了兼容性处理，只需要 e.preventDefault()  即可，原生存在兼容性问题。
+- 事件类型：React 是 原生事件类型 的一个子集（React 只是实现了 DOM level3 的事件接口，有些事件 React 并没有实现，比如 window 的 resize 事件。）阻止 React 事件冒泡的行为只能用于 React 合成事件系统，但是 在原生事件中的阻止冒泡行为，却可以阻止 React 合成事件的传播。
+- 事件的绑定方式：原生事件系统中支持多种不同的绑定事件的方式，React 中只有一种
+- 事件对象：原生中存在 IE 的兼容性问题，React 做了兼容处理。

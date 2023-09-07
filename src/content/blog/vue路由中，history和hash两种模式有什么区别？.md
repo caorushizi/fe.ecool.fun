@@ -1,0 +1,77 @@
+---
+title: vue路由中，history和hash两种模式有什么区别？
+pubDatetime: 2022-04-09T16:00:00.000Z
+author: caorushizi
+tags:
+  - vue
+postSlug: 8d6277eecac8691af72080a02b2b809f
+description: >-
+  前端路由有两种模式：hash模式和history模式，接下来分析这两种模式的实现方式和优缺点。hash模式-------hash模式是一种把前端路由的路径用井号`#`拼接在真实URL后面的模式。当井号
+difficulty: 2
+questionNumber: 21
+source: >-
+  https://fe.ecool.fun/topic-answer/e3a135b5-e6d4-4f1f-8e02-0c977e2ce768?orderBy=updateTime&order=desc&tagId=14
+---
+
+前端路由有两种模式：hash 模式和 history 模式，接下来分析这两种模式的实现方式和优缺点。
+
+## hash 模式
+
+hash 模式是一种把前端路由的路径用井号 `#` 拼接在真实 URL 后面的模式。当井号 `#` 后面的路径发生变化时，浏览器并不会重新发起请求，而是会触发 `hashchange` 事件。
+
+**示例**：
+
+我们新建一个 `hash.html` 文件，内容为：
+
+```typescript
+undefined;
+```
+
+在上面的例子中，我们利用 `a` 标签设置了两个路由导航，把 `app` 当做视图渲染容器，当切换路由的时候触发视图容器的更新，这其实就是大多数前端框架哈希路由的实现原理。
+
+总结一下 hash 模式的优缺点：
+
+- **优点**：浏览器兼容性较好，连 IE8 都支持
+- **缺点**：路径在井号 `#` 的后面，比较丑
+
+## history 模式
+
+history API 是 H5 提供的新特性，允许开发者直接更改前端路由，即更新浏览器 URL 地址而不重新发起请求。
+
+**示例**：
+
+我们新建一个 `history.html`，内容为：
+
+```typescript
+undefined;
+```
+
+history API 提供了丰富的函数供开发者调用，我们不妨把控制台打开，然后输入下面的语句来观察浏览器地址栏的变化：
+
+```typescript
+undefined;
+```
+
+上面的代码监听了 `popstate` 事件，该事件能监听到：
+
+- 用户点击浏览器的前进和后退操作
+- 手动调用 history 的 `back`、`forward` 和 `go` 方法
+
+监听不到：
+
+- history 的 `pushState` 和 `replaceState`方法
+
+这也是为什么上面的 `toA` 和 `toB` 函数内部需要手动调用 `render` 方法的原因。另外，大家可能也注意到 `light-server` 的命令多了 `--historyindex '/history.html'` 参数，这是干什么的呢？
+
+浏览器在刷新的时候，会按照路径发送真实的资源请求，如果这个路径是前端通过 history API 设置的 URL，那么在服务端往往不存在这个资源，于是就返回 404 了。上面的参数的意思就是如果后端资源不存在就返回 `history.html` 的内容。
+
+因此在线上部署基于 history API 的单页面应用的时候，一定要后端配合支持才行，否则会出现大量的 404。以最常用的 Nginx 为例，只需要在配置的 `location /` 中增加下面一行即可：
+
+    try_files $uri /index.html;
+
+总结一下 history 模式的优缺点：
+
+- **优点**：路径比较正规，没有井号 `#`
+- **缺点**：兼容性不如 hash，且需要服务端支持，否则一刷新页面就 404 了
+
+> 本答案由“前端面试题宝典”收集整理，PC 端访问请前往： [https://fe.ecool.fun/](https://fe.ecool.fun/)

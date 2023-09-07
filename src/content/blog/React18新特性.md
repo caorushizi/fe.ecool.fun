@@ -1,0 +1,307 @@
+---
+title: React18新特性
+pubDatetime: 2023-03-18T16:00:00.000Z
+author: caorushizi
+tags:
+  - react
+postSlug: d3198bdbe286b4e013427f41052114df
+description: >-
+  React团队在2022年3月29日正式发布了React的第18个版本。我将在这篇文章里简单介绍React18的新特性，ReactConcurrentMode（并发模式）的实现，以及简要的升级指南。N
+difficulty: 4
+questionNumber: 20
+source: >-
+  https://fe.ecool.fun/topic-answer/6f40b143-3941-44c6-ac90-9bf87795ee2c?orderBy=updateTime&order=desc&tagId=13
+---
+
+React 团队在 2022 年 3 月 29 日正式发布了 React 的第 18 个版本。 我将在这篇文章里简单介绍 React 18 的新特性，React Concurrent Mode（并发模式）的实现，以及简要的升级指南。
+
+# New Features
+
+## Automatic Batching
+
+早在 React 18 之前，React 就已经可以对 state 更新进行批处理了：
+
+```typescript
+undefined;
+```
+
+上面这个例子中，用户点击按钮时会产生两次 state 的更新，按理来说每次 state 更新都会导致一次 re-render。但是，这两次更新完全可以合成一次，从而减少无谓的 re-render 带来的性能损失。
+
+这种批处理只限于 React 原生事件内部的更新。
+
+在 React 18 中，批处理支持处理的操作范围扩大了：Promise，setTimeout，native event handlers 等这些非 React 原生的事件内部的更新也会得到合并：
+
+```typescript
+undefined;
+```
+
+## Transitions
+
+Transitions 是 React 中一个用于区分高优更新和非高优更新的新概念。
+
+- 高优的更新/渲染：包括鼠标点击、打字等对实时交互性要求很高的更新场景，卡顿时会影响用户的交互行为，使用户明显感到整个页面卡顿。
+- 非高优的更新/渲染：普通的 UI 更新，不与用户的交互相关，一些对更新实时性要求没那么高的场景。
+
+这里有一个 [demo](https://react-fractals-git-react-18-swizec.vercel.app/)，上方是一个滑动条用于控制下方树的倾角，最顶上的扇区展示了当前的掉帧情况，当用户拉动滚动条时，下方的树的每一个节点都会重新渲染，这会带来明显的卡顿，不仅是下方树的渲染卡顿，上方的滚动条也会无法实时跟着用户的交互移动，这会给用户带来明显的卡顿感。
+
+类似场景下常见的做法应该是 `debounce` 或 `throttle` ，React 18 为我们提供了原生的方式来解决这个问题：使用 `starTransition` 和 `useTransition`。
+
+- `starTransition`：用于标记非紧急的更新，用 `starTransition` 包裹起来就是告诉 React，这部分代码渲染的优先级不高，可以优先处理其它更重要的渲染。用法如下：
+
+```typescript
+undefined;
+```
+
+- useTransition：除了能提供 startTransition 以外，还能提供一个变量来跟踪当前渲染的执行状态：
+
+```typescript
+undefined;
+```
+
+在勾选了 Use startTransition 后 ，滑动条的更新渲染不会再被树的渲染阻塞了，尽管树叶的渲染仍然需要较多的时间，但是用户使用起来不再有之前那么卡顿了。
+
+## Suspense
+
+Suspense 是 React 提供的用于声明 UI 加载状态的 API：
+
+```typescript
+undefined;
+```
+
+<ComponentThatSuspends /> <Sibling /> </Suspense>
+
+上面这串代码里，组件 `ComponentThatSuspends` 在请求处理数据过程中，React 会在它的位置上展示 Loading 组件。
+
+React 16 和 17 中也已经有 Suspense 了，但是它不是完全体，有许多功能仍未就绪。在 React 团队的计划中，Suspense 的完全体是基于 Concurrent React 的，所以在 React 18，Suspense 相较之前有了一些变化。
+
+### `ComponentThatSuspends` 的兄弟组件会被中断
+
+还是上面那个例子：
+
+```typescript
+undefined;
+```
+
+<ComponentThatSuspends /> <Sibling /> </Suspense>
+
+- Legacy Suspense 中，同级兄弟组件会立即挂载（mounted）到 DOM，相关的 effects 和生命周期会被触发，最后会隐藏这个组件。具体可以查看 [代码示例](https://codesandbox.io/s/keen-banach-nzut8?file=/src/App.js)。
+- Concurrent Suspense 中，同级兄弟组件并不会从 DOM 上卸载，相关的 effects 和生命周期会在 ComponentThatSuspends 处理完成时触发。具体可以查看 [代码示例](https://codesandbox.io/s/romantic-architecture-ht3qi?file=/src/App.js)。
+
+### Suspense 边界之外的 ref
+
+另一个差异是父级 ref 传入的时间：
+
+```typescript
+undefined;
+```
+
+</Suspense>
+
+- 在 Legacy Suspense 中，在渲染之初 `refPassedFromParent.current` 立即指向 DOM 节点，此时 `ComponentThatSuspends` 还未处理完成。
+- 在 Concurrent Suspense 中，在 `ComponentThatSuspends` 完成处理、Suspense 边界解除锁定之前 `refPassedFromParent.current` 一直为 null。
+
+也就是说，在父级代码中访问此类 ref 都需要关注当前 ref 是否已经指向相应的节点。
+
+### Suspense for SSR
+
+React 18 之前的 SSR， 客户端必须一次性的等待 HTML 数据加载到服务器上并且等待所有 JavaScript 加载完毕之后再开始 hydration， 等待所有组件 hydration 后，才能进行交互。即整个过程需要完成从获取数据（服务器）→ 渲染到 HTML（服务器）→ 加载代码（客户端）→ 水合物（客户端）这一套流程。这样的 SSR 并不能使我们的完全可交互变快，只是提高了用户的感知静态页面内容的速度。
+
+React 18 的 Suspense：
+
+- 服务器不需要等待被 Suspense 包裹组件是否加载到完毕，即可发送 HTML，而代替 Suspense 包裹的组件是 fallback 中的内容，一般是一个占位符（spinner），以最小内联 `<script>` 标签标记此 HTML 的位置。等待服务器上组件的数据准备好后，React 再将剩余的 HTML 发送到同一个流中。
+- hydration 的过程是逐步的，不需要等待所有的 js 加载完毕再开始 hydration，避免了页面的卡顿。
+- React 会提前监听页面上交互事件（如鼠标的点击），对发生交互的区域优先进行 hydration。
+
+## New Client and Server Rendering APIs
+
+### Client
+
+- `createRoot`
+  - 新的 root API，在 React 就版本中都是通过 `ReactDom.render` 将应用组件渲染到页面的根元素，在 React 18 中，只有使用 `ReactDom.createRoot` 才能使用新特性。
+
+```typescript
+undefined;
+```
+
+- `hydrateRoot`：同理，用于替代 ReactDOM.hydrate。
+
+### Server
+
+`renderToPipeableStream` 用于 Node 环境，实现流式传输；`renderToReadableStream` 用于 Deno 或 Cloudflare workers 等更现代的运行时中。
+
+## New Hooks
+
+- `useTransition`：见上
+- `useDeferredValue`
+
+  - startTransition 可以用来标记低优先的 state 更新；而 useDeferredValue 可以用来标记低优先的变量。
+  - 下方代码的具体效果是当 `input` 的值改变时，返回的 `graphValue` 并不会立即改变，会首先返回上一次的 `input` 值，如果当前不存在更紧急的更新，才会变成最新的 `input`，因此可以通过 `graphValue` 是否改变来进行一些低优先级的更新。可以在渲染比较耗时的情况下把优先级滞后，在多数情况不会存在不必要的延迟。在较快的机器上，滞后会更少或者根本不存在，在较慢的机器上，会变得更明显。但不论哪种情况，应用都会保持可响应。
+
+```typescript
+undefined;
+```
+
+### 不常用的 hooks
+
+以下的新 hook 主要用于解决 SSR 相关的问题或者是为第三方库的开发设计的，对于普通 React 应用开发者来说几乎用不到：
+
+- `useId` 用于解决 SSR 时客户端与服务端难以生成统一的 ID 的问题。
+- `useSyncExternalStore` 是一个为第三方库编写提供的新 hook，主要用于支持 React 18 在 concurrent rendering 下与第三方 store 的数据同步问题。
+- `useInsertionEffect` 主要用于提高第三方 CSS in JS 库渲染过程中样式注入的性能。
+
+# Concurrent Rendering
+
+React 18 最重要的更新就是全面启用了 concurrent rendering。它不能算是新功能，实际上是 React 内部工作方式的重大变化。为了最终实现 concurrent rendering，React 布局已久。
+
+## 问题
+
+在页面元素很多，且需要频繁 re-render 的场景下，React 15 会出现掉帧的现象。其根本原因是大量的同步计算任务阻塞了浏览器的 UI 渲染。JS 运算、页面布局和绘制都是运行在浏览器的主线程当中，他们之间是互斥的。如果 JS 运算持续占用主线程，页面就没法得到及时的更新。当我们更新 state 触发 re-render 时，React 会遍历应用的所有节点，计算出差异，然后再更新 UI。更新一旦开始，中途就无法中断，直到遍历完整棵树，才能释放主线程。如果页面元素很多，整个过程占用的时机就可能超过 16ms，造成浏览器卡顿。
+
+可以看到，React 15 的实现导致浏览器卡顿的关键在于每一次 re-render 开始了就无法停止，所以 React 团队想了一种解决方法：把 re-render 变成 **可中断** 的。
+
+## 实现
+
+### 思路
+
+- 将 re-render 时的 JS 计算拆分成更小粒度的任务，可以随时暂停、继续和丢弃执行的任务。
+- 当 JS 计算的时间达到 16 毫秒之后使其暂停，把主线程让给 UI 绘制，防止出现渲染掉帧的问题。
+- 在浏览器空闲的时候继续执行之前没执行完的小任务。
+
+### 架构演进
+
+React 15 时期还没有 concurrent 的概念。它主要分为 Reconciler 和 Renderer 两部分：Reconciler 负责生成虚拟 DOM 并进行 diff，找出变动的虚拟 DOM，然后 Renderer 负责将变化的组件渲染到不同的宿主环境中。
+
+React 16 的架构改动较大，多了一层 Scheduler，并且 Reconciler 的部分基于 Fiber 完成了重构。
+
+React 17 相较先前并没有在架构上有大的改动，它是一个用以稳定 concurrent mode 的过渡版本，另外，它使用 Lanes 重构了优先级算法。
+
+### Reconciler
+
+重构以前的 React Reconciler 是基于栈实现的，重构后的 React Reconciler 是基于 Fiber 实现的。
+
+#### Fiber
+
+Fiber 是一种数据结构，源码定义在 [这里](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactInternalTypes.js#L66-L193)。简化来讲，它的主要结构如下：
+
+```typescript
+undefined;
+```
+
+ReactElement，Fiber，DOM 三者的关系：
+
+- ReactElement：所有采用 JSX 语法书写的节点都会被转译，最终会以`React.createElement(...)` 的方式，创建出来一个与之对应的 ReactElement 对象。
+- Fiber：Fiber 对象是通过 ReactElement 对象进行创建的，多个 Fiber 对象构成了一棵 Fiber 树，Fiber 树是构造 DOM 树的数据模型，Fiber 树的任何改动，最后都体现到 DOM 树上。
+- DOM：将文档解析为一个由节点和对象（包含属性和方法的对象）组成的结构集合，也就是常说的 DOM 树。JS 可以访问和操作存储在 DOM 中的内容，也就是操作 DOM 对象，进而触发 UI 渲染。
+
+开发人员通过编程只能控制 ReactElement 树的结构，ReactElement 树驱动 Fiber 树，Fiber 树再驱动 DOM 树，最后展现到页面上。所以 Fiber 树的构造过程，其核心就是 ReactElement 对象到 Fiber 对象的转换过程。（因为篇幅问题，此处不做过多展开。）
+
+#### 双缓存
+
+React 应用中最多同时存在两棵 Fiber 树。当前屏幕上显示内容对应的 Fiber 树叫做 Current Fiber，正在内存中构建的 Fiber 树叫做 workInProgress Fiber，他们通过 alternate 属性相互连接。当 workInProgress Fiber 树构建好了以后，只需要切换一下 current 指针的指向，这两棵树的身份就会完成互换。
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f99da506f2a843708adbfdba47fc4c00~tplv-k3u1fbpfcp-zoom-1.image)
+
+在这种双缓存的机制下，我们可以随时暂停或放弃对 workInProgress Fiber 树的修改，这就使得 React 更新的 **中断** 成为了可能。
+
+#### 流程
+
+整个 Reconciliation 的流程可以简单地分为两个阶段：
+
+- Render 阶段：当 React 需要进行 re-render 时，会遍历 Fiber 树的节点，根据 diff 算法将变化应用到 workInProgress 树上，这个阶段是随时可中断的。
+- Commit 阶段：当 workInProgress 树构建完成之后，将其作为 Current 树，并把 DOM 变动绘制到页面上，这个阶段是不可中断的，必须一气呵成，类似操作系统中「原语」的概念。
+
+### Scheduler
+
+对于大部分浏览器来说，每 1s 会有 60 帧，所以每一帧差不多是 16.6 ms，如果 Reconciliation 的 Render 阶段的更新时间过长，挤占了主线程其它任务的执行时间，就会导致页面卡顿。
+
+> 思路
+>
+> - 将 re-render 时的 JS 计算拆分成更小粒度的任务，可以随时暂停、继续和丢弃执行的任务。
+> - 当 JS 计算的时间达到 16 毫秒之后使其暂停，把主线程让给 UI 绘制，防止出现渲染掉帧的问题。
+> - 在浏览器空闲的时候继续执行之前没执行完的小任务。
+
+让我们回看一下回看上面的解决思路，React 给出的解决方案是将整次 Render 阶段的长任务拆分成多个小任务：
+
+- 每个任务执行的时间控制在 5ms。
+- 把每一帧 5ms 内未执行的任务分配到后面的帧中。
+- 给任务划分优先级，同时进行时优先执行高优任务。
+
+这就留下了三个问题。
+
+> 如何把每个任务执行的时间控制在 5ms？
+
+#### 中断 - `shouldYield()`
+
+Reconciler 的设计使 re-render 具备了 可中断 的特性，而 Scheduler 用于控制 何时中断。
+
+在这里先对比一下 [Concurrent Mode](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.old.js#L1884-L1889) 和 [非 Concurrent Mode](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.old.js#L1796-L1801) 下的代码：
+
+```typescript
+undefined;
+```
+
+可以看到在每次遍历前，都会通过 Scheduler 提供的 `shouldYield` 方法判断是否需要中断遍历。
+
+Scheduler 提供的 `shouldYield` 方法在 [源码](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L615) 中叫 [shouldYieldToHost](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L440-L483)，它通过综合判断已消耗的时间（是否超过 5ms）、是否有用户输入等高优事件来决定是否需要中断遍历，给浏览器渲染和处理其它任务的时间，防止页面卡顿。源码中的注释对于哪些条件/情况下 yield 写得非常清晰。
+
+```typescript
+undefined;
+```
+
+如何把每一帧 5ms 内未执行的任务分配到后面的帧中？
+
+#### 时间切片
+
+如果任务的执行因为超过了 5ms 等被中断了，那么 React Scheduler 会借助一种效果接近于 `setTimeout` 的方式来开启一个宏任务，预定下一次的更新：
+
+```typescript
+undefined;
+```
+
+`requestIdleCallback`？
+
+在其它的很多文章中，都提到了 `requestIdleCallback` 这个 API，然后说 React 团队考虑到兼容性和刷新帧率的问题，没有直接采用它，而是基于 `MessageChannel` 进行了模拟实现。但是从我看到的源码来说，React 是在借助 `MessageChannel` 模拟 `setTimeout` 的行为，将未完成的任务以宏任务的形式发放给浏览器，被动地让浏览器自行安排执行时间，而 `requestIdleCallback` 是主动从浏览器处获取空闲信息并执行任务，个人感觉不太像是一种对 `requestIdleCallback` 的 polyfill。
+
+其它文章大多引用的是 [这部分源码](https://github.com/facebook/react/blob/v17.0.1/packages/scheduler/src/forks/SchedulerHostConfig.default.js)，可以看到这是在 v17 的分支上的，目前最新的 React 源码中已经没有了这个文件，应该是 React 更换了实现方式（[#20025](https://github.com/facebook/react/pull/20025)，[#20915](https://github.com/facebook/react/pull/20915)），那些文章里的说法感觉有些过时？
+
+在 Reconciliation 的 Render 阶段，假设它耗时比较长，为 150ms，那么我们可以把他拆分为单个节点的计算时间之和。单个节点的计算非常快，假设都为 0.1ms。那么可以根据宏任务在帧中执行的特点（一帧里可以执行多个宏任务，同时浏览器还会将宏任务合理分配到不同帧中），将渲染过程改为如下过程：
+
+```typescript
+undefined;
+```
+
+> 如何给任务划分优先级？
+
+#### 基于 Lanes 的优先级控制
+
+React 17 开始采用基于 Lanes 的优先级控制方案：
+
+不同的 Lanes 可以简单理解为不同的数值，数值越小，表明优先级越高。比如用户事件比较紧急，那么可以对应比较高的优先级如 `SyncLane`；UI 界面过渡的更新不那么紧急，可以对应比较低的优先级如 `TransitionLane`；网络加载的更新也不那么紧急，可以对应低优先级 RetryLane。
+
+通过这种优先级，我们就能判断哪些更新优先执行，哪些更新会被中断滞后执行了。举个例子来讲：假如有两个更新，他们同时对 App 组件的一个 `count` 属性更新：
+
+```typescript
+undefined;
+```
+
+</button>
+
+假设 `TransitionLane1` 按钮先点击， `TransitionLane1` 更新开始，按照之前提到时间切片的形式进行更新。中途触发了 `DefaultLane` 按钮点击，进而触发 `DefaultLane` 更新。那么此时就会通过 lane 进行对比，发现 `DefaultLane` 优先级高于 `TransitionLane1`。此时会中断 `TransitionLane1` 更新，开始 `DefaultLane` 更新。直到 `DefaultLane` 更新完成时，再重新开始 `TransitionLane1` 更新。
+
+# 升级指南
+
+- 改变根节点的挂载方式使用新的 API `createRoot`，使用旧的 API 仍然兼容，只有在使用 `createRoot` 了之后才会有 React 18 的新特性。
+- React 18 会启用上面提到的全自动批处理，这算是一个 breaking change，不过 React 也提供了一个 `flushSync` API 用于退出全自动批处理，用法如下：
+
+```typescript
+undefined;
+```
+
+- 如果不用 `flushSync` 的话两个 setState 只会进行一次 re-render，用了之后会触发两次。
+- TS 类型定义上的较大变化：如果有用到 children，需要在组件 props 的定义中写明它的类型，这在以往是可以忽略不写的。其它 TS 相关的改动可以见 [这里](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210)。
+
+```typescript
+undefined;
+```
+
+- React 18 不再支持 IE。

@@ -1,0 +1,15 @@
+---
+title: 将数组的length设置为0，取第一个元素会返回什么？
+pubDatetime: 2022-05-11T16:00:00.000Z
+author: caorushizi
+tags:
+  - javascript
+postSlug: 874769e7de6831e1d5e54059348f432d
+description: 设置`length=0`会清空数组，所以会返回`undefined`
+difficulty: 0.5
+questionNumber: 106
+source: >-
+  https://fe.ecool.fun/topic-answer/cbdbe075-a81e-4c8b-a264-1ffb95a7ee49?orderBy=updateTime&order=desc&tagId=10
+---
+
+设置 `length = 0` 会清空数组，所以会返回 `undefined`

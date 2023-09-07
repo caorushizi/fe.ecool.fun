@@ -1,0 +1,151 @@
+---
+title: ES6中函数新增了哪些扩展?
+pubDatetime: 2021-07-03T16:00:00.000Z
+author: caorushizi
+tags:
+  - es6
+postSlug: 33f1138e195ccfa98387c33247fd68f9
+description: >-
+  ![](https://static.vue-js.com/54a04a10-5569-11eb-85f6-6fac77c0c9b3.png)预览一、参数----`ES6`允许为函数的参数设置默认值`
+difficulty: 1.5
+questionNumber: 31
+source: >-
+  https://fe.ecool.fun/topic-answer/9cf9cb30-8864-4823-bf2d-d30b5f079f45?orderBy=updateTime&order=desc&tagId=24
+---
+
+![](https://static.vue-js.com/54a04a10-5569-11eb-85f6-6fac77c0c9b3.png)
+
+预览
+
+## 一、参数
+
+`ES6`允许为函数的参数设置默认值
+
+```typescript
+undefined;
+```
+
+函数的形参是默认声明的，不能使用`let`或`const`再次声明
+
+```typescript
+undefined;
+```
+
+参数默认值可以与解构赋值的默认值结合起来使用
+
+```typescript
+undefined;
+```
+
+上面的`foo`函数，当参数为对象的时候才能进行解构，如果没有提供参数的时候，变量`x`和`y`就不会生成，从而报错，这里设置默认值避免
+
+```typescript
+undefined;
+```
+
+参数默认值应该是函数的尾参数，如果不是非尾部的参数设置默认值，实际上这个参数是没发省略的
+
+```typescript
+undefined;
+```
+
+## 二、属性
+
+### 函数的 length 属性
+
+`length`将返回没有指定默认值的参数个数
+
+```typescript
+undefined;
+```
+
+`rest` 参数也不会计入`length`属性
+
+```typescript
+undefined;
+```
+
+如果设置了默认值的参数不是尾参数，那么`length`属性也不再计入后面的参数了
+
+```typescript
+undefined;
+```
+
+### name 属性
+
+返回该函数的函数名
+
+```typescript
+undefined;
+```
+
+如果将一个具名函数赋值给一个变量，则 `name`属性都返回这个具名函数原本的名字
+
+```typescript
+undefined;
+```
+
+`Function`构造函数返回的函数实例，`name`属性的值为`anonymous`
+
+```typescript
+undefined;
+```
+
+`bind`返回的函数，`name`属性值会加上`bound`前缀
+
+```typescript
+undefined;
+```
+
+## 三、作用域
+
+一旦设置了参数的默认值，函数进行声明初始化时，参数会形成一个单独的作用域
+
+等到初始化结束，这个作用域就会消失。这种语法行为，在不设置参数默认值时，是不会出现的
+
+下面例子中，`y=x`会形成一个单独作用域，`x`没有被定义，所以指向全局变量`x`
+
+```typescript
+undefined;
+```
+
+## 四、严格模式
+
+只要函数参数使用了默认值、解构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错
+
+```typescript
+undefined;
+```
+
+## 五、箭头函数
+
+使用“箭头”（`=>`）定义函数
+
+```typescript
+undefined;
+```
+
+如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分
+
+```typescript
+undefined;
+```
+
+如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用`return`语句返回
+
+```typescript
+undefined;
+```
+
+如果返回对象，需要加括号将对象包裹
+
+```typescript
+undefined;
+```
+
+注意点：
+
+- 函数体内的`this`对象，就是定义时所在的对象，而不是使用时所在的对象
+- 不可以当作构造函数，也就是说，不可以使用`new`命令，否则会抛出一个错误
+- 不可以使用`arguments`对象，该对象在函数体内不存在。如果要用，可以用 `rest` 参数代替
+- 不可以使用`yield`命令，因此箭头函数不能用作 Generator 函数
