@@ -28,7 +28,7 @@ env:
   BUILD_PATH: "." # default value when not using subfolders
   BUCKET: ziying-web-home
   ENDPOINT: oss-cn-beijing.aliyuncs.com
-  ACCESS_KEY: LTAI5tSK8P7ieUxRb1X2sJsD
+  ACCESS_KEY: LTAI5tLnRgUbF7BHTX91ZihW
   ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
 
 jobs:
