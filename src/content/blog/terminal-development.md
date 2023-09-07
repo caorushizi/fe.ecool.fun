@@ -1,7 +1,7 @@
 ---
-title: How Do I Develop My Terminal Portfolio Website with React
-author: Sat Naing
-pubDatetime: 2022-06-09T03:42:51Z
+title: 前端跨页面通信，你知道哪些方法？
+author: caorushizi
+pubDatetime: 2023-09-07T16:58:00Z
 postSlug: how-do-i-develop-my-terminal-portfolio-website-with-react
 featured: false
 draft: false
@@ -11,9 +11,7 @@ tags:
   - ContextAPI
   - Styled-Components
   - TypeScript
-description:
-  "EXAMPLE POST: Developing a terminal-like website using ReactJS, TypeScript and Styled-Components.
-  Includes features like autocomplete, multiple themes, command hints etc."
+description: "在浏览器中，我们可以同时打开多个Tab页，每个Tab页可以粗略理解为一个“独立”的运行环境，即使是全局对象也不会在多个Tab间共享。然而有些时候，我们希望能在这些“独立”的Tab页面之间同步页面的数据、信息或状态。"
 ---
 
 > This article is originally from my [blog post](https://satnaing.dev/blog/posts/how-do-i-develop-my-terminal-portfolio-website-with-react). I put this article to demonstrate how you can write blog posts/articles using AstroPaper theme.
