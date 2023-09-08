@@ -175,7 +175,7 @@ export default {
         remove(keys, key);
         keys.push(key);
       } else {
-      /* 如果没有命中缓存，则将其设置进缓存 */
+        /* 如果没有命中缓存，则将其设置进缓存 */
         cache[key] = vnode;
         keys.push(key);
         // prune oldest entry

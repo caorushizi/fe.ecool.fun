@@ -393,8 +393,8 @@ source: >-
 1.  修改 **package.json** 文件中的 **sideEffects 属性**， 告诉 **webpack** **.vue 文件**在使用 **tree shaking** 的时候会有 **副作用**， 如下:
 
     "sideEffects": [
-     "*.vue"
-     ]
+    "*.vue"
+    ]
 
 有了上述配置， **webpack** 在处理 **.vue** 文件的时候， 不会使用 **tree shaking**， **不会出现样式丢失的问题**。  
 但是这种解决方法有一个问题， 如果 **script 区域块** 中通过 **import** 的方式引入了 **未使用的模块**，**未使用的模块在最后打包代码的时候不会被删除**。
