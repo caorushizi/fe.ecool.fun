@@ -4,7 +4,7 @@ pubDatetime: 2021-10-24T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: e05475bf786bc9eb2011d6c7e3bb315e
+postSlug: 95275f82e642d6335e92f656c384654a
 description: >-
   ![](https://static.vue-js.com/8db1b5c0-f288-11eb-85f6-6fac77c0c9b3.png)预览一、是什么-----错误在我们日常编写代码是非常常见的
 difficulty: 3
@@ -40,14 +40,40 @@ source: >-
 
 抛出错误后，请使用 `static getDerivedStateFromError()` 渲染备用 UI ，使用 `componentDidCatch()` 打印错误信息，如下：
 
-```typescript
-undefined;
+```jsx
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // 更新 state 使下一次渲染能够显示降级后的 UI
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // 你同样可以将错误日志上报给服务器
+    logErrorToMyService(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // 你可以自定义降级后的 UI 并渲染
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}
 ```
 
 然后就可以把自身组件的作为错误边界的子组件，如下：
 
-```typescript
-undefined;
+```jsx
+<ErrorBoundary>
+  <MyWidget />
+</ErrorBoundary>
 ```
 
 下面这些情况无法捕获到异常：
@@ -71,12 +97,33 @@ undefined;
 
 这种情况可以使用`js`的`try...catch...`语法，如下：
 
-```typescript
-undefined;
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    try {
+      // 执行操作，如有错误则会抛出
+    } catch (error) {
+      this.setState({ error });
+    }
+  }
+
+  render() {
+    if (this.state.error) {
+      return <h1>Caught an error.</h1>;
+    }
+    return <button onClick={this.handleClick}>Click Me</button>;
+  }
+}
 ```
 
 除此之外还可以通过监听`onerror`事件
 
-```typescript
-undefined;
+```js
+window.addEventListener('error', function(event) { ... })
 ```

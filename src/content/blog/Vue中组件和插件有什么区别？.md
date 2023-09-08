@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: fa1d204e3c7f77b00ff35e82ee3de1b0
+postSlug: 20d050c2a4d5a442e981f3400c9f09c8
 description: >-
   ![](https://static.vue-js.com/683475e0-3acc-11eb-ab90-d9ae814b240d.png)预览一、组件是什么-------回顾以前对组件的定义：组件
 difficulty: 1
@@ -55,22 +55,61 @@ source: >-
 
 `vue`文件标准格式
 
-```typescript
-undefined;
+```vue
+<template></template>
+<script>
+export default{
+    ...
+}
+</script>
+<style></style>
 ```
 
 我们还可以通过`template`属性来编写一个组件，如果组件内容多，我们可以在外部定义`template`组件内容，如果组件内容并不多，我们可直接写在`template`属性上
 
-```typescript
-undefined;
+```js
+<template id="testComponent">     // 组件显示的内容
+    <div>component!</div>
+</template>
+
+Vue.component('componentA',{
+    template: '#testComponent'
+    template: `<div>component</div>`  // 组件内容少可以通过这种形式
+})
 ```
 
 #### 编写插件
 
 `vue`插件的实现应该暴露一个 `install` 方法。这个方法的第一个参数是 `Vue` 构造器，第二个参数是一个可选的选项对象
 
-```typescript
-undefined;
+```js
+MyPlugin.install = function (Vue, options) {
+  // 1. 添加全局方法或 property
+  Vue.myGlobalMethod = function () {
+    // 逻辑...
+  }
+
+  // 2. 添加全局资源
+  Vue.directive('my-directive', {
+    bind (el, binding, vnode, oldVnode) {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 3. 注入组件选项
+  Vue.mixin({
+    created: function () {
+      // 逻辑...
+    }
+    ...
+  })
+
+  // 4. 添加实例方法
+  Vue.prototype.$myMethod = function (methodOptions) {
+    // 逻辑...
+  }
+}
 ```
 
 ### 注册形式
@@ -81,8 +120,10 @@ undefined;
 
 全局注册通过`Vue.component`方法，第一个参数为组件的名称，第二个参数为传入的配置项
 
-```typescript
-undefined;
+```js
+Vue.component("my-component-name", {
+  /* ... */
+});
 ```
 
 局部注册只需在用到的地方通过`components`属性注册一个组件

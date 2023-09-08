@@ -4,7 +4,7 @@ pubDatetime: 2022-07-02T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 6643e3e910b1730da3422bc8263bfec5
+postSlug: ce906e4b240a79f7cfaa105933dd991e
 description: >-
   前言--JavaScript语言诞生至今，模块规范化之路曲曲折折。社区先后出现了各种解决方案，包括AMD、CMD、CommonJS等，而后ECMA组织在JavaScript语言标准层面，增加了模块功能
 difficulty: 3
@@ -39,12 +39,40 @@ JavaScript 语言诞生至今，模块规范化之路曲曲折折。社区先后
 
 在刀耕火种的前端原始社会，JS 文件之间的通信基本完全依靠`window`对象（借助 HTML、CSS 或后端等情况除外）。
 
-```typescript
-undefined;
+```js
+// config.js
+var api = "https://github.com/ronffy";
+var config = {
+  api: api,
+};
+
+// utils.js
+var utils = {
+  request() {
+    console.log(window.config.api);
+  },
+};
+
+// main.js
+window.utils.request();
 ```
 
-```typescript
-undefined;
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小贼先生：【深度全面】JS模块规范进化论</title>
+  </head>
+  <body>
+    <!-- 所有 script 标签必须保证顺序正确，否则会依赖报错 -->
+    <script src="./js/config.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
 ```
 
 ### IIFE
@@ -53,14 +81,22 @@ undefined;
 
 这时，IIFE（匿名立即执行函数）出现了：
 
-```typescript
-undefined;
+```js
+;(function () {
+  ...
+}());
 ```
 
 用 IIFE 重构 config.js：
 
-```typescript
-undefined;
+```js
+(function (root) {
+  var api = "https://github.com/ronffy";
+  var config = {
+    api: api,
+  };
+  root.config = config;
+})(window);
 ```
 
 IIFE 的出现，使全局变量的声明数量得到了有效的控制。
@@ -71,20 +107,27 @@ IIFE 的出现，使全局变量的声明数量得到了有效的控制。
 
 这时，`namespace`登场了，简约版本的`namespace`函数的实现（只为演示，不要用于生产）：
 
-```typescript
-undefined;
+```js
+function namespace(tpl, value) {
+  return tpl.split(".").reduce((pre, curr, i) => {
+    return (pre[curr] =
+      i === tpl.split(".").length - 1 ? value || pre[curr] : pre[curr] || {});
+  }, window);
+}
 ```
 
 用`namespace`设置`window.app.a.b`的值：
 
-```typescript
-undefined;
+```js
+namespace("app.a.b", 3); // window.app.a.b 值为 3
 ```
 
 用`namespace`获取`window.app.a.b`的值：
 
-```typescript
-undefined;
+```js
+var b = namespace("app.a.b"); // b 的值为 3
+
+var d = namespace("app.a.c.d"); // d 的值为 undefined
 ```
 
 `app.a.c`值为`undefined`，但因为使用了`namespace`, 所以`app.a.c.d`不会报错，变量`d`的值为`undefined`。
@@ -101,8 +144,14 @@ undefined;
 
 本规范只定义了一个函数`define`，它是全局变量。
 
-```typescript
-undefined;
+```js
+/**
+ * @param {string} id 模块名称
+ * @param {string[]} dependencies 模块所依赖模块的数组
+ * @param {function} factory 模块初始化要执行的函数或对象
+ * @return {any} 模块导出的接口
+ */
+function define(id?, dependencies?, factory): any
 ```
 
 ### RequireJS
@@ -119,12 +168,40 @@ AMD 是一种异步模块规范，RequireJS 是 AMD 规范的实现。
     │  └─ require.js     # RequireJS 的 JS 库
     └─  ...
 
-```typescript
-undefined;
+```js
+// config.js
+define(function () {
+  var api = "https://github.com/ronffy";
+  var config = {
+    api: api,
+  };
+  return config;
+});
+
+// utils.js
+define(["./config"], function (config) {
+  var utils = {
+    request() {
+      console.log(config.api);
+    },
+  };
+  return utils;
+});
+
+// main.js
+require(["./utils"], function (utils) {
+  utils.request();
+});
 ```
 
-```typescript
-undefined;
+```html
+<!-- index.html  -->
+<!-- ...省略其他 -->
+<body>
+
+  <script data-main="./js/main" src="./js/require.js"></script>
+</body>
+</html>
 ```
 
 可以看到，使用 RequireJS 后，每个文件都可以作为一个模块来管理，通信方式也是以模块的形式，这样既可以清晰的管理模块依赖，又可以避免声明全局变量。
@@ -141,8 +218,19 @@ undefined;
 
 二者的的主要区别是 CMD 推崇依赖就近，AMD 推崇依赖前置：
 
-```typescript
-undefined;
+```js
+// AMD
+// 依赖必须一开始就写好
+define(["./utils"], function (utils) {
+  utils.request();
+});
+
+// CMD
+define(function (require) {
+  // 依赖可以就近书写
+  var utils = require("./utils");
+  utils.request();
+});
 ```
 
 AMD 也支持依赖就近，但 RequireJS 作者和官方文档都是优先推荐依赖前置写法。
@@ -157,8 +245,27 @@ AMD 也支持依赖就近，但 RequireJS 作者和官方文档都是优先推�
 
 还是以上面介绍到的 `config.js、utils.js、main.js` 为例，看看 CommonJS 的写法:
 
-```typescript
-undefined;
+```js
+// config.js
+var api = "https://github.com/ronffy";
+var config = {
+  api: api,
+};
+module.exports = config;
+
+// utils.js
+var config = require("./config");
+var utils = {
+  request() {
+    console.log(config.api);
+  },
+};
+module.exports = utils;
+
+// main.js
+var utils = require("./utils");
+utils.request();
+console.log(global.api);
 ```
 
 执行`node main.js`，`https://github.com/ronffy`被打印了出来。
@@ -173,8 +280,11 @@ CommonJS 规范仅定义了`exports`，但`exports`存在一些问题（下面�
 
 每一个文件都是一个模块，每个模块都有一个`module`对象，这个`module`对象的`exports`属性用来导出接口，外部模块导入当前模块时，使用的也是`module`对象，这些都是 node 基于 CommonJS2 规范做的处理。
 
-```typescript
-undefined;
+```js
+// a.js
+var s = "i am ronffy";
+module.exports = s;
+console.log(module);
 ```
 
 执行`node a.js`，看看打印的`module`对象：
@@ -191,34 +301,51 @@ undefined;
 
 其他模块导入该模块时：
 
-```typescript
-undefined;
+```js
+// b.js
+var a = require("./a.js"); // a --> i am ronffy
 ```
 
 当在 a.js 里这样写时：
 
-```typescript
-undefined;
+```js
+// a.js
+var s = "i am ronffy";
+exports = s;
 ```
 
 a.js 模块的`module.exports`是一个空对象。
 
-```typescript
-undefined;
+```js
+// b.js
+var a = require("./a.js"); // a --> {}
 ```
 
 把`module.exports`和`exports`放到“明面”上来写，可能就更清楚了：
 
-```typescript
-undefined;
+```js
+var module = {
+  exports: {},
+};
+var exports = module.exports;
+console.log(module.exports === exports); // true
+
+var s = "i am ronffy";
+exports = s; // module.exports 不受影响
+console.log(module.exports === exports); // false
 ```
 
 模块初始化时，`exports`和`module.exports`指向同一块内存，`exports`被重新赋值后，就切断了跟原内存地址的关系。
 
 所以，`exports`要这样使用：
 
-```typescript
-undefined;
+```js
+// a.js
+exports.s = "i am ronffy";
+
+// b.js
+var a = require("./a.js");
+console.log(a.s); // i am ronffy
 ```
 
 CommonJS 和 CommonJS2 经常被混淆概念，一般大家经常提到的 CommonJS 其实是指 CommonJS2，本文也是如此，不过不管怎样，大家知晓它们的区别和如何应用就好。
@@ -233,8 +360,9 @@ CommonJS 和 AMD 都是运行时加载，换言之：都是在运行时确定模
 2.  CommonJS 加载模块是同步的，即执行`var a = require('./a.js');`时，在 a.js 文件加载完成后，才执行后面的代码。AMD 加载模块是异步的，所有依赖加载完成后以回调函数的形式执行代码。
 3.  \[如下代码\]`fs`和`chalk`都是模块，不同的是，`fs`是 node 内置模块，`chalk`是一个 npm 包。这两种情况在 CommonJS 中才有，AMD 不支持。
 
-```typescript
-undefined;
+```js
+var fs = require("fs");
+var chalk = require("chalk");
 ```
 
 ## UMD
@@ -246,8 +374,26 @@ undefined;
 
 UMD 是一种通用模块定义规范，代码大概这样(假如我们的模块名称是 myLibName):
 
-```typescript
-undefined;
+```js
+!(function (root, factory) {
+  if (typeof exports === "object" && typeof module === "object") {
+    // CommonJS2
+    module.exports = factory();
+    // define.amd 用来判断项目是否应用 require.js。
+    // 更多 define.amd 介绍，请[查看文档](https://github.com/amdjs/amdjs-api/wiki/AMD#defineamd-property-)
+  } else if (typeof define === "function" && define.amd) {
+    // AMD
+    define([], factory);
+  } else if (typeof exports === "object") {
+    // CommonJS
+    exports.myLibName = factory();
+  } else {
+    // 全局变量
+    root.myLibName = factory();
+  }
+})(window, function () {
+  // 模块初始化要执行的代码
+});
 ```
 
 UMD 解决了 JS 模块跨模块规范、跨平台使用的问题，它是非常好的解决方案。
@@ -268,30 +414,44 @@ CommonJS 中顶层作用域不是全局作用域，同样的，ES6 module 中，
 
 #### 方式 1
 
-```typescript
-undefined;
+```js
+export const prefix = "https://github.com";
+export const api = `${prefix}/ronffy`;
 ```
 
 #### 方式 2
 
-```typescript
-undefined;
+```js
+const prefix = "https://github.com";
+const api = `${prefix}/ronffy`;
+export { prefix, api };
 ```
 
 方式 1 和方式 2 只是写法不同，结果是一样的，都是把`prefix`和`api`分别导出。
 
 #### 方式 3（默认导出）
 
-```typescript
-undefined;
+```js
+// foo.js
+export default function foo() {}
+
+// 等同于：
+function foo() {}
+export {
+  foo as default
+}
 ```
 
 `export default`用来导出模块默认的接口，它等同于导出一个名为`default`的接口。配合`export`使用的`as`关键字用来在导出接口时为接口重命名。
 
 #### 方式 4（先导入再导出简写）
 
-```typescript
-undefined;
+```js
+export { api } from "./config.js";
+
+// 等同于：
+import { api } from "./config.js";
+export { api };
 ```
 
 如果需要在一个模块中先导入一个接口，再导出，可以使用`export ... from 'module'`这样的简便写法。
@@ -302,30 +462,47 @@ ES6 module 使用`import`导入模块接口。
 
 导出接口的模块代码 1：
 
-```typescript
-undefined;
+```js
+// config.js
+const prefix = "https://github.com";
+const api = `${prefix}/ronffy`;
+export { prefix, api };
 ```
 
 接口已经导出，如何导入呢：
 
 #### 方式 1
 
-```typescript
-undefined;
+```js
+import { api } from "./config.js";
+
+// or
+// 配合`import`使用的`as`关键字用来为导入的接口重命名。
+import { api as myApi } from "./config.js";
 ```
 
 #### 方式 2（整体导入）
 
-```typescript
-undefined;
+```js
+import * as config from "./config.js";
+const api = config.api;
 ```
 
 将 config.js 模块导出的所有接口都挂载在`config`对象上。
 
 #### 方式 3（默认导出的导入）
 
-```typescript
-undefined;
+```js
+// foo.js
+export const conut = 0;
+export default function myFoo() {}
+
+// index.js
+// 默认导入的接口此处刻意命名为cusFoo，旨在说明该命名可完全自定义。
+import cusFoo, { count } from "./foo.js";
+
+// 等同于：
+import { default as cusFoo, count } from "./foo.js";
 ```
 
 `export default`导出的接口，可以使用`import name from 'module'`导入。这种方式，使导入默认接口很便捷。
@@ -342,14 +519,31 @@ import './config.js';
 
 ES6 module 在处理以上几种导入模块接口的方式时都是编译时处理，所以`import`和`export`命令只能用在模块的顶层，以下方式都会报错：
 
-```typescript
-undefined;
+```js
+// 报错
+if (/* ... */) {
+  import { api } from './config.js';
+}
+
+// 报错
+function foo() {
+  import { api } from './config.js';
+}
+
+// 报错
+const modulePath = './utils' + '/api.js';
+import modulePath;
 ```
 
 使用`import()`实现按需加载：
 
-```typescript
-undefined;
+```js
+function foo() {
+  import("./config.js").then(({ api }) => {});
+}
+
+const modulePath = "./utils" + "/api.js";
+import(modulePath);
 ```
 
 特别说明：  
@@ -365,8 +559,40 @@ ES6 module 是在编译时（`import()`是运行时加载）处理模块依赖�
 
 CommonJS 在导入模块时，会加载该模块，所谓“CommonJS 是运行时加载”，正因代码在运行完成后生成`module.exports`的缘故。当然，CommonJS 对模块做了缓存处理，某个模块即使被多次多处导入，也只加载一次。
 
-```typescript
-undefined;
+```js
+// o.js
+let num = 0;
+function getNum() {
+  return num;
+}
+function setNum(n) {
+  num = n;
+}
+console.log("o init");
+module.exports = {
+  num,
+  getNum,
+  setNum,
+};
+
+// a.js
+const o = require("./o.js");
+o.setNum(1);
+
+// b.js
+const o = require("./o.js");
+// 注意：此处只是演示，项目里不要这样修改模块
+o.num = 2;
+
+// main.js
+const o = require("./o.js");
+
+require("./a.js");
+console.log("a o.num:", o.num);
+
+require("./b.js");
+console.log("b o.num:", o.num);
+console.log("b o.getNum:", o.getNum());
 ```
 
 命令行执行`node main.js`，打印结果如下：
@@ -382,14 +608,37 @@ undefined;
 
 #### ES6 module
 
-```typescript
-undefined;
+```js
+// o.js
+let num = 0;
+function getNum() {
+  return num;
+}
+function setNum(n) {
+  num = n;
+}
+console.log("o init");
+export { num, getNum, setNum };
+
+// main.js
+import { num, getNum, setNum } from "./o.js";
+
+console.log("o.num:", num);
+setNum(1);
+
+console.log("o.num:", num);
+console.log("o.getNum:", getNum());
 ```
 
 我们增加一个 index.js 用于在 node 端支持 ES6 module：
 
-```typescript
-undefined;
+```js
+// index.js
+require("@babel/register")({
+  presets: ["@babel/preset-env"],
+});
+
+module.exports = require("./main.js");
 ```
 
 命令行执行`npm install @babel/core @babel/register @babel/preset-env -D`安装 ES6 相关 npm 包。

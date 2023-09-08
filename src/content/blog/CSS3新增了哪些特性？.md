@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - css
-postSlug: 14b049abe9d72560d2b99d356544d4bd
+postSlug: 03010aab7317a7d72f13c4998bdbdab9
 description: >-
   ![](https://static.vue-js.com/d58f6df0-9b5e-11eb-ab90-d9ae814b240d.png)预览一、是什么-----`css`，即层叠样式表（Casc
 difficulty: 0.5
@@ -142,14 +142,17 @@ CSS3 里面开始支持对文字的更深层次的渲染，具体有三个属性
 
 语法如下：
 
-```typescript
-undefined;
+```css
+transition： CSS属性，花费时间，效果曲线(默认ease)，延迟时间(默认0)
 ```
 
 上面为简写模式，也可以分开写各个属性
 
-```typescript
-undefined;
+```css
+transition-property: width;
+transition-duration: 1s;
+transition-timing-function: linear;
+transition-delay: 2s;
 ```
 
 ### 五、transform 转换

@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - 编程题
-postSlug: 37d678d45ff377370124e924484dcd89
+postSlug: 47c0a729d70ed90f061a70ecc4128183
 description: >-
   ![](https://static.vue-js.com/a35a2950-7b2a-11eb-ab90-d9ae814b240d.png)预览一、是什么-----`AJAX`全称(AsyncJav
 difficulty: 2.5
@@ -54,16 +54,16 @@ source: >-
 
 通过`XMLHttpRequest()` 构造函数用于初始化一个 `XMLHttpRequest` 实例对象
 
-```typescript
-undefined;
+```js
+const xhr = new XMLHttpRequest();
 ```
 
 ### 与服务器建立连接
 
 通过 `XMLHttpRequest` 对象的 `open()` 方法与服务器建立连接
 
-```typescript
-undefined;
+```js
+xhr.open(method, url, [async][, user][, password])
 ```
 
 参数说明：
@@ -78,8 +78,8 @@ undefined;
 
 通过 `XMLHttpRequest` 对象的 `send()` 方法，将客户端页面的数据发送给服务端
 
-```typescript
-undefined;
+```js
+xhr.send([body]);
 ```
 
 `body`: 在 `XHR` 请求中要发送的数据体，如果不传递数据则为 `null`
@@ -105,20 +105,76 @@ undefined;
 
 举个例子：
 
-```typescript
-undefined;
+```js
+const request = new XMLHttpRequest();
+request.onreadystatechange = function (e) {
+  if (request.readyState === 4) {
+    // 整个请求过程完毕
+    if (request.status >= 200 && request.status <= 300) {
+      console.log(request.responseText); // 服务端返回的结果
+    } else if (request.status >= 400) {
+      console.log("错误信息：" + request.status);
+    }
+  }
+};
+request.open("POST", "http://xxxx");
+request.send();
 ```
 
 ## 三、封装
 
 通过上面对`XMLHttpRequest` 对象的了解，下面来封装一个简单的`ajax`请求
 
-```typescript
-undefined;
+```js
+//封装一个ajax请求
+function ajax(options) {
+    //创建XMLHttpRequest对象
+    const xhr = new XMLHttpRequest()
+
+
+    //初始化参数的内容
+    options = options || {}
+    options.type = (options.type || 'GET').toUpperCase()
+    options.dataType = options.dataType || 'json'
+    const params = options.data
+
+    //发送请求
+    if (options.type === 'GET') {
+        xhr.open('GET', options.url + '?' + params, true)
+        xhr.send(null)
+    } else if (options.type === 'POST') {
+        xhr.open('POST', options.url, true)
+        xhr.send(params)
+
+    //接收请求
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            let status = xhr.status
+            if (status >= 200 && status < 300) {
+                options.success && options.success(xhr.responseText, xhr.responseXML)
+            } else {
+                options.fail && options.fail(status)
+            }
+        }
+    }
+}
 ```
 
 使用方式如下
 
-```typescript
-undefined;
+```js
+ajax({
+  type: "post",
+  dataType: "json",
+  data: {},
+  url: "https://xxxx",
+  success: function (text, xml) {
+    //请求成功后的回调函数
+    console.log(text);
+  },
+  fail: function (status) {
+    ////请求失败后的回调函数
+    console.log(status);
+  },
+});
 ```

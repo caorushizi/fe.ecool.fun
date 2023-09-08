@@ -4,7 +4,7 @@ pubDatetime: 2021-08-14T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: 84a6f652a80f88068f20a865f9f22a5c
+postSlug: 4e0967a2307a50a7d07840645ab52753
 description: >-
   React.lazy是什么--------------随着前端应用体积的扩大，资源加载的优化是我们必须要面对的问题，动态代码加载就是其中的一个方案。webpack提供了符合ECMAScript提案的i
 difficulty: 3.5
@@ -56,8 +56,10 @@ Error Boundaries 是一种组件，如果你在组件中定义了 static getDeri
 
 它的用法也非常的简单，可以直接当作一个组件去使用，如下：
 
-```typescript
-undefined;
+```javascript
+<ErrorBoundary>
+  <MyWidget />
+</ErrorBoundary>
 ```
 
 ## 总结

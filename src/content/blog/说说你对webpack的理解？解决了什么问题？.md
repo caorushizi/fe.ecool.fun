@@ -4,7 +4,7 @@ pubDatetime: 2021-07-06T16:00:00.000Z
 author: caorushizi
 tags:
   - 工程化
-postSlug: aec6909e6d4026327c0269e792ab9ace
+postSlug: 3a9e524d9fe15e507412cd19c73fa771
 description: >-
   ![](https://static.vue-js.com/898ed570-a578-11eb-85f6-6fac77c0c9b3.png)预览一、背景----`Webpack`最初的目标是实现前端
 difficulty: 1
@@ -27,8 +27,9 @@ source: >-
 
 约定每个文件是一个独立的模块，然后再将这些`js`文件引入到页面，一个`script`标签对应一个模块，然后调用模块化的成员
 
-```typescript
-undefined;
+```html
+<script src="module-a.js"></script>
+<script src="module-b.js"></script>
 ```
 
 但这种模块弊端十分的明显，模块都是在全局中工作，大量模块成员污染了环境，模块与模块之间并没有依赖关系、维护困难、没有私有空间等问题
@@ -37,16 +38,32 @@ undefined;
 
 随后，就出现了命名空间方式，规定每个模块只暴露一个全局对象，然后模块的内容都挂载到这个对象中
 
-```typescript
-undefined;
+```js
+window.moduleA = {
+  method1: function () {
+    console.log("moduleA#method1");
+  },
+};
 ```
 
 这种方式也并没有解决第一种方式的依赖等问题
 
 再后来，我们使用立即执行函数为模块提供私有空间，通过参数的形式作为依赖声明，如下
 
-```typescript
-undefined;
+```js
+// module-a.js
+(function ($) {
+  var name = "module-a";
+
+  function method1() {
+    console.log(name + "#method1");
+    $("body").animate({ margin: "200px" });
+  }
+
+  window.moduleA = {
+    method1: method1,
+  };
+})(jQuery);
 ```
 
 上述的方式都是早期解决模块的方式，但是仍然存在一些没有解决的问题。例如，我们是用过`script`标签在页面引入这些模块的，这些模块的加载并不受代码的控制，时间一久维护起来也十分的麻烦

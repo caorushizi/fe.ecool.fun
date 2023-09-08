@@ -4,8 +4,9 @@ pubDatetime: 2022-01-09T16:00:00.000Z
 author: caorushizi
 tags:
   - 编程题
-postSlug: 39cc0ee8ad0a4e0c81d4ab6156e20fc9
-description: 这个比较简单，只需要在图片的onload函数中，使用resolve返回一下就可以了。```typescriptundefined```
+postSlug: 05935dc7595f47c32a8e5abe46a11179
+description: >-
+  这个比较简单，只需要在图片的onload函数中，使用resolve返回一下就可以了。```jsfunctionloadImg(url){returnnewPromise((resolve,reject
 difficulty: 3
 questionNumber: 47
 source: >-
@@ -14,6 +15,18 @@ source: >-
 
 这个比较简单，只需要在图片的 onload 函数中，使用 resolve 返回一下就可以了。
 
-```typescript
-undefined;
+```js
+function loadImg(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = function() {
+      resolve(img);
+    };
+    img.onerror = function() {
+    	reject(new Error('Could not load image at' + url));
+    };
+    img.src = url;
+  });
+
+
 ```

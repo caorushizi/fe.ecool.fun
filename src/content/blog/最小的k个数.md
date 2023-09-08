@@ -4,7 +4,7 @@ pubDatetime: 2022-05-10T16:00:00.000Z
 author: caorushizi
 tags:
   - leetcode
-postSlug: b2d5d5cade3a719e300a22b8d06d62a1
+postSlug: 78366010bf4b80578a60f96ea6019338
 description: >-
   输入整数数组`arr`，找出其中最小的`k`个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。**示例1：****输入：**arr=\[3,2,1\],k=2
 difficulty: 1
@@ -32,6 +32,11 @@ source: >-
 - `0 <= k <= arr.length <= 10000`
 - `0 <= arr[i] <= 10000`
 
-```typescript
-undefined;
+```js
+/**
+ * @param {number[]} arr
+ * @param {number} k
+ * @return {number[]}
+ */
+var getLeastNumbers = function (arr, k) {};
 ```

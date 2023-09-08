@@ -4,7 +4,7 @@ pubDatetime: 2022-03-20T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 3cd871e19782b7d4736ab1cfb9d743bb
+postSlug: e91f1683237ea21681153876ee095cab
 description: >-
   >flexible.js官方已不再维护，目前推行vw适配方案，本答案只是为了分析它的原理。flexible.js存在的目的，是为了让网页在各终端上的展示效果就像缩放设计稿图片一样，在不同屏幕上等比缩放
 difficulty: 3
@@ -59,6 +59,52 @@ window.onresize = function() { html.size = P/100 + 'px' }
 
 flexible.js 的源码并不多，总共不到 50 行：
 
-```typescript
-undefined;
+```js
+// 首先是一个立即执行函数，执行时传入的参数是window和document
+(function flexible(window, document) {
+  var docEl = document.documentElement; // 返回文档的root元素
+  var dpr = window.devicePixelRatio || 1;
+  // 获取设备的dpr，即当前设置下物理像素与虚拟像素的比值
+
+  // 调整body标签的fontSize，fontSize = (12 * dpr) + 'px'
+  // 设置默认字体大小，默认的字体大小继承自body
+  function setBodyFontSize() {
+    if (document.body) {
+      document.body.style.fontSize = 12 * dpr + "px";
+    } else {
+      document.addEventListener("DOMContentLoaded", setBodyFontSize);
+    }
+  }
+  setBodyFontSize();
+
+  // set 1rem = viewWidth / 10
+  // 设置root元素的fontSize = 其clientWidth / 10 + ‘px’
+  function setRemUnit() {
+    var rem = docEl.clientWidth / 10;
+    docEl.style.fontSize = rem + "px";
+  }
+
+  setRemUnit();
+
+  // 当页面展示或重新设置大小的时候，触发重新
+  window.addEventListener("resize", setRemUnit);
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) {
+      setRemUnit();
+    }
+  });
+
+  // 检测0.5px的支持，支持则root元素的class中有hairlines
+  if (dpr >= 2) {
+    var fakeBody = document.createElement("body");
+    var testElement = document.createElement("div");
+    testElement.style.border = ".5px solid transparent";
+    fakeBody.appendChild(testElement);
+    docEl.appendChild(fakeBody);
+    if (testElement.offsetHeight === 1) {
+      docEl.classList.add("hairlines");
+    }
+    docEl.removeChild(fakeBody);
+  }
+})(window, document);
 ```

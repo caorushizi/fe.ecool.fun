@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: ae2010ac8815508dc29074b4202bfa4b
+postSlug: 05f15e3803c21cf3bfbdd43382f84c4b
 description: >-
   ![](https://static.vue-js.com/cef7dcc0-3ac9-11eb-85f6-6fac77c0c9b3.png)预览一、什么是双向绑定---------我们先从单向绑定切
 difficulty: 2
@@ -73,14 +73,39 @@ source: >-
 
 先来一个构造函数：执行初始化，对`data`执行响应化处理
 
-```typescript
-undefined;
+```js
+class Vue {
+  constructor(options) {
+    this.$options = options;
+    this.$data = options.data; // 对data选项做响应式处理
+    observe(this.$data); // 代理data到vm上
+    proxy(this); // 执行编译
+    new Compile(options.el, this);
+  }
+}
 ```
 
 对`data`选项执行响应化具体操作
 
-```typescript
-undefined;
+```js
+function observe(obj) {
+  if (typeof obj !== "object" || obj == null) {
+    return;
+  }
+  new Observer(obj);
+}
+
+class Observer {
+  constructor(value) {
+    this.value = value;
+    this.walk(value);
+  }
+  walk(obj) {
+    Object.keys(obj).forEach(key => {
+      defineReactive(obj, key, obj[key]);
+    });
+  }
+}
 ```
 
 #### 编译`Compile`
@@ -136,24 +161,68 @@ undefined;
 3.  由于触发`name1`的`getter`方法，便将`watcher1`添加到`name1`对应的 Dep 中
 4.  当`name1`更新，`setter`触发时，便可通过对应`Dep`通知其管理所有`Watcher`更新
 
-```typescript
-undefined;
+```js
+// 负责更新视图
+class Watcher {
+  constructor(vm, key, updater) {
+    this.vm = vm;
+    this.key = key;
+    this.updaterFn = updater; // 创建实例时，把当前实例指定到Dep.target静态属性上
+
+    Dep.target = this; // 读一下key，触发get
+    vm[key]; // 置空
+    Dep.target = null;
+  } // 未来执行dom更新函数，由dep调用的
+
+  update() {
+    this.updaterFn.call(this.vm, this.vm[this.key]);
+  }
+}
 ```
 
 声明`Dep`
 
-```typescript
-undefined;
+```js
+class Dep {
+  constructor() {
+    this.deps = []; // 依赖管理
+  }
+  addDep(dep) {
+    this.deps.push(dep);
+  }
+  notify() {
+    this.deps.forEach(dep => dep.update());
+  }
+}
 ```
 
 创建`watcher`时触发`getter`
 
-```typescript
-undefined;
+```js
+class Watcher {
+  constructor(vm, key, updateFn) {
+    Dep.target = this;
+    this.vm[this.key];
+    Dep.target = null;
+  }
+}
 ```
 
 依赖收集，创建`Dep`实例
 
-```typescript
-undefined;
+```js
+function defineReactive(obj, key, val) {
+  this.observe(val);
+  const dep = new Dep();
+  Object.defineProperty(obj, key, {
+    get() {
+      Dep.target && dep.addDep(Dep.target); // Dep.target也就是Watcher实例
+      return val;
+    },
+    set(newVal) {
+      if (newVal === val) return;
+      dep.notify(); // 通知dep执行更新方法
+    },
+  });
+}
 ```

@@ -4,7 +4,7 @@ pubDatetime: 2021-07-06T16:00:00.000Z
 author: caorushizi
 tags:
   - 工程化
-postSlug: 1e2a6795d5b28cce8569168ffe8c2407
+postSlug: 56a178098a76302107dc88f8dc4813f5
 description: >-
   ![](https://static.vue-js.com/8d3978a0-a7c2-11eb-85f6-6fac77c0c9b3.png)预览一、是什么-----`Plugin`（Plug-in）
 difficulty: 1.5
@@ -35,8 +35,16 @@ source: >-
 
 这里讲述文件的配置方式，一般情况，通过配置文件导出对象中`plugins`属性传入`new`实例对象。如下所示：
 
-```typescript
-undefined;
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
+const webpack = require('webpack'); // 访问内置的插件
+module.exports = {
+  ...
+  plugins: [
+    new webpack.ProgressPlugin(),
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+  ],
+};
 ```
 
 ## 二、特性
@@ -45,8 +53,18 @@ undefined;
 
 `apply` 方法会被 `webpack compiler` 调用，并且在整个编译生命周期都可以访问 `compiler` 对象
 
-```typescript
-undefined;
+```javascript
+const pluginName = "ConsoleLogOnBuildWebpackPlugin";
+
+class ConsoleLogOnBuildWebpackPlugin {
+  apply(compiler) {
+    compiler.hooks.run.tap(pluginName, compilation => {
+      console.log("webpack 构建过程开始！");
+    });
+  }
+}
+
+module.exports = ConsoleLogOnBuildWebpackPlugin;
 ```
 
 `compiler hook` 的 `tap` 方法的第一个参数，应是驼峰式命名的插件名称
@@ -78,16 +96,39 @@ undefined;
 
 在打包结束后，⾃动生成⼀个 `html` ⽂文件，并把打包生成的 `js` 模块引⼊到该 `html` 中
 
-```typescript
-undefined;
+```bash
+npm install --save-dev html-webpack-plugin
 ```
 
-```typescript
-undefined;
+```js
+// webpack.config.js
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+module.exports = {
+ ...
+  plugins: [
+     new HtmlWebpackPlugin({
+       title: "My App",
+       filename: "app.html",
+       template: "./src/html/index.html"
+     })
+  ]
+};
 ```
 
-```typescript
-undefined;
+```html
+<!--./src/html/index.html-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title><%=htmlWebpackPlugin.options.title%></title>
+  </head>
+  <body>
+    <h1>html-webpack-plugin</h1>
+  </body>
+</html>
 ```
 
 在 `html` 模板中，可以通过 `<%=htmlWebpackPlugin.options.XXX%>` 的方式获取配置的值
@@ -98,50 +139,60 @@ undefined;
 
 删除（清理）构建目录
 
-```typescript
-undefined;
+```bash
+npm install --save-dev clean-webpack-plugin
 ```
 
-```typescript
-undefined;
+```js
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+module.exports = {
+ ...
+  plugins: [
+    ...,
+    new CleanWebpackPlugin(),
+    ...
+  ]
+}
 ```
 
 ### mini-css-extract-plugin
 
 提取 `CSS` 到一个单独的文件中
 
-```typescript
-undefined;
+```bash
+npm install --save-dev mini-css-extract-plugin
 ```
 
-```typescript
-undefined;
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');module.exports = { ...,  module: {   rules: [    {     test: /\.s[ac]ss$/,     use: [      {       loader: MiniCssExtractPlugin.loader     },          'css-loader',          'sass-loader'        ]   }   ] },  plugins: [    ...,    new MiniCssExtractPlugin({     filename: '[name].css'    }),    ...  ]}
 ```
 
 ### DefinePlugin
 
 允许在编译时创建配置的全局对象，是一个`webpack`内置的插件，不需要安装
 
-```typescript
-undefined;
+```js
+const { DefinePlugun } = require('webpack')module.exports = { ...    plugins:[        new DefinePlugin({            BASE_URL:'"./"'        })    ]}
 ```
 
 这时候编译`template`模块的时候，就能通过下述形式获取全局对象
 
-```typescript
-undefined;
+```html
+<link rel="icon" href="<%= BASE_URL%>favicon.ico>"
 ```
 
 ### copy-webpack-plugin
 
 复制文件或目录到执行区域，如`vue`的打包过程中，如果我们将一些文件放到`public`的目录下，那么这个目录会被复制到`dist`文件夹中
 
-```typescript
-undefined;
+```cmd
+npm install copy-webpack-plugin -D
 ```
 
-```typescript
-undefined;
+```js
+new CopyWebpackPlugin({
+  parrerns: [{ from: "public", globOptions: { ignore: ["**/index.html"] } }],
+});
 ```
 
 复制的规则在`patterns`属性中设置：

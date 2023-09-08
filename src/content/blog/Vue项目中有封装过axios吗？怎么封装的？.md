@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 5e6f29231687b4af63fd3f38c7905e56
+postSlug: 1e28e4ede912d38f79233342092cd5b2
 description: >-
   ![](https://static.vue-js.com/2bf1e460-45a7-11eb-85f6-6fac77c0c9b3.png)预览一、axios是什么----------`axios`
 difficulty: 2
@@ -38,26 +38,53 @@ source: >-
 
 安装
 
-```typescript
-undefined;
+```js
+// 项目中安装
+npm install axios --S
+// cdn 引入
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 ```
 
 导入
 
-```typescript
-undefined;
+```js
+import axios from "axios";
 ```
 
 发送请求
 
-```typescript
-undefined;
+```js
+axios({
+  url: "xxx", // 设置请求的地址
+  method: "GET", // 设置请求方法
+  params: {
+    // get请求使用params进行参数凭借,如果是post请求用data
+    type: "",
+    page: 1,
+  },
+}).then(res => {
+  // res为后端返回的数据
+  console.log(res);
+});
 ```
 
 并发请求`axios.all([])`
 
-```typescript
-undefined;
+```js
+function getUserAccount() {
+  return axios.get("/user/12345");
+}
+
+function getUserPermissions() {
+  return axios.get("/user/12345/permissions");
+}
+
+axios.all([getUserAccount(), getUserPermissions()]).then(
+  axios.spread(function (res1, res2) {
+    // res1第一个请求的返回的内容，res2第二个请求返回的内容
+    // 两个请求都执行完成才会执行
+  })
+);
 ```
 
 ## 二、为什么要封装
@@ -70,8 +97,39 @@ undefined;
 
 举个例子：
 
-```typescript
-undefined;
+```js
+axios("http://localhost:3000/data", {
+  // 配置代码
+  method: "GET",
+  timeout: 1000,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "xxx",
+  },
+  transformRequest: [
+    function (data, headers) {
+      return data;
+    },
+  ],
+  // 其他请求配置...
+}).then(
+  data => {
+    // todo: 真正业务逻辑代码
+    console.log(data);
+  },
+  err => {
+    // 错误处理代码
+    if (err.response.status === 401) {
+      // handle authorization error
+    }
+    if (err.response.status === 403) {
+      // handle server forbidden error
+    }
+    // 其他错误处理.....
+    console.log(err);
+  }
+);
 ```
 
 如果每个页面都发送类似的请求，都要写一堆的配置与错误处理，就显得过于繁琐了
@@ -98,42 +156,117 @@ undefined;
 
 利用`node`环境变量来作判断，用来区分开发、测试、生产环境
 
-```typescript
-undefined;
+```js
+if (process.env.NODE_ENV === "development") {
+  axios.defaults.baseURL = "http://dev.xxx.com";
+} else if (process.env.NODE_ENV === "production") {
+  axios.defaults.baseURL = "http://prod.xxx.com";
+}
 ```
 
 在本地调试的时候，还需要在`vue.config.js`文件中配置`devServer`实现代理转发，从而实现跨域
 
-```typescript
-undefined;
+```js
+devServer: {
+    proxy: {
+      '/proxyApi': {
+        target: 'http://dev.xxx.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '/proxyApi': ''
+        }
+      }
+    }
+  }
 ```
 
 ### 设置请求头与超时时间
 
 大部分情况下，请求头都是固定的，只有少部分情况下，会需要一些特殊的请求头，这里将普适性的请求头作为基础配置。当需要特殊请求头时，将特殊请求头作为参数传入，覆盖基础配置
 
-```typescript
-undefined;
+```js
+const service = axios.create({
+    ...
+    timeout: 30000,  // 请求 30s 超时
+	  headers: {
+        get: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+          // 在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
+        },
+        post: {
+          'Content-Type': 'application/json;charset=utf-8'
+          // 在开发中，一般还需要单点登录或者其他功能的通用请求头，可以一并配置进来
+        }
+  },
+})
 ```
 
 ### 封装请求方法
 
 先引入封装好的方法，在要调用的接口重新封装成一个方法暴露出去
 
-```typescript
-undefined;
+```js
+// get 请求
+export function httpGet({ url, params = {} }) {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(url, {
+        params,
+      })
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+}
+
+// post
+// post请求
+export function httpPost({ url, data = {}, params = {} }) {
+  return new Promise((resolve, reject) => {
+    axios({
+      url,
+      method: "post",
+      transformRequest: [
+        function (data) {
+          let ret = "";
+          for (let it in data) {
+            ret +=
+              encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
+          }
+          return ret;
+        },
+      ],
+      // 发送的数据
+      data,
+      // url参数
+      params,
+    }).then(res => {
+      resolve(res.data);
+    });
+  });
+}
 ```
 
 把封装的方法放在一个`api.js`文件中
 
-```typescript
-undefined;
+```js
+import { httpGet, httpPost } from "./http";
+export const getorglist = (params = {}) =>
+  httpGet({ url: "apps/api/org/list", params });
 ```
 
 页面中就能直接调用
 
-```typescript
-undefined;
+```js
+// .vue
+import { getorglist } from "@/assets/js/api";
+
+getorglist({ id: 200 }).then(res => {
+  console.log(res);
+});
 ```
 
 这样可以把`api`统一管理起来，以后维护修改只需要在`api.js`文件操作即可
@@ -142,16 +275,52 @@ undefined;
 
 请求拦截器可以在每个请求里加上 token，做了统一处理后维护起来也方便
 
-```typescript
-undefined;
+```js
+// 请求拦截器
+axios.interceptors.request.use(
+  config => {
+    // 每次发送请求之前判断是否存在token
+    // 如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录情况，此处token一般是用户完成登录后储存到localstorage里的
+    token && (config.headers.Authorization = token);
+    return config;
+  },
+  error => {
+    return Promise.error(error);
+  }
+);
 ```
 
 ### 响应拦截器
 
 响应拦截器可以在接收到响应后先做一层操作，如根据状态码判断登录状态、授权
 
-```typescript
-undefined;
+```js
+// 响应拦截器
+axios.interceptors.response.use(
+  response => {
+    // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
+    // 否则的话抛出错误
+    if (response.status === 200) {
+      if (response.data.code === 511) {
+        // 未授权调取授权接口
+      } else if (response.data.code === 510) {
+        // 未登录跳转登录页
+      } else {
+        return Promise.resolve(response);
+      }
+    } else {
+      return Promise.reject(response);
+    }
+  },
+  error => {
+    // 我们可以在这里对异常状态作统一处理
+    if (error.response.status) {
+      // 处理请求失败的情况
+      // 对不同返回码对相应处理
+      return Promise.reject(error.response);
+    }
+  }
+);
 ```
 
 ### 小结

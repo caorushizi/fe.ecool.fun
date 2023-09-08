@@ -4,7 +4,7 @@ pubDatetime: 2022-04-05T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: d8c3041470b0b6334ab0094764e44720
+postSlug: 275f8206190281ef4ebefd2d0cf55a82
 description: >-
   前言--继承这个概念在面向对象编程思想里面十分重要，也是面试必考的考点之一。javascript的继承主要是依托其原型与原型链的概念来实现的。>ECMAscript将原型链作为实现继承的主要方法。先来
 difficulty: 3
@@ -33,8 +33,22 @@ ES6 提供了 Class 关键字来实现类的定义，Class 可以通过 extends 
 
 原型链继承的原理很简单，直接让子类的原型对象指向父类实例，当子类实例找不到对应的属性和方法时，就会往它的原型对象，也就是父类实例上找，从而实现对父类的属性和方法的继承
 
-```typescript
-undefined;
+```js
+function Person() {
+  this.name = "Back_kk";
+}
+Person.prototype.getName = function () {
+  return this.name;
+};
+function Student() {}
+Student.prototype = new Person();
+// 根据原型链的规则,顺便绑定一下constructor, 这一步不影响继承, 只是在用到constructor时会需要
+// 原型的实例等于自身
+Student.prototype.constructor = Student;
+
+const student = new Student();
+console.log(student.name); // Back_kk
+console.log(student.getName()); // Back_kk
 ```
 
 #### 缺陷
@@ -43,8 +57,23 @@ undefined;
 
 例如：
 
-```typescript
-undefined;
+```js
+function Person() {
+  this.obj = {
+    name: "Back_kk",
+    age: 18,
+  };
+}
+function Student() {}
+Student.prototype = new Person();
+// 根据原型链的规则,顺便绑定一下constructor, 这一步不影响继承, 只是在用到constructor时会需要
+// 原型的实例等于自身
+Student.prototype.constructor = Student;
+
+const student1 = new Student();
+student1.obj.name = "佩奇";
+const student2 = new Student();
+console.log(student2.obj.name); // 佩奇
 ```
 
 2.  在创建子类实例时无法向父类构造传参, 即没有实现 super()的功能
@@ -55,8 +84,19 @@ undefined;
 
 构造函数继承，即在子类的构造函数中执行父类的构造函数，并为其绑定子类的 this，让父类的构造函数把成员属性和方法都挂到子类的 this 上去，这样既能避免实例之间共享一个原型实例，又能向父类构造方法传参。
 
-```typescript
-undefined;
+```js
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.getName = function () {
+  return this.name;
+};
+function Student() {
+  Person.apply(this, arguments);
+}
+
+const student = new Student("Back_kk");
+console.log(student.name); // Back_kk
 ```
 
 #### 缺陷
@@ -71,8 +111,19 @@ undefined;
 
   能否交加修改让其获取到 Person 原型上的属性和方法呢？
 
-  ```typescript
-  undefined;
+  ```js
+  function Person(name) {
+    this.name = name;
+  }
+  Person.prototype.getName = function () {
+    return this.name;
+  };
+  function Student() {
+    // 这里偷偷用了ES6的解构，不影响大局不要在意哈
+    return new Person(...arguments);
+  }
+  const student = new Student("Back_kk");
+  console.log(student); // Back_kk
   ```
 
   这是这样顾此失彼，student 的构造方法变成了 Person,这显然违背了我们的初衷。
@@ -85,8 +136,26 @@ undefined;
 
 组合是继承结合了原型集成和构造函数继承的特点。
 
-```typescript
-undefined;
+```js
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.getName = function () {
+  return this.name;
+};
+function Student() {
+  // 构造函数继承
+  Person.apply(this, arguments);
+}
+// 原型式继承
+Student.prototype = new Person();
+
+// 原型的实例等于自身
+Student.prototype.constructor = Student;
+
+const student = new Student("Back_kk");
+console.log(student.name); // Back_kk
+console.log(student.getName()); // Back_kk
 ```
 
 #### 缺陷
@@ -95,14 +164,31 @@ undefined;
 
 ![](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8d7e70a265e7466fb678a8d1f2b4ccd2~tplv-k3u1fbpfcp-watermark.image?)
 
-预览
-
 ### 4\. 寄生式组合继承
 
 解决构造函数被执行两次的问题, 我们将指向父类实例改为指向父类原型, 减去一次构造函数的执行。
 
-```typescript
-undefined;
+```js
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.getName = function () {
+  return this.name;
+};
+function Student() {
+  // 构造函数继承
+  Person.apply(this, arguments);
+}
+// 原型式继承
+// Student.prototype = new Person();
+Student.prototype = Object.create(Person.prototype);
+
+// 原型的实例等于自身
+Student.prototype.constructor = Student;
+
+const student = new Student("Back_kk");
+console.log(student.name); // Back_kk
+console.log(student.getName()); // Back_kk
 ```
 
 这是目前 ES5 中比较成熟的继承方式了。

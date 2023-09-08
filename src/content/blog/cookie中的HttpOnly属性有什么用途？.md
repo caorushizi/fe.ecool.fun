@@ -1,0 +1,20 @@
+---
+title: cookie中的HttpOnly属性有什么用途？
+pubDatetime: 2021-09-25T16:00:00.000Z
+author: caorushizi
+tags:
+  - 前端安全
+postSlug: db91f904ce953a04234cd79e9fdf969f
+description: >-
+  MDN上对HttpOnly属性的解释：>JavaScriptDocument.cookieAPI无法访问带有HttpOnly属性的cookie；此类Cookie仅作用于服务器。例如，持久化服务器端会话
+difficulty: 1
+questionNumber: 10
+source: >-
+  https://fe.ecool.fun/topic-answer/d370ad63-b673-4887-899d-6446148bcfe7?orderBy=updateTime&order=desc&tagId=21
+---
+
+MDN 上对 HttpOnly 属性的解释：
+
+> JavaScript Document.cookie API 无法访问带有 HttpOnly 属性的 cookie；此类 Cookie 仅作用于服务器。例如，持久化服务器端会话的 Cookie 不需要对 JavaScript 可用，而应具有 HttpOnly 属性。此预防措施有助于缓解跨站点脚本（XSS） (en-US)攻击。
+
+也就是说，对于设置了 HttpOnly 属性为 true 的 cookie，无法通过 js 进行访问或其他操作，只是在发送对应域下的请求时，浏览器会自动带上。这样可以有效缓解 XSS 攻击。

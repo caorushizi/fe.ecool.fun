@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 4efe4beac07736f30b3d0322da14f7a4
+postSlug: 50d8fdfebd4339328c29c58aa008dd86
 description: >-
   解决跨域的方法有很多，下面列举了三种：*JSONP*CORS*Proxy而在`vue`项目中，我们主要针对`CORS`或`Proxy`这两种方案进行展开###CORSCORS（Cross-Origin
 difficulty: 2
@@ -37,8 +37,20 @@ CORS （Cross-Origin Resource Sharing，跨域资源共享）是一个系统，�
 
 添加中间件，直接设置`Access-Control-Allow-Origin`请求头
 
-```typescript
-undefined;
+```js
+app.use(async (ctx, next) => {
+  ctx.set("Access-Control-Allow-Origin", "*");
+  ctx.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild"
+  );
+  ctx.set("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+  if (ctx.method == "OPTIONS") {
+    ctx.body = 200;
+  } else {
+    await next();
+  }
+});
 ```
 
 ps: `Access-Control-Allow-Origin` 设置为\*其实意义不大，可以说是形同虚设，实际应用中，上线前我们会将`Access-Control-Allow-Origin` 值设为我们目标`host`
@@ -55,14 +67,31 @@ ps: `Access-Control-Allow-Origin` 设置为\*其实意义不大，可以说是�
 
 在`vue.config.js`文件，新增以下代码
 
-```typescript
-undefined;
+```js
+amodule.exports = {
+  devServer: {
+    host: "127.0.0.1",
+    port: 8084,
+    open: true, // vue项目启动时自动打开浏览器
+    proxy: {
+      "/api": {
+        // '/api'是代理标识，用于告诉node，url前面是/api的就是使用代理的
+        target: "http://xxx.xxx.xx.xx:8080", //目标地址，一般是指后台服务器地址
+        changeOrigin: true, //是否跨域
+        pathRewrite: {
+          // pathRewrite 的作用是把实际Request Url中的'/api'用""代替
+          "^/api": "",
+        },
+      },
+    },
+  },
+};
 ```
 
 通过`axios`发送请求中，配置请求的根路径
 
-```typescript
-undefined;
+```js
+axios.defaults.baseURL = "/api";
 ```
 
 **方案二**
@@ -71,14 +100,37 @@ undefined;
 
 以`express`框架为例
 
-```typescript
-undefined;
+```js
+var express = require("express");
+const proxy = require("http-proxy-middleware");
+const app = express();
+app.use(express.static(__dirname + "/"));
+app.use(
+  "/api",
+  proxy({ target: "http://localhost:4000", changeOrigin: false })
+);
+module.exports = app;
 ```
 
 **方案三**
 
 通过配置`nginx`实现代理
 
-```typescript
-undefined;
+```js
+server {
+    listen    80;
+    # server_name www.josephxia.com;
+    location / {
+        root  /var/www/html;
+        index  index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    }
+    location /api {
+        proxy_pass  http://127.0.0.1:3000;
+        proxy_redirect   off;
+        proxy_set_header  Host       $host;
+        proxy_set_header  X-Real-IP     $remote_addr;
+        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
+    }
+}
 ```

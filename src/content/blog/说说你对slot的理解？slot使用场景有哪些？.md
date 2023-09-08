@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 2f2b5138accf773eb35f291f2191f53b
+postSlug: df59acde9be05f906509d5df771c97cb
 description: >-
   ![](https://static.vue-js.com/141ca660-3dbc-11eb-85f6-6fac77c0c9b3.png)预览一、slot是什么---------在HTML中`sl
 difficulty: 2
@@ -25,14 +25,35 @@ source: >-
 
 举个栗子
 
-```typescript
-undefined;
+```html
+<template id="element-details-template">
+  <slot name="element-name">Slot template</slot>
+</template>
+<element-details>
+  <span slot="element-name">1</span>
+</element-details>
+<element-details>
+  <span slot="element-name">2</span>
+</element-details>
 ```
 
 `template`不会展示到页面中，需要用先获取它的引用，然后添加到`DOM`中，
 
-```typescript
-undefined;
+```js
+customElements.define(
+  "element-details",
+  class extends HTMLElement {
+    constructor() {
+      super();
+      const template = document.getElementById(
+        "element-details-template"
+      ).content;
+      const shadowRoot = this.attachShadow({ mode: "open" }).appendChild(
+        template.cloneNode(true)
+      );
+    }
+  }
+);
 ```
 
 在`Vue`中的概念也是如此
@@ -73,14 +94,20 @@ undefined;
 
 子组件`Child.vue`
 
-```typescript
-undefined;
+```js
+<template>
+  <slot>
+    <p>插槽后备的内容</p>
+  </slot>
+</template>
 ```
 
 父组件
 
-```typescript
-undefined;
+```js
+<Child>
+  <div>默认插槽</div>
+</Child>
 ```
 
 ### 具名插槽
@@ -91,14 +118,21 @@ undefined;
 
 子组件`Child.vue`
 
-```typescript
-undefined;
+```js
+<template>
+  <slot>插槽后备的内容</slot>
+  <slot name="content">插槽后备的内容</slot>
+</template>
 ```
 
 父组件
 
-```typescript
-undefined;
+```js
+<child>
+    <template v-slot:default>具名插槽</template>
+    <!-- 具名插槽⽤插槽名做参数 -->
+    <template v-slot:content>内容...</template>
+</child>
 ```
 
 ### 作用域插槽
@@ -109,14 +143,26 @@ undefined;
 
 子组件`Child.vue`
 
-```typescript
-undefined;
+```js
+<template>
+  <slot name="footer" testProps="子组件的值">
+    <h3>没传footer插槽</h3>
+  </slot>
+</template>
 ```
 
 父组件
 
-```typescript
-undefined;
+```js
+<child>
+    <!-- 把v-slot的值指定为作⽤域上下⽂对象 -->
+    <template v-slot:default="slotProps">
+      来⾃⼦组件数据：{{slotProps.testProps}}
+    </template>
+  <template #default="slotProps">
+      来⾃⼦组件数据：{{slotProps.testProps}}
+    </template>
+</child>
 ```
 
 ### 小结：
@@ -132,48 +178,114 @@ undefined;
 
 编写一个`buttonCounter`组件，使用匿名插槽
 
-```typescript
-undefined;
+```js
+Vue.component("button-counter", {
+  template: "<div> <slot>我是默认内容</slot></div>",
+});
 ```
 
 使用该组件
 
-```typescript
-undefined;
+```js
+new Vue({
+  el: "#app",
+  template: "<button-counter><span>我是slot传入内容</span></button-counter>",
+  components: { buttonCounter },
+});
 ```
 
 获取`buttonCounter`组件渲染函数
 
-```typescript
-undefined;
+```js
+(function anonymous() {
+  with (this) {
+    return _c("div", [_t("default", [_v("我是默认内容")])], 2);
+  }
+});
 ```
 
 `_v`表示穿件普通文本节点，`_t`表示渲染插槽的函数
 
 渲染插槽函数`renderSlot`（做了简化）
 
-```typescript
-undefined;
+```js
+function renderSlot(name, fallback, props, bindObject) {
+  // 得到渲染插槽内容的函数
+  var scopedSlotFn = this.$scopedSlots[name];
+  var nodes;
+  // 如果存在插槽渲染函数，则执行插槽渲染函数，生成nodes节点返回
+  // 否则使用默认值
+  nodes = scopedSlotFn(props) || fallback;
+  return nodes;
+}
 ```
 
 `name`属性表示定义插槽的名字，默认值为`default`，`fallback`表示子组件中的`slot`节点的默认值
 
 关于`this.$scopredSlots`是什么，我们可以先看看`vm.slot`
 
-```typescript
-undefined;
+```js
+function initRender (vm) {
+  ...
+  vm.$slots = resolveSlots(options._renderChildren, renderContext);
+  ...
+}
 ```
 
 `resolveSlots`函数会对`children`节点做归类和过滤处理，返回`slots`
 
-```typescript
-undefined;
+```js
+function resolveSlots(children, context) {
+  if (!children || !children.length) {
+    return {};
+  }
+  var slots = {};
+  for (var i = 0, l = children.length; i < l; i++) {
+    var child = children[i];
+    var data = child.data;
+    // remove slot attribute if the node is resolved as a Vue slot node
+    if (data && data.attrs && data.attrs.slot) {
+      delete data.attrs.slot;
+    }
+    // named slots should only be respected if the vnode was rendered in the
+    // same context.
+    if (
+      (child.context === context || child.fnContext === context) &&
+      data &&
+      data.slot != null
+    ) {
+      // 如果slot存在(slot="header") 则拿对应的值作为key
+      var name = data.slot;
+      var slot = slots[name] || (slots[name] = []);
+      // 如果是tempalte元素 则把template的children添加进数组中，这也就是为什么你写的template标签并不会渲染成另一个标签到页面
+      if (child.tag === "template") {
+        slot.push.apply(slot, child.children || []);
+      } else {
+        slot.push(child);
+      }
+    } else {
+      // 如果没有就默认是default
+      (slots.default || (slots.default = [])).push(child);
+    }
+  }
+  // ignore slots that contains only whitespace
+  for (var name$1 in slots) {
+    if (slots[name$1].every(isWhitespace)) {
+      delete slots[name$1];
+    }
+  }
+  return slots;
+}
 ```
 
 `_render`渲染函数通过`normalizeScopedSlots`得到`vm.$scopedSlots`
 
-```typescript
-undefined;
+```js
+vm.$scopedSlots = normalizeScopedSlots(
+  _parentVnode.data.scopedSlots,
+  vm.$slots,
+  vm.$scopedSlots
+);
 ```
 
 作用域插槽中父组件能够得到子组件的值是因为在`renderSlot`的时候执行会传入`props`，也就是上述`_t`第三个参数，父组件则能够得到子组件传递过来的值

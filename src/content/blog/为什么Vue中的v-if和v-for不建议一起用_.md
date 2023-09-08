@@ -4,7 +4,7 @@ pubDatetime: 2023-04-17T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: a5d8a72ec69c28c4e56fe2624eead9d0
+postSlug: b12620173d167cfd23be580ce36c9f1f
 description: >-
   一、作用----`v-if`指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回`true`值的时候被渲染`v-for`指令基于一个数组来渲染一个列表。`v-for`指令需要使用`itemin
 difficulty: 1
@@ -23,8 +23,12 @@ source: >-
 
 两者在用法上
 
-```typescript
-undefined;
+```js
+<Modal v-if="isShow" />
+
+<li v-for="item in items" :key="item.id">
+    {{ item.label }}
+</li>
 ```
 
 ## 二、优先级
@@ -42,12 +46,20 @@ undefined;
 1.  永远不要把 `v-if` 和 `v-for` 同时用在同一个元素上，带来性能方面的浪费（每次渲染都会先循环再进行条件判断）
 2.  如果避免出现这种情况，则在外层嵌套`template`（页面渲染不生成`dom`节点），在这一层进行 v-if 判断，然后在内部进行 v-for 循环
 
-```typescript
-undefined;
+```js
+<template v-if="isShow">
+    <p v-for="item in items">
+</template>
 ```
 
 3.  如果条件出现在循环内部，可通过计算属性`computed`提前过滤掉那些不需要显示的项
 
-```typescript
-undefined;
+```js
+computed: {
+    items: function() {
+      return this.list.filter(function (item) {
+        return item.isShow
+      })
+    }
+}
 ```

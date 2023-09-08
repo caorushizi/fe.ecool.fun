@@ -4,7 +4,7 @@ pubDatetime: 2023-01-08T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 9c596d3a457f2a266640e27e1e5ae60e
+postSlug: 53772b6e058b8bee1b9bb0d274bd252e
 description: >-
   数组不是以一组连续的区域存储在内存中，而是一种哈希映射的形式。它可以通过多种数据结构来实现，其中一种是链表。js分为基本类型和引用类型：*基本类型是保存在栈内存中的简单数据段，它们的值都有固定的大小，
 difficulty: 3.5
@@ -39,8 +39,16 @@ js 的数据分为两种， 一种是原始类型（Boolean,Null,Undefined,Numbe
 
 原始类型有一个特点就是不可变。示例代码如下
 
-```typescript
-undefined;
+```js
+// 例子1
+var str = "abc";
+str[0] = "d";
+console.log(str); // abc
+
+// 例子2
+var str2 = "abc";
+str2 = "dbc";
+console.log(str2); // dbc
 ```
 
 例子 1 的数据没有改变， 例子 2 的数据却改变了， 实际上例子 2 是创建了一个新的字符串， 也就是内存开辟了一个新的区域给"dbc"使用。

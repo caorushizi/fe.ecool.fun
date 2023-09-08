@@ -4,9 +4,9 @@ pubDatetime: 2021-07-04T16:00:00.000Z
 author: caorushizi
 tags:
   - html
-postSlug: a0cba4e9761038439295c310346a0c06
+postSlug: f4ceebaaa352106f20acf6ba4d951ac0
 description: >-
-  当页面中a标签不需要任何跳转时，从原理上来讲，可分如下两种方法：*标签属性href，使其指向空或不返回任何内容。如：```typescriptundefined```*从标签事件入手，阻止其默认行为。
+  当页面中a标签不需要任何跳转时，从原理上来讲，可分如下两种方法：*标签属性href，使其指向空或不返回任何内容。如：```html<ahref="javascript:void(0);">点此无反应j
 difficulty: 2
 questionNumber: 56
 source: >-
@@ -17,26 +17,29 @@ source: >-
 
 - 标签属性 href，使其指向空或不返回任何内容。如：
 
-```typescript
-undefined;
+```html
+<a href="javascript:void(0);">点此无反应javascript:void(0)</a>
+
+<a href="javascript:;">点此无反应javascript:</a>
 ```
 
 - 从标签事件入手，阻止其默认行为。如：
 
 html 方法：
 
-```typescript
-undefined;
+```html
+<a href="" onclick="return false;">return false;</a>
+<a href="#" onclick="return false;">return false;</a>
 ```
 
 或者在 js 文件中阻止默认点击事件：
 
-```typescript
-undefined;
+```javascript
+Event.preventDefault();
 ```
 
 还可以在 css 文件中处理点击，不响应任何鼠标事件：
 
-```typescript
-undefined;
+```css
+pointer-events: none;
 ```

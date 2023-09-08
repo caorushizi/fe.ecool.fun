@@ -4,7 +4,7 @@ pubDatetime: 2022-04-05T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 514211bd458d050749b56ac497891e42
+postSlug: 2105df8caa08c9448b3c32d1ddae1f8b
 description: >-
   明确函数的双重用途---------`JavaScript`中的函数一般有两种使用方式:*当作构造函数使用:`newFunc()`*当作普通函数使用:`Func()`但`JavaScript`内部并没
 difficulty: 2.5
@@ -24,8 +24,17 @@ source: >-
 
 下面来举个栗子:
 
-```typescript
-undefined;
+```js
+// 定义构造函数 Person
+function Person(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.fullName = this.firstName + this.lastName;
+}
+// 使用 new 调用
+console.log(new Person("战场", "小包"));
+// 当作普通函数调用
+console.log(Person("战场", "小包"));
 ```
 
 输出结果:
@@ -44,8 +53,8 @@ undefined;
 
 使用语法:
 
-```typescript
-undefined;
+```js
+object instanceof constructor;
 ```
 
 我们可以使用 `instanceof` 检测某个对象是不是另一个对象的实例，例如 `new Person() instanceof Person --> true`
@@ -55,8 +64,14 @@ undefined;
 - 通过 `new` 来调用构造函数，会生成一个新对象，并且把这个新对象绑定为调用函数的 `this` 。
 - 如果普通调用函数，非严格模式 `this` 指向 `window`，严格模式指向 `undefined`
 
-```typescript
-undefined;
+```js
+function Test() {
+  console.log(this);
+}
+// Window {...}
+console.log(Test());
+// Test {}
+console.log(new Test());
 ```
 
 使用 `new` 调用函数和普通调用函数最大的区别在于**函数内部 `this` 指向不同: `new` 调用后 `this` 指向实例，普通调用则会指向 `window`**。
@@ -65,8 +80,23 @@ undefined;
 
 ### 代码实现
 
-```typescript
-undefined;
+```js
+function Person(firstName, lastName) {
+  // this instanceof Person
+  // 如果返回值为 false，说明为普通调用
+  // 返回类型错误信息——当前构造函数需要使用 new 调用
+  if (!(this instanceof Person)) {
+    throw new TypeError(
+      'Function constructor A cannot be invoked without "new"'
+    );
+  }
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.fullName = this.firstName + this.lastName;
+}
+// 当作普通函数调用
+// Uncaught TypeError: Function constructor A cannot be invoked without "new"
+console.log(Person("战场", "小包"));
 ```
 
 通过输出结果，我们可以发现，定义的 `Person` 构造函数已经无法被普通调用了。撒花~~~
@@ -75,8 +105,9 @@ undefined;
 
 具体实现: `JavaScript` 提供的 `apply/call` 方法可以修改 `this` 指向，如果调用时将 `this` 指向修改为 `Person` 实例，就可以成功骗过上面的语法。
 
-```typescript
-undefined;
+```js
+// 输出结果 undefined
+console.log(Person.call(new Person(), "战场", "小包"));
 ```
 
 这点瑕疵虽说无伤大雅，但经过小包的学习，`ES6` 中提供了更好的方案。
@@ -89,14 +120,28 @@ undefined;
 
 `new.target` 就是为确定构造函数的调用方式而生的，太符合这个场景了，我们来试一下 `new.target` 的用法。
 
-```typescript
-undefined;
+```js
+function Person() {
+  console.log(new.target);
+}
+// new: Person {}
+console.log("new: ", new Person());
+// not new: undefined
+console.log("not new:", Person());
 ```
 
 所以我们就可以使用 `new.target` 来非常简单的实现对构造函数的限制。
 
-```typescript
-undefined;
+```js
+function Person() {
+  if (!new.target) {
+    throw new TypeError(
+      'Function constructor A cannot be invoked without "new"'
+    );
+  }
+}
+// Uncaught TypeError: Function constructor A cannot be invoked without "new"
+console.log("not new:", Person());
 ```
 
 ## 使用 ES6 Class
@@ -107,8 +152,14 @@ undefined;
 
 因此后续在进行面向对象编程时，强烈推荐使用 `ES6` 的 `Class`。 `Class` 修复了很多 `ES5` 面向对象编程的缺陷，例如类中的所有方法都是不可枚举的；类的所有方法都无法被当作构造函数使用等。
 
-```typescript
-undefined;
+```js
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+}
+// Uncaught TypeError: Class constructor Person cannot be invoked without 'new'
+console.log(Person());
 ```
 
 学到这里我就不由得好奇了，既然 `Class` 必须使用 `new` 来调用，那提供 `new.target` 属性的意义在哪里？
@@ -117,8 +168,14 @@ undefined;
 
 首先来看一下 `new.target` 在类中使用会返回什么？
 
-```typescript
-undefined;
+```js
+class Person {
+  constructor(name) {
+    this.name = name;
+    console.log(new.target);
+  }
+}
+new Person();
 ```
 
 输出结果:
@@ -131,8 +188,22 @@ undefined;
 
 《ECMAScript 6 入门》中又讲到: **需要注意的是，子类继承父类时，`new.target`会返回子类**。继承中的 `new.target` 好像有不一样的花样，我们来试一下。
 
-```typescript
-undefined;
+```js
+class Animal {
+  constructor(type, name, age) {
+    this.type = type;
+    this.name = name;
+    this.age = age;
+    console.log(new.target);
+  }
+}
+// extends 是 Class 中实现继承的关键字
+class Dog extends Animal {
+  constructor(name, age) {
+    super("dog", "baobao", "1");
+  }
+}
+const dog = new Dog();
 ```
 
 输出结果:
@@ -155,8 +226,25 @@ undefined;
 
 > 抽象类也可以理解为不能独立使用、必须继承后才能使用的类。
 
-```typescript
-undefined;
+```js
+class Animal {
+  constructor(type, name, age) {
+    if (new.target === Animal) {
+      throw new TypeError("abstract class cannot new");
+    }
+    this.type = type;
+    this.name = name;
+    this.age = age;
+  }
+}
+// extends 是 Class 中实现继承的关键字
+class Dog extends Animal {
+  constructor(name, age) {
+    super("dog", "baobao", "1");
+  }
+}
+// Uncaught TypeError: abstract class cannot new
+const dog = new Animal("dog", "baobao", 18);
 ```
 
 ## 总结

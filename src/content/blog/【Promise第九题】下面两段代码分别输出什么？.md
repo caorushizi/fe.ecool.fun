@@ -4,8 +4,9 @@ pubDatetime: 2022-01-09T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: ffe2bdea9e96ab6bcf39413730e85e29
-description: 代码一：```typescriptundefined```代码二：```typescriptundefined```
+postSlug: 07836d112d7ecdfca6e28227c279a18d
+description: >-
+  代码一：```jssetTimeout(()=>{console.log('timer1');setTimeout(()=>{console.log('timer3')},0)},0)setTimeo
 difficulty: 3
 questionNumber: 169
 source: >-
@@ -14,12 +15,30 @@ source: >-
 
 代码一：
 
-```typescript
-undefined;
+```js
+setTimeout(() => {
+  console.log("timer1");
+  setTimeout(() => {
+    console.log("timer3");
+  }, 0);
+}, 0);
+setTimeout(() => {
+  console.log("timer2");
+}, 0);
+console.log("start");
 ```
 
 代码二：
 
-```typescript
-undefined;
+```js
+setTimeout(() => {
+  console.log("timer1");
+  Promise.resolve().then(() => {
+    console.log("promise");
+  });
+}, 0);
+setTimeout(() => {
+  console.log("timer2");
+}, 0);
+console.log("start");
 ```

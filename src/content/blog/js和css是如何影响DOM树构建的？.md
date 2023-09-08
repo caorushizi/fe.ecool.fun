@@ -4,7 +4,7 @@ pubDatetime: 2022-04-09T16:00:00.000Z
 author: caorushizi
 tags:
   - html
-postSlug: 9959c44b450a3a84db7629818a53e2f7
+postSlug: 70a765ffd90e3117c27db298e57b51d3
 description: >-
   先做个总结，然后再进行具体的分析：CSS不会阻塞DOM的解析，但是会影响JAVAScript的运行，javaSscript会阻止DOM树的解析，最终css（CSSOM）会影响DOM树的渲染，也可以说最
 difficulty: 3
@@ -21,8 +21,17 @@ CSS 不会阻塞 DOM 的解析，但是会影响 JAVAScript 的运行，javaSscr
 
 ## JavaScript 脚本在 html 页面中
 
-```typescript
-undefined;
+```html
+<html>
+  <body>
+    <div>1</div>
+    <script>
+      let div1 = document.getElementsByTagName("div")[0];
+      div1.innerText = "time.geekbang";
+    </script>
+    <div>test</div>
+  </body>
+</html>
 ```
 
 两段 div 中间插入一段 JavaScript 脚本，这段脚本的解析过程就有点不一样了。
@@ -33,12 +42,20 @@ undefined;
 
 ## html 页面中引入 javaScript 文件
 
-```typescript
-undefined;
+```js
+//foo.js
+let div1 = document.getElementsByTagName("div")[0];
+div1.innerText = "time.geekbang";
 ```
 
-```typescript
-undefined;
+```html
+<html>
+  <body>
+    <div>1</div>
+    <script type="text/javascript" src="foo.js"></script>
+    <div>test</div>
+  </body>
+</html>
 ```
 
 这段代码的功能还是和前面那段代码是一样的，只是把内嵌 JavaScript 脚本修改成了通过 javaScript 文件加载。
@@ -63,12 +80,28 @@ async 和 defer 区别：
 
 ## html 页面中有 css 样式
 
-```typescript
-undefined;
+```css
+//theme.css
+div {
+  color: blue;
+}
 ```
 
-```typescript
-undefined;
+```html
+<html>
+  <head>
+    <style src="theme.css"></style>
+  </head>
+  <body>
+    <div>1</div>
+    <script>
+      let div1 = document.getElementsByTagName("div")[0];
+      div1.innerText = "time.geekbang"; // 需要 DOM
+      div1.style.color = "red"; // 需要 CSSOM
+    </script>
+    <div>test</div>
+  </body>
+</html>
 ```
 
 该示例中，JavaScript 代码出现了 `div1.style.color = ‘red’` 的语句，它是用来操纵 CSSOM 的，所以在执行 JavaScript 之前，需要先解析 JavaScript 语句之上所有的 CSS 样式。所以如果代码里引用了外部的 CSS 文件，那么在执行 JavaScript 之前，还需要等待外部的 CSS 文件下载完成，并解析生成 CSSOM 对象之后，才能执行 JavaScript 脚本。

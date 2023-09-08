@@ -4,7 +4,7 @@ pubDatetime: 2023-08-17T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 174fe21392d2ac39d68f6a080c0c4597
+postSlug: f915eb0dcfc0629b1caa056236dae8e3
 description: >-
   一、直接添加属性的问题-----------我们从一个例子开始定义一个`p`标签，通过`v-for`指令进行遍历然后给`botton`标签绑定点击事件，我们预期点击按钮时，数据新增一个属性，界面也新增
 difficulty: 2
@@ -21,14 +21,28 @@ source: >-
 
 然后给`botton`标签绑定点击事件，我们预期点击按钮时，数据新增一个属性，界面也 新增一行
 
-```typescript
-undefined;
+```html
+<p v-for="(value,key) in item" :key="key">{{ value }}</p>
+<button @click="addProperty">动态添加新属性</button>
 ```
 
 实例化一个`vue`实例，定义`data`属性和`methods`方法
 
-```typescript
-undefined;
+```js
+const app = new Vue({
+  el: "#app",
+  data: () => {
+    item: {
+      oldProperty: "旧属性";
+    }
+  },
+  methods: {
+    addProperty() {
+      this.items.newProperty = "新属性"; // 为items添加新属性
+      console.log(this.items); // 输出带有newProperty的items
+    },
+  },
+});
 ```
 
 点击按钮，发现结果不及预期，数据虽然更新了（`console`打印出了新属性），但页面并没有更新
@@ -41,20 +55,33 @@ undefined;
 
 `vue2`是用过`Object.defineProperty`实现数据响应式
 
-```typescript
-undefined;
+```js
+const obj = {};
+Object.defineProperty(obj, "foo", {
+  get() {
+    console.log(`get foo:${val}`);
+    return val;
+  },
+  set(newVal) {
+    if (newVal !== val) {
+      console.log(`set foo:${newVal}`);
+      val = newVal;
+    }
+  },
+});
 ```
 
 当我们访问`foo`属性或者设置`foo`值的时候都能够触发`setter`与`getter`
 
-```typescript
-undefined;
+```js
+obj.foo;
+obj.foo = "new";
 ```
 
 但是我们为`obj`添加新属性的时候，却无法触发事件属性的拦截
 
-```typescript
-undefined;
+```js
+obj.bar = "新属性";
 ```
 
 原因是一开始`obj`的`foo`属性被设成了响应式数据，而`bar`是后面新增的属性，并没有通过`Object.defineProperty`设置成响应式数据
@@ -87,8 +114,13 @@ Vue.set( target, propertyName/index, value )
 
 源码位置：`src\core\observer\index.js`
 
-```typescript
-undefined;
+```js
+function set (target: Array<any> | Object, key: any, val: any): any {
+  ...
+  defineReactive(ob.value, key, val)
+  ob.dep.notify()
+  return val
+}
 ```
 
 这里无非再次调用`defineReactive`方法，实现新增属性的响应式
@@ -97,8 +129,21 @@ undefined;
 
 大致代码如下：
 
-```typescript
-undefined;
+```js
+function defineReactive(obj, key, val) {
+  Object.defineProperty(obj, key, {
+    get() {
+      console.log(`get ${key}:${val}`);
+      return val;
+    },
+    set(newVal) {
+      if (newVal !== val) {
+        console.log(`set ${key}:${newVal}`);
+        val = newVal;
+      }
+    },
+  });
+}
 ```
 
 ### Object.assign()
@@ -107,8 +152,8 @@ undefined;
 
 应创建一个新的对象，合并原对象和混入对象的属性
 
-```typescript
-undefined;
+```js
+this.someObject = Object.assign({},this.someObject,{newProperty1:1,newProperty2:2 ...})
 ```
 
 ### $forceUpdate

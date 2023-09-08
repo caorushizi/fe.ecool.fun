@@ -4,7 +4,7 @@ pubDatetime: 2022-04-09T16:00:00.000Z
 author: caorushizi
 tags:
   - css
-postSlug: ebf2b605f8f5763d5df338f8694e7d0d
+postSlug: 2347b37f4a8dbd53e8ffc851cc8f6d7e
 description: >-
   在大多数情况下我们在设置元素的border和padding并不希望改变元素的width,height值，这个时候我们就可以为该元素设置`box-sizing:border-box;`。如果不希望每次都
 difficulty: 1
@@ -17,8 +17,15 @@ source: >-
 
 如果不希望每次都重写一遍，而是希望他是继承而来的，那么我们可以使用如下代码：
 
-```typescript
-undefined;
+```css
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 ```
 
 这样的好处在于他不会覆盖其他组件的 box-sizing 值，又无需为每一个元素重复设置 box-sizing:border-box;

@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: eea497ba813d837364b20795f64d4b16
+postSlug: b3edeede2762929b67dc6efc6ca3d29b
 description: >-
   ![](https://static.vue-js.com/8a739c90-3b7f-11eb-85f6-6fac77c0c9b3.png)预览一、mixin是什么----------`Mixin`
 difficulty: 2
@@ -39,14 +39,25 @@ source: >-
 
 定义一个`mixin`对象，有组件`options`的`data`、`methods`属性
 
-```typescript
-undefined;
+```js
+var myMixin = {
+  created: function () {
+    this.hello();
+  },
+  methods: {
+    hello: function () {
+      console.log("hello from mixin!");
+    },
+  },
+};
 ```
 
 组件通过`mixins`属性调用`mixin`对象
 
-```typescript
-undefined;
+```js
+Vue.component("componentA", {
+  mixins: [myMixin],
+});
 ```
 
 该组件在使用的时候，混合了`mixin`里面的方法，在自动执行`create`生命钩子，执行`hello`方法
@@ -55,8 +66,12 @@ undefined;
 
 通过`Vue.mixin()`进行全局的混入
 
-```typescript
-undefined;
+```js
+Vue.mixin({
+  created: function () {
+    console.log("全局混入");
+  },
+});
 ```
 
 使用全局混入需要特别注意，因为它会影响到每一个组件实例（包括第三方组件）
@@ -79,28 +94,71 @@ PS：全局混入常用于插件的编写
 
 定义一个`modal`弹窗组件，内部通过`isShowing`来控制显示
 
-```typescript
-undefined;
+```js
+const Modal = {
+  template: "#modal",
+  data() {
+    return {
+      isShowing: false,
+    };
+  },
+  methods: {
+    toggleShow() {
+      this.isShowing = !this.isShowing;
+    },
+  },
+};
 ```
 
 定义一个`tooltip`提示框，内部通过`isShowing`来控制显示
 
-```typescript
-undefined;
+```js
+const Tooltip = {
+  template: "#tooltip",
+  data() {
+    return {
+      isShowing: false,
+    };
+  },
+  methods: {
+    toggleShow() {
+      this.isShowing = !this.isShowing;
+    },
+  },
+};
 ```
 
 通过观察上面两个组件，发现两者的逻辑是相同，代码控制显示也是相同的，这时候`mixin`就派上用场了
 
 首先抽出共同代码，编写一个`mixin`
 
-```typescript
-undefined;
+```js
+const toggle = {
+  data() {
+    return {
+      isShowing: false,
+    };
+  },
+  methods: {
+    toggleShow() {
+      this.isShowing = !this.isShowing;
+    },
+  },
+};
 ```
 
 两个组件在使用上，只需要引入`mixin`
 
-```typescript
-undefined;
+```js
+const Modal = {
+  template: "#modal",
+  mixins: [toggle],
+};
+
+const Tooltip = {
+  template: "#tooltip",
+  mixins: [toggle],
+};
 ```
 
 通过上面小小的例子，让我们知道了`Mixin`对于封装一些可复用的功能如此有趣、方便、实用
@@ -111,16 +169,49 @@ undefined;
 
 源码位置：/src/core/global-api/mixin.js
 
-```typescript
-undefined;
+```js
+export function initMixin(Vue: GlobalAPI) {
+  Vue.mixin = function (mixin: Object) {
+    this.options = mergeOptions(this.options, mixin);
+    return this;
+  };
+}
 ```
 
 主要是调用`merOptions`方法
 
 源码位置：/src/core/util/options.js
 
-```typescript
-undefined;
+```js
+export function mergeOptions(
+  parent: Object,
+  child: Object,
+  vm?: Component
+): Object {
+  if (child.mixins) {
+    // 判断有没有mixin 也就是mixin里面挂mixin的情况 有的话递归进行合并
+    for (let i = 0, l = child.mixins.length; i < l; i++) {
+      parent = mergeOptions(parent, child.mixins[i], vm);
+    }
+  }
+
+  const options = {};
+  let key;
+  for (key in parent) {
+    mergeField(key); // 先遍历parent的key 调对应的strats[XXX]方法进行合并
+  }
+  for (key in child) {
+    if (!hasOwn(parent, key)) {
+      // 如果parent已经处理过某个key 就不处理了
+      mergeField(key); // 处理child中的key 也就parent中没有处理过的key
+    }
+  }
+  function mergeField(key) {
+    const strat = strats[key] || defaultStrat;
+    options[key] = strat(parent[key], child[key], vm, key); // 根据不同类型的options调用strats中不同的方法进行合并
+  }
+  return options;
+}
 ```
 
 从上面的源码，我们得到以下几点：
@@ -141,8 +232,24 @@ undefined;
 
 替换型合并有`props`、`methods`、`inject`、`computed`
 
-```typescript
-undefined;
+```js
+strats.props =
+  strats.methods =
+  strats.inject =
+  strats.computed =
+    function (
+      parentVal: ?Object,
+      childVal: ?Object,
+      vm?: Component,
+      key: string
+    ): ?Object {
+      if (!parentVal) return childVal; // 如果parentVal没有值，直接返回childVal
+      const ret = Object.create(null); // 创建一个第三方对象 ret
+      extend(ret, parentVal); // extend方法实际是把parentVal的属性复制到ret中
+      if (childVal) extend(ret, childVal); // 把childVal的属性复制到ret中
+      return ret;
+    };
+strats.provide = mergeDataOrFn;
 ```
 
 同名的`props`、`methods`、`inject`、`computed`会被后来者代替
@@ -151,8 +258,42 @@ undefined;
 
 和并型合并有：`data`
 
-```typescript
-undefined;
+```js
+strats.data = function (parentVal, childVal, vm) {
+  return mergeDataOrFn(parentVal, childVal, vm);
+};
+
+function mergeDataOrFn(parentVal, childVal, vm) {
+  return function mergedInstanceDataFn() {
+    var childData = childVal.call(vm, vm); // 执行data挂的函数得到对象
+    var parentData = parentVal.call(vm, vm);
+    if (childData) {
+      return mergeData(childData, parentData); // 将2个对象进行合并
+    } else {
+      return parentData; // 如果没有childData 直接返回parentData
+    }
+  };
+}
+
+function mergeData(to, from) {
+  if (!from) return to;
+  var key, toVal, fromVal;
+  var keys = Object.keys(from);
+  for (var i = 0; i < keys.length; i++) {
+    key = keys[i];
+    toVal = to[key];
+    fromVal = from[key];
+    // 如果不存在这个属性，就重新设置
+    if (!to.hasOwnProperty(key)) {
+      set(to, key, fromVal);
+    }
+    // 存在相同属性，合并对象
+    else if (typeof toVal == "object" && typeof fromVal == "object") {
+      mergeData(toVal, fromVal);
+    }
+  }
+  return to;
+}
 ```
 
 `mergeData`函数遍历了要合并的 data 的所有属性，然后根据不同情况进行合并：
@@ -164,8 +305,59 @@ undefined;
 
 队列性合并有：全部生命周期和`watch`
 
-```typescript
-undefined;
+```js
+function mergeHook(
+  parentVal: ?Array<Function>,
+  childVal: ?Function | ?Array<Function>
+): ?Array<Function> {
+  return childVal
+    ? parentVal
+      ? parentVal.concat(childVal)
+      : Array.isArray(childVal)
+      ? childVal
+      : [childVal]
+    : parentVal;
+}
+
+LIFECYCLE_HOOKS.forEach(hook => {
+  strats[hook] = mergeHook;
+});
+
+// watch
+strats.watch = function (parentVal, childVal, vm, key) {
+  // work around Firefox's Object.prototype.watch...
+  if (parentVal === nativeWatch) {
+    parentVal = undefined;
+  }
+  if (childVal === nativeWatch) {
+    childVal = undefined;
+  }
+  /* istanbul ignore if */
+  if (!childVal) {
+    return Object.create(parentVal || null);
+  }
+  {
+    assertObjectType(key, childVal, vm);
+  }
+  if (!parentVal) {
+    return childVal;
+  }
+  var ret = {};
+  extend(ret, parentVal);
+  for (var key$1 in childVal) {
+    var parent = ret[key$1];
+    var child = childVal[key$1];
+    if (parent && !Array.isArray(parent)) {
+      parent = [parent];
+    }
+    ret[key$1] = parent
+      ? parent.concat(child)
+      : Array.isArray(child)
+      ? child
+      : [child];
+  }
+  return ret;
+};
 ```
 
 生命周期钩子和`watch`被合并为一个数组，然后正序遍历一次执行
@@ -174,8 +366,19 @@ undefined;
 
 叠加型合并有：`component`、`directives`、`filters`
 
-```typescript
-undefined;
+```js
+strats.components =
+  strats.directives =
+  strats.filters =
+    function mergeAssets(parentVal, childVal, vm, key) {
+      var res = Object.create(parentVal || null);
+      if (childVal) {
+        for (var key in childVal) {
+          res[key] = childVal[key];
+        }
+      }
+      return res;
+    };
 ```
 
 叠加型主要是通过原型链进行层层的叠加

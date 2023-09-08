@@ -4,7 +4,7 @@ pubDatetime: 2021-07-24T16:00:00.000Z
 author: caorushizi
 tags:
   - nodejs
-postSlug: 551c9c4b01155f5e9a501a66e9d08866
+postSlug: c4de619897686090ed51a0b525713e28
 description: >-
   ![](https://static.vue-js.com/e0faf3c0-c90e-11eb-ab90-d9ae814b240d.png)预览一、是什么-----在[浏览器事件循环](https:
 difficulty: 3
@@ -82,8 +82,44 @@ source: >-
 
 通过上面的学习，下面开始看看题目
 
-```typescript
-undefined;
+```js
+async function async1() {
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");
+}
+
+async function async2() {
+  console.log("async2");
+}
+
+console.log("script start");
+
+setTimeout(function () {
+  console.log("setTimeout0");
+}, 0);
+
+setTimeout(function () {
+  console.log("setTimeout2");
+}, 300);
+
+setImmediate(() => console.log("setImmediate"));
+
+process.nextTick(() => console.log("nextTick1"));
+
+async1();
+
+process.nextTick(() => console.log("nextTick2"));
+
+new Promise(function (resolve) {
+  console.log("promise1");
+  resolve();
+  console.log("promise2");
+}).then(function () {
+  console.log("promise3");
+});
+
+console.log("script end");
 ```
 
 分析过程：
@@ -123,14 +159,27 @@ undefined;
 
 最后有一道是关于`setTimeout`与`setImmediate`的输出顺序
 
-```typescript
-undefined;
+```js
+setTimeout(() => {
+  console.log("setTimeout");
+}, 0);
+
+setImmediate(() => {
+  console.log("setImmediate");
+});
 ```
 
 输出情况如下：
 
-```typescript
-undefined;
+```js
+情况一：
+setTimeout
+setImmediate
+
+情况二：
+setImmediate
+setTimeout
+
 ```
 
 分析下流程：

@@ -4,7 +4,7 @@ pubDatetime: 2021-10-23T16:00:00.000Z
 author: caorushizi
 tags:
   - 工具
-postSlug: 6b3d328c130c899198a386358498e28b
+postSlug: 08a67026a987056a8cd5fe73430397d6
 description: >-
   ![](https://static.vue-js.com/213eba50-f79c-11eb-bc6f-3f06e1491664.png)预览一、是什么-----git，是一个分布式版本控制软件，
 difficulty: 1
@@ -41,8 +41,8 @@ git，是一个分布式版本控制软件，最初目的是为更好地管理`L
 
 `Git` 用以计算校验和的机制叫做 SHA-1 散列（hash，哈希）， 这是一个由 40 个十六进制字符（0-9 和 a-f）组成字符串，基于 Git 中文件的内容或目录结构计算出来，如下：
 
-```typescript
-undefined;
+```text
+24b9da6552252987aa493b52f8696cd6d3b00373
 ```
 
 当我们修改文件的时候，`git`就会修改文件的状态，可以通过`git status`进行查询，状态情况如下：

@@ -4,7 +4,7 @@ pubDatetime: 2023-01-15T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: 9691a8d2a71b500fb39a265d965735b0
+postSlug: 4d030b46707906ef676479dff975563b
 description: >-
   我们知道，`React`在内部对事件做了统一的处理，合成事件是一个比较大的概念###为什么要有合成事件1.在传统的事件里，不同的浏览器需要兼容不同的写法，在合成事件中`React`提供统一的事件对象，
 difficulty: 2.5
@@ -34,14 +34,21 @@ source: >-
 
 事件监听主要用到了`addEventListener`这个函数，具体怎么用可以[点击](https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener)进行查看 事件监听和事件绑定的最大区别就是事件监听可以给一个事件监听多个函数操作，而事件绑定只有一次
 
-```typescript
-undefined;
+```js
+// 可以监听多个，不会被覆盖
+eventTarget.addEventListener("click", () => {});
+eventTarget.addEventListener("click", () => {});
+
+eventTarget.onclick = function () {};
+eventTarget.onclick = function () {}; // 第二个会把第一个覆盖
 ```
 
 ###### 事件执行顺序
 
-```typescript
-undefined;
+```html
+<div>
+  <span>点我</span>
+</div>
 ```
 
 当我们点击`span`标签的时候会经过这么三个过程，在路径内的元素绑定的事件都会进行触发
@@ -63,8 +70,80 @@ undefined;
 
 下面一个例子说清楚，[点击在线查看编辑](https://codesandbox.io/s/determined-glitter-oxh8kj?file=/src/App.js)
 
-```typescript
-undefined;
+```jsx
+import React, { useRef, useEffect } from "react";
+import "./styles.css";
+
+const logFunc = (target, isSynthesizer, isCapture = false) => {
+  const info = `${isSynthesizer ? "合成" : "原生"}事件，${
+    isCapture ? "捕获" : "冒泡"
+  }阶段，${target}元素执行了`;
+
+  console.log(info);
+};
+
+const batchManageEvent = (targets, funcs, isRemove = false) => {
+  targets.forEach((target, targetIndex) => {
+    funcs[targetIndex].forEach((func, funcIndex) => {
+      target[isRemove ? "removeEventListener" : "addEventListener"](
+        "click",
+        func,
+        !funcIndex
+      );
+    });
+  });
+};
+
+export default function App() {
+  const divDom = useRef();
+  const h1Dom = useRef();
+  useEffect(() => {
+    const docClickCapFunc = () => logFunc("document", false, true);
+    const divClickCapFunc = () => logFunc("div", false, true);
+    const h1ClickCapFunc = () => logFunc("h1", false, true);
+    const docClickFunc = () => logFunc("document", false);
+    const divClickFunc = () => logFunc("div", false);
+    const h1ClickFunc = () => logFunc("h1", false);
+
+    batchManageEvent(
+      [document, divDom.current, h1Dom.current],
+      [
+        [docClickCapFunc, docClickFunc],
+        [divClickCapFunc, divClickFunc],
+        [h1ClickCapFunc, h1ClickFunc],
+      ]
+    );
+
+    return () => {
+      batchManageEvent(
+        [document, divDom.current, h1Dom.current],
+        [
+          [docClickCapFunc, docClickFunc],
+          [divClickCapFunc, divClickFunc],
+          [h1ClickCapFunc, h1ClickFunc],
+        ],
+        true
+      );
+    };
+  }, []);
+
+  return (
+    <div
+      ref={divDom}
+      className="App1"
+      onClickCapture={() => logFunc("div", true, true)}
+      onClick={() => logFunc("div", true)}
+    >
+      <h1
+        ref={h1Dom}
+        onClickCapture={() => logFunc("h1", true, true)}
+        onClick={() => logFunc("h1", true)}
+      >
+        Hello CodeSandbox
+      </h1>
+    </div>
+  );
+}
 ```
 
 看这个例子，当我们点击`h1`的时候
@@ -73,20 +152,21 @@ undefined;
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/47eac4a858b242a6ab66e832f46019ad~tplv-k3u1fbpfcp-watermark.image?)
 
-预览
-
 我们用一个图简单描述一下
 
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/31bdf297acad48e1a4934335fceadfb0~tplv-k3u1fbpfcp-watermark.image?)
-
-预览
 
 知道上面的概念，那我们回答开始阶段的后面两个问题
 
 当我们把上面的`demo`的原生`div`的`stopPropagation()`   方法调用阻止捕获和冒泡阶段中当前事件的进一步传播，会阻止后续的所有事件执行
 
-```typescript
-undefined;
+```jsx
+// ...
+const divClickCapFunc = e => {
+  e.stopPropagation(); // 增加原生捕获阶段的阻止事件
+  logFunc("div", false, true);
+};
+// ...
 ```
 
 ![](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9e567409ad3a4da18a7f076d247f9c6a~tplv-k3u1fbpfcp-watermark.image?)
@@ -105,8 +185,88 @@ undefined;
 
 ### 模拟阶段
 
-```typescript
-undefined;
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link href="favicon.ico" type="image/x-icon" rel="icon" />
+    <title>浅谈React合成事件</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <h1 id="content">hello</h1>
+    </div>
+  </body>
+  <script>
+    const logFunc = (target, isSynthesizer, isCapture = false) => {
+      const info = `${isSynthesizer ? "合成" : "原生"}事件，${
+        isCapture ? "捕获" : "冒泡"
+      }阶段，${target}元素执行了`;
+      console.log(info);
+    };
+    // document的派发事件函数
+    const dispatchEvent = currentDom => {
+      let current = currentDom;
+      let eventCallbacks = []; // 存储冒泡事件回调函数
+      let eventCaptureCallbacks = []; // 存储冒泡事件回调函数
+      // 收集事件流一路上的所有回调函数
+      while (current) {
+        if (current.onClick) {
+          eventCallbacks.push(current.onClick);
+        }
+        if (current.onClickCapture) {
+          // 捕获阶段由外到内，所以需要把回调函数放到数组的最前面
+          eventCaptureCallbacks.unshift(current.onClickCapture);
+        }
+        current = current.parentNode;
+      }
+      // 执行调用
+      eventCaptureCallbacks.forEach(callback => callback());
+      eventCallbacks.forEach(callback => callback());
+    };
+    const wrapperDom = document.getElementById("wrapper");
+    const contentDom = document.getElementById("content");
+
+    // 一路上注册原生事件
+    document.addEventListener(
+      "click",
+      () => logFunc("document", false, true),
+      true
+    );
+    wrapperDom.addEventListener(
+      "click",
+      () => logFunc("div", false, true),
+      true
+    );
+    contentDom.addEventListener(
+      "click",
+      () => logFunc("h1", false, true),
+      true
+    );
+    contentDom.addEventListener("click", () => logFunc("h1", false));
+    wrapperDom.addEventListener("click", () => logFunc("div", false));
+    document.addEventListener("click", e => {
+      dispatchEvent(e.target); // 这里收集一路上的事件进行派发
+      logFunc("document", false);
+    });
+
+    // 模拟合成事件
+    wrapperDom.onClick = () => logFunc("div", true);
+    wrapperDom.onClickCapture = () => logFunc("div", true, true);
+    contentDom.onClick = () => logFunc("h1", true);
+    contentDom.onClickCapture = () => logFunc("h1", true, true);
+  </script>
+</html>
 ```
 
 点击`h1`可以看到一路上的注册的所有事件已经执行了
@@ -121,8 +281,46 @@ undefined;
 
 [点我](https://codesandbox.io/s/practical-lichterman-1lhvb1?file=/src/App.js:0-924)查看在线案例
 
-```typescript
-undefined;
+```jsx
+import React, { useEffect, useState } from "react";
+import "./styles.css";
+
+const Modal = ({ onClose }) => {
+  useEffect(() => {
+    document.addEventListener("click", onClose);
+    return () => {
+      document.removeEventListener("click", onClose);
+    };
+  }, [onClose]);
+  return (
+    <div
+      style={{ width: 300, height: 300, backgroundColor: "red" }}
+      onClick={e => {
+        e.stopPropagation();
+        // e.nativeEvent.stopImmediatePropagation();
+      }}
+    >
+      Modal
+    </div>
+  );
+};
+
+function App() {
+  const [visible, setVisible] = useState(false);
+  return (
+    <div className="App">
+      <button
+        onClick={() => {
+          setVisible(true);
+        }}
+      >
+        点我弹出modal
+      </button>
+      {visible && <Modal onClose={() => setVisible(false)} />}
+    </div>
+  );
+}
+export default App;
 ```
 
 写完之后点击按钮`Modal`被弹出来, 但是点击`modal`里面的内容`modal`就隐藏了，添加阻止事件流函数还是不行
@@ -141,12 +339,95 @@ undefined;
 
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2b3a5ff14e364a90a87ff66a658ef194~tplv-k3u1fbpfcp-watermark.image?)
 
-预览
-
 ### 模拟 17 版本
 
-```typescript
-undefined;
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link href="favicon.ico" type="image/x-icon" rel="icon" />
+    <title>浅谈React合成事件</title>
+  </head>
+  <body>
+    <div id="root">
+      <div id="wrapper">
+        <h1 id="content">hello</h1>
+      </div>
+    </div>
+  </body>
+  <script>
+    const logFunc = (target, isSynthesizer, isCapture = false) => {
+      const info = `${isSynthesizer ? "合成" : "原生"}事件，${
+        isCapture ? "捕获" : "冒泡"
+      }阶段，${target}元素执行了`;
+      console.log(info);
+    };
+    // document的派发事件函数
+    const dispatchEvent = (currentDom, useCapture = false) => {
+      let current = currentDom;
+      let eventCallbacks = []; // 存储冒泡事件回调函数
+      const eventTypeName = useCapture ? "onClickCapture" : "onClick"; // 冒泡事件或者捕获事件的名称
+      const actionName = useCapture ? "unshift" : "push";
+      while (current) {
+        if (current[eventTypeName]) {
+          eventCallbacks[actionName](current[eventTypeName]);
+        }
+        current = current.parentNode;
+      }
+      eventCallbacks.forEach(callback => callback());
+    };
+    const wrapperDom = document.getElementById("wrapper");
+    const contentDom = document.getElementById("content");
+    const root = document.getElementById("root");
+
+    // 一路上注册原生事件
+    document.addEventListener(
+      "click",
+      () => logFunc("document", false, true),
+      true
+    );
+    root.addEventListener(
+      "click",
+      e => {
+        dispatchEvent(e.target, true);
+        logFunc("root", false, true);
+      },
+      true
+    );
+    wrapperDom.addEventListener(
+      "click",
+      () => logFunc("div", false, true),
+      true
+    );
+    contentDom.addEventListener(
+      "click",
+      () => logFunc("h1", false, true),
+      true
+    );
+    contentDom.addEventListener("click", () => logFunc("h1", false));
+    wrapperDom.addEventListener("click", () => logFunc("div", false));
+    root.addEventListener("click", e => {
+      dispatchEvent(e.target); // 这里收集一路上的事件进行派发
+      logFunc("root", false);
+    });
+    document.addEventListener("click", () => logFunc("document", false));
+    // 模拟合成事件
+    wrapperDom.onClick = () => logFunc("div", true);
+    wrapperDom.onClickCapture = () => logFunc("div", true, true);
+    contentDom.onClick = () => logFunc("h1", true);
+    contentDom.onClickCapture = () => logFunc("h1", true, true);
+  </script>
+</html>
 ```
 
 区别就是在外层增加了一个`root`模拟根节点，修改了`dispatchEvent`的逻辑

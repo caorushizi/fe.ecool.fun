@@ -4,7 +4,7 @@ pubDatetime: 2022-04-05T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: cdce32ef103b2b3a984721a6dfd7d646
+postSlug: 165fbde409bf9f8b082a904266832bda
 description: >-
   前言--我们都知道，Vue2.0对于响应式数据的实现有一些不足：*无法检测数组/对象的新增*无法检测通过索引改变数组的操作。分析--*无法检测数组/对象的新增？Vue检测数据的变动是通过Object.
 difficulty: 3
@@ -38,8 +38,30 @@ Vue 检测数据的变动是通过 Object.defineProperty 实现的，所以无�
 >
 > 遍历数组，用 Object.defineProperty 对每一项进行监测
 
-```typescript
-undefined;
+```js
+function defineReactive(data, key, value) {
+  Object.defineProperty(data, key, {
+    enumerable: true,
+    configurable: true,
+    get: function defineGet() {
+      console.log(`get key: ${key} value: ${value}`);
+      return value;
+    },
+    set: function defineSet(newVal) {
+      console.log(`set key: ${key} value: ${newVal}`);
+      value = newVal;
+    },
+  });
+}
+
+function observe(data) {
+  Object.keys(data).forEach(function (key) {
+    defineReactive(data, key, data[key]);
+  });
+}
+
+let arr = [1, 2, 3];
+observe(arr);
 ```
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5b228cf688814f6c864d53b43f3f792b~tplv-k3u1fbpfcp-zoom-1.image)
@@ -68,20 +90,26 @@ undefined;
 
 1.  this.$set(array, index, data)
 
-    ```typescript
-    undefined;
+    ```js
+    //这是个深度的修改，某些情况下可能导致你不希望的结果，因此最好还是慎用
+    this.dataArr = this.originArr;
+    this.$set(this.dataArr, 0, { data: "修改第一个元素" });
+    console.log(this.dataArr);
+    console.log(this.originArr); //同样的 源数组也会被修改 在某些情况下会导致你不希望的结果
     ```
 
 2.  splice
 
-    ```typescript
-    undefined;
+    ```js
+    //因为splice会被监听有响应式，而splice又可以做到增删改。
     ```
 
 3.  利用临时变量进行中转
 
-    ```typescript
-    undefined;
+    ```js
+    let tempArr = [...this.targetArr];
+    tempArr[0] = { data: "test" };
+    this.targetArr = tempArr;
     ```
 
 ### 对象
@@ -89,12 +117,19 @@ undefined;
 1.  this.$set(obj, key ,value) - 可实现增、改
 2.  watch 时添加`deep：true`深度监听，只能监听到属性值的变化，新增、删除属性无法监听
 
-    ```typescript
-    undefined;
+    ```js
+    this.$watch("blog", this.getCatalog, {
+      deep: true,
+      // immediate: true // 是否第一次触发
+    });
     ```
 
 3.  watch 时直接监听某个 key
 
-    ```typescript
-    undefined;
+    ```js
+    watch: {
+      'obj.name'(curVal, oldVal) {
+        // TODO
+      }
+    }
     ```

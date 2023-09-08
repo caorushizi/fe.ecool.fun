@@ -4,7 +4,7 @@ pubDatetime: 2021-07-31T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: cde0cbbc1b7918e184b0c5d4aaa50c69
+postSlug: 579a0b7288467d64ebaa686e9285cca3
 description: >-
   可枚举性（enumerable）用来控制所描述的属性，是否将被包括在for...in循环之中（除非属性名是一个Symbol）。具体来说，如果一个属性的enumerable为false，下面三个操作不会
 difficulty: 3
@@ -19,8 +19,26 @@ source: >-
 - Object.keys 方法
 - JSON.stringify 方法
 
-```typescript
-undefined;
+```javascript
+var o = { a: 1, b: 2 };
+
+o.c = 3;
+Object.defineProperty(o, "d", {
+  value: 4,
+  enumerable: false,
+});
+
+o.d;
+// 4
+
+for (var key in o) console.log(o[key]);
+// 1
+// 2
+// 3
+
+Object.keys(o); // ["a", "b", "c"]
+
+JSON.stringify(o); // => "{a:1,b:2,c:3}"
 ```
 
 上面代码中，d 属性的 enumerable 为 false，所以一般的遍历操作都无法获取该属性，使得它有点像“秘密”属性，但还是可以直接获取它的值。

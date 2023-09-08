@@ -4,7 +4,7 @@ pubDatetime: 2021-07-04T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: ffcc0413623d6d37305c20260f0024dc
+postSlug: 9f92d6ba9b3ce09a4edea935785eced8
 description: >-
   JSX即JavaScriptXML。一种在React组件内部构建标签的类XML语法。JSX为react.js开发的一套语法糖，也是react.js的使用基础。React在不使用JSX的情况下一样可以工
 difficulty: 1.5
@@ -15,8 +15,17 @@ source: >-
 
 JSX 即 JavaScript XML。一种在 React 组件内部构建标签的类 XML 语法。JSX 为 react.js 开发的一套语法糖，也是 react.js 的使用基础。React 在不使用 JSX 的情况下一样可以工作，然而使用 JSX 可以提高组件的可读性，因此推荐使用 JSX。
 
-```typescript
-undefined;
+```jsx
+class MyComponent extends React.Component {
+  render() {
+    let props = this.props;
+    return (
+      <div className="my-component">
+        <a href={props.url}>{props.name}</a>
+      </div>
+    );
+  }
+}
 ```
 
 **优点**：

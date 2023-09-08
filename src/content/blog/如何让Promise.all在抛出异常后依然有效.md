@@ -4,7 +4,7 @@ pubDatetime: 2022-08-09T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 2077cd67cc9206c31e314703beed481f
+postSlug: 0ffa86841d93902b4046def925e8ba66
 description: >-
   在处理多个并发请求时，我们一般会用`Promise.all()`方法。该方法指当所有在可迭代参数中的`promises`已完成，或者第一个传递的promise（指reject）失败时，返回promis
 difficulty: 3
@@ -27,8 +27,23 @@ source: >-
 
 在 promise.all 队列中，使用 map 每一个过滤每一个 promise 任务，其中任意一个报错后，return 一个返回值，确保 promise 能正常执行走到.then 中。
 
-```typescript
-undefined;
+```js
+var p1 = new Promise((resolve, reject) => {
+  resolve("p1");
+});
+var p2 = new Promise((resolve, reject) => {
+  resolve("p2");
+});
+var p3 = new Promise((resolve, reject) => {
+  reject("p3");
+});
+Promise.all([p1, p2, p3].map(p => p.catch(e => "出错后返回的值")))
+  .then(values => {
+    console.log(values);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 ```
 
 # 方案二

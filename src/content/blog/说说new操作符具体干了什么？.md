@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - 编程题
-postSlug: 97f1ed85f8c8ed5c4d75769b7f06eab9
+postSlug: 9da4485fd2c6c1210bd4fb24ceec7bcb
 description: >-
   ![](https://static.vue-js.com/880d0010-7a39-11eb-85f6-6fac77c0c9b3.png)预览一、是什么-----在`JavaScript`中，`n
 difficulty: 2
@@ -23,8 +23,17 @@ source: >-
 
 例子
 
-```typescript
-undefined;
+```js
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+Person.prototype.sayName = function () {
+  console.log(this.name);
+};
+const person1 = new Person("Tom", 20);
+console.log(person1); // Person {name: "Tom", age: 20}
+t.sayName(); // 'Tom'
 ```
 
 从上面可以看到：
@@ -34,16 +43,28 @@ undefined;
 
 现在在构建函数中显式加上返回值，并且这个返回值是一个原始类型
 
-```typescript
-undefined;
+```js
+function Test(name) {
+  this.name = name;
+  return 1;
+}
+const t = new Test("xxx");
+console.log(t.name); // 'xxx'
 ```
 
 可以发现，构造函数中返回一个原始值，然而这个返回值并没有作用
 
 下面在构造函数中返回一个对象
 
-```typescript
-undefined;
+```js
+function Test(name) {
+  this.name = name;
+  console.log(this); // Test { name: 'xxx' }
+  return { age: 26 };
+}
+const t = new Test("xxx");
+console.log(t); // { age: 26 }
+console.log(t.name); // 'undefined'
 ```
 
 从上面可以发现，构造函数如果返回值为一个对象，那么这个返回值会被正常使用
@@ -59,8 +80,14 @@ undefined;
 
 举个例子：
 
-```typescript
-undefined;
+```js
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+const person1 = new Person("Tom", 20);
+console.log(person1); // Person {name: "Tom", age: 20}
+t.sayName(); // 'Tom'
 ```
 
 流程图如下：
@@ -75,14 +102,39 @@ undefined;
 
 那么我们就动手来实现一下`new`
 
-```typescript
-undefined;
+```js
+function mynew(Func, ...args) {
+  // 1.创建一个新对象
+  const obj = {};
+  // 2.新对象原型指向构造函数原型对象
+  obj.__proto__ = Func.prototype;
+  // 3.将构建函数的this指向新对象
+  let result = Func.apply(obj, args);
+  // 4.根据返回值判断
+  return result instanceof Object ? result : obj;
+}
 ```
 
 测试一下
 
-```typescript
-undefined;
+```js
+function mynew(func, ...args) {
+  const obj = {};
+  obj.__proto__ = func.prototype;
+  let result = func.apply(obj, args);
+  return result instanceof Object ? result : obj;
+}
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+Person.prototype.say = function () {
+  console.log(this.name);
+};
+
+let p = mynew(Person, "huihui", 123);
+console.log(p); // Person {name: "huihui", age: 123}
+p.say(); // huihui
 ```
 
 可以发现，代码虽然很短，但是能够模拟实现`new`

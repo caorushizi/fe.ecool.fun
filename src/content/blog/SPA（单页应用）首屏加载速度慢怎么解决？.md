@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - 性能优化
-postSlug: bc82b07ecd57a49a9d4e026cf0d39f88
+postSlug: 5cd13780d4e8d68eb11f95f182304e65
 description: >-
   ![](https://static.vue-js.com/24617c00-3acc-11eb-ab90-d9ae814b240d.png)预览一、什么是首屏加载---------首屏时间（Firs
 difficulty: 2
@@ -33,8 +33,22 @@ source: >-
 
 通过`DOMContentLoad`或者`performance`来计算出首屏时间
 
-```typescript
-undefined;
+```js
+// 方案一：
+document.addEventListener('DOMContentLoaded', (event) => {
+    console.log('first contentful painting');
+});
+// 方案二：
+performance.getEntriesByName("first-contentful-paint")[0].startTime
+
+// performance.getEntriesByName("first-contentful-paint")[0]
+// 会返回一个 PerformancePaintTiming的实例，结构如下：
+{
+  name: "first-contentful-paint",
+  entryType: "paint",
+  startTime: 507.80000002123415,
+  duration: 0,
+};
 ```
 
 ## 二、加载慢的原因
@@ -68,8 +82,12 @@ undefined;
 
 在`vue-router`配置路由的时候，采用动态加载路由的形式
 
-```typescript
-undefined;
+```js
+routes:[
+    path: 'Blogs',
+    name: 'ShowBlogs',
+    component: () => import('./components/ShowBlogs.vue')
+]
 ```
 
 以函数的形式加载路由，这样就可以把各自的路由文件分别打包，只有在解析给定的路由时，才会加载路由组件
@@ -87,14 +105,25 @@ undefined;
 
 在日常使用`UI`框架，例如`element-UI`、或者`antd`，我们经常性直接饮用整个`UI`库
 
-```typescript
-undefined;
+```js
+import ElementUI from "element-ui";
+Vue.use(ElementUI);
 ```
 
 但实际上我用到的组件只有按钮，分页，表格，输入与警告 所以我们要按需引用
 
-```typescript
-undefined;
+```js
+import {
+  Button,
+  Input,
+  Pagination,
+  Table,
+  TableColumn,
+  MessageBox,
+} from "element-ui";
+Vue.use(Button);
+Vue.use(Input);
+Vue.use(Pagination);
 ```
 
 ### 组件重复打包
@@ -103,8 +132,8 @@ undefined;
 
 解决方案：在`webpack`的`config`文件中，修改`CommonsChunkPlugin`的配置
 
-```typescript
-undefined;
+```js
+minChunks: 3;
 ```
 
 `minChunks`为 3 表示会把使用 3 次及以上的包抽离出来，放进公共依赖文件，避免了重复加载组件
@@ -121,14 +150,27 @@ undefined;
 
 拆完包之后，我们再用`gzip`做一下压缩 安装`compression-webpack-plugin`
 
-```typescript
-undefined;
+```js
+cnmp i compression-webpack-plugin -D
 ```
 
 在`vue.congig.js`中引入并修改`webpack`配置
 
-```typescript
-undefined;
+```js
+const CompressionPlugin = require('compression-webpack-plugin')
+
+configureWebpack: (config) => {
+        if (process.env.NODE_ENV === 'production') {
+            // 为生产环境修改配置...
+            config.mode = 'production'
+            return {
+                plugins: [new CompressionPlugin({
+                    test: /\.js$|\.html$|\.css/, //匹配文件名
+                    threshold: 10240, //对超过10k的数据进行压缩
+                    deleteOriginalAssets: false //是否删除原文件
+                })]
+            }
+        }
 ```
 
 在服务器我们也要做相应的配置 如果发送请求的浏览器支持`gzip`，就发送给它`gzip`格式的文件 我的服务器是用`express`框架搭建的 只要安装一下`compression`就能使用

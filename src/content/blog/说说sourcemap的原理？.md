@@ -4,7 +4,7 @@ pubDatetime: 2022-03-22T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: a29d65bffca161d28f6c20dfc9a19103
+postSlug: 41fc59fa8352391dbd00f7f4805771e0
 description: >-
   Sourcemap想必大家都不陌生。线上的代码多是压缩后的，如果线上有报错却只能调试那个代码多半是个噩梦。因此我们需要有一个桥梁帮助我们搭建起源代码及压缩后代码的联系，sourcemap就是起了这个作
 difficulty: 4
@@ -43,8 +43,15 @@ source map 是存在一个标准的，为 Google 及 Mozilla 的工程师制定�
 
 通过上面的库生成出来的 source map 格式大致如下，大家也可以对比各个打包器的产物，格式及内容大部分都是一致的：
 
-```typescript
-undefined;
+```json
+{
+  "version": 3,
+  "file": "min.js",
+  "names": ["bar", "baz", "n"],
+  "sources": ["one.js", "two.js"],
+  "sourceRoot": "http://example.com/www/js/",
+  "mappings": "CAAC,IAAI,IAAM,SAAUA,GAClB,OAAOC,IAAID;CCDb,IAAI,IAAM,SAAUE,GAClB,OAAOA"
+}
 ```
 
 接下来介绍下重要字段的作用：
@@ -63,16 +70,19 @@ undefined;
 
 这里我们以 webpack 做个实验，通过 webpack5 对于以下代码进行打包：
 
-```typescript
-undefined;
+```js
+// index.js
+const a = 1;
+console.log(a);
 ```
 
 当我们开启 source map 选项以后，产物应该为两个文件，分别为 `bundle.js` 以及 `bundle.js.map`。
 
 查看 `bundle.js` 文件以后我们会发现代码中存在这一一段注释：
 
-```typescript
-undefined;
+```js
+console.log(1);
+//# sourceMappingURL=bundle.js.map
 ```
 
 `sourceMappingURL` 就是标记了该文件的 source map 地址。
@@ -87,8 +97,12 @@ undefined;
 
 我们还是以刚才打包的文件为例，来看看产出的 source map 长啥样（去掉了无关紧要的）：
 
-```typescript
-undefined;
+```json
+{
+  "sources": ["webpack://webpack-source-demo/./src/index.js"],
+  "names": ["console", "log"],
+  "mappings": "AACAA,QAAQC,IADE"
+}
 ```
 
 首先 `mappings` 的内容其实是 Base64 VLQ 的编码表示。

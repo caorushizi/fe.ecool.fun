@@ -4,7 +4,7 @@ pubDatetime: 2022-01-09T16:00:00.000Z
 author: caorushizi
 tags:
   - 编程题
-postSlug: 02e84e53fee0f116dbae092589bcc893
+postSlug: f17d9aa3b67d1a94fa2a4615c282434c
 description: >-
   有8个图片资源的url，已经存储在数组urls中。urls类似于`['https://image1.png','https://image2.png',....]`而且已经有一个函数`function
 difficulty: 4.5
@@ -23,6 +23,27 @@ urls 类似于`['https://image1.png', 'https://image2.png', ....]`
 
 请写一段代码实现这个需求，要求尽可能快速地将所有图片下载完成。
 
-```typescript
-undefined;
+```js
+var urls = [
+  "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting1.png",
+  "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting2.png",
+  "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting3.png",
+  "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting4.png",
+  "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting5.png",
+  "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/bpmn6.png",
+  "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/bpmn7.png",
+  "https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/bpmn8.png",
+];
+function loadImg(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = function() {
+      console.log("一张图片加载完成");
+      resolve(img);
+    };
+    img.onerror = function() {
+    	reject(new Error('Could not load image at' + url));
+    };
+    img.src = url;
+  });
 ```

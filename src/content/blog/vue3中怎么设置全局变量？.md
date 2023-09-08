@@ -4,7 +4,7 @@ pubDatetime: 2022-05-11T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: f455037d7087b85ca0ffb4f6b82cc02b
+postSlug: 476425628da33e618cfb835d49e27e10
 description: >-
   方法一config.globalProperties---------------------------`vue2.x`挂载全局是使用`Vue.prototype.$xxxx=xxx`的形式来挂载，
 difficulty: 1.5
@@ -19,8 +19,13 @@ source: >-
 
 这在 `Vue 3` 中，就等同于 `config.globalProperties`。这些 `property` 将被复制到应用中作为实例化组件的一部分。
 
-```typescript
-undefined;
+```js
+// 之前 (Vue 2.x)
+Vue.prototype.$http = () => {};
+
+// 之后 (Vue 3.x)
+const app = createApp({});
+app.config.globalProperties.$http = () => {};
 ```
 
 ## 方法二 Provide / Inject

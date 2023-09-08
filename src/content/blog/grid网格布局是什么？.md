@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - css
-postSlug: 737962a1504dbbaaa51a8d2186c0a8e3
+postSlug: 5d0a4bcfb6f24f5a6f4d524e7bf38c80
 description: >-
   ![](https://static.vue-js.com/4d73e3d0-9a94-11eb-85f6-6fac77c0c9b3.png)预览一、是什么-----`Grid`布局即网格布局，是一个
 difficulty: 2
@@ -31,8 +31,14 @@ source: >-
 
 设置`display:grid/inline-grid`的元素就是网格布局容器，这样就能出发浏览器渲染引擎的网格布局算法
 
-```typescript
-undefined;
+```js
+<div class="container">
+  <div class="item item-1">
+    <p class="sub-item"></p>
+  </div>
+  <div class="item item-2"></div>
+  <div class="item item-3"></div>
+</div>
 ```
 
 上述代码实例中，`.container`元素就是网格布局容器，`.item`元素就是网格的项目，由于网格元素只能是容器的顶层子元素，所以`p`元素并不是网格元素
@@ -67,8 +73,15 @@ undefined;
 
 `grid-template-columns` 属性设置列宽，`grid-template-rows` 属性设置行高
 
-```typescript
-undefined;
+```css
+.wrapper {
+  display: grid;
+  /*  声明了三列，宽度分别为 200px 200px 200px */
+  grid-template-columns: 200px 200px 200px;
+  grid-gap: 5px;
+  /*  声明了两行，行高分别为 50px 50px  */
+  grid-template-rows: 50px 50px;
+}
 ```
 
 以上表示固定列宽为 200px 200px 200px，行高为 50px 50px
@@ -80,8 +93,13 @@ undefined;
 
 所以上述代码可以简写成
 
-```typescript
-undefined;
+```css
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  grid-gap: 5px;
+  grid-template-rows: repeat(2, 50px);
+}
 ```
 
 除了上述的`repeact`关键字，还有：
@@ -116,16 +134,27 @@ undefined;
 
 用于定义区域，一个区域由一个或者多个单元格组成
 
-```typescript
-undefined;
+```css
+.container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  grid-template-areas:
+    "a b c"
+    "d e f"
+    "g h i";
+}
 ```
 
 上面代码先划分出 9 个单元格，然后将其定名为`a`到`i`的九个区域，分别对应这九个单元格。
 
 多个单元格合并成一个区域的写法如下
 
-```typescript
-undefined;
+```css
+grid-template-areas:
+  "a a a"
+  "b b b"
+  "c c c";
 ```
 
 上面代码将 9 个单元格分成`a`、`b`、`c`三个区域
@@ -154,8 +183,11 @@ undefined;
 
 两者属性的值完成相同
 
-```typescript
-undefined;
+```css
+.container {
+  justify-items: start | end | center | stretch;
+  align-items: start | end | center | stretch;
+}
 ```
 
 属性对应如下：
@@ -171,8 +203,13 @@ undefined;
 
 `justify-content`属性是整个内容区域在容器里面的水平位置（左中右），`align-content`属性是整个内容区域的垂直位置（上中下）
 
-```typescript
-undefined;
+```css
+.container {
+  justify-content: start | end | center | stretch | space-around | space-between
+    | space-evenly;
+  align-content: start | end | center | stretch | space-around | space-between |
+    space-evenly;
+}
 ```
 
 两个属性的写法完全相同，都可以取下面这些值：
@@ -215,8 +252,24 @@ undefined;
 
 举个例子：
 
-```typescript
-undefined;
+```html
+<style>
+  #container {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+  }
+  .item-1 {
+    grid-column-start: 2;
+    grid-column-end: 4;
+  }
+</style>
+
+<div id="container">
+  <div class="item item-1">1</div>
+  <div class="item item-2">2</div>
+  <div class="item item-3">3</div>
+</div>
 ```
 
 通过设置`grid-column`属性，指定 1 号项目的左边框是第二根垂直网格线，右边框是第四根垂直网格线
@@ -229,8 +282,10 @@ undefined;
 
 `grid-area` 属性指定项目放在哪一个区域
 
-```typescript
-undefined;
+```css
+.item-1 {
+  grid-area: e;
+}
 ```
 
 意思为将 1 号项目位于`e`区域
@@ -243,8 +298,11 @@ undefined;
 
 `align-self`属性设置单元格内容的垂直位置（上中下），跟`align-items`属性的用法完全一致，也是只作用于单个项目
 
-```typescript
-undefined;
+```css
+.item {
+  justify-self: start | end | center | stretch;
+  align-self: start | end | center | stretch;
+}
 ```
 
 这两个属性都可以取下面四个值。

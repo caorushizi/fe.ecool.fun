@@ -4,7 +4,7 @@ pubDatetime: 2022-01-16T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 780fddb88d23f63f189c4f0fc01d7ca8
+postSlug: 7992c026c88503a8e3903b618eda0c0a
 description: >-
   什么是keep-alive--------------在平常开发中，有部分组件没有必要多次初始化，这时，我们需要将组件进行持久化，使组件的状态维持不变，在下一次展示时，也不会进行重新初始化组件。也就是
 difficulty: 2.5
@@ -29,16 +29,22 @@ source: >-
 
 include 包含的意思。值为字符串或正则表达式或数组。只有组件的名称与 include 的值相同的才会被缓存，即指定哪些被缓存，可以指定多个被缓存。这里以字符串为例，指定多个组件缓存，语法是用逗号隔开。如下：
 
-```typescript
-undefined;
+```js
+// 指定home组件和about组件被缓存
+<keep-alive include="home,about">
+  <router-view></router-view>
+</keep-alive>
 ```
 
 - exclude 属性
 
 exclude 相当于 include 的反义词，就是除了的意思，指定哪些组件不被缓存，用法和 include 类似，如下：
 
-```typescript
-undefined;
+```js
+// 除了home组件和about组件别的都缓存，本例中就是只缓存detail组件
+<keep-alive exclude="home,about">
+  <router-view></router-view>
+</keep-alive>
 ```
 
 ## 使用 keep-alive 的钩子函数执行顺序问题
@@ -50,8 +56,33 @@ undefined;
 
 假设我们只缓存 home 组件，我们先看一下代码，再在钩子中打印出对应的顺序。就知道钩子执行的顺序了，自己动手印象深刻
 
-```typescript
-undefined;
+```js
+<template>
+<div>
+  <el-checkbox v-model="checked">备选项</el-checkbox>
+</div>
+</template>
+<script>
+export default {
+name: "home",
+data() { return { checked: false } },
+created() {
+  console.log("我是created钩子");
+},
+mounted() {
+  console.log("我是mounted钩子");
+},
+activated() {
+  console.log("我是activated钩子");
+},
+deactivated() {
+  console.log("我是deactivated钩子");
+},
+beforeDestroy() {
+  console.log("我是beforeDestroy钩子");所以我们可以得出结论：
+},
+};
+</script>
 ```
 
 进入组件打印结果如下：

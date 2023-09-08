@@ -4,7 +4,7 @@ pubDatetime: 2022-04-05T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 828e279dd853d371a8a605cfb1aff2ee
+postSlug: c7162b88a7da93c2b33c4ef804f5d1a1
 description: >-
   答案：**会继续执行**。虽然**Promise**是开发过程中使用非常频繁的一个技术点，但是它的一些细节可能很多人都没有去关注过。我们都知道`.then`,`.catch`,`.finally`都可
 difficulty: 3
@@ -19,8 +19,8 @@ source: >-
 
 catch 的语法形式如下：
 
-```typescript
-undefined;
+```javascript
+p.catch(onRejected);
 ```
 
 `.catch`只会处理`rejected`的情况，并且也会返回一个新的`Promise`实例。

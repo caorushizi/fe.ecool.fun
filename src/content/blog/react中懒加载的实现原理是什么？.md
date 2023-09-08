@@ -4,7 +4,7 @@ pubDatetime: 2021-08-22T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: b155b049c1bae4c1b6150cc1c55469b4
+postSlug: a94fcc22c652dcf53c2009f0f2e41b28
 description: >-
   随着前端应用体积的扩大，资源加载的优化是我们必须要面对的问题，动态代码加载就是其中的一个方案，webpack提供了符合ECMAScript提案的import()语法，让我们来实现动态地加载模块（注：r
 difficulty: 3.5
@@ -21,14 +21,29 @@ source: >-
 
 在实际的使用中，首先是引入组件方式的变化：
 
-```typescript
-undefined;
+```javascript
+// 不使用 React.lazy
+import OtherComponent from "./OtherComponent";
+// 使用 React.lazy
+const OtherComponent = React.lazy(() => import("./OtherComponent"));
 ```
 
 React.lazy 接受一个函数作为参数，这个函数需要调用 import() 。它需要返回一个 Promise，该 Promise 需要 resolve 一个 defalut export 的 React 组件。
 
-```typescript
-undefined;
+```jsx
+import React, { Suspense } from "react";
+
+const OtherComponent = React.lazy(() => import("./OtherComponent"));
+
+function MyComponent() {
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <OtherComponent />
+      </Suspense>
+    </div>
+  );
+}
 ```
 
 如上代码中，通过 import()、React.lazy 和 Suspense 共同一起实现了 React 的懒加载，也就是我们常说了运行时动态加载，即 OtherComponent 组件文件被拆分打包为一个新的包（bundle）文件，并且只会在 OtherComponent 组件渲染时，才会被下载到本地。
@@ -45,8 +60,29 @@ Suspense 可以包裹多个动态加载的组件，这也意味着在加载这�
 
 import() 函数是由 TS39 提出的一种动态加载模块的规范实现，其返回是一个 promise。在浏览器宿主环境中一个 import()的参考实现如下：
 
-```typescript
-undefined;
+```javascript
+function import(url) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    const tempGlobal = "__tempModuleLoadingVariable" + Math.random().toString(32).substring(2);
+    script.type = "module";
+    script.textContent = `import * as m from "${url}"; window.${tempGlobal} = m;`;
+
+    script.onload = () => {
+      resolve(window[tempGlobal]);
+      delete window[tempGlobal];
+      script.remove();
+    };
+
+    script.onerror = () => {
+      reject(new Error("Failed to load module script with URL " + url));
+      delete window[tempGlobal];
+      script.remove();
+    };
+
+    document.documentElement.appendChild(script);
+  });
+}
 ```
 
 结合上面的代码来看，webpack 通过创建 script 标签来实现动态加载的，找出依赖对应的 chunk 信息，然后生成 script 标签来动态加载 chunk，每个 chunk 都有对应的状态：未加载 、 加载中、已加载 。

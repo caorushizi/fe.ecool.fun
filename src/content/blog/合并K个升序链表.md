@@ -4,7 +4,7 @@ pubDatetime: 2021-07-24T16:00:00.000Z
 author: caorushizi
 tags:
   - leetcode
-postSlug: bd44db0c5df5f96e2851b33db335eab8
+postSlug: 61ba34f4848066170b510e4b1d56e269
 description: >-
   给你一个链表数组，每个链表都已经按升序排列。请你将所有链表合并到一个升序链表中，返回合并后的链表。示例1：输入：lists=[[1,4,5],[1,3,4],[2,6]]输出：[1,1,2,3,4,4
 difficulty: 4
@@ -49,6 +49,17 @@ source: >-
 - lists\[i\] 按 升序 排列
 - lists\[i\].length 的总和不超过 10^4
 
-```typescript
-undefined;
+```javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+var mergeKLists = function (lists) {};
 ```

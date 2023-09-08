@@ -4,7 +4,7 @@ pubDatetime: 2023-03-12T16:00:00.000Z
 author: caorushizi
 tags:
   - typescript
-postSlug: 8c0bfa02ac24ce7cf3e805a2681e0276
+postSlug: d4a0673f77b25e7f49b39bffe0c2141f
 description: >-
   一、是什么-----泛型程序设计（genericprogramming）是程序设计语言的一种风格或范式泛型允许我们在强类型程序设计语言中编写代码时使用一些以后才指定的类型，在实例化时作为参数指明这些类
 difficulty: 2.5
@@ -21,14 +21,18 @@ source: >-
 
 假设我们用一个函数，它可接受一个 `number` 参数并返回一个 `number` 参数，如下写法：
 
-```typescript
-undefined;
+```ts
+function returnItem(para: number): number {
+  return para;
+}
 ```
 
 如果我们打算接受一个 `string` 类型，然后再返回 `string`类型，则如下写法：
 
-```typescript
-undefined;
+```ts
+function returnItem(para: string): string {
+  return para;
+}
 ```
 
 上述两种编写方式，存在一个最明显的问题在于，代码重复度比较高
@@ -37,8 +41,10 @@ undefined;
 
 这种情况就可以使用泛型，如下所示：
 
-```typescript
-undefined;
+```ts
+function returnItem<T>(para: T): T {
+  return para;
+}
 ```
 
 可以看到，泛型给予开发者创造灵活、可重用代码的能力
@@ -55,28 +61,36 @@ undefined;
 
 声明函数的形式如下：
 
-```typescript
-undefined;
+```ts
+function returnItem<T>(para: T): T {
+  return para;
+}
 ```
 
 定义泛型的时候，可以一次定义**多个类型参数**，比如我们可以同时定义泛型 `T` 和 泛型 `U`：
 
-```typescript
-undefined;
+```ts
+function swap<T, U>(tuple: [T, U]): [U, T] {
+  return [tuple[1], tuple[0]];
+}
+
+swap([7, "seven"]); // ['seven', 7]
 ```
 
 ### 接口声明
 
 声明接口的形式如下：
 
-```typescript
-undefined;
+```ts
+interface ReturnItemFn<T> {
+  (para: T): T;
+}
 ```
 
 那么当我们想传入一个 number 作为参数的时候，就可以这样声明函数:
 
-```typescript
-undefined;
+```ts
+const returnItem: ReturnItemFn<number> = para => para;
 ```
 
 ### 类声明
@@ -85,14 +99,24 @@ undefined;
 
 下面简单实现一个元素同类型的栈结构，如下所示：
 
-```typescript
-undefined;
+```ts
+class Stack<T> {
+  private arr: T[] = [];
+
+  public push(item: T) {
+    this.arr.push(item);
+  }
+
+  public pop() {
+    this.arr.pop();
+  }
+}
 ```
 
 使用方式如下：
 
-```typescript
-undefined;
+```ts
+const stack = new Stacn<number>();
 ```
 
 如果上述只能传递 `string` 和 `number` 类型，这时候就可以使用 `<T extends xx>` 的方式猜实现**约束泛型**，如下所示：
@@ -111,8 +135,10 @@ undefined;
 
 索引类型 `keyof T` 把传入的对象的属性类型取出生成一个联合类型，这里的泛型 U 被约束在这个联合类型中，如下所示：
 
-```typescript
-undefined;
+```ts
+function getValue<T extends object, U extends keyof T>(obj: T, key: U) {
+  return obj[key]; // ok
+}
 ```
 
 上述为什么需要使用泛型约束，而不是直接定义第一个参数为 `object`类型，是因为默认情况 `object` 指的是`{}`，而我们接收的对象是各种各样的，一个泛型来表示传入的对象类型，比如 `T extends object`
@@ -127,20 +153,36 @@ undefined;
 
 例如如下需要实现两个接口的类型约束：
 
-```typescript
-undefined;
+```ts
+interface FirstInterface {
+  doSomething(): number;
+}
+
+interface SecondInterface {
+  doSomethingElse(): string;
+}
 ```
 
 可以创建一个接口继承上述两个接口，如下：
 
-```typescript
-undefined;
+```ts
+interface ChildInterface extends FirstInterface, SecondInterface {}
 ```
 
 正确使用如下：
 
-```typescript
-undefined;
+```ts
+class Demo<T extends ChildInterface> {
+  private genericProperty: T;
+
+  constructor(genericProperty: T) {
+    this.genericProperty = genericProperty;
+  }
+  useT() {
+    this.genericProperty.doSomething();
+    this.genericProperty.doSomethingElse();
+  }
+}
 ```
 
 通过泛型约束就可以达到多类型约束的目的

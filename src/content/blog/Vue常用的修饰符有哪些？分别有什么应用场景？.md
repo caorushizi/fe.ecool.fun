@@ -4,7 +4,7 @@ pubDatetime: 2023-06-02T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 41a901f224e12040df026fb6d461bcb4
+postSlug: edd5e3131c4d3f9d24f5a5ce607d304b
 description: >-
   一、修饰符是什么--------在程序世界里，修饰符是用于限定类型以及类型成员的声明的一种符号在`Vue`中，修饰符处理了许多`DOM`事件的细节，让我们不再需要花大量的时间去处理这些烦恼的事情，而能
 difficulty: 2
@@ -43,24 +43,25 @@ source: >-
 
 在我们填完信息，光标离开标签的时候，才会将值赋予给`value`，也就是在`change`事件之后再进行信息同步
 
-```typescript
-undefined;
+```js
+<input type="text" v-model.lazy="value">
+<p>{{value}}</p>
 ```
 
 #### trim
 
 自动过滤用户输入的首空格字符，而中间的空格不会过滤
 
-```typescript
-undefined;
+```js
+<input type="text" v-model.trim="value">
 ```
 
 #### number
 
 自动将用户的输入值转为数值类型，但如果这个值无法被`parseFloat`解析，则会返回原来的值
 
-```typescript
-undefined;
+```js
+<input v-model.number="age" type="number">
 ```
 
 ### 事件修饰符
@@ -79,24 +80,27 @@ undefined;
 
 阻止了事件冒泡，相当于调用了`event.stopPropagation`方法
 
-```typescript
-undefined;
+```js
+<div @click="shout(2)">
+  <button @click.stop="shout(1)">ok</button>
+</div>
+//只输出1
 ```
 
 #### prevent
 
 阻止了事件的默认行为，相当于调用了`event.preventDefault`方法
 
-```typescript
-undefined;
+```js
+<form v-on:submit.prevent="onSubmit"></form>
 ```
 
 #### self
 
 只当在 `event.target` 是当前元素自身时触发处理函数
 
-```typescript
-undefined;
+```js
+<div v-on:click.self="doThat">...</div>
 ```
 
 > 使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。因此，用 `v-on:click.prevent.self` 会阻止**所有的点击**，而 `v-on:click.self.prevent` 只会阻止对元素自身的点击
@@ -105,24 +109,39 @@ undefined;
 
 绑定了事件以后只能触发一次，第二次就不会触发
 
-```typescript
-undefined;
+```js
+<button @click.once="shout(1)">ok</button>
 ```
 
 #### capture
 
 使事件触发从包含这个元素的顶层开始往下触发
 
-```typescript
-undefined;
+```js
+<div @click.capture="shout(1)">
+    obj1
+<div @click.capture="shout(2)">
+    obj2
+<div @click="shout(3)">
+    obj3
+<div @click="shout(4)">
+    obj4
+</div>
+</div>
+</div>
+</div>
+// 输出结构: 1 2 4 3
 ```
 
 #### passive
 
 在移动端，当我们在监听元素滚动事件的时候，会一直触发`onscroll`事件会让我们的网页变卡，因此我们使用这个修饰符的时候，相当于给`onscroll`事件整了一个`.lazy`修饰符
 
-```typescript
-undefined;
+```js
+<!-- 滚动事件的默认行为 (即滚动行为) 将会立即触发 -->
+<!-- 而不会等待 `onScroll` 完成  -->
+<!-- 这其中包含 `event.preventDefault()` 的情况 -->
+<div v-on:scroll.passive="onScroll">...</div>
 ```
 
 > 不要把 `.passive` 和 `.prevent` 一起使用,因为 `.prevent` 将会被忽略，同时浏览器可能会向你展示一个警告。
@@ -133,8 +152,8 @@ undefined;
 
 让组件变成像`html`内置标签那样监听根元素的原生事件，否则组件上使用 `v-on` 只会监听自定义事件
 
-```typescript
-undefined;
+```js
+<my-component v-on:click.native="doSomething"></my-component>
 ```
 
 > 使用.native 修饰符来操作普通 HTML 标签是会令事件失效的
@@ -147,8 +166,10 @@ undefined;
 - right 右键点击
 - middle 中键点击
 
-```typescript
-undefined;
+```js
+<button @click.left="shout(1)">ok</button>
+<button @click.right="shout(1)">ok</button>
+<button @click.middle="shout(1)">ok</button>
 ```
 
 ### 键盘修饰符
@@ -160,14 +181,15 @@ undefined;
 - 普通键（enter、tab、delete、space、esc、up...）
 - 系统修饰键（ctrl、alt、meta、shift...）
 
-```typescript
-undefined;
+```js
+// 只有按键为keyCode的时候才触发
+<input type="text" @keyup.keyCode="shout()">
 ```
 
 还可以通过以下方式自定义一些全局的键盘码别名
 
-```typescript
-undefined;
+```js
+Vue.config.keyCodes.f2 = 113;
 ```
 
 ### v-bind 修饰符
@@ -182,14 +204,25 @@ v-bind 修饰符主要是为属性进行操作，用来分别有如下：
 
 能对`props`进行一个双向绑定
 
-```typescript
-undefined;
+```js
+//父组件
+<comp :myMessage.sync="bar"></comp>
+//子组件
+this.$emit('update:myMessage',params);
 ```
 
 以上这种方法相当于以下的简写
 
-```typescript
-undefined;
+```js
+//父亲组件
+<comp :myMessage="bar" @update:myMessage="func"></comp>
+func(e){
+ this.bar = e;
+}
+//子组件js
+func2(){
+  this.$emit('update:myMessage',params);
+}
 ```
 
 使用`sync`需要注意以下两点：
@@ -202,16 +235,16 @@ undefined;
 
 设置自定义标签属性，避免暴露数据，防止污染 HTML 结构
 
-```typescript
-undefined;
+```js
+<input id="uid" title="title1" value="1" :index.prop="index">
 ```
 
 #### camel
 
 将命名变为驼峰命名法，如将 `view-Box`属性名转换为 `viewBox`
 
-```typescript
-undefined;
+```js
+<svg :viewBox="viewBox"></svg>
 ```
 
 ## 三、应用场景

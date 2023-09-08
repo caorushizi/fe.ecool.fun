@@ -4,7 +4,7 @@ pubDatetime: 2022-04-09T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 8d6277eecac8691af72080a02b2b809f
+postSlug: 7fca9ff442cf58133f54b913aa252c8d
 description: >-
   前端路由有两种模式：hash模式和history模式，接下来分析这两种模式的实现方式和优缺点。hash模式-------hash模式是一种把前端路由的路径用井号`#`拼接在真实URL后面的模式。当井号
 difficulty: 2
@@ -23,8 +23,17 @@ hash 模式是一种把前端路由的路径用井号 `#` 拼接在真实 URL �
 
 我们新建一个 `hash.html` 文件，内容为：
 
-```typescript
-undefined;
+```html
+<a href="#/a">A页面</a>
+<a href="#/b">B页面</a>
+<div id="app"></div>
+<script>
+  function render() {
+    app.innerHTML = window.location.hash;
+  }
+  window.addEventListener("hashchange", render);
+  render();
+</script>
 ```
 
 在上面的例子中，我们利用 `a` 标签设置了两个路由导航，把 `app` 当做视图渲染容器，当切换路由的时候触发视图容器的更新，这其实就是大多数前端框架哈希路由的实现原理。
@@ -42,14 +51,34 @@ history API 是 H5 提供的新特性，允许开发者直接更改前端路由�
 
 我们新建一个 `history.html`，内容为：
 
-```typescript
-undefined;
+```html
+<a href="javascript:toA();">A页面</a>
+<a href="javascript:toB();">B页面</a>
+<div id="app"></div>
+<script>
+  function render() {
+    app.innerHTML = window.location.pathname;
+  }
+  function toA() {
+    history.pushState({}, null, "/a");
+    render();
+  }
+  function toB() {
+    history.pushState({}, null, "/b");
+    render();
+  }
+  window.addEventListener("popstate", render);
+</script>
 ```
 
 history API 提供了丰富的函数供开发者调用，我们不妨把控制台打开，然后输入下面的语句来观察浏览器地址栏的变化：
 
-```typescript
-undefined;
+```js
+history.replaceState({}, null, "/b"); // 替换路由
+history.pushState({}, null, "/a"); // 路由压栈
+history.back(); // 返回
+history.forward(); // 前进
+history.go(-2); // 后退2次
 ```
 
 上面的代码监听了 `popstate` 事件，该事件能监听到：

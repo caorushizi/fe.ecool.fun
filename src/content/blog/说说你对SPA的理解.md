@@ -4,7 +4,7 @@ pubDatetime: 2023-01-15T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 94697596e3658fde9673e067e8f0121c
+postSlug: 323c5b9cdb45b20eb3da2f0dab695366
 description: >-
   ![](https://static.vue-js.com/cf6aa320-3ac6-11eb-85f6-6fac77c0c9b3.png)预览一、什么是SPA--------SPA（single-
 difficulty: 2.5
@@ -113,8 +113,30 @@ SEO 搜索引擎优化
 
 核心通过监听`url`中的`hash`来进行路由跳转
 
-```typescript
-undefined;
+```js
+// 定义 Router
+class Router {
+  constructor() {
+    this.routes = {}; // 存放路由path及callback
+    this.currentUrl = ""; // 监听路由change调用相对应的路由回调
+    window.addEventListener("load", this.refresh, false);
+    window.addEventListener("hashchange", this.refresh, false);
+  }
+  route(path, callback) {
+    this.routes[path] = callback;
+  }
+  push(path) {
+    this.routes[path] && this.routes[path]();
+  }
+}
+
+// 使用 router
+window.miniRouter = new Router();
+miniRouter.route("/", () => console.log("page1"));
+miniRouter.route("/page2", () => console.log("page2"));
+
+miniRouter.push("/"); // page1
+miniRouter.push("/page2"); // page2
 ```
 
 ##### history 模式
@@ -125,8 +147,40 @@ undefined;
 - `history.replaceState`修改浏览器历史纪录中当前纪录
 - `history.popState` 当 `history` 发生变化时触发
 
-```typescript
-undefined;
+```js
+// 定义 Router
+class Router {
+  constructor() {
+    this.routes = {};
+    this.listerPopState();
+  }
+  init(path) {
+    history.replaceState({ path: path }, null, path);
+    this.routes[path] && this.routes[path]();
+  }
+  route(path, callback) {
+    this.routes[path] = callback;
+  }
+  push(path) {
+    history.pushState({ path: path }, null, path);
+    this.routes[path] && this.routes[path]();
+  }
+  listerPopState() {
+    window.addEventListener("popstate", e => {
+      const path = e.state && e.state.path;
+      this.routers[path] && this.routers[path]();
+    });
+  }
+}
+
+// 使用 Router
+
+window.miniRouter = new Router();
+miniRouter.route("/", () => console.log("page1"));
+miniRouter.route("/page2", () => console.log("page2"));
+
+// 跳转
+miniRouter.push("/page2"); // page2
 ```
 
 ### 四、题外话：如何给 SPA 做 SEO

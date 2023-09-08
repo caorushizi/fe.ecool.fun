@@ -4,9 +4,9 @@ pubDatetime: 2021-08-22T16:00:00.000Z
 author: caorushizi
 tags:
   - es6
-postSlug: 96d890fe2f63658bfd8d7acbaac3601c
+postSlug: 0fe3ad913ab096099b333129bc50a11e
 description: >-
-  *扩展运算符```typescriptundefined```*Object.assign()```typescriptundefined```可以看到，两者都是浅拷贝。Object.assign()
+  *扩展运算符```jsletoutObj={inObj:{a:1,b:2}}letnewObj={...outObj}newObj.inObj.a=2console.log(outObj)//{inO
 difficulty: 3
 questionNumber: 16
 source: >-
@@ -15,14 +15,24 @@ source: >-
 
 - 扩展运算符
 
-```typescript
-undefined;
+```js
+let outObj = {
+  inObj: { a: 1, b: 2 },
+};
+let newObj = { ...outObj };
+newObj.inObj.a = 2;
+console.log(outObj); // {inObj: {a: 2, b: 2}}
 ```
 
 - Object.assign()
 
-```typescript
-undefined;
+```js
+let outObj = {
+  inObj: { a: 1, b: 2 },
+};
+let newObj = Object.assign({}, outObj);
+newObj.inObj.a = 2;
+console.log(outObj); // {inObj: {a: 2, b: 2}}
 ```
 
 可以看到，两者都是浅拷贝。

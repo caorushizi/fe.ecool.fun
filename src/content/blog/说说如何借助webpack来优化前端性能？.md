@@ -4,7 +4,7 @@ pubDatetime: 2021-07-06T16:00:00.000Z
 author: caorushizi
 tags:
   - 工程化
-postSlug: ed781ab82b8fe46a775ec99532480066
+postSlug: faa0a95dd012347b375288866b9b8929
 description: >-
   ![](https://static.vue-js.com/15e1ace0-aee4-11eb-ab90-d9ae814b240d.png)预览一、背景----随着前端的项目逐渐扩大，必然会带来的一
 difficulty: 2.5
@@ -44,8 +44,19 @@ source: >-
 
 在`production`模式下，`webpack` 默认就是使用 `TerserPlugin` 来处理我们的代码的。如果想要自定义配置它，配置方法如下：
 
-```typescript
-undefined;
+```js
+const TerserPlugin = require('terser-webpack-plugin')
+module.exports = {
+    ...
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                parallel: true // 电脑cpu核数-1
+            })
+        ]
+    }
+}
 ```
 
 属性介绍如下：
@@ -65,22 +76,45 @@ undefined;
 
 CSS 的压缩我们可以使用另外一个插件：`css-minimizer-webpack-plugin`
 
-```typescript
-undefined;
+```cmd
+npm install css-minimizer-webpack-plugin -D
 ```
 
 配置方法如下：
 
-```typescript
-undefined;
+```js
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+module.exports = {
+  // ...
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: true,
+      }),
+    ],
+  },
+};
 ```
 
 ### Html 文件代码压缩
 
 使用`HtmlWebpackPlugin`插件来生成`HTML`的模板时候，通过配置属性`minify`进行`html`优化
 
-```typescript
-undefined;
+```js
+module.exports = {
+    ...
+    plugin:[
+        new HtmlwebpackPlugin({
+            ...
+            minify:{
+                minifyCSS:false, // 是否压缩css
+                collapseWhitespace:false, // 是否折叠空格
+                removeComments:true // 是否移除注释
+            }
+        })
+    ]
+}
 ```
 
 设置了`minify`，实际会使用另一个插件`html-minifier-terser`
@@ -89,12 +123,17 @@ undefined;
 
 对文件的大小进行压缩，减少`http`传输过程中宽带的损耗
 
-```typescript
-undefined;
+```js
+npm install compression-webpack-plugin -D
 ```
 
-```typescript
-undefined;
+```js
+new ComepressionPlugin({
+  test: /\.(css|js)$/, // 哪些文件需要压缩
+  threshold: 500, // 设置文件多大开始压缩
+  minRatio: 0.7, // 至少压缩的比例
+  algorithm: "gzip", // 采用的压缩算法
+});
 ```
 
 ### 图片压缩
@@ -103,8 +142,50 @@ undefined;
 
 配置方法如下：
 
-```typescript
-undefined;
+```js
+module: {
+  rules: [
+    {
+      test: /\.(png|jpg|gif)$/,
+      use: [
+        {
+          loader: "file-loader",
+          options: {
+            name: "[name]_[hash].[ext]",
+            outputPath: "images/",
+          },
+        },
+        {
+          loader: "image-webpack-loader",
+          options: {
+            // 压缩 jpeg 的配置
+            mozjpeg: {
+              progressive: true,
+              quality: 65,
+            },
+            // 使用 imagemin**-optipng 压缩 png，enable: false 为关闭
+            optipng: {
+              enabled: false,
+            },
+            // 使用 imagemin-pngquant 压缩 png
+            pngquant: {
+              quality: "65-90",
+              speed: 4,
+            },
+            // 压缩 gif 的配置
+            gifsicle: {
+              interlaced: false,
+            },
+            // 开启 webp，会把 jpg 和 png 图片压缩为 webp 格式
+            webp: {
+              quality: 75,
+            },
+          },
+        },
+      ],
+    },
+  ];
+}
 ```
 
 ### Tree Shaking
@@ -122,8 +203,13 @@ undefined;
 
 配置方法也很简单，只需要将`usedExports`设为`true`
 
-```typescript
-undefined;
+```js
+module.exports = {
+    ...
+    optimization:{
+        usedExports
+    }
+}
 ```
 
 使用之后，没被用上的代码在`webpack`打包中会加入`unused harmony export mul`注释，用来告知 `Terser` 在优化时，可以删除掉这段代码
@@ -142,8 +228,8 @@ undefined;
 
 如果有些文件需要保留，可以设置为数组的形式
 
-```typescript
-undefined;
+```js
+"sideEffecis":[    "./src/util/format.js",    "*.css" // 所有的css文件]
 ```
 
 上述都是关于`javascript`的`tree shaking`，`css`同样也能够实现`tree shaking`
@@ -152,12 +238,12 @@ undefined;
 
 `css`进行`tree shaking`优化可以安装`PurgeCss`插件
 
-```typescript
-undefined;
+```cmd
+npm install purgecss-plugin-webpack -D
 ```
 
-```typescript
-undefined;
+```js
+const PurgeCssPlugin = require('purgecss-webpack-plugin')module.exports = {    ...    plugins:[        new PurgeCssPlugin({            path:glob.sync(`${path.resolve('./src')}/**/*`), {nodir:true}// src里面的所有文件            satelist:function(){                return {                    standard:["html"]                }            }        })    ]}
 ```
 
 - paths：表示要检测哪些目录下的内容需要被分析，配合使用 glob
@@ -175,8 +261,8 @@ undefined;
 
 默认配置中，chunks 仅仅针对于异步（async）请求，我们可以设置为 initial 或者 all
 
-```typescript
-undefined;
+```js
+module.exports = {    ...    optimization:{        splitChunks:{            chunks:"all"        }    }}
 ```
 
 `splitChunks`主要属性有如下：
@@ -190,8 +276,8 @@ undefined;
 
 可以通过`InlineChunkHtmlPlugin`插件将一些`chunk`的模块内联到`html`，如`runtime`的代码（对模块进行解析、加载、模块信息相关的代码），代码量并不大，但是必须加载的
 
-```typescript
-undefined;
+```js
+const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin')const HtmlWebpackPlugin = require('html-webpack-plugin')module.exports = {    ...    plugin:[        new InlineChunkHtmlPlugin(HtmlWebpackPlugin,[/runtime.+\.js/]}
 ```
 
 ### 三、总结

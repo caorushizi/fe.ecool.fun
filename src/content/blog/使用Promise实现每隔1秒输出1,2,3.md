@@ -4,9 +4,9 @@ pubDatetime: 2021-08-14T16:00:00.000Z
 author: caorushizi
 tags:
   - 编程题
-postSlug: d30e3ce27af8e70e216942e1438872c8
+postSlug: cb88cf9415d79e7889280602027742f5
 description: >-
-  这道题比较简单的一种做法是可以用Promise配合着reduce不停的在promise后面叠加.then，请看下面的代码：```typescriptundefined```还可以更简单一点写：```t
+  这道题比较简单的一种做法是可以用Promise配合着reduce不停的在promise后面叠加.then，请看下面的代码：```javascriptconstarr=[1,2,3]arr.reduce
 difficulty: 3
 questionNumber: 58
 source: >-
@@ -15,12 +15,24 @@ source: >-
 
 这道题比较简单的一种做法是可以用 Promise 配合着 reduce 不停的在 promise 后面叠加.then，请看下面的代码：
 
-```typescript
-undefined;
+```javascript
+const arr = [1, 2, 3];
+arr.reduce((p, x) => {
+  return p.then(() => {
+    return new Promise(r => {
+      setTimeout(() => r(console.log(x)), 1000);
+    });
+  });
+}, Promise.resolve());
 ```
 
 还可以更简单一点写：
 
-```typescript
-undefined;
+```javascript
+const arr = [1, 2, 3];
+arr.reduce(
+  (p, x) =>
+    p.then(() => new Promise(r => setTimeout(() => r(console.log(x)), 1000))),
+  Promise.resolve()
+);
 ```

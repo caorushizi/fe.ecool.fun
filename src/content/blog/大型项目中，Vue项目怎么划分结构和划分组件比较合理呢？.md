@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: ffeb1428142ce962a93e287f469c0449
+postSlug: c62388e354c51d09724d41f392fec1fa
 description: >-
   ![](https://static.vue-js.com/b6cd6a60-4aba-11eb-ab90-d9ae814b240d.png)预览一、为什么要划分--------使用`vue`构建项目
 difficulty: 3
@@ -39,8 +39,12 @@ source: >-
 
 举个例子，在`pages`文件夹里面存在一个`seller`文件夹，这时候`seller` 文件夹应该作为一个独立的模块由外部引入，并且 `seller/index.js` 应该作为外部引入 seller 模块的唯一入口
 
-```typescript
-undefined;
+```js
+// 错误用法
+import sellerReducer from "src/pages/seller/reducer";
+
+// 正确用法
+import { reducer as sellerReducer } from "src/pages/seller";
 ```
 
 这样做的好处在于，无论你的模块文件夹内部有多乱，外部引用的时候，都是从一个入口文件引入，这样就很好的实现了隔离，如果后续有重构需求，你就会发现这种方式的优点
@@ -49,8 +53,11 @@ undefined;
 
 使用相对路径可以保证模块内部的独立性
 
-```typescript
-undefined;
+```js
+// 正确用法
+import styles from "./index.module.scss";
+// 错误用法
+import styles from "src/pages/seller/index.module.scss";
 ```
 
 举个例子
@@ -67,8 +74,11 @@ undefined;
 
 在使用到的页面中，采用绝对路径的形式引用
 
-```typescript
-undefined;
+```js
+// 错误用法
+import Input from "../../components/input";
+// 正确用法
+import Input from "src/components/input";
 ```
 
 同样的，如果我们需要对文件夹结构进行调整。将 `/src/components/input` 变成 `/src/components/new/input`，如果使用绝对路径，只需要全局搜索替换
@@ -85,14 +95,148 @@ undefined;
 
 单页面目录结构
 
-```typescript
-undefined;
+```js
+project
+│  .browserslistrc
+│  .env.production
+│  .eslintrc.js
+│  .gitignore
+│  babel.config.js
+│  package-lock.json
+│  package.json
+│  README.md
+│  vue.config.js
+│  yarn-error.log
+│  yarn.lock
+│
+├─public
+│      favicon.ico
+│      index.html
+│
+|-- src
+    |-- components
+        |-- input
+            |-- index.js
+            |-- index.module.scss
+    |-- pages
+        |-- seller
+            |-- components
+                |-- input
+                    |-- index.js
+                    |-- index.module.scss
+            |-- reducer.js
+            |-- saga.js
+            |-- index.js
+            |-- index.module.scss
+        |-- buyer
+            |-- index.js
+        |-- index.js
 ```
 
 多页面目录结构
 
-```typescript
-undefined;
+```js
+my-vue-test:.
+│  .browserslistrc
+│  .env.production
+│  .eslintrc.js
+│  .gitignore
+│  babel.config.js
+│  package-lock.json
+│  package.json
+│  README.md
+│  vue.config.js
+│  yarn-error.log
+│  yarn.lock
+│
+├─public
+│      favicon.ico
+│      index.html
+│
+└─src
+    ├─apis //接口文件根据页面或实例模块化
+    │      index.js
+    │      login.js
+    │
+    ├─components //全局公共组件
+    │  └─header
+    │          index.less
+    │          index.vue
+    │
+    ├─config //配置（环境变量配置不同passid等）
+    │      env.js
+    │      index.js
+    │
+    ├─contant //常量
+    │      index.js
+    │
+    ├─images //图片
+    │      logo.png
+    │
+    ├─pages //多页面vue项目，不同的实例
+    │  ├─index //主实例
+    │  │  │  index.js
+    │  │  │  index.vue
+    │  │  │  main.js
+    │  │  │  router.js
+    │  │  │  store.js
+    │  │  │
+    │  │  ├─components //业务组件
+    │  │  └─pages //此实例中的各个路由
+    │  │      ├─amenu
+    │  │      │      index.vue
+    │  │      │
+    │  │      └─bmenu
+    │  │              index.vue
+    │  │
+    │  └─login //另一个实例
+    │          index.js
+    │          index.vue
+    │          main.js
+    │
+    ├─scripts //包含各种常用配置，工具函数
+    │  │  map.js
+    │  │
+    │  └─utils
+    │          helper.js
+    │
+    ├─store //vuex仓库
+    │  │  index.js
+    │  │
+    │  ├─index
+    │  │      actions.js
+    │  │      getters.js
+    │  │      index.js
+    │  │      mutation-types.js
+    │  │      mutations.js
+    │  │      state.js
+    │  │
+    │  └─user
+    │          actions.js
+    │          getters.js
+    │          index.js
+    │          mutation-types.js
+    │          mutations.js
+    │          state.js
+    │
+    └─styles //样式统一配置
+        │  components.less
+        │
+        ├─animation
+        │      index.less
+        │      slide.less
+        │
+        ├─base
+        │      index.less
+        │      style.less
+        │      var.less
+        │      widget.less
+        │
+        └─common
+                index.less
+                reset.less
+                style.less
+                transition.less
 ```
 
 ### 小结

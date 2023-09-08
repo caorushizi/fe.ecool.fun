@@ -4,9 +4,9 @@ pubDatetime: 2022-08-22T16:00:00.000Z
 author: caorushizi
 tags:
   - html
-postSlug: f17900141c7bf73ea6e87aa55b103310
+postSlug: e842307d4883b1e18c23a8fc1165c05e
 description: >-
-  script通常被放在header或者body标签中，但位置的不同对于页面的加载效果也不一样。>demo中引用的js文件，都有延迟3秒才执行完成的设定。###放在header中```typescrip
+  script通常被放在header或者body标签中，但位置的不同对于页面的加载效果也不一样。>demo中引用的js文件，都有延迟3秒才执行完成的设定。###放在header中```xml<head>
 difficulty: 2
 questionNumber: 17
 source: >-
@@ -19,8 +19,13 @@ script 通常被放在 header 或者 body 标签中，但位置的不同对于�
 
 ### 放在 header 中
 
-```typescript
-undefined;
+```xml
+<head>
+  <title>script 加载机制</title>
+  <script src='/js/test1.js'></script>
+  <script src='/js/test2.js'></script>
+  <script src='/js/test3.js'></script>
+</head>
 ```
 
 ![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/5/23/172407b4eb29b144~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp)
@@ -31,8 +36,13 @@ undefined;
 
 ### 放在 body 底部
 
-```typescript
-undefined;
+```xml
+<body>
+  <h2>script 加载机制</h2>
+  <script src='/js/test1.js'></script>
+  <script src='/js/test2.js'></script>
+  <script src='/js/test3.js'></script>
+</body>
 ```
 
 ![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/5/23/172407b4eb50de2c~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp)

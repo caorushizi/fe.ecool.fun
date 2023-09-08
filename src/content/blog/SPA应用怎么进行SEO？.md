@@ -4,7 +4,7 @@ pubDatetime: 2022-08-28T16:00:00.000Z
 author: caorushizi
 tags:
   - html
-postSlug: ca027b80ab8485caa07da4739cdc6e1c
+postSlug: 0f9a339bfda47d9dc23c28949ac24c18
 description: >-
   概述--SPA全名是`SinglePageApplication`，指的是单页面应用。SEO全称为`SearchEngineOptimization`，指的是搜索引擎优化。SPA技术将产出html的逻
 difficulty: 3
@@ -23,8 +23,18 @@ SPA 技术将产出 html 的逻辑从服务器转移到了客户端，在进入 
 
 那么搜索引擎爬虫在抓取这样的页面的时，在未做任何优化的情况下，通常拿到的是类似下面的字符文本：
 
-```typescript
-undefined;
+```js
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+</head>
+<body>
+<div id="root"></div>
+<script src="index.js"></script>
+</body>
+</html>
 ```
 
 除了可以事先定义的 title（可能 title 也不能事先确定），在 SPA 下很多内容需要通过 ajax 请求 server 拿到数据通过脚本执行产生。通常爬虫不会有类似浏览器的执行环境去产生这些内容。

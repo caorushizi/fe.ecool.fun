@@ -4,7 +4,7 @@ pubDatetime: 2023-04-15T16:00:00.000Z
 author: caorushizi
 tags:
   - html
-postSlug: 747a6c8fe25010ec6e80938c7091755f
+postSlug: d9100ed253127b1752add85c5862c20b
 description: >-
   HTML5是HTML的新标准，其主要目标是无需任何额外的插件如Flash、Silverlight等，就可以传输所有内容。它囊括了动画、视频、丰富的图形用户界面等。HTML5是由万维网联盟（W3C）和`
 difficulty: 1
@@ -23,8 +23,9 @@ HTML5 是由万维网联盟（W3C）和 `Web Hypertext Application Technology Wo
 
 HTML 是很长的一段代码，很难记住。如下代码：
 
-```typescript
-undefined;
+```html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"></html>
 ```
 
 HTML5 却只有简简单单的声明，方便记忆。如下：

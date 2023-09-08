@@ -4,7 +4,7 @@ pubDatetime: 2021-07-06T16:00:00.000Z
 author: caorushizi
 tags:
   - 工程化
-postSlug: 57104bc87805fa7cb5b2bbe3293de6e3
+postSlug: 81c6cb380f30d004e6480c40c4b41c8c
 description: >-
   ![](https://static.vue-js.com/3a1b8620-b01b-11eb-85f6-6fac77c0c9b3.png)预览一、背景----随着我们的项目涉及到页面越来越多，功能
 difficulty: 3
@@ -44,8 +44,21 @@ source: >-
 
 如采用 ES6 的项目为例，在配置 `babel-loader` 时，可以这样：
 
-```typescript
-undefined;
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        // 如果项目源码中只有 js 文件就不要写成 /\.jsx?$/，提升正则表达式性能
+        test: /\.js$/,
+        // babel-loader 支持缓存转换出的结果，通过 cacheDirectory 选项开启
+        use: ["babel-loader?cacheDirectory"],
+        // 只对项目根目录下的 src 目录中的文件采用 babel-loader
+        include: path.resolve(__dirname, "src"),
+      },
+    ],
+  },
+};
 ```
 
 ### 合理使用 resolve.extensions
@@ -54,8 +67,11 @@ undefined;
 
 通过`resolve.extensions`是解析到文件时自动添加拓展名，默认情况如下：
 
-```typescript
-undefined;
+```js
+module.exports = {
+    ...
+    extensions:[".warm",".mjs",".js",".json"]
+}
 ```
 
 当我们引入文件的时候，若没有文件后缀名，则会根据数组内的值依次查找
@@ -80,8 +96,15 @@ undefined;
 
 通过配置`alias`以减少查找过程
 
-```typescript
-undefined;
+```js
+module.exports = {
+    ...
+    resolve:{
+        alias:{
+            "@":path.resolve(__dirname,'./src')
+        }
+    }
+}
 ```
 
 ### 使用 DLLPlugin 插件
@@ -97,8 +120,16 @@ undefined;
 
 `webpack`内置了一个`DllPlugin`可以帮助我们打包一个 DLL 的库文件
 
-```typescript
-undefined;
+```js
+module.exports = {
+    ...
+    plugins:[
+        new webpack.DllPlugin({
+            name:'dll_[name]',
+            path:path.resolve(__dirname,"./dll/[name].mainfest.json")
+        })
+    ]
+}
 ```
 
 #### 引入 DLL 库
@@ -107,8 +138,18 @@ undefined;
 
 然后再通过`AddAssetHtmlPlugin`插件，将我们打包的`DLL`库引入到`Html`模块中
 
-```typescript
-undefined;
+```js
+module.exports = {
+    ...
+    new webpack.DllReferencePlugin({
+        context:path.resolve(__dirname,"./dll/dll_react.js"),
+        mainfest:path.resolve(__dirname,"./dll/react.mainfest.json")
+    }),
+    new AddAssetHtmlPlugin({
+        outputPath:"./auto",
+        filepath:path.resolve(__dirname,"./dll/dll_react.js")
+    })
+}
 ```
 
 ### 使用 cache-loader
@@ -117,16 +158,34 @@ undefined;
 
 保存和读取这些缓存文件会有一些时间开销，所以请只对性能开销较大的 `loader` 使用此 `loader`
 
-```typescript
-undefined;
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.ext$/,
+        use: ["cache-loader", ...loaders],
+        include: path.resolve("src"),
+      },
+    ],
+  },
+};
 ```
 
 ### terser 启动多线程
 
 使用多进程并行运行来提高构建速度
 
-```typescript
-undefined;
+```js
+module.exports = {
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+      }),
+    ],
+  },
+};
 ```
 
 ### 合理使用 sourceMap

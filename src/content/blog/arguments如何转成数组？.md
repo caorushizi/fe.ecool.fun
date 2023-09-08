@@ -4,9 +4,9 @@ pubDatetime: 2022-08-12T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: ab30eefc96302aa384b7d80c85cde7ac
+postSlug: 241c1f17fcf2c3be016d5bad5385c000
 description: >-
-  函数中的arguments是一个对象，不是一个数组，严格来说它是一个类数组对象。1、调用数组的原型方法来转换--------------```typescriptundefined```2、使用ES6
+  函数中的arguments是一个对象，不是一个数组，严格来说它是一个类数组对象。1、调用数组的原型方法来转换--------------```jsvarfoo=function(a,b){vararr
 difficulty: 1
 questionNumber: 85
 source: >-
@@ -17,28 +17,42 @@ source: >-
 
 ## 1、调用数组的原型方法来转换
 
-```typescript
-undefined;
+```js
+var foo = function (a, b) {
+  var arr = Array.prototype.slice.call(arguments);
+  console.log(arr);
+};
+foo(1, 2); //(2) [1, 2]
 ```
 
 ## 2、使用 ES6 的新语法 `Array.from()` 来转换
 
 `Array.from` 方法用于将两类对象转为真正的数组：类似数组的对象和可遍历对象（包括 Set 和 Map）。
 
-```typescript
-undefined;
+```js
+var foo = function (a, b) {
+  var arr = Array.from(arguments);
+  console.log(arr);
+};
+foo(1, 2); // (2) [1, 2]
 ```
 
 ## 3、使用 for
 
 使用 for 循环挨个将 arguments 对象中的内容复制给新数组中
 
-```typescript
-undefined;
+```js
+function toArray() {
+  var args = [];
+  for (var i = 1; i < arguments.length; i++) {
+    args.push(arguments[i]);
+  }
+  return args;
+}
 ```
 
 ## 4、利用 ES6 中的 rest 参数转换
 
-```typescript
-undefined;
+```js
+let a = (…args) => args;
 ```

@@ -4,7 +4,7 @@ pubDatetime: 2022-04-19T16:00:00.000Z
 author: caorushizi
 tags:
   - 工程化
-postSlug: 3de888549b10c703f60f47dc18414b22
+postSlug: 38590cdab829de74fb81f90d5dbcd36b
 description: >-
   背景==这里的背景介绍会从与`Vite`紧密相关的两个概念的发展史说起，一个是`JavaScript`的模块化标准，另一个是前端构建工具。###共存的模块化标准为什么`JavaScript`会有多种共
 difficulty: 3.5
@@ -91,8 +91,8 @@ source: >-
 
 ### 创建 vite 项目
 
-```typescript
-undefined;
+```shell
+$ npm create vite@latest
 ```
 
 ### 选取模板
@@ -129,8 +129,14 @@ TypeScript
 
 ### 启动
 
-```typescript
-undefined;
+```json
+{
+  "scripts": {
+    "dev": "vite", // 启动开发服务器，别名：`vite dev`，`vite serve`
+    "build": "vite build", // 为生产环境构建产物
+    "preview": "vite preview" // 本地预览生产构建产物
+  }
+}
 ```
 
 ---
@@ -169,8 +175,12 @@ undefined;
 - `es-module-lexer` 扫描 import 语法
 - `magic-string` 重写模块的引入路径
 
-```typescript
-undefined;
+```js
+// 开发代码
+import { createApp } from "vue";
+
+// 转换后
+import { createApp } from "/node_modules/vue/dist/vue.js";
 ```
 
 # 源码分析
@@ -186,32 +196,180 @@ client 代码会在启动服务时注入到客户端，用于客户端对于`Web
 
 1.  命令行启动服务`npm run dev`后，源码执行`cli.ts`，调用`createServer`方法，创建 http 服务，监听开发服务器端口。
 
-```typescript
-undefined;
+```js
+// 源码位置 vite/packages/vite/src/node/cli.ts
+const { createServer } = await import('./server')
+try {
+    const server = await createServer({
+        root,
+        base: options.base,
+        ...
+    })
+    if (!server.httpServer) {
+        throw new Error('HTTP server not available')
+    }
+    await server.listen()
+}
 ```
 
 2.  `createServer`方法的执行做了很多工作，如整合配置项、创建 http 服务（早期通过 koa 创建）、创建`WebSocket`服务、创建源码的文件监听、插件执行、optimize 优化等。下面注释中标出。
 
-```typescript
-undefined;
+```js
+// 源码位置 vite/packages/vite/src/node/server/index.ts
+export async function createServer(
+    inlineConfig: InlineConfig = {}
+): Promise<ViteDevServer> {
+    // Vite 配置整合
+    const config = await resolveConfig(inlineConfig, 'serve', 'development')
+    const root = config.root
+    const serverConfig = config.server
+
+    // 创建http服务
+    const httpServer = await resolveHttpServer(serverConfig, middlewares, httpsOptions)
+
+    // 创建ws服务
+    const ws = createWebSocketServer(httpServer, config, httpsOptions)
+
+    // 创建watcher，设置代码文件监听
+    const watcher = chokidar.watch(path.resolve(root), {
+        ignored: [
+            '**/node_modules/**',
+            '**/.git/**',
+            ...(Array.isArray(ignored) ? ignored : [ignored])
+        ],
+        ...watchOptions
+    }) as FSWatcher
+
+    // 创建server对象
+    const server: ViteDevServer = {
+        config,
+        middlewares,
+        httpServer,
+        watcher,
+        ws,
+        moduleGraph,
+        listen,
+        ...
+    }
+
+    // 文件监听变动，websocket向前端通信
+    watcher.on('change', async (file) => {
+        ...
+        handleHMRUpdate()
+    })
+
+    // 非常多的 middleware
+    middlewares.use(...)
+
+    // optimize
+    const runOptimize = async () => {...}
+
+    return server
+}
 ```
 
 3.  使用[chokidar](https://www.npmjs.com/package/chokidar "chokidar")监听文件变化，绑定监听事件。
 
-```typescript
-undefined;
+```js
+// 源码位置 vite/packages/vite/src/node/server/index.ts
+  const watcher = chokidar.watch(path.resolve(root), {
+    ignored: [
+      '**/node_modules/**',
+      '**/.git/**',
+      ...(Array.isArray(ignored) ? ignored : [ignored])
+    ],
+    ignoreInitial: true,
+    ignorePermissionErrors: true,
+    disableGlobbing: true,
+    ...watchOptions
+  }) as FSWatcher
 ```
 
 4.  通过 [ws](https://www.npmjs.com/package/ws "ws") 来创建`WebSocket`服务，用于监听到文件变化时触发热更新，向客户端发送消息。
 
-```typescript
-undefined;
+```js
+// 源码位置 vite/packages/vite/src/node/server/ws.ts
+export function createWebSocketServer(...){
+    let wss: WebSocket
+    const hmr = isObject(config.server.hmr) && config.server.hmr
+    const wsServer = (hmr && hmr.server) || server
+
+    if (wsServer) {
+        wss = new WebSocket({ noServer: true })
+        wsServer.on('upgrade', (req, socket, head) => {
+            // 服务就绪
+            if (req.headers['sec-websocket-protocol'] === HMR_HEADER) {
+                wss.handleUpgrade(req, socket as Socket, head, (ws) => {
+                    wss.emit('connection', ws, req)
+                })
+            }
+        })
+    } else {
+        ...
+    }
+    // 服务准备就绪，就能在浏览器控制台看到熟悉的打印 [vite] connected.
+    wss.on('connection', (socket) => {
+        socket.send(JSON.stringify({ type: 'connected' }))
+        ...
+    })
+    // 失败
+    wss.on('error', (e: Error & { code: string }) => {
+        ...
+    })
+    // 返回ws对象
+    return {
+        on: wss.on.bind(wss),
+        off: wss.off.bind(wss),
+        // 向客户端发送信息
+        // 多个客户端同时触发
+        send(payload: HMRPayload) {
+            const stringified = JSON.stringify(payload)
+            wss.clients.forEach((client) => {
+                // readyState 1 means the connection is open
+                client.send(stringified)
+            })
+        }
+    }
+}
 ```
 
 5.  在服务启动时会向浏览器注入代码，用于处理客户端接收到的`WebSocket`消息，如重新发起模块请求、刷新页面。
 
-```typescript
-undefined;
+```js
+//源码位置 vite/packages/vite/src/client/client.ts
+async function handleMessage(payload: HMRPayload) {
+  switch (payload.type) {
+    case 'connected':
+      console.log(`[vite] connected.`)
+      break
+    case 'update':
+      notifyListeners('vite:beforeUpdate', payload)
+      ...
+      break
+    case 'custom': {
+      notifyListeners(payload.event as CustomEventName<any>, payload.data)
+      ...
+      break
+    }
+    case 'full-reload':
+      notifyListeners('vite:beforeFullReload', payload)
+      ...
+      break
+    case 'prune':
+      notifyListeners('vite:beforePrune', payload)
+      ...
+      break
+    case 'error': {
+      notifyListeners('vite:error', payload)
+      ...
+      break
+    }
+    default: {
+      const check: never = payload
+      return check
+    }
+  }
+}
 ```
 
 ---

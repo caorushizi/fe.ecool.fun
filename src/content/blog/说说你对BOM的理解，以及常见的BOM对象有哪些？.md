@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 4109a5fd7e46ead0846c2c8202ee1eb8
+postSlug: 02cedfe07aa5b984b075cc46d67268af
 description: >-
   ![](https://static.vue-js.com/3e191c40-8089-11eb-85f6-6fac77c0c9b3.png)预览一、是什么-----`BOM`(BrowserObje
 difficulty: 2
@@ -37,8 +37,15 @@ source: >-
 
 因此所有在全局作用域中声明的变量、函数都会变成`window`对象的属性和方法
 
-```typescript
-undefined;
+```js
+var name = "js每日一题";
+function lookName() {
+  alert(this.name);
+}
+
+console.log(window.name); //js每日一题
+lookName(); //js每日一题
+window.lookName(); //js每日一题
 ```
 
 关于窗口控制方法如下：
@@ -54,14 +61,15 @@ undefined;
 
 如果 `window.open()` 传递了第二个参数，且该参数是已有窗口或者框架的名称，那么就会在目标窗口加载第一个参数指定的 URL
 
-```typescript
-undefined;
+```js
+window.open('htttp://www.vue3js.cn','topFrame')
+==> < a href=" " target="topFrame"></ a>
 ```
 
 `window.open()` 会返回新窗口的引用，也就是新窗口的 `window` 对象
 
-```typescript
-undefined;
+```js
+const myWin = window.open("http://www.vue3js.cn", "myWin");
 ```
 
 `window.close()` 仅用于通过 `window.open()` 打开的窗口
@@ -72,8 +80,8 @@ undefined;
 
 `url`地址如下：
 
-```typescript
-undefined;
+```js
+http://foouser:barpassword@www.wrox.com:80/WileyCDA/?q=javascript#contents
 ```
 
 `location`属性描述如下：
@@ -170,14 +178,15 @@ url 的查询字符串，通常为？后面的内容
 
 接收一个整数数字或者字符串参数：向最近的一个记录中包含指定字符串的页面跳转，
 
-```typescript
-undefined;
+```js
+history.go("maixaofei.com");
 ```
 
 当参数为整数数字的时候，正数表示向前跳转指定的页面，负数为向后跳转指定的页面
 
-```typescript
-undefined;
+```js
+history.go(3); //向前跳转三个记录
+history.go(-1); //向后跳转一个记录
 ```
 
 - `history.forward()`：向前跳转一个页面

@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 0e5df39d7283a2f4ad03ca40935cc123
+postSlug: 1c1977bc4b3a4033ae5ba5f18f6a7526
 description: >-
   ![](https://static.vue-js.com/2ae9dda0-85fa-11eb-ab90-d9ae814b240d.png)预览一、是什么-----函数缓存，就是将函数运算过的结果进
 difficulty: 2
@@ -25,8 +25,11 @@ source: >-
 
 常用于缓存数据计算结果和缓存对象
 
-```typescript
-undefined;
+```js
+const add = (a, b) => a + b;
+const calc = memoize(add); // 函数缓存
+calc(10, 20); // 30
+calc(10, 20); // 30 缓存
 ```
 
 缓存只是一个临时的数据存储，它保存数据，以便将来对该数据的请求能够更快地得到处理
@@ -39,8 +42,16 @@ undefined;
 
 闭包可以理解成，函数 + 函数体内可访问的变量总和
 
-```typescript
-undefined;
+```js
+(function () {
+  var a = 1;
+  function add() {
+    const b = 2;
+    let sum = b + a;
+    console.log(sum); // 3
+  }
+  add();
+})();
 ```
 
 `add` 函数本身，以及其内部可访问的变量，即 `a = 1` ，这两个组合在⼀起就形成了闭包
@@ -49,8 +60,21 @@ undefined;
 
 把接受多个参数的函数转换成接受一个单一参数的函数
 
-```typescript
-undefined;
+```js
+// 非函数柯里化
+var add = function (x, y) {
+  return x + y;
+};
+add(3, 4); //7
+
+// 函数柯里化
+var add2 = function (x) {
+  //**返回函数**
+  return function (y) {
+    return x + y;
+  };
+};
+add2(3)(4); //7
 ```
 
 将一个二元函数拆分成两个一元函数
@@ -59,8 +83,17 @@ undefined;
 
 通过接收其他函数作为参数或返回其他函数的函数
 
-```typescript
-undefined;
+```js
+function foo() {
+  var a = 2;
+
+  function bar() {
+    console.log(a);
+  }
+  return bar;
+}
+var baz = foo();
+baz(); //2
 ```
 
 函数 `foo` 如何返回另一个函数 `bar`，`baz` 现在持有对 `foo` 中定义的`bar` 函数的引用。由于闭包特性，`a`的值能够得到
@@ -69,14 +102,25 @@ undefined;
 
 如下所示
 
-```typescript
-undefined;
+```js
+const memoize = function (func, content) {
+  let cache = Object.create(null);
+  content = content || this;
+  return (...key) => {
+    if (!cache[key]) {
+      cache[key] = func.apply(content, key);
+    }
+    return cache[key];
+  };
+};
 ```
 
 调用方式也很简单
 
-```typescript
-undefined;
+```js
+const calc = memoize(add);
+const num1 = calc(100, 200);
+const num2 = calc(100, 200); // 缓存得到的结果
 ```
 
 过程分析：

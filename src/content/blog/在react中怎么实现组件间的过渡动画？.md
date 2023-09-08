@@ -4,7 +4,7 @@ pubDatetime: 2021-10-24T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: 9d010f9523422f83935b5151a008e0ea
+postSlug: 40428a4305438bed535045d82bdaba51
 description: >-
   一、是什么-----在日常开发中，页面切换时的转场动画是比较基础的一个场景当一个组件在显示与消失过程中存在过渡动画，可以很好的增加用户的体验在`react`中实现过渡动画效果会有很多种选择，如`rea
 difficulty: 2
@@ -45,14 +45,57 @@ source: >-
 
 如下例子：
 
-```typescript
-undefined;
+```jsx
+export default class App2 extends React.PureComponent {
+  state = { show: true };
+
+  onToggle = () => this.setState({ show: !this.state.show });
+
+  render() {
+    const { show } = this.state;
+    return (
+      <div className={"container"}>
+        <div className={"square-wrapper"}>
+          <CSSTransition
+            in={show}
+            timeout={500}
+            classNames={"fade"}
+            unmountOnExit={true}
+          >
+            <div className={"square"} />
+          </CSSTransition>
+        </div>
+        <Button onClick={this.onToggle}>toggle</Button>
+      </div>
+    );
+  }
+}
 ```
 
 对应`css`样式如下：
 
-```typescript
-undefined;
+```css
+.fade-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 500ms;
+}
 ```
 
 ### SwitchTransition
@@ -72,14 +115,64 @@ undefined;
 
 下面给出一个按钮入场和出场的示例，如下：
 
-```typescript
-undefined;
+```jsx
+import { SwitchTransition, CSSTransition } from "react-transition-group";
+
+export default class SwitchAnimation extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOn: true,
+    };
+  }
+
+  render() {
+    const { isOn } = this.state;
+
+    return (
+      <SwitchTransition mode="out-in">
+        <CSSTransition classNames="btn" timeout={500} key={isOn ? "on" : "off"}>
+          {
+            <button onClick={this.btnClick.bind(this)}>
+              {isOn ? "on" : "off"}
+            </button>
+          }
+        </CSSTransition>
+      </SwitchTransition>
+    );
+  }
+
+  btnClick() {
+    this.setState({ isOn: !this.state.isOn });
+  }
+}
 ```
 
 `css`文件对应如下：
 
-```typescript
-undefined;
+```css
+.btn-enter {
+  transform: translate(100%, 0);
+  opacity: 0;
+}
+
+.btn-enter-active {
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: all 500ms;
+}
+
+.btn-exit {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.btn-exit-active {
+  transform: translate(-100%, 0);
+  opacity: 0;
+  transition: all 500ms;
+}
 ```
 
 ### TransitionGroup
@@ -97,12 +190,66 @@ undefined;
 
 如下：
 
-```typescript
-undefined;
+```jsx
+import React, { PureComponent } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+export default class GroupAnimation extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      friends: [],
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <TransitionGroup>
+          {this.state.friends.map((item, index) => {
+            return (
+              <CSSTransition classNames="friend" timeout={300} key={index}>
+                <div>{item}</div>
+              </CSSTransition>
+            );
+          })}
+        </TransitionGroup>
+        <button onClick={e => this.addFriend()}>+friend</button>
+      </div>
+    );
+  }
+
+  addFriend() {
+    this.setState({
+      friends: [...this.state.friends, "coderwhy"],
+    });
+  }
+}
 ```
 
 对应`css`如下：
 
-```typescript
-undefined;
+```css
+.friend-enter {
+  transform: translate(100%, 0);
+  opacity: 0;
+}
+
+.friend-enter-active {
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: all 500ms;
+}
+
+.friend-exit {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.friend-exit-active {
+  transform: translate(-100%, 0);
+  opacity: 0;
+  transition: all 500ms;
+}
 ```

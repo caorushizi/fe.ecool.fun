@@ -4,8 +4,8 @@ pubDatetime: 2021-12-26T16:00:00.000Z
 author: caorushizi
 tags:
   - html
-postSlug: b50bda5c3c679789a0dadc6404dfcf24
-description: 可以，通过给input标签设置multiple属性。```typescriptundefined```
+postSlug: 739c4a0c76dce98eb620e42a2599ff2c
+description: 可以，通过给input标签设置multiple属性。```html<inputtype="file"name="files"multiple/>```
 difficulty: 1
 questionNumber: 35
 source: >-
@@ -14,6 +14,6 @@ source: >-
 
 可以，通过给 input 标签设置 multiple 属性。
 
-```typescript
-undefined;
+```html
+<input type="file" name="files" multiple />
 ```

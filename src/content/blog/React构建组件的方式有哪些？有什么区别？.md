@@ -4,7 +4,7 @@ pubDatetime: 2021-10-24T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: 22f724e231f9941f487a58b291403894
+postSlug: 9f728632907fd4ee70147ac5e8cd9fcc
 description: >-
   一、是什么-----组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式在`React`中，一个类、一个函数都可以视为一个组件组件所存在的优势：*降低整个系统的耦合度，在保持
 difficulty: 1
@@ -41,8 +41,10 @@ source: >-
 
 在`React`中，通过函数简单创建组件的示例如下：
 
-```typescript
-undefined;
+```jsx
+function HelloComponent(props /* context */) {
+  return <div>Hello {props.name}</div>;
+}
 ```
 
 ### 通过 React.createClass 方法创建
@@ -51,8 +53,10 @@ undefined;
 
 像上述通过函数式创建的组件的方式，最终会通过`babel`转化成`React.createClass`这种形式，转化成如下：
 
-```typescript
-undefined;
+```jsx
+function HelloComponent(props) /* context */ {
+  return React.createElement("div", null, "Hello ", props.name);
+}
 ```
 
 由于上述的编写方式过于冗杂，目前基本上不使用上
@@ -67,8 +71,31 @@ undefined;
 
 通过继承`React.Component`创建一个时钟示例如下：
 
-```typescript
-undefined;
+```jsx
+class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { seconds: 0 };
+  }
+
+  tick() {
+    this.setState(state => ({
+      seconds: state.seconds + 1,
+    }));
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+    return <div>Seconds: {this.state.seconds}</div>;
+  }
+}
 ```
 
 ## 三、区别

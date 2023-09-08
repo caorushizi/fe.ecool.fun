@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - es6
-postSlug: 76cf0032209153d698d60a075aecd3de
+postSlug: 49597719fd70997bfef02fcecfe82291
 description: >-
   ![](https://static.vue-js.com/b6d19be0-5adb-11eb-ab90-d9ae814b240d.png)预览一、介绍----模块，（Module），是能够单独命名
 difficulty: 3
@@ -52,16 +52,32 @@ source: >-
 
 代表库为`require.js`
 
-```typescript
-undefined;
+```js
+/** main.js 入口文件/主模块 **/
+// 首先用config()指定各模块路径和引用名
+require.config({
+  baseUrl: "js/lib",
+  paths: {
+    jquery: "jquery.min", //实际路径为js/lib/jquery.min.js
+    underscore: "underscore.min",
+  },
+});
+// 执行基本操作
+require(["jquery", "underscore"], function ($, _) {
+  // some code here
+});
 ```
 
 ### CommonJs
 
 `CommonJS` 是一套 `Javascript` 模块规范，用于服务端
 
-```typescript
-undefined;
+```js
+// a.js
+module.exports = { foo, bar };
+
+// b.js
+const { foo, bar } = require("./a.js");
 ```
 
 其有如下特点：
@@ -77,14 +93,22 @@ ES6 在语言标准的层面上，实现了`Module`，即模块功能，完全�
 
 `CommonJS` 和 `AMD` 模块，都只能在运行时确定这些东西。比如，`CommonJS` 模块就是对象，输入时必须查找对象属性
 
-```typescript
-undefined;
+```javascript
+// CommonJS模块
+let { stat, exists, readfile } = require("fs");
+
+// 等同于
+let _fs = require("fs");
+let stat = _fs.stat;
+let exists = _fs.exists;
+let readfile = _fs.readfile;
 ```
 
 `ES6`设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量
 
-```typescript
-undefined;
+```js
+// ES6模块
+import { stat, exists, readFile } from "fs";
 ```
 
 上述代码，只加载 3 个方法，其他方法不加载，即 `ES6` 可以在编译时就完成模块加载
@@ -104,86 +128,133 @@ undefined;
 
 一个模块就是一个独立的文件，该文件内部的所有变量，外部无法获取。如果你希望外部能够读取模块内部的某个变量，就必须使用`export`关键字输出该变量
 
-```typescript
-undefined;
+```javascript
+// profile.js
+export var firstName = "Michael";
+export var lastName = "Jackson";
+export var year = 1958;
+
+或;
+// 建议使用下面写法，这样能瞬间确定输出了哪些变量
+var firstName = "Michael";
+var lastName = "Jackson";
+var year = 1958;
+
+export { firstName, lastName, year };
 ```
 
 输出函数或类
 
-```typescript
-undefined;
+```js
+export function multiply(x, y) {
+  return x * y;
+}
 ```
 
 通过`as`可以进行输出变量的重命名
 
-```typescript
-undefined;
+```js
+function v1() { ... }
+function v2() { ... }
+
+export {
+  v1 as streamV1,
+  v2 as streamV2,
+  v2 as streamLatestVersion
+};
 ```
 
 ### import
 
 使用`export`命令定义了模块的对外接口以后，其他 JS 文件就可以通过`import`命令加载这个模块
 
-```typescript
-undefined;
+```javascript
+// main.js
+import { firstName, lastName, year } from "./profile.js";
+
+function setName(element) {
+  element.textContent = firstName + " " + lastName;
+}
 ```
 
 同样如果想要输入变量起别名，通过`as`关键字
 
-```typescript
-undefined;
+```javascript
+import { lastName as surname } from "./profile.js";
 ```
 
 当加载整个模块的时候，需要用到星号`*`
 
-```typescript
-undefined;
+```js
+// circle.js
+export function area(radius) {
+  return Math.PI * radius * radius;
+}
+
+export function circumference(radius) {
+  return 2 * Math.PI * radius;
+}
+
+// main.js
+import * as circle from "./circle";
+console.log(circle); // {area:area,circumference:circumference}
 ```
 
 输入的变量都是只读的，不允许修改，但是如果是对象，允许修改属性
 
-```typescript
-undefined;
+```js
+import { a } from "./xxx.js";
+
+a.foo = "hello"; // 合法操作
+a = {}; // Syntax Error : 'a' is read-only;
 ```
 
 不过建议即使能修改，但我们不建议。因为修改之后，我们很难差错
 
 `import`后面我们常接着`from`关键字，`from`指定模块文件的位置，可以是相对路径，也可以是绝对路径
 
-```typescript
-undefined;
+```js
+import { a } from "./a";
 ```
 
 如果只有一个模块名，需要有配置文件，告诉引擎模块的位置
 
-```typescript
-undefined;
+```javascript
+import { myMethod } from "util";
 ```
 
 在编译阶段，`import`会提升到整个模块的头部，首先执行
 
-```typescript
-undefined;
+```javascript
+foo();
+
+import { foo } from "my_module";
 ```
 
 多次重复执行同样的导入，只会执行一次
 
-```typescript
-undefined;
+```js
+import "lodash";
+import "lodash";
 ```
 
 上面的情况，大家都能看到用户在导入模块的时候，需要知道加载的变量名和函数，否则无法加载
 
 如果不需要知道变量名或函数就完成加载，就要用到`export default`命令，为模块指定默认输出
 
-```typescript
-undefined;
+```js
+// export-default.js
+export default function () {
+  console.log("foo");
+}
 ```
 
 加载该模块的时候，`import`命令可以为该函数指定任意名字
 
-```typescript
-undefined;
+```js
+// import-default.js
+import customName from "./export-default";
+customName(); // 'foo'
 ```
 
 ### 动态加载
@@ -192,16 +263,22 @@ undefined;
 
 这个新功能允许您将`import()`作为函数调用，将其作为参数传递给模块的路径。 它返回一个 `promise`，它用一个模块对象来实现，让你可以访问该对象的导出
 
-```typescript
-undefined;
+```js
+import("/modules/myModule.mjs").then(module => {
+  // Do something with the module.
+});
 ```
 
 ### 复合写法
 
 如果在一个模块之中，先输入后输出同一个模块，`import`语句可以与`export`语句写在一起
 
-```typescript
-undefined;
+```javascript
+export { foo, bar } from "my_module";
+
+// 可以简单理解为
+import { foo, bar } from "my_module";
+export { foo, bar };
 ```
 
 同理能够搭配`as`、`*`搭配使用
@@ -212,14 +289,31 @@ undefined;
 
 `vue`组件
 
-```typescript
-undefined;
+```js
+<template>
+  <div class="App">
+      组件化开发 ---- 模块化
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
+  }
+}
+</script>
 ```
 
 `react`组件
 
-```typescript
-undefined;
+```js
+function App() {
+  return <div className="App">组件化开发 ---- 模块化</div>;
+}
+
+export default App;
 ```
 
 包括完成一些复杂应用的时候，我们也可以拆分成各个模块

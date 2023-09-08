@@ -4,7 +4,7 @@ pubDatetime: 2021-07-06T16:00:00.000Z
 author: caorushizi
 tags:
   - 工程化
-postSlug: 8d6e96e22dc6b3c972ee9c1b95aba00a
+postSlug: 5468157ef130d1ef57eb01e90f88070b
 description: >-
   ![](https://static.vue-js.com/a076da40-acd4-11eb-85f6-6fac77c0c9b3.png)预览###一、是什么`HMR`全称`HotModuleRe
 difficulty: 3
@@ -27,8 +27,16 @@ source: >-
 
 在`webpack`中配置开启热模块也非常的简单，如下代码：
 
-```typescript
-undefined;
+```js
+const webpack = require("webpack");
+module.exports = {
+  // ...
+  devServer: {
+    // 开启 HMR 特性
+    hot: true,
+    // hotOnly: true
+  },
+};
 ```
 
 通过上述这种配置，如果我们修改并保存`css`文件，确实能够以不刷新的形式更新到页面中
@@ -39,8 +47,12 @@ undefined;
 
 我们需要去指定哪些模块发生更新时进行`HRM`，如下代码：
 
-```typescript
-undefined;
+```js
+if (module.hot) {
+  module.hot.accept("./util.js", () => {
+    console.log("util.js更新了");
+  });
+}
 ```
 
 ## 二、实现原理

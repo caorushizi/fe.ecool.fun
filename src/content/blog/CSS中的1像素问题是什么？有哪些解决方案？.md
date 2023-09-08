@@ -4,7 +4,7 @@ pubDatetime: 2021-07-11T16:00:00.000Z
 author: caorushizi
 tags:
   - css
-postSlug: f94f111a53a20ab434e4a14546cca26d
+postSlug: 8fe43b9b7300666885ca8c7db03746cc
 description: >-
   1px边框问题的由来-----------苹果iPhone4首次提出了RetinaDisplay（视网膜屏幕）的概念，在iPhone4使用的视网膜屏幕中，把2x2个像素当1个物理像素使用，即使用2x2
 difficulty: 3.5
@@ -25,16 +25,37 @@ source: >-
 
 通过设置元素的 box-sizing 为 border-box，然后构建伪元素，再使用 CSS3 的 transform 缩放，这是目前市面上最受推崇的解决方法。这种方法可以满足所有的场景，而且修改灵活，唯一的缺陷是，对于已使用伪元素的元素要多嵌套一个无用元素。具体的实现如下：
 
-```typescript
-undefined;
+```css
+.one-pixel-border {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.one-pixel-border::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  border: 1px solid red;
+  transform: translate(-50%, -50%) scale(0.5, 0.5);
+}
 ```
 
 这样就可以得到 0.5px 的边框。
 
 还可以结合媒体查询（@media）解决不同 dpr 值屏幕的边框问题，如下：
 
-```typescript
-undefined;
+```css
+@media screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+  ...;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 3), (min-resolution: 3dppx) {
+  ...;
+}
 ```
 
 当然还有不少其他的解决方案：border-image、background-image、viewport + rem + js、box-shadow 等，但都有各自的缺点，不进行推荐，此处也不做详细介绍。

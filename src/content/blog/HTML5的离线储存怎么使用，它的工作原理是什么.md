@@ -4,7 +4,7 @@ pubDatetime: 2022-06-24T16:00:00.000Z
 author: caorushizi
 tags:
   - html
-postSlug: 8ce7ea945233fd8dcb5ee958b781535a
+postSlug: baf43f237ad9ebd99959bfa39d0d60f9
 description: >-
   离线存储指的是：在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件。\*\*原理：\*\*HTML5的离线存储是基于一个新建的`.appcache`文件的
 difficulty: 2.5
@@ -19,14 +19,15 @@ source: >-
 
 **使用方法：** （1）创建一个和 html 同名的 manifest 文件，然后在页面头部加入 manifest 属性：
 
-```typescript
-undefined;
+```html
+<html lang="en" manifest="index.manifest"></html>
 ```
 
 （2）在 `cache.manifest` 文件中编写需要离线存储的资源：
 
-```typescript
-undefined;
+```html
+CACHE MANIFEST #v0.11 CACHE: js/app.js css/style.css NETWORK: resourse/logo.png
+FALLBACK: / /offline.html
 ```
 
 - **CACHE**: 表示需要离线存储的资源列表，由于包含 manifest 文件的页面将被自动离线存储，所以不需要把页面自身也列出来。

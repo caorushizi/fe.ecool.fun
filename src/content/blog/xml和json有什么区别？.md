@@ -4,9 +4,9 @@ pubDatetime: 2021-09-25T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 9e37c9145f9633df6d9ad8410d111252
+postSlug: 887577cca649020082cb851336ef830d
 description: >-
-  JSON---->JSON（JavaScriptObjectNotation）是一种轻量级的数据交换格式，它完全独立于语言。它基于JavaScript编程语言，易于理解和生成。示例：```typesc
+  JSON---->JSON（JavaScriptObjectNotation）是一种轻量级的数据交换格式，它完全独立于语言。它基于JavaScript编程语言，易于理解和生成。示例：```json{"
 difficulty: 1
 questionNumber: 211
 source: >-
@@ -19,8 +19,15 @@ source: >-
 
 示例：
 
-```typescript
-undefined;
+```json
+{
+  "Student": [
+    { "Name": "Vivek", "age": "20" },
+    { "Name": "Suraj", "age": "19" },
+    { "Name": "John", "age": "21" },
+    { "Name": "Peter", "age": "22" }
+  ]
+}
 ```
 
 ## XML
@@ -29,8 +36,21 @@ XML（可扩展标记语言）旨在传输数据，而不是显示数据。这�
 
 示例：
 
-```typescript
-undefined;
+```xml
+<Students>
+    <Student>
+        <Name>Vivek</Name> <age>20</age>
+    </Student>
+    <Student>
+        <Name>Suraj</Name> <age>19</age>
+    </Student>
+    <Student>
+        <Name>John</Name> <age>21</age>
+    </Student>
+    <Student>
+        <Name>Peter</Name> <age>22</age>
+    </Student>
+</Students>
 ```
 
 这两者都是自描述的，可以被许多编程语言解析和使用。

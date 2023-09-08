@@ -4,9 +4,9 @@ pubDatetime: 2021-12-26T16:00:00.000Z
 author: caorushizi
 tags:
   - html
-postSlug: 60bef3bcf84f64a54f4bc70601fe6cc5
+postSlug: 59e0bf715ce700e2c055b99ed54832cf
 description: >-
-  capture属性用于指定文件上传控件中媒体拍摄的方式。可选值：*user前置*environment后置*camera相机*camcorder摄像机*microphone录音```typescrip
+  capture属性用于指定文件上传控件中媒体拍摄的方式。可选值：*user前置*environment后置*camera相机*camcorder摄像机*microphone录音```html<inpu
 difficulty: 1
 questionNumber: 34
 source: >-
@@ -23,6 +23,6 @@ capture 属性用于指定文件上传控件中媒体拍摄的方式。
 - camcorder 摄像机
 - microphone 录音
 
-```typescript
-undefined;
+```html
+<input type="file" accept="image/*;" capture="camera" />
 ```

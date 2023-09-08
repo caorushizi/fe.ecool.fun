@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 32235e107692aa3b14c5f7e4a13ee0c2
+postSlug: 0af0abf5262c6f121bc4d8cf8b3d31e7
 description: >-
   ![](https://static.vue-js.com/8652b710-74c1-11eb-85f6-6fac77c0c9b3.png)预览一、执行上下文-------简单的来说，执行上下文是一
 difficulty: 3
@@ -53,8 +53,12 @@ source: >-
 
 伪代码如下：
 
-```typescript
-undefined;
+```js
+ExecutionContext = {
+  ThisBinding = <this value>,     // 确定this
+  LexicalEnvironment = { ... },   // 词法环境
+  VariableEnvironment = { ... },  // 变量环境
+}
 ```
 
 #### This Binding
@@ -70,8 +74,24 @@ undefined;
 
 伪代码如下：
 
-```typescript
-undefined;
+```js
+GlobalExectionContext = {  // 全局执行上下文
+  LexicalEnvironment: {       // 词法环境
+    EnvironmentRecord: {     // 环境记录
+      Type: "Object",           // 全局环境
+      // 标识符绑定在这里
+      outer: <null>           // 对外部环境的引用
+  }
+}
+
+FunctionExectionContext = { // 函数执行上下文
+  LexicalEnvironment: {     // 词法环境
+    EnvironmentRecord: {    // 环境记录
+      Type: "Declarative",      // 函数环境
+      // 标识符绑定在这里      // 对外部环境的引用
+      outer: <Global or outer function environment reference>
+  }
+}
 ```
 
 #### 变量环境
@@ -82,14 +102,69 @@ undefined;
 
 举个例子
 
-```typescript
-undefined;
+```js
+let a = 20;
+const b = 30;
+var c;
+
+function multiply(e, f) {
+  var g = 20;
+  return e * f * g;
+}
+
+c = multiply(20, 30);
 ```
 
 执行上下文如下：
 
-```typescript
-undefined;
+```js
+GlobalExectionContext = {
+
+  ThisBinding: <Global Object>,
+
+  LexicalEnvironment: {  // 词法环境
+    EnvironmentRecord: {
+      Type: "Object",
+      // 标识符绑定在这里
+      a: < uninitialized >,
+      b: < uninitialized >,
+      multiply: < func >
+    }
+    outer: <null>
+  },
+
+  VariableEnvironment: {  // 变量环境
+    EnvironmentRecord: {
+      Type: "Object",
+      // 标识符绑定在这里
+      c: undefined,
+    }
+    outer: <null>
+  }
+}
+
+FunctionExectionContext = {
+
+  ThisBinding: <Global Object>,
+
+  LexicalEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      // 标识符绑定在这里
+      Arguments: {0: 20, 1: 30, length: 2},
+    },
+    outer: <GlobalLexicalEnvironment>
+  },
+
+  VariableEnvironment: {
+    EnvironmentRecord: {
+      Type: "Declarative",
+      // 标识符绑定在这里
+      g: undefined
+    },
+    outer: <GlobalLexicalEnvironment>
+  }
+}
 ```
 
 留意上面的代码，`let`和`const`定义的变量`a`和`b`在创建阶段没有被赋值，但`var`声明的变量从在创建阶段被赋值为`undefined`
@@ -126,8 +201,18 @@ undefined;
 
 举个例子：
 
-```typescript
-undefined;
+```js
+let a = "Hello World!";
+function first() {
+  console.log("Inside first function");
+  second();
+  console.log("Again inside first function");
+}
+function second() {
+  console.log("Inside second function");
+}
+first();
+console.log("Inside Global Execution Context");
 ```
 
 转化成图的形式

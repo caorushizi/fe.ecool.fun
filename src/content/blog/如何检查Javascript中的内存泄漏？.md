@@ -4,7 +4,7 @@ pubDatetime: 2021-09-25T16:00:00.000Z
 author: caorushizi
 tags:
   - 工具
-postSlug: 4e8e6dc333599e29ea2c984e8bbb387b
+postSlug: e4898c4e9564d8ab900add0f4c157013
 description: >-
   浏览器---Chrome浏览器查看内存占用，按照以下步骤操作。![](https://i.loli.net/2021/09/25/luOGHT7a2EqMSf1.png)预览1、打开开发者工具，选择T
 difficulty: 2
@@ -43,8 +43,12 @@ Chrome 浏览器查看内存占用，按照以下步骤操作。
 
 命令行可以使用 Node 提供的 process.memoryUsage 方法。
 
-```typescript
-undefined;
+```js
+console.log(process.memoryUsage());
+// { rss: 27709440,
+//  heapTotal: 5685248,
+//  heapUsed: 3449392,
+//  external: 8772 }
 ```
 
 process.memoryUsage 返回一个对象，包含了 Node 进程的内存占用信息。该对象包含四个字段，单位是字节，含义如下。

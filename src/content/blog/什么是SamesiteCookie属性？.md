@@ -1,0 +1,24 @@
+---
+title: 什么是SamesiteCookie属性？
+pubDatetime: 2021-11-17T16:00:00.000Z
+author: caorushizi
+tags:
+  - 前端安全
+postSlug: 857d9fa4d61bcd7f013a978fa13da7a9
+description: >-
+  SameSite是HTTP响应头`Set-Cookie`的属性之一。它允许声明该`Cookie`是否仅限于第一方或者同一站点上下文。*将Samesite设为`strict`，这种称为严格模式，表示这个
+difficulty: 3
+questionNumber: 8
+source: >-
+  https://fe.ecool.fun/topic-answer/aef19252-da7d-447d-a9c5-3eb0d191901d?orderBy=updateTime&order=desc&tagId=21
+---
+
+SameSite 是 HTTP 响应头 `Set-Cookie` 的属性之一。它允许声明该 `Cookie` 是否仅限于第一方或者同一站点上下文。
+
+- 将 Samesite 设为 `strict` ，这种称为严格模式，表示这个 cookie 在任何情况下都不可能作为第三方 cookie。
+- 将 Samesite 设为 `Lax` ，这种模式称为宽松模式，也是目前浏览器中的默认值。如果这个请求是个 GET 请求，并且这个请求改变了当前页面或者打开了新的页面，那么这个 cookie 可以作为第三方 cookie，其余情况下都不能作为第三方 cookie。使用这种方法的缺点是，因为它不支持子域，所以子域没有办法与主域共享登录信息，每次转入子域的网站，都需要重新登录。还有一个问题就是它的兼容性不够好。
+- 将 Samesite 设为 `None`，Cookie 将在所有上下文中发送，即允许跨域发送。
+
+响应头设置方式：
+
+    Set-Cookie: flavor=choco; SameSite=None; Secure

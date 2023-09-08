@@ -4,7 +4,7 @@ pubDatetime: 2021-10-18T16:00:00.000Z
 author: caorushizi
 tags:
   - html
-postSlug: 9630891b522872d559729ed689c93348
+postSlug: d3aabfaa6beef9a1fd5b5a9ddf8d1fd3
 description: >-
   不能。自闭合标签来自于XML语法，而不是HTML语法。根据现在的HTML语法，只有不需要结束标签的voidelement（如img之类的），或者是外部元素（如svg）可以使用自闭合。script标签显
 difficulty: 1
@@ -17,6 +17,10 @@ source: >-
 
 根据现在的 HTML 语法，只有不需要结束标签的 void element（如 img 之类的），或者是外部元素（如 svg）可以使用自闭合。script 标签显然不在此列。
 
-```typescript
-undefined;
+```html
+// 正确写法
+<script src="..."></script>
+
+// 错误写法
+<script src="..." />
 ```

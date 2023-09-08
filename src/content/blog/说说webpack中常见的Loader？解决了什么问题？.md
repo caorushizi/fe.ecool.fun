@@ -4,7 +4,7 @@ pubDatetime: 2021-07-06T16:00:00.000Z
 author: caorushizi
 tags:
   - 工程化
-postSlug: b8a0a145f2a2f2581fee1d1f261b55a8
+postSlug: 10371699a748af6ca17eb63853f3fee1
 description: >-
   ![](https://static.vue-js.com/5660fc40-a6ff-11eb-85f6-6fac77c0c9b3.png)预览一、是什么-----`loader`用于对模块的"源代
 difficulty: 2.5
@@ -57,8 +57,26 @@ source: >-
 
 代码编写，如下形式：
 
-```typescript
-undefined;
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+          { loader: "sass-loader" },
+        ],
+      },
+    ],
+  },
+};
 ```
 
 ## 二、特性
@@ -102,12 +120,28 @@ undefined;
 
 分析 `css` 模块之间的关系，并合成⼀个 `css`
 
-```typescript
-undefined;
+```bash
+npm install --save-dev css-loader
 ```
 
-```typescript
-undefined;
+```js
+rules: [
+  ...,
+ {
+  test: /\.css$/,
+    use: {
+      loader: "css-loader",
+      options: {
+     // 启用/禁用 url() 处理
+     url: true,
+     // 启用/禁用 @import 处理
+     import: true,
+        // 启用/禁用 Sourcemap
+        sourceMap: false
+      }
+    }
+ }
+]
 ```
 
 如果只通过`css-loader`加载文件，这时候页面代码设置的样式并没有生效
@@ -120,12 +154,18 @@ undefined;
 
 把 `css-loader` 生成的内容，用 `style` 标签挂载到页面的 `head` 中
 
-```typescript
-undefined;
+```bash
+npm install --save-dev style-loader
 ```
 
-```typescript
-undefined;
+```js
+rules: [
+  ...,
+ {
+  test: /\.css$/,
+    use: ["style-loader", "css-loader"]
+ }
+]
 ```
 
 同一个任务的 `loader` 可以同时挂载多个，处理顺序为：从右到左，从下往上
@@ -134,48 +174,54 @@ undefined;
 
 开发中，我们也常常会使用`less`、`sass`、`stylus`预处理器编写`css`样式，使开发效率提高，这里需要使用`less-loader`
 
-```typescript
-undefined;
+```cmd
+npm install less-loader -D
 ```
 
-```typescript
-undefined;
+```js
+rules: [
+  ...,
+ {
+  test: /\.css$/,
+    use: ["style-loader", "css-loader","less-loader"]
+ }
+]
 ```
 
 ### raw-loader
 
 在 `webpack` 中通过 `import` 方式导入文件内容，该`loader` 并不是内置的，所以首先要安装
 
-```typescript
-undefined;
+```bash
+npm install --save-dev raw-loader
 ```
 
 然后在 webpack.config.js 中进行配置
 
-```typescript
-undefined;
+```javascript
+module.exports = {  ...,  module: {      rules: [      {        test: /\.(txt|md)$/,        use: 'raw-loader'     }    ] }}
 ```
 
 ### file-loader
 
 把识别出的资源模块，移动到指定的输出⽬目录，并且返回这个资源在输出目录的地址(字符串)
 
-```typescript
-undefined;
+```bash
+npm install --save-dev file-loader
 ```
 
-```typescript
-undefined;
+```javascript
+rules: [  ..., {  test: /\.(png|jpe?g|gif)$/,    use: {      loader: "file-loader",      options: {        // placeholder 占位符 [name] 源资源模块的名称        // [ext] 源资源模块的后缀        name: "[name]_[hash].[ext]",        //打包后的存放位置        outputPath: "./images",        // 打包后文件的 url        publicPath: './images',      }    } }]
 ```
 
 ### url-loader
 
 可以处理理 `file-loader` 所有的事情，但是遇到图片格式的模块，可以选择性的把图片转成 `base64` 格式的字符串，并打包到 `js` 中，对小体积的图片比较合适，大图片不合适。
 
-```typescript
-undefined;
+```bash
+npm install --save-dev url-loader
 ```
 
-```typescript
-undefined;
+```javascript
+rules: [  ..., {  test: /\.(png|jpe?g|gif)$/,    use: {      loader: "url-loader",      options: {        // placeholder 占位符 [name] 源资源模块的名称        // [ext] 源资源模块的后缀        name: "[name]_[hash].[ext]",        //打包后的存放位置        outputPath: "./images"        // 打包后文件的 url        publicPath: './images',        // 小于 100 字节转成 base64 格式        limit: 100      }    } }]
 ```

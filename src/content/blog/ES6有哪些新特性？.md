@@ -4,7 +4,7 @@ pubDatetime: 2023-04-15T16:00:00.000Z
 author: caorushizi
 tags:
   - es6
-postSlug: 938b9c4fd5feacf06efc68b75b9f6b68
+postSlug: c73e4b0ab8ab889a4751814a875c3cfd
 description: >-
   ###关于ES6和JavaScript的关系#####1、ES6是对于ES2015+的俗称，也可以说是通常叫法，那么，ES6是什么呢？ES全称是ECMAScript，它是JavaScript基础构建的
 difficulty: 2
@@ -50,26 +50,48 @@ JavaScript 包括 ECMAScript、DOM、BOM 三个组成部分，DOM 和 BOM 是 we
 - let、const 声明的变量，在 for，if 语句中，会形成块级作用域，块级作用域内的变量，不能被作用域外部使用
 - let、const 声明变量不再会有声明提升，在变量声明之前使用运行时会报错
 
-```typescript
-undefined;
+```js
+//块级作用域一级块级作用域的使用
+if (true) {
+  const param = "param in if block";
+  console.log(param); //param in if block
+}
+console.log(param); //块级作用域外访问内部定义的变量，ReferenceError: param is not defined
 ```
 
 - 块级作用域声明变量，会出现“暂时性死区”，块级作用域声明变量前使用变量，将会报错
 
-```typescript
-undefined;
+```js
+// 暂时性死区
+const i = 100;
+if (i) {
+  console.log(i); //ReferenceError: Cannot access 'i' before initialization
+  const i = 1000;
+}
 ```
 
 - const 声明的是一个常量，声明必须初始化
 
-```typescript
-undefined;
+```js
+
+    // const常量声明必须初始化
+    const i;
+    i = 10;
+    console.log(i) //SyntaxError: Missing initializer in const declaration
+
+
 ```
 
 - 如果 const 声明的是基本类型常量，初始化之后不能修改；引用类型的常量，可以修改其成员变量；
 
-```typescript
-undefined;
+```js
+// 基本类型常量不能修改，引用类型常量能修改属性
+const str = "str";
+str = "str1"; //TypeError: Assignment to constant variable.
+
+const arr = [1, 2, 3];
+arr[0] = 100;
+console.log(arr[0]); //100
 ```
 
 - 和 var 的区别
@@ -119,45 +141,66 @@ const
 - **数组解构**
 - 单独解构-根据数组索引，将数组解构成单独的元素
 
-```typescript
-undefined;
+```js
+const arr = [1, 2, 3];
+
+const [a, b, c] = arr;
+console.log(a, b, c); //1,2,3
+const [, , d] = arr;
+console.log(d); //3
 ```
 
 - 默认值，解构时可以给变量设置默认值，数组没有这个元素的话
 
-```typescript
-undefined;
+```js
+const arr = [1, 2, 3];
+
+const [, , , defaultVal = "4"] = arr;
+console.log("设置默认值", defaultVal);
 ```
 
 - 剩余解构-用 "...+变量名" 解构剩余参数到新数组，只能用一次
 
-```typescript
-undefined;
+```js
+const arr = [1, 2, 3];
+
+const [e, ...rest] = arr;
+console.log(rest); //[2, 3]
 ```
 
 - 实例应用
 
-```typescript
-undefined;
+```js
+// 拆分字符串
+const str = "xiaobai/18/200";
+const strArr = str.split("/");
+const [, age] = strArr;
+console.log(age); //18
 ```
 
 - **对象解构**
 - 单个/多个解构-跟数组解构差不多
 
-```typescript
-undefined;
+```js
+const obj = { name: "xiaohui", age: 18, height: undefined };
+const { name, age } = obj;
+console.log(name, age); // 'xiaohui', 18
 ```
 
 - 解构+重命名-给解构出来的变量重命名
 
-```typescript
-undefined;
+```js
+const obj = { name: "xiaohui", age: 18, height: undefined };
+const { name: objName } = obj;
+console.log(objName);
 ```
 
 - 默认值-给解构变量设置默认值
 
-```typescript
-undefined;
+```js
+const obj = { name: "xiaohui", age: 18, height: undefined };
+const { next = "default" } = obj;
+console.log(next);
 ```
 
 ## 3.模板字符串
@@ -170,14 +213,40 @@ undefined;
 
 - 换行/插值
 
-```typescript
-undefined;
+```js
+//换行
+const str = `fdsjak
+    fdsa`;
+console.log(str);
+
+// 插值
+const strs = `random: ${Math.random()}`;
+console.log(strs);
 ```
 
 - 标签函数-可以对模板字符串的字符串和插值进行处理和过滤等操作
 
-```typescript
-undefined;
+```js
+/**
+ * 字符串模板函数
+ * @param {array} strs 以插值为分隔符组成的字符串数组
+ * @param {string} name 插值的value，有多少个就会传入多少个
+ */
+const tagFunc = (strs, name, gender) => {
+  const [str1, str2, str3] = strs;
+  const genderParsed = gender == "1" ? "男" : "女";
+  // 可以在此做过滤，字符串处理，多语言等操作
+  return str1 + name + str2 + str3 + genderParsed;
+};
+
+// 带标签的模板字符串,
+const person = {
+  name: "xiaohui",
+  gender: 1,
+};
+// 返回值为标签函数的返回值
+const result = tagFunc`my name is ${person.name}.gender is ${person.gender}`;
+console.log(result); //my name is xiaohui.gender is 男
 ```
 
 ## 4\. 字符串扩展方法
@@ -186,30 +255,47 @@ undefined;
 - startsWith-是否以什么开始
 - endsWith-是否以什么结束
 
-```typescript
-undefined;
+```js
+const str = "abcd";
+
+console.log(str.includes("e")); //false
+console.log(str.startsWith("a")); //true
+console.log(str.endsWith("a")); //false
 ```
 
 ## 5.参数默认值&剩余参数
 
 - 给函数形参设置默认值
 
-```typescript
-undefined;
+```js
+// 带默认参数的形参一般放在后面，减少传参导致的错误几率
+const defaultParams = function (name, age = 0) {
+  return [age, name];
+};
+console.log(defaultParams(1));
 ```
 
 - 使用...rest 形式设置剩余形参，支持无限参数
 
-```typescript
-undefined;
+```js
+// 剩余参数，转化成数组
+const restParams = function (...args) {
+  console.log(args.toString()); //1, 2, 3, 4, 5
+};
+
+restParams(1, 2, 3, 4, 5);
 ```
 
 ## 6.展开数组
 
 使用...将数组展开
 
-```typescript
-undefined;
+```js
+const arr = [1, 2, 3];
+
+console.log(...arr);
+// 等价于es5中以下写法
+console.log.apply(console, arr);
 ```
 
 ## 7.箭头函数
@@ -220,8 +306,22 @@ undefined;
 - 2、没有 this 机制，this 继承自上一个函数的上下文，如果上一层没有函数，则指向 window
 - 3、作为异步回调函数时，可解决 this 指向问题
 
-```typescript
-undefined;
+```js
+const inc = n => n + 1;
+console.log(inc(100));
+
+const obj = {
+  name: "aa",
+  func() {
+    setTimeout(() => {
+      console.log(this.name); //aa
+    }, 0);
+    setTimeout(function () {
+      console.log(this.name); //undefined
+    }, 0);
+  },
+};
+obj.func();
 ```
 
 ## 8.对象字面量增强
@@ -231,14 +331,46 @@ undefined;
 - 可以直接 func(),
 - 可以使用计算属性，比如：{\[Math.random()\]: value}
 
-```typescript
-undefined;
+```js
+/**
+ * 1、增强了对象字面量：
+ * 1，同名属性可以省略key:value形式，直接key，
+ * 2，函数可以省略key：value形式
+ * 3，可以直接func(),
+ * 4，可以使用计算属性，比如：{[Math.random()]: value}
+ */
+const arr = [1, 2, 3];
+const obj = {
+  arr,
+  func() {
+    console.log(this.arr);
+  },
+  [Math.random()]: arr,
+};
+
+console.log(obj);
 ```
 
 ## 9.Object.assign(target1, target2, targetN)-复制/合并对象
 
-```typescript
-undefined;
+```js
+/**
+ * Object.assign(target1, target2, ...targetn)
+ * 后面的属性向前面的属性合并
+ * 如果target1是空对象，可以创建一个全新对象，而不是对象引用
+ */
+const obj1 = {
+  a: 1,
+  b: 2,
+};
+const obj2 = {
+  a: 1,
+  b: 2,
+};
+
+const obj3 = Object.assign({}, obj1);
+obj3.a = 5;
+console.log(obj3, obj2, obj1);
 ```
 
 ## 10.Object.is(value1, value2)
@@ -250,8 +382,12 @@ undefined;
 - 没有隐式转换
 - 可以比较+0,-0、NaN
 
-```typescript
-undefined;
+```js
+console.log(NaN === NaN); //false
+console.log(Object.is(NaN, NaN)); //true
+console.log(0 === -0); // true
+console.log(Object.is(0, -0)); //false
+console.log(Object.is(1, 1)); //true
 ```
 
 ## 11.Proxy(object, handler)
@@ -262,8 +398,32 @@ undefined;
 
 **用法：**
 
-```typescript
-undefined;
+```js
+const P = {
+  n: "p",
+  a: 19,
+};
+
+const proxy = new Proxy(P, {
+  get(target, property) {
+    console.log(target, property);
+    return property in target ? target[property] : null;
+  },
+  defineProperty(target, property, attrs) {
+    console.log(target, property, attrs);
+    //   throw new Error('不允许修改')
+  },
+  deleteProperty(target, property) {
+    console.log(target, property);
+    delete target[property];
+  },
+  set(target, property, value) {
+    target[property] = value;
+  },
+});
+
+proxy.c = 100;
+console.log("pp", P);
 ```
 
 与 Object.definePropert 对比
@@ -349,8 +509,15 @@ Object.seal(封闭对象)， Object.freeze（冻结对象）是不可扩展的
 
 示例：
 
-```typescript
-undefined;
+```js
+const obj = {
+  name: "reflect",
+};
+Reflect.preventExtensions(obj); //禁止扩展
+console.log(Reflect.set(obj, "age", "xiaobai")); //false
+console.log(obj); //{ name: 'reflect' }
+console.log(Reflect.isExtensible(obj, "name")); //false
+console.log(Reflect.ownKeys(obj)); //[ 'name' ]
 ```
 
 ## 13.Promise
@@ -363,8 +530,12 @@ undefined;
 
 - 使用 class 关键字定义类
 
-```typescript
-undefined;
+```js
+class Person {
+  constructor(props) {
+    this.props = props;
+  }
+}
 ```
 
 **方法**
@@ -372,14 +543,37 @@ undefined;
 - 实例方法，需要实例化之后才能调用，this 指向实例
 - 静态方法，用 static 修饰符修饰，可以直接通过类名调用，不需要实例化，this 不指向实例，而是指向当前类
 
-```typescript
-undefined;
+```js
+class Person {
+  constructor(props) {
+    this.props = props;
+  }
+  // 实例方法
+  eat() {}
+  // 静态方法
+  static run() {}
+}
+// 调用静态方法
+Person.run();
+const person = new Person("props");
+// 调用实例方法
+person.eat();
 ```
 
 **继承：子类使用 extends 关键字实现继承，可以继承父类所有属性**
 
-```typescript
-undefined;
+```js
+class Student extends Person {
+  constructor(props) {
+    super(props);
+  }
+  printProps() {
+    console.log(this.props);
+  }
+}
+
+const student = new Student("student");
+student.printProps();
 ```
 
 ## 15.Set
@@ -398,8 +592,13 @@ Set 是一种类似于数组的数据结构
 - 数组去重
 - 数据存储
 
-```typescript
-undefined;
+```js
+const arr = [1, 3, 1, 1, 1];
+const set = new Set(arr);
+set.add(1).add(1);
+console.log(set.size); //2
+const newArr = Array.from(set);
+console.log(newArr); //[ 1, 3 ]
 ```
 
 ## 16.Map
@@ -414,8 +613,20 @@ Map 键不会隐式转换成字符串，而是保持原有类型
 
 实例：
 
-```typescript
-undefined;
+```js
+const map = new Map();
+map.set(1, 1);
+map.set("name", "map");
+map.set(obj, obj);
+console.log(map.get(1)); //1
+/**
+        1 1
+        name map
+        { '1': 1, true: true, a: 'a' } { '1': 1, true: true, a: 'a' }
+     */
+map.forEach((val, key) => {
+  console.log(key, val);
+});
 ```
 
 ## 17.Symbol
@@ -437,8 +648,28 @@ JavaScript 第六种原始数据类型，用来定义一个唯一的变量
 
 实例
 
-```typescript
-undefined;
+```js
+// 对象属性重名问题；
+const objSymbol = {
+  [Symbol()]: 1,
+  [Symbol()]: 2,
+};
+console.log(objSymbol);
+
+// 2、为对象、类、函数等创建私有属性
+const name = Symbol();
+const obj2 = {
+  [name]: "symbol",
+  testPrivate() {
+    console.log(this[name]);
+  },
+};
+
+obj2.testPrivate();
+// 定义toString标签；
+console.log(obj2.toString());
+obj2[Symbol.toStringTag] = "xx";
+console.log(obj2.toString()); //[object xx]
 ```
 
 ## 18.for...of...
@@ -453,8 +684,56 @@ undefined;
 
 实例：
 
-```typescript
-undefined;
+```js
+// 基本用法
+// 遍历数组
+const arr = [1, 2, 3, 4];
+for (const item of arr) {
+  if (item > 3) {
+    break;
+  }
+  if (item > 2) {
+    console.log(item);
+  }
+}
+
+// 遍历set
+const set = new Set();
+set.add("foo").add("bar");
+for (const item of set) {
+  console.log("set for of", item);
+}
+// 遍历map
+const map = new Map();
+map.set("foo", "one").set("bar", "two");
+for (const [key, val] of map) {
+  console.log("for of map", key, val);
+}
+//迭代对象
+const obj = {
+  name: "xiaohui",
+  age: "10",
+  store: [1, 2, 3],
+  // 实现可迭代的接口
+  [Symbol.iterator]: function () {
+    const params = [this.name, this.age, this.store];
+    let index = 0;
+    return {
+      next() {
+        const ret = {
+          value: params[index],
+          done: index >= params.length,
+        };
+        index++;
+        return ret;
+      },
+    };
+  },
+};
+
+for (const item of obj) {
+  console.log("obj for of", item);
+}
 ```
 
 ## 19\. 迭代器模式
@@ -463,8 +742,34 @@ undefined;
 
 外部可以通过 for...of...去迭代内部的数据
 
-```typescript
-undefined;
+```js
+const tods = {
+  life: ["eat", "sleep"],
+  learn: ["js", "dart"],
+  // 增加的任务
+  work: ["sale", "customer"],
+  [Symbol.iterator]: function () {
+    const all = [];
+    Object.keys(this).forEach(key => {
+      all.push(...this[key]);
+    });
+    let index = 0;
+    return {
+      next() {
+        const ret = {
+          value: all[index],
+          done: index >= all.length,
+        };
+        index++;
+        return ret;
+      },
+    };
+  },
+};
+
+for (const item of tods) {
+  console.log(item);
+}
 ```
 
 ## 20.Generator 生成器
@@ -475,40 +780,87 @@ undefined;
 - 最大特点，惰性执行，调 next 才会往下执行
 - 主要用来解决异步回调过深的问题
 
-```typescript
-undefined;
+```js
+// 生成迭代器方法
+//  生成器Generator的应用
+
+function* createIdGenerator() {
+  let id = 1;
+  while (id < 3) yield id++;
+}
+const createId = createIdGenerator();
+console.log(createId.next()); //{ value: 1, done: false }
+console.log(createId.next()); //{ value: 2, done: false }
+console.log(createId.next()); //{ value: undefined, done: true }
+
+const todos = {
+  life: ["eat", "sleep", "baba"],
+  learn: ["es5", "es6", "design pattern"],
+  work: ["b", "c", "framework"],
+  [Symbol.iterator]: function* () {
+    const all = [...this.life, ...this.learn, ...this.work];
+    for (const i of all) {
+      yield i;
+    }
+  },
+};
+for (const item of todos) {
+  console.log(item);
+}
 ```
 
 ## 21.includes 函数-es2016
 
 判断数组是否包含某个元素，包含 NaN，解决 indexOf 无法查找 NaN 问题
 
-```typescript
-undefined;
+```js
+//  includes函数
+const arr = ["foo", "bar", "baz", NaN];
+console.log(arr.includes(NaN)); //true
+console.log(arr.indexOf(NaN)); //-1
 ```
 
 ## 22\. 运算符-es2016
 
 指数运算
 
-```typescript
-undefined;
+```js
+// 指数运算符 **
+// es5中2十次方
+console.log(Math.pow(2, 10));
+// es6中2十次方
+console.log(2 ** 10);
 ```
 
 ## 23.values 函数-es2017
 
 将对象的值以数组的形式返回
 
-```typescript
-undefined;
+```js
+const obj = {
+  foo: 1,
+  bar: 2,
+  baz: 3,
+};
+
+console.log(Object.values(obj)); //[ 1, 2, 3 ]
 ```
 
 ## 24.entries 函数-es2017
 
 将对象以键值对二维数组返回，使之可以使用 for...of...遍历
 
-```typescript
-undefined;
+```js
+const obj = {
+  foo: 1,
+  bar: 2,
+  baz: 3,
+};
+console.log(Object.entries(obj));
+const entry = Object.entries(obj);
+for (const [key, value] of entry) {
+  console.log(key, value);
+}
 ```
 
 ## 25.Object.getOwnPropertyDescriptors(obj)-es2017
@@ -517,8 +869,28 @@ undefined;
 
 可以通过获得的描述信息，配合 Object.defineProperties 来完整复制对象，包含 get，set 方法
 
-```typescript
-undefined;
+```js
+// getOwnPropertyDescriptors
+
+// 普通get方法
+const objGet = {
+  foo: 1,
+  bar: 2,
+  get getCount() {
+    return this.foo + this.bar;
+  },
+};
+// assign方法会把getCount当做普通属性复制，从而getCount为3，修改bar不管用
+const objGet1 = Object.assign({}, objGet);
+objGet1.bar = 3;
+console.log(objGet1.getCount); //3
+// descriptors
+const descriptors = Object.getOwnPropertyDescriptors(objGet);
+console.log("des", descriptors);
+// 通过descriptors来复制对象，可以完整复制对象，包含get，set
+const objGet2 = Object.defineProperties({}, descriptors);
+objGet2.bar = 3;
+console.log(objGet2.getCount); //4
 ```
 
 ## 26.padStart, padEnd 函数-es2017
@@ -543,6 +915,11 @@ padString:填充的字符串
 
 一般用来对齐字符串输出
 
-```typescript
-undefined;
+```js
+/**
+     *  foo.................|1
+        barbar..............|2
+        bazbazbaz...........|3
+     */
+console.log(`${key.padEnd(20, ".")}${value.toString().padStart(2, "|")}`);
 ```

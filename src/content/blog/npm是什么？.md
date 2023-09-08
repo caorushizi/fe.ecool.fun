@@ -1,0 +1,22 @@
+---
+title: npm是什么？
+pubDatetime: 2021-07-10T16:00:00.000Z
+author: caorushizi
+tags:
+  - nodejs
+postSlug: 98518485d22823cf4234f344e7ce00fc
+description: >-
+  npm是Node.js的包管理工具，它的诞生也极大的促进了前端的发展，在现代前端开发中都离不开npm的身影。常见的使用场景有以下几种：*允许用户从NPM服务器下载别人编写的第三方包到本地使用。*允许用
+difficulty: 1
+questionNumber: 26
+source: >-
+  https://fe.ecool.fun/topic-answer/1b2049cf-9800-420d-b4f3-09238226d162?orderBy=updateTime&order=desc&tagId=18
+---
+
+npm 是 Node.js 的包管理工具，它的诞生也极大的促进了前端的发展，在现代前端开发中都离不开 npm 的身影。
+
+常见的使用场景有以下几种：
+
+- 允许用户从 NPM 服务器下载别人编写的第三方包到本地使用。
+- 允许用户从 NPM 服务器下载并安装别人编写的命令行程序到本地使用。
+- 允许用户将自己编写的包或命令行程序上传到 NPM 服务器供别人使用。

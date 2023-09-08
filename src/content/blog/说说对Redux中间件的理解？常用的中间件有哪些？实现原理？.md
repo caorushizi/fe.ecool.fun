@@ -4,7 +4,7 @@ pubDatetime: 2023-01-09T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: 65879c29a0162230ad72ba13cc4638e5
+postSlug: 566965e96b4b41158733be3027fc4a83
 description: >-
   一、是什么-----中间件（Middleware）是介于应用系统和系统软件之间的一类软件，它使用系统软件所提供的基础服务（功能），衔接网络上应用系统的各个部分或不同的应用，能够达到资源共享、功能共享的
 difficulty: 3
@@ -40,8 +40,8 @@ source: >-
 
 然后作为第二个参数传入到`createStore`中
 
-```typescript
-undefined;
+```js
+const store = createStore(reducer, applyMiddleware(thunk, logger));
 ```
 
 ### redux-thunk
@@ -57,16 +57,28 @@ undefined;
 
 所以`dispatch`可以写成下述函数的形式：
 
-```typescript
-undefined;
+```js
+const getHomeMultidataAction = () => {
+  return dispatch => {
+    axios.get("http://xxx.xx.xx.xx/test").then(res => {
+      const data = res.data.data;
+      dispatch(changeBannersAction(data.banner.list));
+      dispatch(changeRecommendsAction(data.recommend.list));
+    });
+  };
+};
 ```
 
 ### redux-logger
 
 如果想要实现一个日志功能，则可以使用现成的`redux-logger`
 
-```typescript
-undefined;
+```js
+import { applyMiddleware, createStore } from "redux";
+import createLogger from "redux-logger";
+const logger = createLogger();
+
+const store = createStore(reducer, applyMiddleware(logger));
 ```
 
 这样我们就能简单通过中间件函数实现日志记录的信息
@@ -75,8 +87,23 @@ undefined;
 
 首先看看`applyMiddlewares`的源码
 
-```typescript
-undefined;
+```js
+export default function applyMiddleware(...middlewares) {
+  return createStore => (reducer, preloadedState, enhancer) => {
+    var store = createStore(reducer, preloadedState, enhancer);
+    var dispatch = store.dispatch;
+    var chain = [];
+
+    var middlewareAPI = {
+      getState: store.getState,
+      dispatch: action => dispatch(action),
+    };
+    chain = middlewares.map(middleware => middleware(middlewareAPI));
+    dispatch = compose(...chain)(store.dispatch);
+
+    return { ...store, dispatch };
+  };
+}
 ```
 
 所有中间件被放进了一个数组`chain`，然后嵌套执行，最后执行`store.dispatch`。可以看到，中间件内部（`middlewareAPI`）可以拿到`getState`和`dispatch`这两个方法
@@ -85,12 +112,32 @@ undefined;
 
 内部会将`dispatch`进行一个判断，然后执行对应操作，原理如下：
 
-```typescript
-undefined;
+```js
+function patchThunk(store) {
+  let next = store.dispatch;
+
+  function dispatchAndThunk(action) {
+    if (typeof action === "function") {
+      action(store.dispatch, store.getState);
+    } else {
+      next(action);
+    }
+  }
+
+  store.dispatch = dispatchAndThunk;
+}
 ```
 
 实现一个日志输出的原理也非常简单，如下：
 
-```typescript
-undefined;
+```js
+let next = store.dispatch;
+
+function dispatchAndLog(action) {
+  console.log("dispatching:", addAction(10));
+  next(addAction(5));
+  console.log("新的state:", store.getState());
+}
+
+store.dispatch = dispatchAndLog;
 ```

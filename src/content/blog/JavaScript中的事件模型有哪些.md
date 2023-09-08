@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 1247922c260aca3ea4acc9563832998c
+postSlug: 128f8d9e05e1aa98dfcf4fc86896a951
 description: >-
   ![](https://static.vue-js.com/32a182f0-74cf-11eb-85f6-6fac77c0c9b3.png)预览一、事件与事件流--------`javascript
 difficulty: 1.5
@@ -35,20 +35,45 @@ source: >-
 
 事件冒泡是一种从下往上的传播方式，由最具体的元素（触发节点）然后逐渐向上传播到最不具体的那个节点，也就是`DOM`中最高层的父节点
 
-```typescript
-undefined;
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Event Bubbling</title>
+  </head>
+  <body>
+    <button id="clickMe">Click Me</button>
+  </body>
+</html>
 ```
 
 然后，我们给`button`和它的父元素，加入点击事件
 
-```typescript
-undefined;
+```js
+var button = document.getElementById("clickMe");
+
+button.onclick = function () {
+  console.log("1.Button");
+};
+document.body.onclick = function () {
+  console.log("2.body");
+};
+document.onclick = function () {
+  console.log("3.document");
+};
+window.onclick = function () {
+  console.log("4.window");
+};
 ```
 
 点击按钮，输出如下
 
-```typescript
-undefined;
+```js
+1.button
+2.body
+3.document
+4.window
 ```
 
 点击事件首先在`button`元素上发生，然后逐级向上传播
@@ -69,14 +94,15 @@ undefined;
 
 - HTML 代码中直接绑定
 
-```typescript
-undefined;
+```js
+<input type="button" onclick="fun()">
 ```
 
 - 通过`JS`代码绑定
 
-```typescript
-undefined;
+```js
+var btn = document.getElementById(".btn");
+btn.onclick = fun;
 ```
 
 #### 特性
@@ -88,16 +114,19 @@ undefined;
 - 只支持冒泡，不支持捕获
 - 同一个类型的事件只能绑定一次
 
-```typescript
-undefined;
+```js
+<input type="button" id="btn" onclick="fun1()">
+
+var btn = document.getElementById('.btn');
+btn.onclick = fun2;
 ```
 
 如上，当希望为同一个元素绑定多个同类型事件的时候（上面的这个`btn`元素绑定 2 个点击事件），是不被允许的，后绑定的事件会覆盖之前的事件
 
 删除 `DOM0` 级事件处理程序只要将对应事件属性置为`null`即可
 
-```typescript
-undefined;
+```js
+btn.onclick = null;
 ```
 
 ### 标准事件模型
@@ -124,16 +153,20 @@ undefined;
 
 举个例子：
 
-```typescript
-undefined;
+```js
+var btn = document.getElementById('.btn');
+btn.addEventListener(‘click’, showMessage, false);
+btn.removeEventListener(‘click’, showMessage, false);
 ```
 
 #### 特性
 
 - 可以在一个`DOM`元素上绑定多个事件处理器，各自并不会冲突
 
-```typescript
-undefined;
+```js
+btn.addEventListener(‘click’, showMessage1, false);
+btn.addEventListener(‘click’, showMessage2, false);
+btn.addEventListener(‘click’, showMessage3, false);
 ```
 
 - 执行时机
@@ -142,36 +175,53 @@ undefined;
 
 下面举个例子：
 
-```typescript
-undefined;
+```js
+<div id="div">
+  <p id="p">
+    <span id="span">Click Me!</span>
+  </p>
+</div>
 ```
 
 设置点击事件
 
-```typescript
-undefined;
+```js
+var div = document.getElementById("div");
+var p = document.getElementById("p");
+
+function onClickFn(event) {
+  var tagName = event.currentTarget.tagName;
+  var phase = event.eventPhase;
+  console.log(tagName, phase);
+}
+
+div.addEventListener("click", onClickFn, false);
+p.addEventListener("click", onClickFn, false);
 ```
 
 上述使用了`eventPhase`，返回一个代表当前执行阶段的整数值。1 为捕获阶段、2 为事件对象触发阶段、3 为冒泡阶段
 
 点击`Click Me!`，输出如下
 
-```typescript
-undefined;
+```js
+P 3
+DIV 3
 ```
 
 可以看到，`p`和`div`都是在冒泡阶段响应了事件，由于冒泡的特性，裹在里层的`p`率先做出响应
 
 如果把第三个参数都改为`true`
 
-```typescript
-undefined;
+```js
+div.addEventListener("click", onClickFn, true);
+p.addEventListener("click", onClickFn, true);
 ```
 
 输出如下
 
-```typescript
-undefined;
+```js
+DIV 1
+P 1
 ```
 
 两者都是在捕获阶段响应事件，所以`div`比`p`标签先做出响应
@@ -193,6 +243,8 @@ IE 事件模型共有两个过程:
 
 举个例子：
 
-```typescript
-undefined;
+```js
+var btn = document.getElementById('.btn');
+btn.attachEvent(‘onclick’, showMessage);
+btn.detachEvent(‘onclick’, showMessage);
 ```

@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 52e09b9b0cd4346a8fa11b3ccdf8e145
+postSlug: f14a7540741231efa65ee7452f57d975
 description: >-
   ![](https://static.vue-js.com/397e1fa0-4dad-11eb-ab90-d9ae814b240d.png)预览一、是什么-----权限是对特定资源的访问许可，所谓权
 difficulty: 3
@@ -49,8 +49,16 @@ source: >-
 
 登录完拿到`token`，将`token`存起来，通过`axios`请求拦截器进行拦截，每次请求的时候头部携带`token`
 
-```typescript
-undefined;
+```js
+axios.interceptors.request.use(config => {
+    config.headers['token'] = cookie.get('token')
+    return config
+})
+axios.interceptors.response.use(res=>{},{response}=>{
+    if (response.data.code === 40099 || response.data.code === 40098) { //token过期或者错误
+        router.push('/login')
+    }
+})
 ```
 
 ### 路由权限控制
@@ -59,8 +67,40 @@ undefined;
 
 初始化即挂载全部路由，并且在路由上标记相应的权限信息，每次路由跳转前做校验
 
-```typescript
-undefined;
+```js
+const routerMap = [
+  {
+    path: "/permission",
+    component: Layout,
+    redirect: "/permission/index",
+    alwaysShow: true, // will always show the root menu
+    meta: {
+      title: "permission",
+      icon: "lock",
+      roles: ["admin", "editor"], // you can set roles in root nav
+    },
+    children: [
+      {
+        path: "page",
+        component: () => import("@/views/permission/page"),
+        name: "pagePermission",
+        meta: {
+          title: "pagePermission",
+          roles: ["admin"], // or you can only set roles in sub nav
+        },
+      },
+      {
+        path: "directive",
+        component: () => import("@/views/permission/directive"),
+        name: "directivePermission",
+        meta: {
+          title: "directivePermission",
+          // if do not set roles, means: this page does not require permission
+        },
+      },
+    ],
+  },
+];
 ```
 
 这种方式存在以下四种缺点：
@@ -76,8 +116,78 @@ undefined;
 
 登录后，获取用户的权限信息，然后筛选有权限访问的路由，在全局路由守卫里进行调用`addRoutes`添加路由
 
-```typescript
-undefined;
+```js
+import router from "./router";
+import store from "./store";
+import { Message } from "element-ui";
+import NProgress from "nprogress"; // progress bar
+import "nprogress/nprogress.css"; // progress bar style
+import { getToken } from "@/utils/auth"; // getToken from cookie
+
+NProgress.configure({ showSpinner: false }); // NProgress Configuration
+
+// permission judge function
+function hasPermission(roles, permissionRoles) {
+  if (roles.indexOf("admin") >= 0) return true; // admin permission passed directly
+  if (!permissionRoles) return true;
+  return roles.some(role => permissionRoles.indexOf(role) >= 0);
+}
+
+const whiteList = ["/login", "/authredirect"]; // no redirect whitelist
+
+router.beforeEach((to, from, next) => {
+  NProgress.start(); // start progress bar
+  if (getToken()) {
+    // determine if there has token
+    /* has token*/
+    if (to.path === "/login") {
+      next({ path: "/" });
+      NProgress.done(); // if current page is dashboard will not trigger	afterEach hook, so manually handle it
+    } else {
+      if (store.getters.roles.length === 0) {
+        // 判断当前用户是否已拉取完user_info信息
+        store
+          .dispatch("GetUserInfo")
+          .then(res => {
+            // 拉取user_info
+            const roles = res.data.roles; // note: roles must be a array! such as: ['editor','develop']
+            store.dispatch("GenerateRoutes", { roles }).then(() => {
+              // 根据roles权限生成可访问的路由表
+              router.addRoutes(store.getters.addRouters); // 动态添加可访问路由表
+              next({ ...to, replace: true }); // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+            });
+          })
+          .catch(err => {
+            store.dispatch("FedLogOut").then(() => {
+              Message.error(err || "Verification failed, please login again");
+              next({ path: "/" });
+            });
+          });
+      } else {
+        // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
+        if (hasPermission(store.getters.roles, to.meta.roles)) {
+          next(); //
+        } else {
+          next({ path: "/401", replace: true, query: { noGoBack: true } });
+        }
+        // 可删 ↑
+      }
+    }
+  } else {
+    /* has no token*/
+    if (whiteList.indexOf(to.path) !== -1) {
+      // 在免登录白名单，直接进入
+      next();
+    } else {
+      next("/login"); // 否则全部重定向到登录页
+      NProgress.done(); // if current page is login will not trigger afterEach hook, so manually handle it
+    }
+  }
+});
+
+router.afterEach(() => {
+  NProgress.done(); // finish progress bar
+});
 ```
 
 按需挂载，路由就需要知道用户的路由权限，也就是在用户登录进来的时候就要知道当前用户拥有哪些路由权限
@@ -98,16 +208,77 @@ undefined;
 
 前端定义路由信息
 
-```typescript
-undefined;
+```js
+{
+    name: "login",
+    path: "/login",
+    component: () => import("@/pages/Login.vue")
+}
 ```
 
 `name`字段都不为空，需要根据此字段与后端返回菜单做关联，后端返回的菜单信息中必须要有`name`对应的字段，并且做唯一性校验
 
 全局路由守卫里做判断
 
-```typescript
-undefined;
+```js
+function hasPermission(router, accessMenu) {
+  if (whiteList.indexOf(router.path) !== -1) {
+    return true;
+  }
+  let menu = Util.getMenuByName(router.name, accessMenu);
+  if (menu.name) {
+    return true;
+  }
+  return false;
+}
+
+Router.beforeEach(async (to, from, next) => {
+  if (getToken()) {
+    let userInfo = store.state.user.userInfo;
+    if (!userInfo.name) {
+      try {
+        await store.dispatch("GetUserInfo");
+        await store.dispatch("updateAccessMenu");
+        if (to.path === "/login") {
+          next({ name: "home_index" });
+        } else {
+          //Util.toDefaultPage([...routers], to.name, router, next);
+          next({ ...to, replace: true }); //菜单权限更新完成,重新进一次当前路由
+        }
+      } catch (e) {
+        if (whiteList.indexOf(to.path) !== -1) {
+          // 在免登录白名单，直接进入
+          next();
+        } else {
+          next("/login");
+        }
+      }
+    } else {
+      if (to.path === "/login") {
+        next({ name: "home_index" });
+      } else {
+        if (hasPermission(to, store.getters.accessMenu)) {
+          Util.toDefaultPage(store.getters.accessMenu, to, routes, next);
+        } else {
+          next({ path: "/403", replace: true });
+        }
+      }
+    }
+  } else {
+    if (whiteList.indexOf(to.path) !== -1) {
+      // 在免登录白名单，直接进入
+      next();
+    } else {
+      next("/login");
+    }
+  }
+  let menu = Util.getMenuByName(to.name, store.getters.accessMenu);
+  Util.title(menu.title);
+});
+
+Router.afterEach(to => {
+  window.scrollTo(0, 0);
+});
 ```
 
 每次路由跳转的时候都要判断权限，这里的判断也很简单，因为菜单的`name`与路由的`name`是一一对应的，而后端返回的菜单就已经是经过权限过滤的
@@ -127,14 +298,30 @@ undefined;
 
 前端统一定义路由组件
 
-```typescript
-undefined;
+```js
+const Home = () => import("../pages/Home.vue");
+const UserInfo = () => import("../pages/UserInfo.vue");
+export default {
+  home: Home,
+  userInfo: UserInfo,
+};
 ```
 
 后端路由组件返回以下格式
 
-```typescript
-undefined;
+```js
+[
+  {
+    name: "home",
+    path: "/",
+    component: "home",
+  },
+  {
+    name: "home",
+    path: "/userinfo",
+    component: "userInfo",
+  },
+];
 ```
 
 在将后端返回路由通过`addRoutes`动态挂载之间，需要将数据处理一下，将`component`字段换为真正的组件
@@ -162,20 +349,75 @@ undefined;
 
 首先配置路由
 
-```typescript
-undefined;
+```js
+{
+    path: '/permission',
+    component: Layout,
+    name: '权限测试',
+    meta: {
+        btnPermissions: ['admin', 'supper', 'normal']
+    },
+    //页面需要的权限
+    children: [{
+        path: 'supper',
+        component: _import('system/supper'),
+        name: '权限测试页',
+        meta: {
+            btnPermissions: ['admin', 'supper']
+        } //页面需要的权限
+    },
+    {
+        path: 'normal',
+        component: _import('system/normal'),
+        name: '权限测试页',
+        meta: {
+            btnPermissions: ['admin']
+        } //页面需要的权限
+    }]
+}
 ```
 
 自定义权限鉴定指令
 
-```typescript
-undefined;
+```js
+import Vue from "vue";
+/**权限指令**/
+const has = Vue.directive("has", {
+  bind: function (el, binding, vnode) {
+    // 获取页面按钮权限
+    let btnPermissionsArr = [];
+    if (binding.value) {
+      // 如果指令传值，获取指令参数，根据指令参数和当前登录人按钮权限做比较。
+      btnPermissionsArr = Array.of(binding.value);
+    } else {
+      // 否则获取路由中的参数，根据路由的btnPermissionsArr和当前登录人按钮权限做比较。
+      btnPermissionsArr = vnode.context.$route.meta.btnPermissions;
+    }
+    if (!Vue.prototype.$_has(btnPermissionsArr)) {
+      el.parentNode.removeChild(el);
+    }
+  },
+});
+// 权限检查方法
+Vue.prototype.$_has = function (value) {
+  let isExist = false;
+  // 获取用户按钮权限
+  let btnPermissionsStr = sessionStorage.getItem("btnPermissions");
+  if (btnPermissionsStr == undefined || btnPermissionsStr == null) {
+    return false;
+  }
+  if (value.indexOf(btnPermissionsStr) > -1) {
+    isExist = true;
+  }
+  return isExist;
+};
+export { has };
 ```
 
 在使用的按钮中只需要引用`v-has`指令
 
-```typescript
-undefined;
+```js
+<el-button @click='editClick' type="primary" v-has>编辑</el-button>
 ```
 
 ### 小结

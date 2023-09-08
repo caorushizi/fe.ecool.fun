@@ -4,7 +4,7 @@ pubDatetime: 2021-08-14T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: 1e944508c39ebb53374527c63e6ee20e
+postSlug: 0173e1ac2874a68b5f0c68b614093f5e
 description: >-
   React渲染性能优化的三个方向，其实也适用于其他软件开发领域，这三个方向分别是:*减少计算的量。->对应到React中就是减少渲染的节点或者降低组件渲染的复杂度*利用缓存。->对应到React中就是
 difficulty: 4
@@ -80,52 +80,108 @@ React 渲染性能优化的三个方向，其实也适用于其他软件开发�
 
 避免使用箭头函数形式的事件处理器, 例如:
 
-```typescript
-undefined;
+```javascript
+<ComplexComponent onClick={evt => onClick(evt.id)} otherProps={values} />
 ```
 
 假设 ComplexComponent 是一个复杂的 PureComponent, 这里使用箭头函数，其实每次渲染时都会创建一个新的事件处理器，这会导致 ComplexComponent 始终会被重新渲染.
 
 更好的方式是使用实例方法:
 
-```typescript
-undefined;
+```javascript
+class MyComponent extends Component {
+  render() {
+    <ComplexComponent onClick={this.handleClick} otherProps={values} />;
+  }
+  handleClick = () => {
+    /*...*/
+  };
+}
 ```
 
 即使现在使用 hooks，我依然会使用 useCallback 来包装事件处理器，尽量给下级组件暴露一个静态的函数:
 
-```typescript
-undefined;
+```javascript
+const handleClick = useCallback(() => {
+  /*...*/
+}, []);
+
+return <ComplexComponent onClick={handleClick} otherProps={values} />;
 ```
 
 但是如果 useCallback 依赖于很多状态，你的 useCallback 可能会变成这样:
 
-```typescript
-undefined;
+```javascript
+const handleClick = useCallback(() => {
+  /*...*/
+  // 🤭
+}, [foo, bar, baz, bazz, bazzzz]);
 ```
 
 这种写法实在让人难以接受，这时候谁还管什么函数式非函数式的。我是这样处理的:
 
-```typescript
-undefined;
+```javascript
+function useRefProps<T>(props: T) {
+  const ref = useRef < T > props;
+  // 每次渲染更新props
+  useEffect(() => {
+    ref.current = props;
+  });
+}
+
+function MyComp(props) {
+  const propsRef = useRefProps(props);
+
+  // 现在handleClick是始终不变的
+  const handleClick = useCallback(() => {
+    const { foo, bar, baz, bazz, bazzzz } = propsRef.current;
+    // do something
+  }, []);
+}
 ```
 
 设计更方便处理的 Event Props. 有时候我们会被逼的不得不使用箭头函数来作为事件处理器：
 
-```typescript
-undefined;
+```javascript
+<List>
+  {list.map(i => (
+    <Item key={i.id} onClick={() => handleDelete(i.id)} value={i.value} />
+  ))}
+</List>
 ```
 
 上面的 onClick 是一个糟糕的实现，它没有携带任何信息来标识事件来源，所以这里只能使用闭包形式，更好的设计可能是这样的:
 
-```typescript
-undefined;
+```javascript
+// onClick传递事件来源信息
+const handleDelete = useCallback((id: string) => {
+  /*删除操作*/
+}, []);
+
+return (
+  <List>
+    {list.map(i => (
+      <Item key={i.id} id={i.id} onClick={handleDelete} value={i.value} />
+    ))}
+  </List>
+);
 ```
 
 如果是第三方组件或者 DOM 组件呢? 实在不行，看能不能传递 data-\*属性:
 
-```typescript
-undefined;
+```javascript
+const handleDelete = useCallback(event => {
+  const id = event.currentTarget.dataset.id;
+  /*删除操作*/
+}, []);
+
+return (
+  <ul>
+    {list.map(i => (
+      <li key={i.id} data-id={i.id} onClick={handleDelete} value={i.value} />
+    ))}
+  </ul>
+);
 ```
 
 ### 不可变数据
@@ -142,8 +198,13 @@ undefined;
 
 尽管 hooks 出来后，recompose 宣称不再更新了，但还是不影响我们使用 recompose 来控制 shouldComponentUpdate 方法, 比如它提供了以下方法来精细控制应该比较哪些 props:
 
-```typescript
-undefined;
+```javascript
+ /* 相当于React.memo */
+ pure()
+ /* 自定义比较 */
+ shouldUpdate(test: (props: Object, nextProps: Object) => boolean): HigherOrderComponent
+ /* 只比较指定key */
+ onlyUpdateForKeys( propKeys: Array<string>): HigherOrderComponent
 ```
 
 其实还可以再扩展一下，比如 omitUpdateForKeys 忽略比对某些 key.

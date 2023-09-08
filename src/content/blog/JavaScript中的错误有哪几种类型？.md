@@ -4,7 +4,7 @@ pubDatetime: 2021-11-17T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 894ffed14b06d3a6fed4360e706d85b1
+postSlug: 6fd0a5f183b3636f743041dd8ed656da
 description: >-
   JavaScript中的错误类型----------------*Error*EvalError*RangeError*ReferenceError*SyntaxError*TypeError*URI
 difficulty: 2
@@ -31,8 +31,9 @@ source: >-
 
 这个错误会在使用`eval()`函数发生异常时候抛出。两种情况会出错：
 
-```typescript
-undefined;
+```js
+new eval();
+eval = foo;
 ```
 
 上面两个的意思结合就是没有直接调用`eval`函数，而是`new`或者是重新赋值 这个错误基本上不会遇到，因为`eval`函数本来用的就不多。不过需要注意的是，`eval`是一个关键字。
@@ -45,8 +46,9 @@ undefined;
 
 这个错误一般就是出现在变量找不到的情况，比如：
 
-```typescript
-undefined;
+```js
+var a = b;
+Uncaught ReferenceError: b is not defined
 ```
 
 这时候就需要检查一下一个变量了

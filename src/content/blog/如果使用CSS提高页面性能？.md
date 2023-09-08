@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - 性能优化
-postSlug: 7de58b940b08456619852e6c26d1fefa
+postSlug: 87796fc63f6bd8c78fde3408e82a9ff7
 description: >-
   ![](https://static.vue-js.com/c071c820-9fa3-11eb-ab90-d9ae814b240d.png)预览一、前言----每一个网页都离不开`css`，但是很多
 difficulty: 2
@@ -54,20 +54,37 @@ source: >-
 
 - 使用 javascript 将 link 标签插到 head 标签最后
 
-```typescript
-undefined;
+```js
+// 创建link标签
+const myCSS = document.createElement("link");
+myCSS.rel = "stylesheet";
+myCSS.href = "mystyles.css";
+// 插入到header的最后位置
+document.head.insertBefore(
+  myCSS,
+  document.head.childNodes[document.head.childNodes.length - 1].nextSibling
+);
 ```
 
 - 设置 link 标签 media 属性为 noexis，浏览器会认为当前样式表不适用当前类型，会在不阻塞页面渲染的情况下再进行下载。加载完成后，将`media`的值设为`screen`或`all`，从而让浏览器开始解析 CSS
 
-```typescript
-undefined;
+```html
+<link
+  rel="stylesheet"
+  href="mystyles.css"
+  media="noexist"
+  onload="this.media='all'"
+/>
 ```
 
 - 通过 rel 属性将 link 元素标记为 alternate 可选样式表，也能实现浏览器异步加载。同样别忘了加载完成之后，将 rel 设回 stylesheet
 
-```typescript
-undefined;
+```html
+<link
+  rel="alternate stylesheet"
+  href="mystyles.css"
+  onload="this.rel='stylesheet'"
+/>
 ```
 
 ### 资源压缩

@@ -4,7 +4,7 @@ pubDatetime: 2023-03-03T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 8e3be8d80e95bb2fda5e4814300c1cdf
+postSlug: 592501d07a7b8442cbbf7149d686341c
 description: >-
   背景--在一张图片添加相关文字，然后转化为base64数据，上传至服务器。当代码上线写完部署到测试环境，控制台报出如下错题：Uncaught(inpromise)DOMException:Failed
 difficulty: 3
@@ -65,8 +65,19 @@ Access-Control-Allow-Origin 字段值需要包含请求域，且不能为通配�
 
 ## 代码示例
 
-```typescript
-undefined;
+```js
+// page origin is https://a.com
+
+const canvas = document.createElement("canvas");
+const context = canvas.getContext("2d");
+
+const img = new Image();
+img.crossOrigin = "anonymous";
+img.onload = function () {
+  context.drawImage(this, 0, 0);
+  context.getImageData(0, 0, img.width, img.height);
+};
+img.src = "https://b.com/a.png";
 ```
 
 另外，跨域图片能正常裁剪（图片未转化成 base64），应该满足三个条件：

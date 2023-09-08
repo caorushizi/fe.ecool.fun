@@ -4,7 +4,7 @@ pubDatetime: 2023-03-18T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: d3198bdbe286b4e013427f41052114df
+postSlug: 9f769bf9d45a034ae6b33367aa52ce2c
 description: >-
   React团队在2022年3月29日正式发布了React的第18个版本。我将在这篇文章里简单介绍React18的新特性，ReactConcurrentMode（并发模式）的实现，以及简要的升级指南。N
 difficulty: 4
@@ -21,8 +21,27 @@ React 团队在 2022 年 3 月 29 日正式发布了 React 的第 18 个版本�
 
 早在 React 18 之前，React 就已经可以对 state 更新进行批处理了：
 
-```typescript
-undefined;
+```ts
+function App() {
+  const [count, setCount] = useState(0);
+
+  const [flag, setFlag] = useState(false);
+
+  function handleClick() {
+    setCount(c => c + 1); // Does not re-render yet
+
+    setFlag(f => !f); // Does not re-render yet
+
+    // React will only re-render once at the end (that's batching!)
+  }
+
+  return (
+    <div>
+      <div>{count}</div>
+      <button onClick={handleClick}>Next</button>
+    </div>
+  );
+}
 ```
 
 上面这个例子中，用户点击按钮时会产生两次 state 的更新，按理来说每次 state 更新都会导致一次 re-render。但是，这两次更新完全可以合成一次，从而减少无谓的 re-render 带来的性能损失。
@@ -31,8 +50,28 @@ undefined;
 
 在 React 18 中，批处理支持处理的操作范围扩大了：Promise，setTimeout，native event handlers 等这些非 React 原生的事件内部的更新也会得到合并：
 
-```typescript
-undefined;
+```ts
+// Before: only React events were batched.
+
+setTimeout(() => {
+  setCount(c => c + 1);
+
+  setFlag(f => !f);
+
+  // React will render twice, once for each state update (no batching)
+}, 1000);
+
+// After: updates inside of timeouts, promises,
+
+// native event handlers or any other event are batched.
+
+setTimeout(() => {
+  setCount(c => c + 1);
+
+  setFlag(f => !f);
+
+  // React will only re-render once at the end (that's batching!)
+}, 1000);
 ```
 
 ## Transitions
@@ -48,14 +87,27 @@ Transitions 是 React 中一个用于区分高优更新和非高优更新的新�
 
 - `starTransition`：用于标记非紧急的更新，用 `starTransition` 包裹起来就是告诉 React，这部分代码渲染的优先级不高，可以优先处理其它更重要的渲染。用法如下：
 
-```typescript
-undefined;
+```ts
+import { startTransition } from "react";
+
+// Urgent
+setSliderValue(input);
+
+// Mark any state updates inside as transitions
+startTransition(() => {
+  // Transition: Show the results, non-urgent
+  setGraphValue(input);
+});
 ```
 
 - useTransition：除了能提供 startTransition 以外，还能提供一个变量来跟踪当前渲染的执行状态：
 
-```typescript
-undefined;
+```ts
+import { useTransition } from "react";
+
+const [isPending, startTransition] = useTransition();
+
+return isPending && <Spinner />;
 ```
 
 在勾选了 Use startTransition 后 ，滑动条的更新渲染不会再被树的渲染阻塞了，尽管树叶的渲染仍然需要较多的时间，但是用户使用起来不再有之前那么卡顿了。
@@ -64,8 +116,11 @@ undefined;
 
 Suspense 是 React 提供的用于声明 UI 加载状态的 API：
 
-```typescript
-undefined;
+```ts
+<Suspense fallback={<Loading />}>
+  <ComponentThatSuspends />
+  <Sibling />
+</Suspense>
 ```
 
 <ComponentThatSuspends /> <Sibling /> </Suspense>
@@ -78,8 +133,11 @@ React 16 和 17 中也已经有 Suspense 了，但是它不是完全体，有许
 
 还是上面那个例子：
 
-```typescript
-undefined;
+```ts
+<Suspense fallback={<Loading />}>
+  <ComponentThatSuspends />
+  <Sibling />
+</Suspense>
 ```
 
 <ComponentThatSuspends /> <Sibling /> </Suspense>
@@ -91,8 +149,11 @@ undefined;
 
 另一个差异是父级 ref 传入的时间：
 
-```typescript
-undefined;
+```ts
+<Suspense fallback={<Loading />}>
+  <ComponentThatSuspends />
+  <Sibling />
+</Suspense>
 ```
 
 </Suspense>
@@ -119,8 +180,17 @@ React 18 的 Suspense：
 - `createRoot`
   - 新的 root API，在 React 就版本中都是通过 `ReactDom.render` 将应用组件渲染到页面的根元素，在 React 18 中，只有使用 `ReactDom.createRoot` 才能使用新特性。
 
-```typescript
-undefined;
+```ts
+import * as ReactDOM from "react-dom";
+import App from "./App";
+
+// before React 18
+const root = document.getElementById("app");
+ReactDOM.render(<App />, root);
+
+// React 18
+const root = ReactDOM.createRoot(document.getElementById("app"));
+root.render(<App />, root);
 ```
 
 - `hydrateRoot`：同理，用于替代 ReactDOM.hydrate。
@@ -137,8 +207,12 @@ undefined;
   - startTransition 可以用来标记低优先的 state 更新；而 useDeferredValue 可以用来标记低优先的变量。
   - 下方代码的具体效果是当 `input` 的值改变时，返回的 `graphValue` 并不会立即改变，会首先返回上一次的 `input` 值，如果当前不存在更紧急的更新，才会变成最新的 `input`，因此可以通过 `graphValue` 是否改变来进行一些低优先级的更新。可以在渲染比较耗时的情况下把优先级滞后，在多数情况不会存在不必要的延迟。在较快的机器上，滞后会更少或者根本不存在，在较慢的机器上，会变得更明显。但不论哪种情况，应用都会保持可响应。
 
-```typescript
-undefined;
+```ts
+import { useDeferredValue } from "react";
+
+const Comp = input => {
+  const graphValue = useDeferredValue(input); // ...updating depends on graphValue
+};
 ```
 
 ### 不常用的 hooks
@@ -183,8 +257,18 @@ React 17 相较先前并没有在架构上有大的改动，它是一个用以�
 
 Fiber 是一种数据结构，源码定义在 [这里](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactInternalTypes.js#L66-L193)。简化来讲，它的主要结构如下：
 
-```typescript
-undefined;
+```ts
+{
+    ...
+    stateNode, // 一般为 ReactComponent
+               // 的实例或者 DOM 元素
+    child,     // 子 Fiber 节点
+    sibling,   // 同层的下一个 Fiber 节点
+    return,    // 指向父节点
+    alternate, // 连接 Current Fiber 树和
+               // workInProgress Fiber 树
+    ...
+}
 ```
 
 ReactElement，Fiber，DOM 三者的关系：
@@ -200,6 +284,8 @@ ReactElement，Fiber，DOM 三者的关系：
 React 应用中最多同时存在两棵 Fiber 树。当前屏幕上显示内容对应的 Fiber 树叫做 Current Fiber，正在内存中构建的 Fiber 树叫做 workInProgress Fiber，他们通过 alternate 属性相互连接。当 workInProgress Fiber 树构建好了以后，只需要切换一下 current 指针的指向，这两棵树的身份就会完成互换。
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f99da506f2a843708adbfdba47fc4c00~tplv-k3u1fbpfcp-zoom-1.image)
+
+预览
 
 在这种双缓存的机制下，我们可以随时暂停或放弃对 workInProgress Fiber 树的修改，这就使得 React 更新的 **中断** 成为了可能。
 
@@ -236,16 +322,77 @@ Reconciler 的设计使 re-render 具备了 可中断 的特性，而 Scheduler 
 
 在这里先对比一下 [Concurrent Mode](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.old.js#L1884-L1889) 和 [非 Concurrent Mode](https://github.com/facebook/react/blob/main/packages/react-reconciler/src/ReactFiberWorkLoop.old.js#L1796-L1801) 下的代码：
 
-```typescript
-undefined;
+```ts
+// Sync Mode，即 React 原本的不可中断的更新模式
+
+function workLoopSync() {
+  // Already timed out, so perform work without checking if we need to yield.
+
+  while (workInProgress !== null) {
+    performUnitOfWork(workInProgress);
+  }
+}
+
+// Concurrent Mode
+
+function workLoopConcurrent() {
+  // Perform work until Scheduler asks us to yield
+
+  while (workInProgress !== null && !shouldYield()) {
+    performUnitOfWork(workInProgress);
+  }
+}
 ```
 
 可以看到在每次遍历前，都会通过 Scheduler 提供的 `shouldYield` 方法判断是否需要中断遍历。
 
 Scheduler 提供的 `shouldYield` 方法在 [源码](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L615) 中叫 [shouldYieldToHost](https://github.com/facebook/react/blob/main/packages/scheduler/src/forks/Scheduler.js#L440-L483)，它通过综合判断已消耗的时间（是否超过 5ms）、是否有用户输入等高优事件来决定是否需要中断遍历，给浏览器渲染和处理其它任务的时间，防止页面卡顿。源码中的注释对于哪些条件/情况下 yield 写得非常清晰。
 
-```typescript
-undefined;
+```ts
+function shouldYieldToHost() {
+  const timeElapsed = getCurrentTime() - startTime;
+
+  if (timeElapsed < frameInterval) {
+    // frameInterval = 5ms
+    // The main thread has only been blocked for a really short amount of time;
+    // smaller than a single frame. Don't yield yet.
+    return false;
+  }
+  // The main thread has been blocked for a non-negligible amount of time. We
+  // may want to yield control of the main thread, so the browser can perform
+  // high priority tasks. The main ones are painting and user input. If there's
+  // a pending paint or a pending input, then we should yield. But if there's
+  // neither, then we can yield less often while remaining responsive. We'll
+  // eventually yield regardless, since there could be a pending paint that
+  // wasn't accompanied by a call to `requestPaint`, or other main thread tasks
+  // like network events.
+  if (enableIsInputPending) {
+    if (needsPaint) {
+      // There's a pending paint (signaled by `requestPaint`). Yield now.
+      return true;
+    }
+    if (timeElapsed < continuousInputInterval) {
+      // We haven't blocked the thread for that long. Only yield if there's a
+      // pending discrete input (e.g. click). It's OK if there's pending
+      // continuous input (e.g. mouseover).
+      if (isInputPending !== null) {
+        return isInputPending();
+      }
+    } else if (timeElapsed < maxInterval) {
+      // Yield if there's either a pending discrete or continuous input.
+      if (isInputPending !== null) {
+        return isInputPending(continuousOptions);
+      }
+    } else {
+      // We've blocked the thread for a long time. Even if there's no pending
+      // input, there may be some other scheduled work that we don't know about,
+      // like a network event. Yield now.
+      return true;
+    }
+  }
+  // `isInputPending` isn't available. Yield now.
+  return true;
+}
 ```
 
 如何把每一帧 5ms 内未执行的任务分配到后面的帧中？
@@ -254,8 +401,39 @@ undefined;
 
 如果任务的执行因为超过了 5ms 等被中断了，那么 React Scheduler 会借助一种效果接近于 `setTimeout` 的方式来开启一个宏任务，预定下一次的更新：
 
-```typescript
-undefined;
+```ts
+let schedulePerformWorkUntilDeadline;
+
+if (typeof localSetImmediate === "function") {
+  // Node.js and old IE.
+  // There's a few reasons for why we prefer setImmediate.
+
+  // Unlike MessageChannel, it doesn't prevent a Node.js process from exiting.
+  // (Even though this is a DOM fork of the Scheduler, you could get here
+  // with a mix of Node.js 15+, which has a MessageChannel, and jsdom.)
+  // [Bug: using MessageChannel prevents node.js process from exiting · Issue #20756 · facebook/react · GitHub](https://github.com/facebook/react/issues/20756)
+
+  // But also, it runs earlier which is the semantic we want.
+  // If other browsers ever implement it, it's better to use it.
+  // Although both of these would be inferior to native scheduling.
+  schedulePerformWorkUntilDeadline = () => {
+    localSetImmediate(performWorkUntilDeadline);
+  };
+} else if (typeof MessageChannel !== "undefined") {
+  // DOM and Worker environments.
+  // We prefer MessageChannel because of the 4ms setTimeout clamping.
+  const channel = new MessageChannel();
+  const port = channel.port2;
+  channel.port1.onmessage = performWorkUntilDeadline;
+  schedulePerformWorkUntilDeadline = () => {
+    port.postMessage(null);
+  };
+} else {
+  // We should only fallback here in non-browser environments.
+  schedulePerformWorkUntilDeadline = () => {
+    localSetTimeout(performWorkUntilDeadline, 0);
+  };
+}
 ```
 
 `requestIdleCallback`？
@@ -266,8 +444,77 @@ undefined;
 
 在 Reconciliation 的 Render 阶段，假设它耗时比较长，为 150ms，那么我们可以把他拆分为单个节点的计算时间之和。单个节点的计算非常快，假设都为 0.1ms。那么可以根据宏任务在帧中执行的特点（一帧里可以执行多个宏任务，同时浏览器还会将宏任务合理分配到不同帧中），将渲染过程改为如下过程：
 
-```typescript
-undefined;
+```shell
+// 假设 Render 阶段的计算拆分为 m 个节点，在第 n 帧结束
+
+第 1 帧开始
+
+宏任务开始
+
+执行第 1 个节点，耗时 0.1ms
+
+执行第 2 个节点，耗时 0.1ms
+
+执行第 3 个节点，耗时 0.1ms
+
+执行第 4 个节点，耗时 0.1ms
+
+...
+
+执行第 50 个节点，耗时 0.1ms
+
+总耗时 5ms，开始下一个宏任务
+
+渲染开始
+
+由于更新是在内存中计算的，节点没有任何更新，那么不进行重新渲染
+
+第 1 帧结束
+
+第 2 帧开始
+
+宏任务开始
+
+执行第 51 个节点，耗时 0.1ms
+
+执行第 52 个节点，耗时 0.1ms
+
+执行第 53 个节点，耗时 0.1ms
+
+...
+
+执行第 100 个节点，耗时 0.1ms
+
+总耗时 5ms，开始下一个宏任务
+
+渲染开始
+
+由于更新是在内存中计算的，节点没有任何更新，那么不进行重新渲染
+
+第 2 帧结束
+
+...
+
+第 n 帧开始
+
+宏任务开始
+
+执行第 m-2 个节点，耗时 0.1 ms
+
+执行第 m-1 个节点，耗时 0.1 ms
+
+执行第 m 个节点，耗时 0.1 ms
+
+所有节点计算完毕！
+
+开始更新创建真实节点
+
+渲染开始
+
+真实节点更新，将其渲染到浏览器上
+
+第 n 帧结束
+
 ```
 
 > 如何给任务划分优先级？
@@ -280,8 +527,16 @@ React 17 开始采用基于 Lanes 的优先级控制方案：
 
 通过这种优先级，我们就能判断哪些更新优先执行，哪些更新会被中断滞后执行了。举个例子来讲：假如有两个更新，他们同时对 App 组件的一个 `count` 属性更新：
 
-```typescript
-undefined;
+```ts
+<p>You clicked {count} times</p>
+
+<button onClick={() => setCount(count + 1)}>
+    DefaultLane
+</button>
+
+<button onClick={() => startTransition(() => { setCount(count + 1) })}>
+    TransitionLane1
+</button>
 ```
 
 </button>
@@ -293,15 +548,31 @@ undefined;
 - 改变根节点的挂载方式使用新的 API `createRoot`，使用旧的 API 仍然兼容，只有在使用 `createRoot` 了之后才会有 React 18 的新特性。
 - React 18 会启用上面提到的全自动批处理，这算是一个 breaking change，不过 React 也提供了一个 `flushSync` API 用于退出全自动批处理，用法如下：
 
-```typescript
-undefined;
+```tsx
+import { flushSync } from "react-dom";
+
+function handleClick() {
+  flushSync(() => {
+    setCounter(c => c + 1);
+  });
+  // React has updated the DOM by now
+
+  flushSync(() => {
+    setFlag(f => !f);
+  });
+  // React has updated the DOM by now
+}
 ```
 
 - 如果不用 `flushSync` 的话两个 setState 只会进行一次 re-render，用了之后会触发两次。
 - TS 类型定义上的较大变化：如果有用到 children，需要在组件 props 的定义中写明它的类型，这在以往是可以忽略不写的。其它 TS 相关的改动可以见 [这里](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210)。
 
-```typescript
-undefined;
+```ts
+interface MyButtonProps {
+  color: string;
+
+  children?: React.ReactNode;
+}
 ```
 
 - React 18 不再支持 IE。

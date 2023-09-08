@@ -4,7 +4,7 @@ pubDatetime: 2021-08-29T16:00:00.000Z
 author: caorushizi
 tags:
   - css
-postSlug: 97b25eb226d69f9200a731bd55885083
+postSlug: 244f3ed1c1b20d30c357176148d1a164
 description: >-
   目前主流的css模块化分为cssmodules和cssinjs两种方案。cssmodules----------->CSSModules指的是我们像importjs一样去引入我们的css代码，代码中的
 difficulty: 3
@@ -45,35 +45,56 @@ css module 需要 webpack 配置 css-loader 或者 scss-loader , module 为 true
 - 作用域默认为 local 即只在当前模块生效
 - global：被 `:global` 包裹起来的类名，不会被模块化
 
-```typescript
-undefined;
+```css
+/* 加上 :global 会全局样式 */
+:global(.global-color) {
+  color: blue;
+  :global(.common-width) {
+    width: 200px;
+  }
+}
 ```
 
 ### css module 高级使用
 
 - 和外部样式混用
 
-```typescript
-undefined;
+```js
+import classNames from "classnames";
+
+// 使用classNames
+const wrapperClassNames = classNames({
+  "common-show": visible,
+  "common-hide": !visible,
+  [styles1["view-wrapper"]]: true,
+});
+<div className={wrapperClassNames}></div>;
+
+// 使用模板字符串
+<div className={`${styles1.content} ${styles1.color} common-show`}>
+  我是文章内容我是文章内容我是文章内容我是文章内容我是文章内容我是文章内容
+</div>;
 ```
 
 - 覆盖第三方 UI 库
 
-  {/_ 覆盖第三方 UI 库 样式_/}
+  ```jsx
+  {/* 覆盖第三方UI库 样式*/}
   <div className={styles1['am-button-custom-wrapper']}>
     <Button type={'primary'} onClick={() => toggle()}>
        {visible ? '隐藏' : '显示'}
     </Button>
   </div>
 
-  // 覆盖第三方 UI 库的 样式
+  //  覆盖第三方UI库的 样式
   .am-button-custom-wrapper {
-  :global {
-  .am-button-primary {
-  color: red;
+    :global {
+      .am-button-primary {
+        color: red;
+      }
+    }
   }
-  }
-  }
+  ```
 
 ## css in js
 
@@ -97,8 +118,54 @@ CSS-in-JS 是一种技术（technique），而不是一个具体的库实现（l
 
 动态生成的 CSS 选择器会有一小段哈希值来保证全局唯一性来避免样式发生冲突。
 
-```typescript
-undefined;
+```jsx
+const DivWrapper = styled.div`
+  width: "100%";
+  height: 300;
+  background-color: ${props => props.color};
+`;
+
+// 封装第三方组件库
+const AntdButtonWrapper = styled(Button)`
+  color: "red";
+`;
+
+// 通过属性动态定义样式
+const MyButton = styled.button`
+  background: ${props => (props.primary ? "palevioletred" : "white")};
+  color: ${props => (props.primary ? "white" : "palevioletred")};
+
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
+
+// 样式复用
+const TomatoButton = styled(MyButton)`
+  color: tomato;
+  border-color: tomato;
+`;
+
+// 创建关键帧
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+  `;
+
+// 创建动画组件
+const Rotate = styled.div`
+  display: inline-block;
+  animation: ${rotate} 2s linear infinite;
+  padding: 2rem 1rem;
+  font-size: 1.2rem;
+`;
 ```
 
 styled-components 优势: 支持将 props 以插值的方式传递给组件,以调整组件样式, 跨平台可在 RN 和 next 中使用。 缺点： 预处理器和后处理器不兼容。
@@ -109,8 +176,23 @@ Radium 和 styled-components 的最大区别是它生成的是标签内联样式
 
 由于标签内联样式在处理诸如 media query 以及:hover，:focus，:active 等和浏览器状态相关的样式的时候非常不方便，所以 radium 为这些样式封装了一些标准的接口以及抽象。
 
-```typescript
-undefined;
+```jsx
+import Radium from 'radium';
+
+const Button = () => (
+    <button
+        style={styles.base}>
+        {this.props.children}
+    </button>;
+)
+
+var styles = {
+  red: {
+    backgroundColor: 'red'
+  }
+};
+
+Button = Radium(Button);
 ```
 
 内联样式相比于 CSS 选择器的方法有以下的优点：

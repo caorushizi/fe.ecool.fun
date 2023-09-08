@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - css
-postSlug: 75e00def603e825647c59d9067abab6c
+postSlug: 694e0850e2f270eb0b32980769c0e3fa
 description: >-
   ![](https://static.vue-js.com/ef25b0a0-9837-11eb-ab90-d9ae814b240d.png)预览一、是什么-----`FlexibleBox`简称`f
 difficulty: 2
@@ -50,8 +50,10 @@ source: >-
 
 决定主轴的方向(即项目的排列方向)
 
-```typescript
-undefined;
+```css
+.container {
+  flex-direction: row | row-reverse | column | column-reverse;
+}
 ```
 
 属性对应如下：
@@ -71,8 +73,10 @@ undefined;
 
 弹性元素永远沿主轴排列，那么如果主轴排不下，通过`flex-wrap`决定容器内项目是否可换行
 
-```typescript
-undefined;
+```css
+.container {
+  flex-wrap: nowrap | wrap | wrap-reverse;
+}
 ```
 
 属性对应如下：
@@ -87,16 +91,20 @@ undefined;
 
 是`flex-direction`属性和`flex-wrap`属性的简写形式，默认值为`row nowrap`
 
-```typescript
-undefined;
+```css
+.box {
+  flex-flow: <flex-direction> || <flex-wrap>;
+}
 ```
 
 ### justify-content
 
 定义了项目在主轴上的对齐方式
 
-```typescript
-undefined;
+```css
+.box {
+  justify-content: flex-start | flex-end | center | space-between | space-around;
+}
 ```
 
 属性对应如下：
@@ -117,8 +125,10 @@ undefined;
 
 定义项目在交叉轴上如何对齐
 
-```typescript
-undefined;
+```css
+.box {
+  align-items: flex-start | flex-end | center | baseline | stretch;
+}
 ```
 
 属性对应如下：
@@ -133,8 +143,11 @@ undefined;
 
 定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用
 
-```typescript
-undefined;
+```css
+.box {
+  align-content: flex-start | flex-end | center | space-between | space-around |
+    stretch;
+}
 ```
 
 属性对应如吓：
@@ -165,8 +178,10 @@ undefined;
 
 定义项目的排列顺序。数值越小，排列越靠前，默认为 0
 
-```typescript
-undefined;
+```css
+.item {
+  order: <integer>;
+}
 ```
 
 ### flex-grow
@@ -177,8 +192,10 @@ undefined;
 
 默认为`0`，即如果存在剩余空间，也不放大
 
-```typescript
-undefined;
+```css
+.item {
+  flex-grow: <number>;
+}
 ```
 
 如果所有项目的`flex-grow`属性都为 1，则它们将等分剩余空间（如果有的话）
@@ -199,8 +216,10 @@ undefined;
 
 定义了项目的缩小比例（容器宽度<元素总宽度时如何收缩），默认为 1，即如果空间不足，该项目将缩小
 
-```typescript
-undefined;
+```css
+.item {
+  flex-shrink: <number>; /* default 1 */
+}
 ```
 
 如果所有项目的`flex-shrink`属性都为 1，当空间不足时，都将等比例缩小
@@ -219,8 +238,10 @@ undefined;
 
 浏览器根据这个属性，计算主轴是否有多余空间，默认值为`auto`，即项目的本来大小，如设置了`width`则元素尺寸由`width/height`决定（主轴方向），没有设置则由内容决定
 
-```typescript
-undefined;
+```css
+.item {
+  flex-basis: <length> | auto; /* default auto */
+}
 ```
 
 当设置为 0 的是，会根据内容撑开
@@ -231,8 +252,10 @@ undefined;
 
 `flex`属性是`flex-grow`, `flex-shrink` 和 `flex-basis`的简写，默认值为`0 1 auto`，也是比较难懂的一个复合属性
 
-```typescript
-undefined;
+```css
+.item {
+  flex: none | [ < "flex-grow" > < "flex-shrink" >? || < "flex-basis" >];
+}
 ```
 
 一些属性有：
@@ -256,8 +279,10 @@ undefined;
 
 默认值为`auto`，表示继承父元素的`align-items`属性，如果没有父元素，则等同于`stretch`
 
-```typescript
-undefined;
+```css
+.item {
+  align-self: auto | flex-start | flex-end | center | baseline | stretch;
+}
 ```
 
 效果图如下：

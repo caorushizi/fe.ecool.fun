@@ -4,9 +4,9 @@ pubDatetime: 2021-08-22T16:00:00.000Z
 author: caorushizi
 tags:
   - typescript
-postSlug: 34dddcd67779488483a8f35331f57ebc
+postSlug: d308671100b2dfe8c3ec218a26c3b46b
 description: >-
-  unknown用于变量类型不确定，但肯定可以确定的情形下，比如下面这个示例中，入参总归会有个值，根据这个值的类型进行不同的处理，这里使用unknown替代any则会更加类型安全。```typescri
+  unknown用于变量类型不确定，但肯定可以确定的情形下，比如下面这个示例中，入参总归会有个值，根据这个值的类型进行不同的处理，这里使用unknown替代any则会更加类型安全。```tsfuncti
 difficulty: 2
 questionNumber: 23
 source: >-
@@ -15,6 +15,11 @@ source: >-
 
 unknown 用于变量类型不确定，但肯定可以确定的情形下，比如下面这个示例中，入参总归会有个值，根据这个值的类型进行不同的处理，这里使用 unknown 替代 any 则会更加类型安全。
 
-```typescript
-undefined;
+```ts
+function isArray(x: unknown): boolean {
+  if (Array.isArray(x)) {
+    return true;
+  }
+  return false;
+}
 ```

@@ -4,9 +4,9 @@ pubDatetime: 2021-12-26T16:00:00.000Z
 author: caorushizi
 tags:
   - css
-postSlug: effc1944b03bae538e8e8a01e833859f
+postSlug: 7b70fa5c0de9cc21ad3b03614741a584
 description: >-
-  CSS属性`touch-action`用于设置触摸屏用户如何操纵元素的区域(例如，浏览器内置的缩放功能)。最简单方法是：```typescriptundefined```还可以直接指定对应元素的宽度和
+  CSS属性`touch-action`用于设置触摸屏用户如何操纵元素的区域(例如，浏览器内置的缩放功能)。最简单方法是：```csshtml{touch-action:none;touch-actio
 difficulty: 1
 questionNumber: 45
 source: >-
@@ -17,12 +17,18 @@ CSS 属性 `touch-action` 用于设置触摸屏用户如何操纵元素的区域
 
 最简单方法是：
 
-```typescript
-undefined;
+```css
+html {
+  touch-action: none;
+  touch-action: pan-y;
+}
 ```
 
 还可以直接指定对应元素的宽度和 overflow：
 
-```typescript
-undefined;
+```css
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
 ```

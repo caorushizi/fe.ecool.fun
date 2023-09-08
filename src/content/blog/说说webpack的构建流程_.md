@@ -4,7 +4,7 @@ pubDatetime: 2021-07-06T16:00:00.000Z
 author: caorushizi
 tags:
   - 工程化
-postSlug: 438a14195a8e38599e862ad2a67810b3
+postSlug: b5716cdbc885637eec02c0ea55cc5263
 description: >-
   ![](https://static.vue-js.com/96cf6840-a658-11eb-85f6-6fac77c0c9b3.png)预览一、运行流程------`webpack`的运行流程是
 difficulty: 3
@@ -41,16 +41,71 @@ source: >-
 
 关于文件配置内容分析，如下注释：
 
-```typescript
-undefined;
+```js
+var path = require('path');
+var node_modules = path.resolve(__dirname, 'node_modules');
+var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
+
+module.exports = {
+  // 入口文件，是模块构建的起点，同时每一个入口文件对应最后生成的一个 chunk。
+  entry: './path/to/my/entry/file.js'，
+  // 文件路径指向(可加快打包过程)。
+  resolve: {
+    alias: {
+      'react': pathToReact
+    }
+  },
+  // 生成文件，是模块构建的终点，包括输出文件与输出路径。
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].js'
+  },
+  // 这里配置了处理各模块的 loader ，包括 css 预处理 loader ，es6 编译 loader，图片处理 loader。
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
+      }
+    ],
+    noParse: [pathToReact]
+  },
+  // webpack 各插件对象，在 webpack 的事件流中执行对应的方法。
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
+};
 ```
 
 `webpack` 将 `webpack.config.js` 中的各个配置项拷贝到 `options` 对象中，并加载用户配置的 `plugins`
 
 完成上述步骤之后，则开始初始化`Compiler`编译对象，该对象掌控者`webpack`声明周期，不执行具体的任务，只是进行一些调度工作
 
-```typescript
-undefined;
+```js
+class Compiler extends Tapable {
+    constructor(context) {
+        super();
+        this.hooks = {
+            beforeCompile: new AsyncSeriesHook(["params"]),
+            compile: new SyncHook(["params"]),
+            afterCompile: new AsyncSeriesHook(["compilation"]),
+            make: new AsyncParallelHook(["compilation"]),
+            entryOption: new SyncBailHook(["context", "entry"])
+            // 定义了很多不同类型的钩子
+        };
+        // ...
+    }
+}
+
+function webpack(options) {
+  var compiler = new Compiler();
+  ...// 检查options,若watch字段为true,则开启watch线程
+  return compiler;
+}
+...
 ```
 
 `Compiler` 对象继承自 `Tapable`，初始化时定义了很多钩子函数
@@ -59,8 +114,10 @@ undefined;
 
 根据配置中的 `entry` 找出所有的入口文件
 
-```typescript
-undefined;
+```js
+module.exports = {
+  entry: "./src/file.js",
+};
 ```
 
 初始化完成后会调用`Compiler`的`run`来真正启动`webpack`编译构建流程，主要流程如下：
@@ -81,8 +138,32 @@ undefined;
 
 当完成了上述的`compilation`对象后，就开始从`Entry`入口文件开始读取，主要执行`_addModuleChain()`函数，如下：
 
-```typescript
-undefined;
+```js
+_addModuleChain(context, dependency, onModule, callback) {
+   ...
+   // 根据依赖查找对应的工厂函数
+   const Dep = /** @type {DepConstructor} */ (dependency.constructor);
+   const moduleFactory = this.dependencyFactories.get(Dep);
+
+   // 调用工厂函数NormalModuleFactory的create来生成一个空的NormalModule对象
+   moduleFactory.create({
+       dependencies: [dependency]
+       ...
+   }, (err, module) => {
+       ...
+       const afterBuild = () => {
+        this.processModuleDependencies(module, err => {
+         if (err) return callback(err);
+         callback(null, module);
+           });
+    };
+
+       this.buildModule(module, false, null, null, err => {
+           ...
+           afterBuild();
+       })
+   })
+}
 ```
 
 过程如下：
@@ -115,8 +196,11 @@ undefined;
 
 在确定好输出内容后，根据配置确定输出的路径和文件名
 
-```typescript
-undefined;
+```js
+output: {
+    path: path.resolve(__dirname, 'build'),
+        filename: '[name].js'
+}
 ```
 
 在 `Compiler` 开始生成文件前，钩子 `emit` 会被执行，这是我们修改最终文件的最后一个机会

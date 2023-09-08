@@ -4,7 +4,7 @@ pubDatetime: 2022-05-11T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: a754d633b586f4c80d4b7ab07b2b3ec5
+postSlug: c1c6f352b9fe8de39e2def9898b379b3
 description: >-
   在vue项目中用vuex来做全局的状态管理，发现当刷新网页后，保存在vuex实例store里的数据会丢失。原因：因为`store`里的数据是保存在运行内存中的，当页面刷新时，页面会重新加载vue实例，
 difficulty: 2
@@ -32,12 +32,39 @@ source: >-
 
 配置 `vuex-along`: 在 `store/index.js` 中最后添加以下代码:
 
-```typescript
-undefined;
+```js
+import VueXAlong from "vuex-along"; //导入插件
+export default new Vuex.Store({
+  //modules: {
+  //controler  //模块化vuex
+  //},
+  plugins: [
+    VueXAlong({
+      name: "store", //存放在localStroage或者sessionStroage 中的名字
+      local: false, //是否存放在local中  false 不存放 如果存放按照下面session的配置
+      session: { list: [], isFilter: true }, //如果值不为false 那么可以传递对象 其中 当isFilter设置为true时， list 数组中的值就会被过滤调,这些值不会存放在seesion或者local中
+    }),
+  ],
+});
 ```
 
 ## 使用 `localStorage` 或者 `sessionStroage`
 
-```typescript
-undefined;
+```js
+created() {
+    //在页面加载时读取sessionStorage里的状态信息
+    if (sessionStorage.getItem("store")) {
+      this.$store.replaceState(
+        Object.assign(
+          {},
+          this.$store.state,
+          JSON.parse(sessionStorage.getItem("store"))
+        )
+      );
+    }
+    //在页面刷新时将vuex里的信息保存到sessionStorage里
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.setItem("store", JSON.stringify(this.$store.state));
+    });
+},
 ```

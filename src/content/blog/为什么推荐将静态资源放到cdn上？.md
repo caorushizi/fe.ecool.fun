@@ -4,7 +4,7 @@ pubDatetime: 2022-04-05T16:00:00.000Z
 author: caorushizi
 tags:
   - 工具
-postSlug: 8dc34ac21b2678a9eb32689f415e2049
+postSlug: 0a71d43d0aadb3287bdb64eab9c5638b
 description: >-
   静态资源是什么-------###静态资源静态资源是指在不同请求中访问到的数据都相同的静态文件。例如：图片、视频、网站中的文件（html、css、js）、软件安装包、apk文件、压缩包文件等。###动
 difficulty: 2
@@ -60,6 +60,8 @@ CDN 加速厂商一般都会提供一站式服务，业务不仅限于 CDN，还
 ## CDN 工作原理
 
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f8402497bd0349aaac7825a2335eb72b~tplv-k3u1fbpfcp-watermark.image)
+
+预览
 
 - 当用户点击网站页面上的内容 URL，经过本地 DNS 系统解析，DNS 系统会最终将域名的解析权交给 CNAME 指向的 CDN 专用 DNS 服务器。
 - CDN 的 DNS 服务器将 CDN 的全局负载均衡设备 IP 地址返回用户。

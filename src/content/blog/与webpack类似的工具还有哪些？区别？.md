@@ -4,7 +4,7 @@ pubDatetime: 2021-07-06T16:00:00.000Z
 author: caorushizi
 tags:
   - 工程化
-postSlug: f6264bf794f4d8c316c8285b72c57693
+postSlug: fea3f043305610db492da606fbf7c720
 description: >-
   ![](https://static.vue-js.com/8ed8d520-b1a4-11eb-85f6-6fac77c0c9b3.png)预览一、模块化工具-------模块化是一种处理复杂系统分
 difficulty: 2.5
@@ -37,14 +37,35 @@ source: >-
 
 举个例子：
 
-```typescript
-undefined;
+```js
+// ./src/messages.js
+export default {
+  hi: "Hey Guys, I am zce~",
+};
+
+// ./src/logger.js
+export const log = msg => {
+  console.log("---------- INFO ----------");
+  console.log(msg);
+  console.log("--------------------------");
+};
+
+export const error = msg => {
+  console.error("---------- ERROR ----------");
+  console.error(msg);
+  console.error("---------------------------");
+};
+
+// ./src/index.js
+import { log } from "./logger";
+import messages from "./messages";
+log(messages.hi);
 ```
 
 然后通过`rollup`进行打包
 
-```typescript
-undefined;
+```js
+$ npx rollup ./src/index.js --file ./dist/bundle.js
 ```
 
 打包结果如下图
@@ -74,20 +95,37 @@ Parcel ，是一款完全零配置的前端打包器，它提供了 “傻瓜式
 
 `Parcel` 跟 `Webpack` 一样都支持以任意类型文件作为打包入口，但建议使用`HTML`文件作为入口，该`HTML`文件像平时一样正常编写代码、引用资源。如下所示：
 
-```typescript
-undefined;
+```js
+<!-- ./src/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parcel Tutorials</title>
+</head>
+<body>
+  <script src="main.js"></script>
+</body>
+</html>
 ```
 
 main.js 文件通过`ES Moudle`方法导入其他模块成员
 
-```typescript
-undefined;
+```js
+// ./src/main.js
+import { log } from "./logger";
+log("hello parcel");
+// ./src/logger.js
+export const log = msg => {
+  console.log("---------- INFO ----------");
+  console.log(msg);
+};
 ```
 
 运行之后，使用命令打包
 
-```typescript
-undefined;
+```cmd
+npx parcel src/index.html
 ```
 
 执行命令后，`Parcel`不仅打包了应用，同时也启动了一个开发服务器，跟`webpack Dev Server`一样
@@ -100,8 +138,8 @@ undefined;
 
 打包命令如下：
 
-```typescript
-undefined;
+```cmd
+npx parcel src/index.html
 ```
 
 由于打包过程是多进程同时工作，构建速度会比`Webpack` 快，输出文件也会被压缩，并且样式代码也会被单独提取到单个文件中

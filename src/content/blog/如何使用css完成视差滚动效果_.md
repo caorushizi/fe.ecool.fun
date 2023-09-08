@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - css
-postSlug: 03e0ccf5c6348baff771d5c5e48c4e41
+postSlug: dc4ea0b9ed977cd17fc0fb5ccc1836dc
 description: >-
   ![](https://static.vue-js.com/1b2d33e0-a18d-11eb-85f6-6fac77c0c9b3.png)预览一、是什么-----视差滚动（ParallaxScro
 difficulty: 2.5
@@ -56,14 +56,60 @@ source: >-
 
 核心的`css`代码如下：
 
-```typescript
-undefined;
+```css
+section {
+  height: 100vh;
+}
+
+.g-img {
+  background-image: url(...);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+}
 ```
 
 整体例子如下：
 
-```typescript
-undefined;
+```html
+<style>
+  div {
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    line-height: 100vh;
+    text-align: center;
+    font-size: 20vh;
+  }
+
+  .a-img1 {
+    background-image: url(https://images.pexels.com/photos/1097491/pexels-photo-1097491.jpeg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .a-img2 {
+    background-image: url(https://images.pexels.com/photos/2437299/pexels-photo-2437299.jpeg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .a-img3 {
+    background-image: url(https://images.pexels.com/photos/1005417/pexels-photo-1005417.jpeg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+  }
+</style>
+<div class="a-text">1</div>
+<div class="a-img1">2</div>
+<div class="a-text">3</div>
+<div class="a-img2">4</div>
+<div class="a-text">5</div>
+<div class="a-img3">6</div>
+<div class="a-text">7</div>
 ```
 
 ### transform:translate3D
@@ -81,8 +127,54 @@ undefined;
 
 举个例子：
 
-```typescript
-undefined;
+```html
+<style>
+  html {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  body {
+    /* 视差元素的父级需要3D视角 */
+    perspective: 1px;
+    transform-style: preserve-3d;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  #app {
+    width: 100vw;
+    height: 200vh;
+    background: skyblue;
+    padding-top: 100px;
+  }
+  .one {
+    width: 500px;
+    height: 200px;
+    background: #409eff;
+    transform: translateZ(0px);
+    margin-bottom: 50px;
+  }
+  .two {
+    width: 500px;
+    height: 200px;
+    background: #67c23a;
+    transform: translateZ(-1px);
+    margin-bottom: 150px;
+  }
+  .three {
+    width: 500px;
+    height: 200px;
+    background: #e6a23c;
+    transform: translateZ(-2px);
+    margin-bottom: 150px;
+  }
+</style>
+<div id="app">
+  <div class="one">one</div>
+  <div class="two">two</div>
+  <div class="three">three</div>
+</div>
 ```
 
 而这种方式实现视觉差动的原理如下：

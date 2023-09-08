@@ -4,9 +4,9 @@ pubDatetime: 2022-01-09T16:00:00.000Z
 author: caorushizi
 tags:
   - 编程题
-postSlug: d733c16303fde6125b83acea66ab1a2f
+postSlug: 11a8c1779775f6fab4293b6c04eceba0
 description: >-
-  红灯3秒亮一次，黄灯2秒亮一次，绿灯1秒亮一次；如何让三个灯不断交替重复亮灯？要求：用Promise实现三个亮灯函数已经存在：```typescriptundefined```
+  红灯3秒亮一次，黄灯2秒亮一次，绿灯1秒亮一次；如何让三个灯不断交替重复亮灯？要求：用Promise实现三个亮灯函数已经存在：```jsfunctionred(){console.log('red')
 difficulty: 4
 questionNumber: 49
 source: >-
@@ -19,6 +19,14 @@ source: >-
 
 三个亮灯函数已经存在：
 
-```typescript
-undefined;
+```js
+function red() {
+  console.log("red");
+}
+function green() {
+  console.log("green");
+}
+function yellow() {
+  console.log("yellow");
+}
 ```

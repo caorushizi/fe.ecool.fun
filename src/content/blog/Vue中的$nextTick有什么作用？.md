@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 224134af5980ac20280b82f15c36c4ea
+postSlug: fe4f00d80bab16e47a429215afc09e01
 description: >-
   ![](https://static.vue-js.com/76484d30-3aba-11eb-85f6-6fac77c0c9b3.png)预览一、NextTick是什么-------------官
 difficulty: 2
@@ -31,26 +31,33 @@ source: >-
 
 `Html`结构
 
-```typescript
-undefined;
+```html
+<div id="app">{{ message }}</div>
 ```
 
 构建一个`vue`实例
 
-```typescript
-undefined;
+```js
+const vm = new Vue({
+  el: "#app",
+  data: {
+    message: "原始值",
+  },
+});
 ```
 
 修改`message`
 
-```typescript
-undefined;
+```js
+this.message = "修改后的值1";
+this.message = "修改后的值2";
+this.message = "修改后的值3";
 ```
 
 这时候想获取页面最新的`DOM`节点，却发现获取到的是旧值
 
-```typescript
-undefined;
+```js
+console.log(vm.$el.textContent); // 原始值
 ```
 
 这是因为`message`数据在发现变化的时候，`vue`并不会立刻去更新`Dom`，而是将修改数据的操作放在了一个异步操作队列中
@@ -63,8 +70,15 @@ undefined;
 
 举个例子
 
-```typescript
-undefined;
+```js
+{
+  {
+    num;
+  }
+}
+for (let i = 0; i < 100000; i++) {
+  num = i;
+}
 ```
 
 如果没有 `nextTick` 更新机制，那么 `num` 每次更新值都会触发视图更新(上面这段代码也就是会更新 10 万次视图)，有了`nextTick`机制，只需要更新一次，所以`nextTick`本质是一种优化策略
@@ -77,20 +91,34 @@ undefined;
 
 第二个参数为：执行函数上下文
 
-```typescript
-undefined;
+```js
+// 修改数据
+vm.message = "修改后的值";
+// DOM 还没有更新
+console.log(vm.$el.textContent); // 原始的值
+Vue.nextTick(function () {
+  // DOM 更新了
+  console.log(vm.$el.textContent); // 修改后的值
+});
 ```
 
 组件内使用 `vm.$nextTick()` 实例方法只需要通过`this.$nextTick()`，并且回调函数中的 `this` 将自动绑定到当前的 `Vue` 实例上
 
-```typescript
-undefined;
+```js
+this.message = "修改后的值";
+console.log(this.$el.textContent); // => '原始的值'
+this.$nextTick(function () {
+  console.log(this.$el.textContent); // => '修改后的值'
+});
 ```
 
 `$nextTick()` 会返回一个 `Promise` 对象，可以是用`async/await`完成相同作用的事情
 
-```typescript
-undefined;
+```js
+this.message = "修改后的值";
+console.log(this.$el.textContent); // => '原始的值'
+await this.$nextTick();
+console.log(this.$el.textContent); // => '修改后的值'
 ```
 
 ## 三、实现原理
@@ -101,8 +129,37 @@ undefined;
 
 `callbacks`新增回调函数后又执行了`timerFunc`函数，`pending`是用来标识同一个时间只能执行一次
 
-```typescript
-undefined;
+```js
+export function nextTick(cb?: Function, ctx?: Object) {
+  let _resolve;
+
+  // cb 回调函数会经统一处理压入 callbacks 数组
+  callbacks.push(() => {
+    if (cb) {
+      // 给 cb 回调函数执行加上了 try-catch 错误处理
+      try {
+        cb.call(ctx);
+      } catch (e) {
+        handleError(e, ctx, "nextTick");
+      }
+    } else if (_resolve) {
+      _resolve(ctx);
+    }
+  });
+
+  // 执行异步延迟函数 timerFunc
+  if (!pending) {
+    pending = true;
+    timerFunc();
+  }
+
+  // 当 nextTick 没有传入函数参数的时候，返回一个 Promise 化的调用
+  if (!cb && typeof Promise !== "undefined") {
+    return new Promise(resolve => {
+      _resolve = resolve;
+    });
+  }
+}
 ```
 
 `timerFunc`函数定义，这里是根据当前环境支持什么方法则确定调用哪个，分别有：
@@ -111,8 +168,45 @@ undefined;
 
 通过上面任意一种方法，进行降级操作
 
-```typescript
-undefined;
+```js
+export let isUsingMicroTask = false;
+if (typeof Promise !== "undefined" && isNative(Promise)) {
+  //判断1：是否原生支持Promise
+  const p = Promise.resolve();
+  timerFunc = () => {
+    p.then(flushCallbacks);
+    if (isIOS) setTimeout(noop);
+  };
+  isUsingMicroTask = true;
+} else if (
+  !isIE &&
+  typeof MutationObserver !== "undefined" &&
+  (isNative(MutationObserver) ||
+    MutationObserver.toString() === "[object MutationObserverConstructor]")
+) {
+  //判断2：是否原生支持MutationObserver
+  let counter = 1;
+  const observer = new MutationObserver(flushCallbacks);
+  const textNode = document.createTextNode(String(counter));
+  observer.observe(textNode, {
+    characterData: true,
+  });
+  timerFunc = () => {
+    counter = (counter + 1) % 2;
+    textNode.data = String(counter);
+  };
+  isUsingMicroTask = true;
+} else if (typeof setImmediate !== "undefined" && isNative(setImmediate)) {
+  //判断3：是否原生支持setImmediate
+  timerFunc = () => {
+    setImmediate(flushCallbacks);
+  };
+} else {
+  //判断4：上面都不行，直接用setTimeout
+  timerFunc = () => {
+    setTimeout(flushCallbacks, 0);
+  };
+}
 ```
 
 无论是微任务还是宏任务，都会放到`flushCallbacks`使用
@@ -121,8 +215,15 @@ undefined;
 
 依次执行`callbacks`里面的函数
 
-```typescript
-undefined;
+```js
+function flushCallbacks() {
+  pending = false;
+  const copies = callbacks.slice(0);
+  callbacks.length = 0;
+  for (let i = 0; i < copies.length; i++) {
+    copies[i]();
+  }
+}
 ```
 
 **小结：**

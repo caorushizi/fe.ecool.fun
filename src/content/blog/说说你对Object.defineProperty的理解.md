@@ -1,0 +1,105 @@
+---
+title: 说说你对Object.defineProperty的理解
+pubDatetime: 2021-07-31T16:00:00.000Z
+author: caorushizi
+tags:
+  - javascript
+postSlug: 23c57cb7b59a48227ba16a42cb3dce88
+description: >-
+  Object.defineProperty()方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。该方法接受三个参数，第一个参数是obj：要定义属性的对象，第二个参数是pr
+difficulty: 3
+questionNumber: 238
+source: >-
+  https://fe.ecool.fun/topic-answer/a493193e-48ff-4e9e-9e66-0bf55732db63?orderBy=updateTime&order=desc&tagId=10
+---
+
+Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+
+该方法接受三个参数，第一个参数是 obj：要定义属性的对象，第二个参数是 prop：要定义或修改的属性的名称或 Symbol，第三个参数是 descriptor：要定义或修改的属性描述符。
+
+```javascript
+const obj = {};
+Object.defineProperty(obj, "property", { value: 18 });
+console.log(obj.property); // 18
+```
+
+虽然我们可以直接添加属性和值，但是使用这种方式，我们能进行更多的配置。
+
+函数的第三个参数 descriptor 所表示的属性描述符有两种形式：数据描述符和存取描述符。数据描述符是一个具有值的属性，该值可以是可写的，也可以是不可写的。存取描述符是由 getter 函数和 setter 函数所描述的属性。一个描述符只能是这两者其中之一；不能同时是两者。
+
+这两种同时拥有下列两种键值：
+
+- configurable：是否可以删除目标属性或是否可以再次修改属性的特性（writable, configurable, enumerable）。设置为 true 可以被删除或可以重新设置特性；设置为 false，不能被可以被删除或不可以重新设置特性。默认为 false。
+- enumerable：当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。默认为 false。
+
+```javascript
+const obj = { property: 24 };
+Object.defineProperty(obj, "property", { configurable: true });
+delete obj["property"]; // true
+obj; // {}
+// 改变状态
+const obj = { property: 24 };
+Object.defineProperty(obj, "property", { configurable: false });
+delete obj["property"]; // false
+obj; // {'property': 24}
+```
+
+```javascript
+const obj = { property1: 24, property2: 34, property3: 54 };
+Object.defineProperty(obj, "property1", { enumerable: true });
+for (i in obj) {
+  console.log(i);
+}
+// property1
+// property2
+// property3
+// 改状态
+
+Object.defineProperty(obj, "property1", { enumerable: false });
+for (i in obj) {
+  console.log(i);
+}
+// property2
+// property3
+```
+
+数据描述符还具有以下可选键值：
+
+- value：该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined。
+- writable：当且仅当该属性的 writable 键值为 true 时，属性的值，也就是上面的 value，才能被赋值运算符改变。默认为 false。
+
+```javascript
+const obj = {};
+Object.defineProperty(obj, "property1", { value: 18 });
+obj; // {'property1': 18}
+```
+
+```javascript
+const obj = {};
+Object.defineProperty(obj, "property1", { value: 18, writable: false });
+obj.property1 = 24;
+obj; // {'property1': 18}
+
+// 改变状态
+const obj = {};
+Object.defineProperty(obj, "property1", { value: 18, writable: true });
+obj.property1 = 24;
+obj; // {'property1': 24}
+```
+
+存取描述符还具有以下可选键值：
+
+- get：属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数。执行时不传入任何参数，但是会传入 this 对象（由于继承关系，这里的 this 并不一定是定义该属性的对象）。该函数的返回值会被用作属性的值。默认为 undefined。
+- set：属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值），会传入赋值时的 this 对象。默认为 undefined。
+
+```javascript
+const obj = {};
+Object.defineProperty(obj, "property1", {
+  get(value) {
+    return value;
+  },
+  set(newValue) {
+    value = newValue;
+  },
+});
+```

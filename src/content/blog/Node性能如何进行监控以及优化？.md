@@ -4,7 +4,7 @@ pubDatetime: 2021-07-24T16:00:00.000Z
 author: caorushizi
 tags:
   - nodejs
-postSlug: acf677da0e13aa70da1b06142ce0d385
+postSlug: f27d7af12727d9e637d2d5ee029b81f7
 description: >-
   ![](https://static.vue-js.com/bb37dae0-d179-11eb-ab90-d9ae814b240d.png)预览一、是什么------`Node`作为一门服务端语言，
 difficulty: 3
@@ -41,8 +41,25 @@ source: >-
 
 内存是一个非常容易量化的指标。 内存占用率是评判一个系统的内存瓶颈的常见指标。 对于 Node 来说，内部内存堆栈的使用状态也是一个可以量化的指标
 
-```typescript
-undefined;
+```js
+// /app/lib/memory.js
+const os = require("os");
+// 获取当前Node内存堆栈情况
+const { rss, heapUsed, heapTotal } = process.memoryUsage();
+// 获取系统空闲内存
+const sysFree = os.freemem();
+// 获取系统总内存
+const sysTotal = os.totalmem();
+
+module.exports = {
+  memory: () => {
+    return {
+      sys: 1 - sysFree / sysTotal, // 系统内存占用率
+      heap: heapUsed / headTotal, // Node堆内存占用率
+      node: rss / sysTotal, // Node占用系统内存的比例
+    };
+  },
+};
 ```
 
 - rss：表示 node 进程占用的内存总量。
@@ -70,8 +87,9 @@ undefined;
 
 在你的项目入口文件中按照如下方式引入，当然请传入你的项目名称：
 
-```typescript
-undefined;
+```js
+const easyMonitor = require("easy-monitor");
+easyMonitor("你的项目名称");
 ```
 
 打开你的浏览器，访问 `http://localhost:12333` ，即可看到进程界面
@@ -98,16 +116,40 @@ undefined;
 
 在`Node`中，很多对象都实现了流，对于一个大文件可以通过流的形式发送，不需要将其完全读入内存
 
-```typescript
-undefined;
+```js
+const http = require("http");
+const fs = require("fs");
+
+// bad
+http.createServer(function (req, res) {
+  fs.readFile(__dirname + "/data.txt", function (err, data) {
+    res.end(data);
+  });
+});
+
+// good
+http.createServer(function (req, res) {
+  const stream = fs.createReadStream(__dirname + "/data.txt");
+  stream.pipe(res);
+});
 ```
 
 ### 代码层面优化
 
 合并查询，将多次查询合并一次，减少数据库的查询次数
 
-```typescript
-undefined;
+```js
+// bad
+for user_id in userIds
+     let account = user_account.findOne(user_id)
+
+// good
+const user_account_map = {}   // 注意这个对象将会消耗大量内存。
+user_account.find(user_id in user_ids).forEach(account){
+    user_account_map[account.user_id] =  account
+}
+for user_id in userIds
+    var account = user_account_map[user_id]
 ```
 
 ### 内存管理优化
@@ -123,8 +165,19 @@ undefined;
 
 如下面情况：
 
-```typescript
-undefined;
+```js
+const buffer = fs.readFileSync(__dirname + "/source/index.htm");
+
+app.use(
+  mount("/", async ctx => {
+    ctx.status = 200;
+    ctx.type = "html";
+    ctx.body = buffer;
+    leak.push(fs.readFileSync(__dirname + "/source/index.htm"));
+  })
+);
+
+const leak = [];
 ```
 
 `leak`的内存非常大，造成内存泄露，应当避免这样的操作，通过减少内存使用，是提高服务性能的手段之一

@@ -4,14 +4,35 @@ pubDatetime: 2022-01-09T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 8de56572b31f1affed893945384c915d
-description: "```typescriptundefined```"
+postSlug: edfb2f88c5b7450d210f85b16e03684f
+description: >-
+  ```jsconstfirst=()=>(newPromise((resolve,reject)=>{console.log(3);letp=newPromise((resolve,reject)=>
 difficulty: 4
 questionNumber: 141
 source: >-
   https://fe.ecool.fun/topic-answer/570eed0a-2340-4c59-a6c0-967db6a7dc48?orderBy=updateTime&order=desc&tagId=10
 ---
 
-```typescript
-undefined;
+```js
+const first = () =>
+  new Promise((resolve, reject) => {
+    console.log(3);
+    let p = new Promise((resolve, reject) => {
+      console.log(7);
+      setTimeout(() => {
+        console.log(5);
+        resolve(6);
+        console.log(p);
+      }, 0);
+      resolve(1);
+    });
+    resolve(2);
+    p.then(arg => {
+      console.log(arg);
+    });
+  });
+first().then(arg => {
+  console.log(arg);
+});
+console.log(4);
 ```

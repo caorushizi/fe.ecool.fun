@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - 前端安全
-postSlug: 66ebd2e24ba7da2f48654fb9c3b32eb6
+postSlug: db7b43138f364a4ab40477ec8cfda7c8
 description: >-
   ![](https://static.vue-js.com/d0892930-8d1d-11eb-ab90-d9ae814b240d.png)预览一、是什么-----Web攻击（WebAttack）是
 difficulty: 3
@@ -47,16 +47,29 @@ XSS，跨站脚本攻击，允许攻击者将恶意代码植入到提供给其�
 
 一个搜索页面，根据`url`参数决定关键词的内容
 
-```typescript
-undefined;
+```html
+<input type="text" value="<%= getParameter("keyword") %>">
+<button>搜索</button>
+<div>您搜索的关键词是：<%= getParameter("keyword") %></div>
 ```
 
 这里看似并没有问题，但是如果不按套路出牌呢？
 
 用户输入`"><script>alert('XSS');</script>`，拼接到 HTML 中返回给浏览器。形成了如下的 HTML：
 
-```typescript
-undefined;
+```html
+<input type="text" value="" />
+<script>
+  alert("XSS");
+</script>
+">
+<button>搜索</button>
+<div>
+  您搜索的关键词是：">
+  <script>
+    alert("XSS");
+  </script>
+</div>
 ```
 
 浏览器无法分辨出 `<script>alert('XSS');</script>` 是恶意代码，因而将其执行，试想一下，如果是获取`cookie`发送对黑客服务器呢？
@@ -127,8 +140,8 @@ DOM 型 XSS 跟前两种 XSS 的区别：DOM 型 XSS 攻击中，取出和执行
 
 - 当 `5 < 7` 作为 HTML 拼接页面时，可以正常显示：
 
-```typescript
-undefined;
+```html
+<div title="comment">5 &lt; 7</div>
 ```
 
 - 当 `5 < 7` 通过 Ajax 返回，然后赋值给 JavaScript 的变量时，前端得到的字符串就是转义后的字符。这个内容不能直接用于 Vue 等模板的展示，也不能直接用于内容长度计算。不能用于标题、alert 等
@@ -141,8 +154,20 @@ undefined;
 
 DOM 中的内联事件监听器，如 `location`、`onclick`、`onerror`、`onload`、`onmouseover` 等，`<a>` 标签的 `href` 属性，JavaScript 的 `eval()`、`setTimeout()`、`setInterval()` 等，都能把字符串作为代码运行。如果不可信的数据拼接到字符串中传递给这些 API，很容易产生安全隐患，请务必避免
 
-```typescript
-undefined;
+```js
+<!-- 链接内包含恶意代码 -->
+< a href=" ">1</ a>
+
+<script>
+// setTimeout()/setInterval() 中调用恶意代码
+setTimeout("UNTRUSTED")
+setInterval("UNTRUSTED")
+
+// location 调用恶意代码
+location.href = 'UNTRUSTED'
+
+// eval() 中调用恶意代码
+eval("UNTRUSTED")
 ```
 
 ## 三、CSRF
@@ -164,8 +189,13 @@ CSRF（Cross-site request forgery）跨站请求伪造：攻击者诱导受害�
 
 同样，也可以设置一个自动提交的表单发送`post`请求，如下：
 
-```typescript
-undefined;
+```js
+<form action="http://bank.example/withdraw" method=POST>
+    <input type="hidden" name="account" value="xiaoming" />
+    <input type="hidden" name="amount" value="10000" />
+    <input type="hidden" name="for" value="hacker" />
+</form>
+<script> document.forms[0].submit(); </script>
 ```
 
 访问该页面后，表单会自动提交，相当于模拟用户完成了一次`POST`操作
@@ -174,8 +204,9 @@ undefined;
 
 访问该页面后，表单会自动提交，相当于模拟用户完成了一次 POST 操作
 
-```typescript
-undefined;
+```html
+< a href="http://test.com/csrf/withdraw.php?amount=1000&for=hacker"
+taget="_blank"> 重磅消息！！ <a />
 ```
 
 ### CSRF 的特点
@@ -203,8 +234,8 @@ CSRF 通常从第三方网站发起，被攻击的网站无法防止攻击发生
 - 用户打开页面的时候，服务器需要给这个用户生成一个 Token
 - 对于 GET 请求，Token 将附在请求地址之后。对于 POST 请求来说，要在 form 的最后加上
 
-```typescript
-undefined;
+```html
+<input type="”hidden”" name="”csrftoken”" value="”tokenvalue”" />
 ```
 
 - 当用户从客户端得到了 Token，再次提交给服务器的时候，服务器需要判断 Token 的有效性

@@ -4,9 +4,9 @@ pubDatetime: 2022-03-21T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 01f0145b54c97b08ca6a850727371cd1
+postSlug: 7beea90829e35b0ece2265352b0cf688
 description: >-
-  下面将围绕一个例子，讲解一下computed初始化及更新时的流程，来看看计算属性是怎么实现的缓存，及依赖是怎么被收集的。```typescriptundefined```初始化computed----
+  下面将围绕一个例子，讲解一下computed初始化及更新时的流程，来看看计算属性是怎么实现的缓存，及依赖是怎么被收集的。```js<divid="app"><span@click="change">{
 difficulty: 3
 questionNumber: 27
 source: >-
@@ -15,28 +15,71 @@ source: >-
 
 下面将围绕一个例子，讲解一下 computed 初始化及更新时的流程，来看看计算属性是怎么实现的缓存，及依赖是怎么被收集的。
 
-```typescript
-undefined;
+```js
+<div id="app">
+  <span @click="change">{{sum}}</span>
+</div>
+<script src="./vue2.6.js"></script>
+<script>
+  new Vue({
+    el: "#app",
+    data() {
+      return {
+        count: 1,
+      }
+    },
+    methods: {
+      change() {
+        this.count = 2
+      },
+    },
+    computed: {
+      sum() {
+        return this.count + 1
+      },
+    },
+  })
+</script>
 ```
 
 ## 初始化 computed
 
 vue 初始化时先执行 init 方法，里面的 initState 会进行计算属性的初始化
 
-```typescript
-undefined;
+```js
+if (opts.computed) {
+  initComputed(vm, opts.computed);
+}
 ```
 
 下面是 initComputed 的代码
 
-```typescript
-undefined;
+```js
+var watchers = (vm._computedWatchers = Object.create(null));
+// 依次为每个 computed 属性定义一个计算watcher
+for (const key in computed) {
+  const userDef = computed[key];
+  watchers[key] = new Watcher(
+    vm, // 实例
+    getter, // 用户传入的求值函数 sum
+    noop, // 回调函数 可以先忽视
+    { lazy: true } // 声明 lazy 属性 标记 computed watcher
+  );
+  // 用户在调用 this.sum 的时候，会发生的事情
+  defineComputed(vm, key, userDef);
+}
 ```
 
 每个计算属性对应的计算 watcher 的初始状态如下：
 
-```typescript
-undefined;
+```js
+{
+    deps: [],
+    dirty: true,
+    getter: ƒ sum(),
+    lazy: true,
+    value: undefined
+}
 ```
 
 可以看到它的 value 刚开始是 undefined，lazy 是 true，说明它的值是惰性计算的，只有到真正在模板里去读取它的值后才会计算。
@@ -45,16 +88,39 @@ undefined;
 
 接下来看看比较关键的 defineComputed，它决定了用户在读取 this.sum 这个计算属性的值后会发生什么，继续简化，排除掉一些不影响流程的逻辑。
 
-```typescript
-undefined;
+```js
+Object.defineProperty(target, key, {
+  get() {
+    // 从刚刚说过的组件实例上拿到 computed watcher
+    const watcher = this._computedWatchers && this._computedWatchers[key];
+    if (watcher) {
+      // 只有dirty了才会重新求值
+      if (watcher.dirty) {
+        // 这里会求值，会调用get，会设置Dep.target
+        watcher.evaluate();
+      }
+      // 这里也是个关键 等会细讲
+      if (Dep.target) {
+        watcher.depend();
+      }
+      // 最后返回计算出来的值
+      return watcher.value;
+    }
+  },
+});
 ```
 
 这个函数需要仔细看看，它做了好几件事，我们以初始化的流程来讲解它：
 
 首先 dirty 这个概念代表脏数据，说明这个数据需要重新调用用户传入的 sum 函数来求值了。我们暂且不管更新时候的逻辑，第一次在模板中读取到 {{sum}} 的时候它一定是 true，所以初始化就会经历一次求值。
 
-```typescript
-undefined;
+```js
+evaluate () {
+  // 调用 get 函数求值
+  this.value = this.get()
+  // 把 dirty 标记为 false
+  this.dirty = false
+}
 ```
 
 这个函数其实很清晰，它先求值，然后把 dirty 置为 false。再回头看看我们刚刚那段 Object.defineProperty 的逻辑，下次没有特殊情况再读取到 sum 的时候，发现 dirty 是 false 了，是不是直接就返回 watcher.value 这个值就可以了，这其实就是计算属性缓存的概念。
@@ -63,56 +129,123 @@ undefined;
 
 初始化完成之后，最终会调用 render 进行渲染，而 render 函数会作为 watcher 的 getter，此时的 watcher 为渲染 watcher。
 
-```typescript
-undefined;
+```js
+updateComponent = () => {
+  vm._update(vm._render(), hydrating);
+};
+// 创建一个渲染watcher，渲染watcher初始化时，就会调用其get()方法，即render函数，就会进行依赖收集
+new Watcher(vm, updateComponent, noop, {}, true /* isRenderWatcher */);
 ```
 
 看一下 watcher 中的 get 方法
 
-```typescript
-undefined;
+```js
+get () {
+    // 将当前watcher放入栈顶，同时设置给Dep.target
+    pushTarget(this)
+    let value
+    const vm = this.vm
+    // 调用用户定义的函数，会访问到this.count，从而访问其getter方法，下面会讲到
+    value = this.getter.call(vm, vm)
+    // 求值结束后，当前watcher出栈
+    popTarget()
+    this.cleanupDeps()
+    return value
+ }
 ```
 
 渲染 watcher 的 getter 执行时（render 函数），会访问到 this.sum，就会触发该计算属性的 getter，即在 initComputed 时定义的该方法，会把与 sum 绑定的计算 watcher 得到之后，因为初始化时 dirty 为 true，会调用其 evaluate 方法，最终会调用其 get()方法，把该计算 watcher 放入栈顶，此时 Dep.target 也为该计算 watcher。
 
 接着调用其 get 方法，就会访问到 this.count，会触发 count 属性的 getter（如下），就会将当前 Dep.target 存放的 watcher 收集到 count 属性对应的 dep 中。此时求值结束，调用`popTarget()`将该 watcher 出栈，此时上个渲染 watcher 就在栈顶了，Dep.target 重新为渲染 watcher。
 
-```typescript
-undefined;
+```js
+// 在闭包中，会保留对于 count 这个 key 所定义的 dep
+const dep = new Dep();
+
+// 闭包中也会保留上一次 set 函数所设置的 val
+let val;
+
+Object.defineProperty(obj, key, {
+  get: function reactiveGetter() {
+    const value = val;
+    // Dep.target 此时就是计算watcher
+    if (Dep.target) {
+      // 收集依赖
+      dep.depend();
+    }
+    return value;
+  },
+});
 ```
 
-```typescript
-undefined;
+```js
+// dep.depend()
+depend () {
+  if (Dep.target) {
+    Dep.target.addDep(this)
+  }
+}
 ```
 
-```typescript
-undefined;
+```js
+// watcher 的 addDep函数
+addDep (dep: Dep) {
+  // 这里做了一系列的去重操作 简化掉
+
+  // 这里会把 count 的 dep 也存在自身的 deps 上
+  this.deps.push(dep)
+  // 又带着 watcher 自身作为参数
+  // 回到 dep 的 addSub 函数了
+  dep.addSub(this)
+}
 ```
 
-```typescript
-undefined;
+```js
+class Dep {
+  subs = [];
+
+  addSub(sub: Watcher) {
+    this.subs.push(sub);
+  }
+}
 ```
 
 通过这两段代码，计算 watcher 就被属性所绑定 dep 所收集。watcher 依赖 dep，dep 同时也依赖 watcher，它们之间的这种相互依赖的数据结构，可以方便知道一个 watcher 被哪些 dep 依赖和一个 dep 依赖了哪些 watcher。
 
 接着执行`watcher.depend()`
 
-```typescript
-undefined;
+```js
+// watcher.depend
+depend () {
+  let i = this.deps.length
+  while (i--) {
+    this.deps[i].depend()
+  }
+}
 ```
 
 还记得刚刚的 计算 watcher 的形态吗？它的 deps 里保存了 count 的 dep。也就是说，又会调用 count 上的 dep.depend()
 
-```typescript
-undefined;
+```js
+class Dep {
+  subs = [];
+
+  depend() {
+    if (Dep.target) {
+      Dep.target.addDep(this);
+    }
+  }
+}
 ```
 
 这次的 Dep.target 已经是 渲染 watcher 了，所以这个 count 的 dep 又会把 渲染 watcher 存放进自身的 subs 中。
 
 最终 count 的依赖收集完毕，它的 dep 为:
 
-```typescript
-undefined;
+```js
+{
+    subs: [ sum的计算watcher，渲染watcher ]
+}
 ```
 
 ## 派发更新
@@ -121,14 +254,35 @@ undefined;
 
 再回到 count 的响应式劫持逻辑里去：
 
-```typescript
-undefined;
+```js
+// 在闭包中，会保留对于 count 这个 key 所定义的 dep
+const dep = new Dep()
+
+// 闭包中也会保留上一次 set 函数所设置的 val
+let val
+
+Object.defineProperty(obj, key, {
+  set: function reactiveSetter (newVal) {
+      val = newVal
+      // 触发 count 的 dep 的 notify
+      dep.notify()
+    }
+  })
+})
 ```
 
 好，这里触发了我们刚刚精心准备的 count 的 dep 的 notify 函数。
 
-```typescript
-undefined;
+```js
+class Dep {
+  subs = [];
+
+  notify() {
+    for (let i = 0, l = subs.length; i < l; i++) {
+      subs[i].update();
+    }
+  }
+}
 ```
 
 这里的逻辑就很简单了，把 subs 里保存的 watcher 依次去调用它们的 update 方法，也就是
@@ -138,8 +292,12 @@ undefined;
 
 计算 watcher 的 update
 
-```typescript
-undefined;
+```js
+update () {
+  if (this.lazy) {
+    this.dirty = true
+  }
+}
 ```
 
 仅仅是把 计算 watcher 的 dirty 属性置为 true，静静的等待下次读取即可（再次执行 render 函数时，会再次访问到 sum 属性，此时的 dirty 为 true，就会进行再次求值）。
@@ -149,8 +307,23 @@ undefined;
 这里其实就是调用 vm.\_update(vm.\_render()) 这个函数，重新根据 render 函数生成的 vnode 去渲染视图了。  
 而在 render 的过程中，一定会访问到 su 这个值，那么又回到 sum 定义的 get 上：
 
-```typescript
-undefined;
+```js
+Object.defineProperty(target, key, {
+  get() {
+    const watcher = this._computedWatchers && this._computedWatchers[key];
+    if (watcher) {
+      // 上一步中 dirty 已经置为 true, 所以会重新求值
+      if (watcher.dirty) {
+        watcher.evaluate();
+      }
+      if (Dep.target) {
+        watcher.depend();
+      }
+      // 最后返回计算出来的值
+      return watcher.value;
+    }
+  },
+});
 ```
 
 由于上一步中的响应式属性更新，触发了 计算 watcher 的 dirty 更新为 true。所以又会重新调用用户传入的 sum 函数计算出最新的值，页面上自然也就显示出了最新的值。

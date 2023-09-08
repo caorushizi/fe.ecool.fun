@@ -4,7 +4,7 @@ pubDatetime: 2022-02-27T16:00:00.000Z
 author: caorushizi
 tags:
   - vue
-postSlug: 64727a8b66d92adccdbf66f9b1156b8a
+postSlug: 265e506fac43c3fde069dc0176557f4e
 description: >-
   在实际开发中，我们经常会用到vuex来对数据进行管理，随着数据越来越多，我们逐渐开始使用一些语法糖来帮助我们快速开发。即vuex中的mapState、mapGetters、mapMutations、m
 difficulty: 2
@@ -31,8 +31,15 @@ source: >-
 
 ### 1、mapState:把 state 属性映射到 computed 身上
 
-```typescript
-undefined;
+```js
+computed:{
+  ...Vuex.mapState({
+    input:state=>state.inputVal,
+    n:state=>state.n
+  })
+}
+
+
 ```
 
 `state`：用来存储公共的状态 在`state`中的数据都是响应式的。
@@ -46,28 +53,51 @@ undefined;
 - 本身 key 值是别名，要的是 val 的值，key 的值 a 和 val="a"一样就行，随意写。减少 state 里面长的属性名。
 - 可以在函数内部查看 state 中的数据，数组方式的话，必须按照 state 中的属性名。
 
-```typescript
-undefined;
+```js
+computed: Vuex.mapState({
+  key: state => state.属性,
+});
 ```
 
 如果自身组件也需要使用 computed 的话，通过解构赋值去解构出来
 
-```typescript
-undefined;
+```js
+  computed:{
+    ...Vuex.mapState({
+       key:state=>state.属性
+    })
+  }
 ```
 
 ### 2、mapAcions：把 actions 里面的方法映射到 methods 中
 
-```typescript
-undefined;
+```js
+methods:{
+        ...Vuex.mapActions({
+            add:"handleTodoAdd",    //val为actions里面的方法名称
+            change:"handleInput"
+        })
+    }
+
+
 ```
 
 add、change 为 action 方法别名，直接代用 add 和 change 方法就行，不过要记得在 actions 里面做完数据业务逻辑的操作。
 
 等价于如下的函数调用，
 
-```typescript
-undefined;
+```js
+methods: {
+	handleInput(e){
+		let val = e.target.value;
+		this.$store.dispatch("handleInput",val )
+	},
+	handleAdd(){
+		this.$store.dispatch("handleTodoAdd")
+	}
+}
+
+
 ```
 
 `actions`里面的函数主要用来处理异步的函数以及一些业务逻辑,每一个函数里面都有一个形参，这个形参是一个对象，里面有一个`commit`方法，这个方法用来触发 mutations 里面的方法
@@ -76,8 +106,14 @@ undefined;
 
 只是做简单的数据修改（例如 n++），它没有涉及到数据的处理，没有用到业务逻辑或者异步函数，可以直接调用 mutations 里的方法修改数据。
 
-```typescript
-undefined;
+```js
+methods:{
+        ...Vuex.mapMutations({
+            handleAdd:"handlMutationseAdd"
+        })
+    }
+
+
 ```
 
 `mutations`里面的函数主要用来修改`state`中的数据。`mutations`里面的所有方法都会有 2 个参数，一个是`store`中的`state`，另外一个是需要传递的参数。
@@ -90,8 +126,14 @@ undefined;
 
 ### 4、mapGetters:把 getters 属性映射到 computed 身上
 
-```typescript
-undefined;
+```js
+ computed:{
+        ...Vuex.mapGetters({
+            NumN:"NumN"
+        })
+    }
+
+
 ```
 
 `getters`类似于组件里面`computed`，同时也监听属性的变化，当`state`中的属性发生改变的时候就会触发`getters`里面的方法。`getters`里面的每一个方法中都会有一个参数 `state`。
@@ -122,12 +164,21 @@ undefined;
 
 模块开启命名空间后，享有独自的命名空间。示例代码如下：
 
-```typescript
-undefined;
+```js
+export default {
+	namespaced: true,
+	....
+}
 ```
 
 `mapState`、`mapGetters`、`mapMutations`、`mapActions`第一个参数是字符串（命名空间名称），第二个参数是数组（不需要重命名）/对象（需要重命名）。
 
-```typescript
-undefined;
+```js
+mapXXXs("命名空间名称", ["属性名1", "属性名2"]);
+
+mapXXXs("命名空间名称", {
+  组件中的新名称1: "Vuex中的原名称1",
+
+  组件中的新名称2: "Vuex中的原名称2",
+});
 ```

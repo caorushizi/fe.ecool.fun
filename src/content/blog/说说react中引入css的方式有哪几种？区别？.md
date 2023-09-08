@@ -4,7 +4,7 @@ pubDatetime: 2021-10-24T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: e23b9aab30f11490f0bf7141aa452e60
+postSlug: 45d6cc3f0ce3784c48859d06823bb49c
 description: >-
   一、是什么-----组件式开发选择合适的`css`解决方案尤为重要通常会遵循以下规则：*可以编写局部css，不会随意污染其他组件内的原生；*可以编写动态的css，可以获取当前组件的一些状态，根据状态的
 difficulty: 1.5
@@ -46,8 +46,33 @@ source: >-
 
 直接在组件中书写`css`样式，通过`style`属性直接引入，如下：
 
-```typescript
-undefined;
+```js
+import React, { Component } from "react";
+
+const div1 = {
+  width: "300px",
+  margin: "30px auto",
+  backgroundColor: "#44014C",  //驼峰法
+  minHeight: "200px",
+  boxSizing: "border-box"
+};
+
+class Test extends Component {
+  constructor(props, context) {
+    super(props);
+  }
+
+  render() {
+    return (
+     <div>
+       <div style={div1}>123</div>
+       <div style={{backgroundColor:"red"}}>
+     </div>
+    );
+  }
+}
+
+export default Test;
 ```
 
 上面可以看到，`css`属性需要转换成驼峰写法
@@ -70,14 +95,38 @@ undefined;
 
 `App.css`文件：
 
-```typescript
-undefined;
+```css
+.title {
+  color: red;
+  font-size: 20px;
+}
+
+.desc {
+  color: green;
+  text-decoration: underline;
+}
 ```
 
 组件中引入：
 
-```typescript
-undefined;
+```js
+import React, { PureComponent } from "react";
+
+import Home from "./Home";
+
+import "./App.css";
+
+export default class App extends PureComponent {
+  render() {
+    return (
+      <div className="app">
+        <h2 className="title">我是App的标题</h2>
+        <p className="desc">我是App中的一段文字描述</p>
+        <Home />
+      </div>
+    );
+  }
+}
 ```
 
 这种方式存在不好的地方在于样式是全局生效，样式之间会互相影响
@@ -88,8 +137,24 @@ undefined;
 
 这种方式是`webpack`特工的方案，只需要配置`webpack`配置文件中`modules:true`即可
 
-```typescript
-undefined;
+```jsx
+import React, { PureComponent } from "react";
+
+import Home from "./Home";
+
+import "./App.module.css";
+
+export default class App extends PureComponent {
+  render() {
+    return (
+      <div className="app">
+        <h2 className="title">我是App的标题</h2>
+        <p className="desc">我是App中的一段文字描述</p>
+        <Home />
+      </div>
+    );
+  }
+}
 ```
 
 这种方式能够解决局部作用域问题，但也有一定的缺陷：
@@ -119,14 +184,47 @@ CSS-in-JS， 是指一种模式，其中`CSS`由 `JavaScript` 生成而不是在
 
 创建一个`style.js`文件用于存放样式组件：
 
-```typescript
-undefined;
+```js
+export const SelfLink = styled.div`
+  height: 50px;
+  border: 1px solid red;
+  color: yellow;
+`;
+
+export const SelfButton = styled.div`
+  height: 150px;
+  width: 150px;
+  color: ${props => props.color};
+  background-image: url(${props => props.src});
+  background-size: 150px 150px;
+`;
 ```
 
 引入样式组件也很简单：
 
-```typescript
-undefined;
+```jsx
+import React, { Component } from "react";
+
+import { SelfLink, SelfButton } from "./style";
+
+class Test extends Component {
+  constructor(props, context) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <SelfLink title="People's Republic of China">app.js</SelfLink>
+        <SelfButton color="palevioletred" style={{ color: "pink" }} src={fist}>
+          SelfButton
+        </SelfButton>
+      </div>
+    );
+  }
+}
+
+export default Test;
 ```
 
 ## 三、区别

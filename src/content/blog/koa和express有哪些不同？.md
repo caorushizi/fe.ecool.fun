@@ -4,7 +4,7 @@ pubDatetime: 2022-03-21T16:00:00.000Z
 author: caorushizi
 tags:
   - nodejs
-postSlug: 18c07ce1b72cffe574f98e4e2faa72cc
+postSlug: 1a1f6fbe8c277750835d4f1490af45e5
 description: >-
   框架介绍----express框架是一个基于Node.js平台的极简、灵活的web应用开发框架，主要基于Connect中间件，并且自身封装了路由、视图处理等功能。koa是Express原班人马基于ES
 difficulty: 2.5
@@ -33,14 +33,33 @@ express 的中间件模型为线型，而 koa 的中间件模型为 U 型，也�
 
 express 通过回调实现异步函数，在多个回调、多个中间件中写起来容易逻辑混乱。
 
-```typescript
-undefined;
+```js
+// express写法
+app.get("/test", function (req, res) {
+  fs.readFile("/file1", function (err, data) {
+    if (err) {
+      res.status(500).send("read file1 error");
+    }
+    fs.readFile("/file2", function (err, data) {
+      if (err) {
+        res.status(500).send("read file2 error");
+      }
+      res.type("text/plain");
+      res.send(data);
+    });
+  });
+});
 ```
 
 koa 通过 generator 和 async/await 使用同步的写法来处理异步，明显好于 callback 和 promise。
 
-```typescript
-undefined;
+```js
+app.use(async (ctx, next) => {
+  await next();
+  var data = await doReadFile();
+  ctx.response.type = "text/plain";
+  ctx.response.body = data;
+});
 ```
 
 ## **总结**

@@ -4,9 +4,9 @@ pubDatetime: 2022-03-15T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 3489d435bce621d5632e907b0879d831
+postSlug: d6002f525c2f3d574996ffb6ba9fffdc
 description: >-
-  我们都知道jQuery可以链式调用，比如：```typescriptundefined```链式调用的核心就在于调用完的方法将自身实例返回。实现一个简单的链式调用-----------```types
+  我们都知道jQuery可以链式调用，比如：```js$("div").eq(0).css("width","200px").show();```链式调用的核心就在于调用完的方法将自身实例返回。实现一个
 difficulty: 2
 questionNumber: 130
 source: >-
@@ -15,14 +15,40 @@ source: >-
 
 我们都知道 jQuery 可以链式调用，比如：
 
-```typescript
-undefined;
+```js
+$("div").eq(0).css("width", "200px").show();
 ```
 
 链式调用的核心就在于调用完的方法将自身实例返回。
 
 ## 实现一个简单的链式调用
 
-```typescript
-undefined;
+```js
+// 定义一个对象
+class listFunc {
+  // 初始化
+  constructor(val) {
+    this.arr = [...val];
+    return this;
+  }
+  // 打印这个数组
+  get() {
+    console.log(this.arr);
+    return this;
+  }
+  // 向数组尾部添加数据
+  push(val) {
+    console.log(this.arr);
+    this.arr.push(val);
+    return this;
+  }
+  // 删除尾部数据
+  pop() {
+    console.log(this.arr);
+    this.arr.pop();
+    return this;
+  }
+}
+const list = new listFunc([1, 2, 3]);
+list.get().pop().push("ldq");
 ```

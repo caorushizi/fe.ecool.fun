@@ -4,7 +4,7 @@ pubDatetime: 2021-07-04T16:00:00.000Z
 author: caorushizi
 tags:
   - react
-postSlug: b3f8e550c9151685b13348bee45461e5
+postSlug: 199a56299a1b66948714d149f833d983
 description: >-
   类组件（Classcomponents）---------------------*无论是使用函数或是类来声明一个组件，它决不能修改它自己的props。*所有React组件都必须是纯函数，并禁止修改其
 difficulty: 1
@@ -21,16 +21,24 @@ source: >-
   - 属性 props 是外界传递过来的，状态 state 是组件本身的，状态可以在组件中任意修改
   - 组件的属性和状态改变都会更新视图。
 
-```typescript
-undefined;
+```jsx
+class Welcome extends React.Component {
+  render() {
+    return <h1>Welcome {this.props.name}</h1>;
+  }
+}
+ReactDOM.render(<Welcome name="react" />, document.getElementById("root"));
 ```
 
 ## 函数组件（functional component）
 
 函数组件接收一个单一的 props 对象并返回了一个 React 元素
 
-```typescript
-undefined;
+```jsx
+function Welcome(props) {
+  return <h1>Welcome {props.name}</h1>;
+}
+ReactDOM.render(<Welcome name="react" />, document.getElementById("root"));
 ```
 
 ## 区别
@@ -57,14 +65,27 @@ undefined;
 
 如果 SayHi 是一个函数，React 需要调用它：
 
-```typescript
-undefined;
+```jsx
+// 你的代码
+function SayHi() {
+  return <p>Hello, React</p>;
+}
+// React内部
+const result = SayHi(props); // » <p>Hello, React</p>
 ```
 
 如果 SayHi 是一个类，React 需要先用 new 操作符将其实例化，然后调用刚才生成实例的 render 方法：
 
-```typescript
-undefined;
+```jsx
+// 你的代码
+class SayHi extends React.Component {
+  render() {
+    return <p>Hello, React</p>;
+  }
+}
+// React内部
+const instance = new SayHi(props); // » SayHi {}
+const result = instance.render(); // » <p>Hello, React</p>
 ```
 
 可想而知，函数组件重新渲染将重新调用组件方法返回新的 react 元素，类组件重新渲染将 new 一个新的组件实例，然后调用 render 类方法返回 react 元素，这也说明为什么类组件中 this 是可变的。

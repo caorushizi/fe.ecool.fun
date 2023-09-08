@@ -4,7 +4,7 @@ pubDatetime: 2021-07-03T16:00:00.000Z
 author: caorushizi
 tags:
   - javascript
-postSlug: 64ce02ea814e831ba7c76cf26a7bf274
+postSlug: 2ddacf4146f35708ae6dee31e7abe273
 description: >-
   ![](https://static.vue-js.com/68dccf20-849f-11eb-ab90-d9ae814b240d.png)预览一、方式----`javaScript`本地缓存的方法
 difficulty: 1.5
@@ -38,21 +38,21 @@ source: >-
 
 - Expires 用于设置 Cookie 的过期时间
 
-```typescript
-undefined;
+```js
+Expires=Wed, 21 Oct 2015 07:28:00 GMT
 ```
 
 - Max-Age 用于设置在 Cookie 失效之前需要经过的秒数（优先级比`Expires`高）
 
-```typescript
-undefined;
+```js
+Max-Age=604800
 ```
 
 - `Domain` 指定了 `Cookie` 可以送达的主机名
 - `Path` 指定了一个 `URL` 路径，这个路径必须出现在要请求的资源的路径中才可以发送 `Cookie` 首部
 
-```typescript
-undefined;
+```js
+Path=/docs   # /docs/Web/ 下的资源会带 Cookie 首部
 ```
 
 - 标记为 `Secure` 的 `Cookie` 只应通过被`HTTPS`协议加密过的请求发送给服务端
@@ -61,14 +61,15 @@ undefined;
 
 关于`cookie`的使用如下：
 
-```typescript
-undefined;
+```js
+document.cookie = "名字=值";
 ```
 
 关于`cookie`的修改，首先要确定`domain`和`path`属性都是相同的才可以，其中有一个不同得时候都会创建出一个新的`cookie`
 
-```typescript
-undefined;
+```js
+Set-Cookie:name=aa; domain=aa.net; path=/  # 服务端设置
+document.cookie =name=bb; domain=aa.net; path=/  # 客户端设置
 ```
 
 最后`cookie`的删除，最常用的方法就是给`cookie`设置一个过期的事件，这样`cookie`过期后会被浏览器删除
@@ -90,32 +91,32 @@ undefined;
 
 设置
 
-```typescript
-undefined;
+```js
+localStorage.setItem("username", "cfangxu");
 ```
 
 获取
 
-```typescript
-undefined;
+```js
+localStorage.getItem("username");
 ```
 
 获取键名
 
-```typescript
-undefined;
+```js
+localStorage.key(0); //获取第一个键名
 ```
 
 删除
 
-```typescript
-undefined;
+```js
+localStorage.removeItem("username");
 ```
 
 一次性清除所有存储
 
-```typescript
-undefined;
+```js
+localStorage.clear();
 ```
 
 `localStorage` 也不是完美的，它有两个缺点：
@@ -123,8 +124,9 @@ undefined;
 - 无法像`Cookie`一样设置过期时间
 - 只能存入字符串，无法直接存对象
 
-```typescript
-undefined;
+```js
+localStorage.setItem("key", { name: "value" });
+console.log(localStorage.getItem("key")); // '[object, Object]'
 ```
 
 ### sessionStorage

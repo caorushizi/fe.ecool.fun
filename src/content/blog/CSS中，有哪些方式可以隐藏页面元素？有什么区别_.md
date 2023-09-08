@@ -4,7 +4,7 @@ pubDatetime: 2023-07-28T16:00:00.000Z
 author: caorushizi
 tags:
   - css
-postSlug: 4d61611be07cf3b0f775a89f5fbf025f
+postSlug: 0fdd0885a9d9bb16468fc2c6703c932b
 description: >-
   一、前言----在平常的样式排版中，我们经常遇到将某个模块隐藏的场景通过`css`隐藏元素的方法有很多种，它们看起来实现的效果是一致的但实际上每一种方法都有一丝轻微的不同，这些不同决定了在一些特定场合
 difficulty: 0.5
@@ -36,8 +36,10 @@ source: >-
 
 设置元素的`display`为`none`是最常用的隐藏元素的方法
 
-```typescript
-undefined;
+```css
+.hide {
+  display: none;
+}
 ```
 
 将元素设置为`display:none`后，元素在页面上将彻底消失
@@ -54,8 +56,10 @@ undefined;
 
 从页面上仅仅是隐藏该元素，DOM 结果均会存在，只是当时在一个不可见的状态，不会触发重排，但是会触发重绘
 
-```typescript
-undefined;
+```css
+.hidden {
+  visibility: hidden;
+}
 ```
 
 给人的效果是隐藏了，所以他自身的事件不会触发
@@ -70,8 +74,10 @@ undefined;
 
 > 如果利用 animation 动画，对 opacity 做变化（animation 会默认触发 GPU 加速），则只会触发 GPU 层面的 composite，不会触发重绘
 
-```typescript
-undefined;
+```css
+.transparent {
+  opacity: 0;
+}
 ```
 
 由于其仍然是存在于页面上的，所以他自身的的事件仍然是可以触发的，但被他遮挡的元素是不能触发其事件的
@@ -84,8 +90,15 @@ undefined;
 
 将元素的`margin`，`border`，`padding`，`height`和`width`等影响元素盒模型的属性设置成 0，如果元素内有子元素或内容，还应该设置其`overflow:hidden`来隐藏其子元素
 
-```typescript
-undefined;
+```css
+.hiddenBox {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
 ```
 
 特点：元素不可见，不占据页面空间，无法响应点击事件
@@ -94,8 +107,12 @@ undefined;
 
 将元素移出可视区域
 
-```typescript
-undefined;
+```css
+.hide {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
 ```
 
 特点：元素不可见，不影响页面布局
@@ -104,8 +121,10 @@ undefined;
 
 通过裁剪的形式
 
-```typescript
-undefined;
+```css
+.hide {
+  clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+}
 ```
 
 特点：元素不可见，占据页面空间，无法响应点击事件
