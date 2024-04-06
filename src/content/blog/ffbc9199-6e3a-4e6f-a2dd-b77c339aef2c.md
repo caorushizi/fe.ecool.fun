@@ -4,7 +4,7 @@ pubDatetime: 2021-07-11T10:59:11.000Z
 author: caorushizi
 tags:
   - Typescript
-postSlug: 5936829843717432f0e265eef2265f3a
+postSlug: ffbc9199-6e3a-4e6f-a2dd-b77c339aef2c
 description: >-
   Getter 和 setter 是特殊类型的方法，可帮助你根据程序的需要委派对私有变量的不同级别的访问。 Getters
   允许你引用一个值但不能编辑它。Setter 允许你更改变量的值，但不能查看其当前值。这些对于实现封装是必不可少的。

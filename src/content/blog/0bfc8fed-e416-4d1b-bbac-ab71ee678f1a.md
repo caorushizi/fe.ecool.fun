@@ -4,7 +4,7 @@ pubDatetime: 2023-05-31T20:27:56.000Z
 author: caorushizi
 tags:
   - JavaScript
-postSlug: 20320d6bfe3a33d9c3f138290afde0b2
+postSlug: 0bfc8fed-e416-4d1b-bbac-ab71ee678f1a
 description: >-
   可以从以下几个方面考虑：
   设计界面和交互：首先需要设计一个美观、易用的用户界面，包括搜索框、图片展示区、分页、筛选器等。同时还需要设计一些交互细节，例如图片加载过程中的占位符、无结果时的提示信息、图片缩放和拖拽等。

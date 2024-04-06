@@ -4,7 +4,7 @@ pubDatetime: 2021-07-07T00:14:33.000Z
 author: caorushizi
 tags:
   - 设计模式
-postSlug: 6d6990acd861a2a17e68bf11f652d1c1
+postSlug: 5a6bab0d-b96e-42ce-bfce-ba3b38e32728
 description: >-
   1.什么是工厂模式
   它提供了一种创建对象的最佳方式。在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。实现了创建者和调用者分离，工厂模式分为简单工厂、工厂方法、抽象工厂模式

@@ -4,7 +4,7 @@ pubDatetime: 2021-07-04T19:24:45.000Z
 author: caorushizi
 tags:
   - React.js
-postSlug: 3728d7f755de9350b92c8a24c767803c
+postSlug: a67eec57-8dc1-40ee-9c8a-ccfbe25ca58d
 description: >-
   在调用方法之前，子类构造函数无法使用this引用super()。 在ES6中，在子类的constructor中必须先调用super才能引用this。
   在constructor中可以使用this.props 使用props： class MyComponent extends React.Component

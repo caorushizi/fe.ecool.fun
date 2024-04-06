@@ -4,7 +4,7 @@ pubDatetime: 2024-01-25T19:22:37.000Z
 author: caorushizi
 tags:
   - 工具
-postSlug: 699c2110694a915fd6d4380c075431c8
+postSlug: 7aa8fdff-3c1c-423c-8f2d-cd784dfcbac1
 description: >-
   一、是什么 stash，译为存放，在 git 中，可以理解为保存当前工作进度，会把暂存区和工作区的改动进行保存，这些修改会保存在一个栈上
   后续你可以在任何时候任何分支重新将某次的修改推出来，重新应用这些更改的代码 默认情况下，git stash会缓存下列状态的文件：

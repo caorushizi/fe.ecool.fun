@@ -4,7 +4,7 @@ pubDatetime: 2022-01-17T14:30:37.000Z
 author: caorushizi
 tags:
   - React.js
-postSlug: d01d6fddcb78215af24cd5cac43c31e6
+postSlug: 453b0ac6-f8a2-44ed-af3f-eda8eaa0a70d
 description: >-
   共同点 为了解决状态管理混乱、无法有效同步的问题，统一维护管理应用状态 某一状态只有一个可信数据来源（通常命名为store，指状态容器）
   操作更新状态方式统一，并且可控（通常以action方式提供更新状态的途径）

@@ -4,7 +4,7 @@ pubDatetime: 2021-09-25T19:05:56.000Z
 author: caorushizi
 tags:
   - JavaScript
-postSlug: 47360d07c421c74cf146cc5f106e42be
+postSlug: 4ca8dcc9-9ce6-457c-b6ef-3c2e322aeba5
 description: >-
   同源策略（Same origin
   policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说 Web

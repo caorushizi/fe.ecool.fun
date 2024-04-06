@@ -4,7 +4,7 @@ pubDatetime: 2023-05-31T09:23:49.000Z
 author: caorushizi
 tags:
   - JavaScript
-postSlug: ab02e59571723437d296a77a31ad99cd
+postSlug: 3734a9cd-2ef6-4b29-8eaf-f86ffc5dfdf7
 description: >-
   var name = '123'; var obj = { name: '456', print: function() { function a() {
   console.log(this.name); } a(); } } obj.print(); 上述代码输出结果为 "123"。解释如下：
@@ -29,6 +29,8 @@ var obj = {
 
 obj.print();
 ```
+
+---
 
 上述代码输出结果为 "123"。解释如下：
 

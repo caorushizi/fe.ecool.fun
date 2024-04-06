@@ -4,7 +4,7 @@ pubDatetime: 2021-12-25T17:23:11.000Z
 author: caorushizi
 tags:
   - 选择题
-postSlug: c9728967bc165542328a3abbc121f50f
+postSlug: aa20fdd3-2a4b-44a6-a97b-7bdbc6dd30d4
 description: >-
   const person = { name: "Lydia Hallie", hobbies: ["coding"] }; function
   addHobby(hobby, hobbies = person.hobbies) { hobbies.push(hobby); return
@@ -31,6 +31,8 @@ addHobby("baking", person.hobbies);
 
 console.log(person.hobbies);
 ```
+
+---
 
 函数 `addHobby` 接受两个参数，`hobby` 和 `hobbies`，其中 `hobbies` 的默认值是 `person` 对象中的 `hobbies` 属性。
 

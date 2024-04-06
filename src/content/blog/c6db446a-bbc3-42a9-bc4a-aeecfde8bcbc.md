@@ -4,7 +4,7 @@ pubDatetime: 2021-08-08T18:52:06.000Z
 author: caorushizi
 tags:
   - React.js
-postSlug: 5380936518dd42264fc272abf8b8314b
+postSlug: c6db446a-bbc3-42a9-bc4a-aeecfde8bcbc
 description: >-
   React渲染页面的两个阶段： 调度阶段（reconciliation）：在这个阶段 React 会更新数据生成新的 Virtual
   DOM，然后通过Diff算法，快速找出需要更新的元素，放到更新队列中去，得到新的更新队列。 渲染阶段（commit）：这个阶段 React

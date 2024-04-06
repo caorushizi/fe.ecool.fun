@@ -4,7 +4,7 @@ pubDatetime: 2023-08-20T21:21:17.000Z
 author: caorushizi
 tags:
   - 编程题
-postSlug: 87b0691efec950c0b2aae015590270be
+postSlug: b9ca2e1f-d720-4b6a-ab77-acc5edd03c99
 description: >-
   将以下结构的数据转成数组。 const listTree = [ { id: 1, name: '部门1', pid: 0, children: [ {
   id: 2, name: '部门1-1', pid: 1, children: [ { id: 4, name: '部门1-1-1', pid: 2,
@@ -87,6 +87,8 @@ const list = [
   { id: 8, name: "部门3", pid: 0 },
 ];
 ```
+
+---
 
 ## reduce 取树行数据的所有子集
 

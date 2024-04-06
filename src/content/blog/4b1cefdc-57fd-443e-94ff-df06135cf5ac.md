@@ -4,7 +4,7 @@ pubDatetime: 2024-01-25T19:56:56.000Z
 author: caorushizi
 tags:
   - JavaScript
-postSlug: a0de12ab0ea8f3e1b2ab04487610f456
+postSlug: 4b1cefdc-57fd-443e-94ff-df06135cf5ac
 description: >-
   冒泡 & 捕获 当你触发一个元素的事件的时候，该事件从该元素的祖先元素传递下去，此过程为捕获，而到达此元素之后，又会向其祖先元素传播上去，此过程为冒泡
   <div id="a"> <div id="b"> <div id="c"> <div id="d">哈哈哈哈哈</div> </div> </div>

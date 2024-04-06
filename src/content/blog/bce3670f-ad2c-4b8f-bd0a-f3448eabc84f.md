@@ -4,7 +4,7 @@ pubDatetime: 2023-05-20T20:50:16.000Z
 author: caorushizi
 tags:
   - 跨端技术
-postSlug: 0c056bc7ef54c04c7ffcabe93a9e9d86
+postSlug: bce3670f-ad2c-4b8f-bd0a-f3448eabc84f
 description: >-
   在 Electron 中，主进程和渲染进程是两个不同的进程。 主进程是 Electron
   应用程序的入口，它负责创建和管理应用程序中的所有窗口，并且可以访问底层系统资源。主进程通常是一个 Node.js 进程，可以使用 Node.js 的 API

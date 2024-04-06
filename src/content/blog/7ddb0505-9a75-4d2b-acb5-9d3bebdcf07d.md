@@ -6,7 +6,7 @@ pubDatetime: 2024-03-18T19:23:04.000Z
 author: caorushizi
 tags:
   - React.js
-postSlug: 23b5b3e2a4d4b8eee77e9f39e898673b
+postSlug: 7ddb0505-9a75-4d2b-acb5-9d3bebdcf07d
 description: >-
   React 在 16.3 版本中： 将
   componentWillMount、componentWillReceiveProps、componentWillUpdate 三个生命周期钩子加上了

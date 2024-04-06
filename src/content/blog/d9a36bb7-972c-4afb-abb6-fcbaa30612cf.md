@@ -4,7 +4,7 @@ pubDatetime: 2022-01-09T23:01:15.000Z
 author: caorushizi
 tags:
   - JavaScript
-postSlug: 982908bf3354887d5684b7412ff7ca3e
+postSlug: d9a36bb7-972c-4afb-abb6-fcbaa30612cf
 description: >-
   const promise1 = new Promise((resolve, reject) => { setTimeout(() => {
   resolve('success') }, 1000) }) const promise2 = promise1.then(() => { throw
@@ -30,6 +30,8 @@ setTimeout(() => {
   console.log("promise2", promise2);
 }, 2000);
 ```
+
+---
 
 ## 过程分析
 

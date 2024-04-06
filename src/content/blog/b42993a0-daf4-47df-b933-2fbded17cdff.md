@@ -4,7 +4,7 @@ pubDatetime: 2024-01-02T20:07:00.000Z
 author: caorushizi
 tags:
   - JavaScript
-postSlug: 532ffddcefc1b817f7981a37ba39dba5
+postSlug: b42993a0-daf4-47df-b933-2fbded17cdff
 description: >-
   Promise.resolve().then(() => { console.log(0) return Promise.resolve(4)
   }).then((res) => { console.log(res) }) Promise.resolve().then(() => {
@@ -34,6 +34,8 @@ Promise.resolve().then(() => {
   console.log(6)
 })
 ```
+
+---
 
 输出结果是：
 

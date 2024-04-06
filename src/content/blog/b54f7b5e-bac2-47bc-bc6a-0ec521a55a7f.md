@@ -4,7 +4,7 @@ pubDatetime: 2023-12-18T20:51:00.000Z
 author: caorushizi
 tags:
   - CSS
-postSlug: 79f8f877bfe40b1f9c9b6647db28e073
+postSlug: b54f7b5e-bac2-47bc-bc6a-0ec521a55a7f
 description: >-
   在默认情况下，Chrome 浏览器的最小字体大小限制为 12px，因此无法直接设置小于 12px 的文字大小。然而，可以通过以下方法绕过这个限制：
   使用缩放比例：可以使用 CSS 的 transform 属性来缩放文本元素以达到小于 12px 的效果。例如，使用 transform:

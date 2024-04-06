@@ -4,7 +4,7 @@ pubDatetime: 2023-05-31T20:20:57.000Z
 author: caorushizi
 tags:
   - 计算机网络
-postSlug: 6d116d57ea2e3eb6e0b2ca3924e0bd0f
+postSlug: 6edf54be-a9ce-44f3-8dbc-490ab7ef06b8
 description: >-
   HTTP/3 使用的底层传输协议 QUIC 是基于 UDP 的，因此需要在应用层实现可靠的数据传输。QUIC 协议使用了以下几种机制来保证数据的可靠性：
   连接迁移：QUIC 允许在网络切换或 IP 变更时迁移连接，而不需要重新建立新的连接，从而避免了连接中断和数据丢失的问题。 可靠性流控制：QUIC

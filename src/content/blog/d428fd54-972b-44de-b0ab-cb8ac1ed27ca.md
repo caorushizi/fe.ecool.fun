@@ -4,7 +4,7 @@ pubDatetime: 2021-10-24T12:11:58.000Z
 author: caorushizi
 tags:
   - 工具
-postSlug: f9b09cdd759ed435c527e97c38d0c092
+postSlug: d428fd54-972b-44de-b0ab-cb8ac1ed27ca
 description: >-
   版本控制（Version
   control），是维护工程蓝图的标准作法，能追踪工程蓝图从诞生一直到定案的过程。此外，版本控制也是一种软件工程技巧，借此能在软件开发的过程中，确保由不同人所编辑的同一程序文件都得到同步

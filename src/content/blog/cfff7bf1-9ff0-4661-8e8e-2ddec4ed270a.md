@@ -4,7 +4,7 @@ pubDatetime: 2021-07-25T10:31:37.000Z
 author: caorushizi
 tags:
   - 计算机网络
-postSlug: 9690dc7669ed4877bb0314105163a517
+postSlug: cfff7bf1-9ff0-4661-8e8e-2ddec4ed270a
 description: " weight轮询（默认，常用，具有HA功效！）：接收到的请求按照权重分配到不同的后端服务器，即使在使用过程中，某一台后端服务器宕机，Nginx会自动将该服务器剔除出队列，请求受理情况不会受到任何影响。 这种方式下，可以给不同的后端服务器设置一个权重值(weight)，用于调整不同的服务器上请求的分配率；权重数据越大，被分配到请求的几率越大；该权重值，主要是针对实际工作环境中不同的后端服务器硬件配"
 difficulty: 3.5
 questionNumber: 536

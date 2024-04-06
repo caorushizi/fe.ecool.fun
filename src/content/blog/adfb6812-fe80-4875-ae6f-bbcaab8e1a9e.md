@@ -4,7 +4,7 @@ pubDatetime: 2021-08-01T15:34:34.000Z
 author: caorushizi
 tags:
   - JavaScript
-postSlug: 01918b3f746814b86bb48c2756a86663
+postSlug: adfb6812-fe80-4875-ae6f-bbcaab8e1a9e
 description: >-
   堆（Heap）与栈（Stack）是开发人员必须面对的两个概念，在理解这两个概念时，需要放到具体的场景下，因为不同场景下，堆与栈代表不同的含义。一般情况下，有两层含义：
   程序内存布局场景下，堆与栈表示两种内存管理方式； 数据结构场景下，堆与栈表示两种常用的数据结构。 程序内存分区中的堆与栈 栈简介 栈由操作系统自动分配释放

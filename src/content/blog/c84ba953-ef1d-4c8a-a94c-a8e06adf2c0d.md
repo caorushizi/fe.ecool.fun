@@ -4,7 +4,7 @@ pubDatetime: 2022-02-06T20:06:53.000Z
 author: caorushizi
 tags:
   - 趣味题
-postSlug: a2a608735c1dd8bdfc9d96d43bfa4431
+postSlug: c84ba953-ef1d-4c8a-a94c-a8e06adf2c0d
 description: >-
   有5对夫妇举行家庭聚会。每一个人都可能和其他人握手，但夫妇之间绝对不握手。
   聚会结束时，A先生问大家握手几次，结果是每个人的握手次数都不相同，那么请问A先生的太太握手几次？ A先生的太太握了4次手。
@@ -18,6 +18,8 @@ source: https://fe.ecool.fun/topic/c84ba953-ef1d-4c8a-a94c-a8e06adf2c0d
 有 5 对夫妇举行家庭聚会。每一个人都可能和其他人握手，但夫妇之间绝对不握手。
 
 聚会结束时，A 先生问大家握手几次，结果是每个人的握手次数都不相同，那么请问 A 先生的太太握手几次？
+
+---
 
 A 先生的太太握了 4 次手。
 

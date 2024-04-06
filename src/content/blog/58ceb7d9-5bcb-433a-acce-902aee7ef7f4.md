@@ -4,7 +4,7 @@ pubDatetime: 2023-05-31T20:26:38.000Z
 author: caorushizi
 tags:
   - JavaScript
-postSlug: e74a7a55a772819224085b9629315518
+postSlug: 58ceb7d9-5bcb-433a-acce-902aee7ef7f4
 description: >-
   在前端路由中，常用的存储方式是栈（Stack）数据结构。栈是一种线性数据结构，具有后进先出（LIFO）的特点，即最后入栈的元素最先弹出栈。
   当用户访问一个新页面时，可以将当前页面路由信息压入栈中。例如，在访问页面 a 时，可以将 a 的路由信息存储在栈顶。当用户访问 b 页面时，再将 b

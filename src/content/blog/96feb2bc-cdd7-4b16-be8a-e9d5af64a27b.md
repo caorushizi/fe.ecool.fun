@@ -4,7 +4,7 @@ pubDatetime: 2022-01-09T23:15:10.000Z
 author: caorushizi
 tags:
   - JavaScript
-postSlug: f802d60e26b4d54d232fab1855f65b4b
+postSlug: 96feb2bc-cdd7-4b16-be8a-e9d5af64a27b
 description: >-
   async function async1() { console.log("async1 start"); await async2();
   console.log("async1 end"); } async function async2() { setTimeout(() => {
@@ -29,6 +29,8 @@ async function async2() {
 async1();
 console.log("start");
 ```
+
+---
 
 ## 解析
 

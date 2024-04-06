@@ -4,7 +4,7 @@ pubDatetime: 2024-01-02T21:16:41.000Z
 author: caorushizi
 tags:
   - Vue.js
-postSlug: b83df0308c6462393da6831d949d6a3b
+postSlug: db22b09c-fdbb-4a6c-8fdd-2ad65bb11846
 description: >-
   v-if 和 v-show 是 Vue.js 中用于条件渲染的指令，它们的作用是根据条件来控制元素的显示和隐藏。它们之间有一些重要的区别： 编译时刻 vs
   运行时刻： v-if 是一个“惰性”指令，在编译时刻，Vue.js 会根据条件决定是否编译或挂载元素到 DOM 中。如果条件为
