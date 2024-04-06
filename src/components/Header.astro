@@ -3,8 +3,8 @@ import { LOGO_IMAGE, SITE } from "@config";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 
-import logoPNG from "/assets/logo.png";
-import logoSVG from "/assets/logo.svg";
+import logoPNG from "/assets/logo.png?url";
+import logoSVG from "/assets/logo.svg?url";
 
 export interface Props {
   activeNav?: "posts" | "tags" | "about" | "search";
@@ -69,11 +69,6 @@ const { activeNav } = Astro.props;
             </a>
           </li>
           <li>
-            <a href="/about" class={activeNav === "about" ? "active" : ""}>
-              关于
-            </a>
-          </li>
-          <li>
             <LinkButton
               href="/search"
               className={`focus-outline p-3 sm:p-1 ${
@@ -111,6 +106,24 @@ const { activeNav } = Astro.props;
               )
             }
           </li>
+          <li>
+            <LinkButton
+              href="/sitemap-0.xml"
+              className={`focus-outline p-3 sm:p-1 ${
+                activeNav === "search" ? "active" : ""
+              }`}
+              ariaLabel="search"
+              title="Search"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="rss-icon"
+                ><path
+                  d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z"
+                ></path><path
+                  d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z"
+                ></path><circle cx="6" cy="18" r="2"></circle>
+              </svg>
+            </LinkButton>
+          </li>
         </ul>
       </nav>
     </div>
@@ -142,10 +155,10 @@ const { activeNav } = Astro.props;
     @apply flex w-full flex-col items-center bg-skin-fill sm:ml-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0;
   }
   nav ul {
-    @apply mt-4 grid w-44 grid-cols-2 grid-rows-4 gap-x-2 gap-y-2 sm:ml-0 sm:mt-0 sm:w-auto sm:gap-x-5 sm:gap-y-0;
+    @apply mt-4 grid w-44 grid-cols-2 grid-rows-4 gap-x-2 gap-y-2 sm:flex sm:ml-0 sm:mt-0 sm:w-auto sm:gap-x-5 sm:gap-y-0;
   }
   nav ul li {
-    @apply col-span-2 flex items-center justify-center;
+    @apply col-span-3 flex items-center justify-center;
   }
   nav ul li a {
     @apply w-full px-4 py-3 text-center font-medium hover:text-skin-accent sm:my-0 sm:px-2 sm:py-1;
@@ -154,7 +167,8 @@ const { activeNav } = Astro.props;
     @apply w-auto;
   }
   nav ul li:nth-child(4),
-  nav ul li:nth-child(5) {
+  nav ul li:nth-child(5),
+  nav ul li:nth-child(6) {
     @apply col-span-1;
   }
   nav a.active {
