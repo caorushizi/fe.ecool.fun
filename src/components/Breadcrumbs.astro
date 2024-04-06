@@ -9,7 +9,9 @@ const breadcrumbList = currentUrlPath.split("/").slice(1);
 // if breadcrumb is Home > Posts > 1 <etc>
 // replace Posts with Posts (page number)
 breadcrumbList[0] === "posts" &&
-  breadcrumbList.splice(0, 2, `Posts (page ${breadcrumbList[1] || 1})`);
+  breadcrumbList.splice(0, 2, `题目 (第 ${breadcrumbList[1] || 1} 页)`);
+
+breadcrumbList[0] === "tags" && breadcrumbList.splice(0, 2, '标签');
 ---
 
 <nav class="breadcrumb" aria-label="breadcrumb">

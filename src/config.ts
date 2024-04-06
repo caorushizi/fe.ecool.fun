@@ -4,7 +4,7 @@ export const SITE: Site = {
   website: "https://caorushizi.cn/",
   author: "caorushizi",
   desc: "曹儒士子的个人网站，记录生活，分享知识，交流技术，欢迎访问！",
-  title: "曹儒士子的个人网站",
+  title: "面试题收集",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerPage: 3,
