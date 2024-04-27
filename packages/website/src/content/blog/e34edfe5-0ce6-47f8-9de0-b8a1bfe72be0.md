@@ -16,15 +16,16 @@ source: https://fe.ecool.fun/topic/e34edfe5-0ce6-47f8-9de0-b8a1bfe72be0
 
 ```html
 <style type="text/css">
-  #parent p { background-color: red;  }
-   div .a.b.c.d.e.f.g.h.i.j.k p{ background-color: green;
+     #parent p { background-color: red;  }
+      div .a.b.c.d.e.f.g.h.i.j.k p{ background-color: green;  
 </style>
 ......
 <div id="parent">
-  <div class="a b c d e f g h i j k">
-    <p>xxxx</p>
-  </div>
+     <div class="a b c d e f g h i j k">
+         <p>xxxx</p>
+     </div>
 </div>
+
 ```
 
 ---

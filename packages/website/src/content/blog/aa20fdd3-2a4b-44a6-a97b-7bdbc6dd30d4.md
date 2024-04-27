@@ -8,7 +8,7 @@ postSlug: aa20fdd3-2a4b-44a6-a97b-7bdbc6dd30d4
 description: >-
   const person = { name: "Lydia Hallie", hobbies: ["coding"] }; function
   addHobby(hobby, hobbies = person.hobbies) { hobbies.push(hobby); return
-  hobbies; } addHobby("running", []); addHobby("dancing");
+  hobbies; } addHobby("running", []); addHobby("dancing"); 
 difficulty: 0.5
 questionNumber: 146
 source: https://fe.ecool.fun/topic/aa20fdd3-2a4b-44a6-a97b-7bdbc6dd30d4
@@ -16,13 +16,13 @@ source: https://fe.ecool.fun/topic/aa20fdd3-2a4b-44a6-a97b-7bdbc6dd30d4
 
 ```javascript
 const person = {
-  name: "Lydia Hallie",
-  hobbies: ["coding"],
+	name: "Lydia Hallie",
+	hobbies: ["coding"]
 };
 
 function addHobby(hobby, hobbies = person.hobbies) {
-  hobbies.push(hobby);
-  return hobbies;
+	hobbies.push(hobby);
+	return hobbies;
 }
 
 addHobby("running", []);

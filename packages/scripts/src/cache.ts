@@ -1,7 +1,5 @@
 import fs from "fs";
-
-// 用于存储已访问过的 URL 的文件路径
-const visitedUrlsFilePath = "visitedUrls.txt";
+import { visitedUrlsFilePath } from "./utils";
 
 // 创建一个 Set 来存储已经访问过的 URL
 const visitedUrls = new Set();

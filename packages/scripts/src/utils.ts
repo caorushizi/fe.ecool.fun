@@ -24,6 +24,7 @@ export const postsPath = path.resolve(
   projectRoot,
   "../website/src/content/blog",
 );
+export const visitedUrlsFilePath = path.join(projectRoot, "visitedUrls.txt");
 
 export async function getSummary(markdown: string): Promise<string> {
   const html = await marked(markdown);

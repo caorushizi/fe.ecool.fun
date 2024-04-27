@@ -19,13 +19,12 @@ source: https://fe.ecool.fun/topic/7ddb0505-9a75-4d2b-acb5-9d3bebdcf07d
 
 React 在 16.3 版本中：
 
-- 将 `componentWillMount`、`componentWillReceiveProps`、`componentWillUpdate` 三个生命周期钩子加上了 `UNSAFE` 前缀，变为 `UNSAFE_componentWillMount`、`UNSAFE_componentWillReceiveProps` 和 `UNSAFE_componentWillUpdate`。
-- 并引入了一个新的生命周期钩子：`getDerivedStateFromProps`。
+* 将 `componentWillMount`、`componentWillReceiveProps`、`componentWillUpdate` 三个生命周期钩子加上了 `UNSAFE` 前缀，变为 `UNSAFE_componentWillMount`、`UNSAFE_componentWillReceiveProps` 和 `UNSAFE_componentWillUpdate`。
+* 并引入了一个新的生命周期钩子：`getDerivedStateFromProps`。
 
 并在 17.0 以及之后的版本中：
-
-- 删除了 `componentWillMount`、`componentWillReceiveProps`、`componentWillUpdate` 这三个生命周期钩子。
-- 不过 `UNSAFE_componentWillMount`、`UNSAFE_componentWillReceiveProps` 和 `UNSAFE_componentWillUpdate` 还是可以用的。
+* 删除了 `componentWillMount`、`componentWillReceiveProps`、`componentWillUpdate` 这三个生命周期钩子。
+* 不过 `UNSAFE_componentWillMount`、`UNSAFE_componentWillReceiveProps` 和 `UNSAFE_componentWillUpdate` 还是可以用的。
 
 我们知道 React 的更新流程分为：render 阶段和 commit 阶段。
 

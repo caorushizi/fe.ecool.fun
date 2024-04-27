@@ -16,21 +16,21 @@ source: https://fe.ecool.fun/topic/cb23ddfc-db2e-4d2a-b859-9238d30daed9
 
 ```javascript
 class Counter {
-  #number = 10;
+  #number = 10
 
   increment() {
-    this.#number++;
+    this.#number++
   }
 
   getNum() {
-    return this.#number;
+    return this.#number
   }
 }
 
-const counter = new Counter();
-counter.increment();
+const counter = new Counter()
+counter.increment()
 
-console.log(counter.#number);
+console.log(counter.#number)
 ```
 
 ---
