@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1562,
+    "exerciseKey": "d9ddb08c-beb1-4aa4-8c54-cbccc0395fc5",
+    "category": "QA",
+    "renderType": "md",
+    "title": "mouseover 和 mouseenter 有什么区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "当鼠标移动到元素上时就会触发 mouseenter 事件，类似 mouseover，它们两者之间的差别是 mouseenter 不会冒泡。\n\n由于 mouseenter 不支持事件冒泡，导致在一个元素的子元素上进入或离开的时候会触发其 mouseover 和 mouseout 事件，但是却不会触发 mouseenter 和 mouseleave 事件。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:38:59.000Z",
+    "updateAt": "2021-11-17T22:49:30.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 719,
+    "prev": "6efa769a-3eb9-44ea-bd7c-01c5c991000f",
+    "next": "bddd2a34-2ccf-44ba-9cca-4213619b4e8e"
+  },
+  "post": {
+    "exerciseKey": "d9ddb08c-beb1-4aa4-8c54-cbccc0395fc5",
+    "category": "QA",
+    "title": "mouseover 和 mouseenter 有什么区别？",
+    "level": 1,
+    "updateAt": "2021-11-17T22:49:30+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

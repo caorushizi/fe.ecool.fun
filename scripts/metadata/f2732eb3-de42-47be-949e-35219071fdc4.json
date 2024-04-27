@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1943,
+    "exerciseKey": "f2732eb3-de42-47be-949e-35219071fdc4",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何定义一个数组，它的元素可能是字符串类型，也可能是数值类型？",
+    "desc": null,
+    "options": null,
+    "explanation": "```typescript\n // 方法1：\nlet arr1: (number | string)[] = [1]\narr1.push(1)\narr1.push('3')\n\n// 方法2：\nlet  arr2 : Array<string | number> = [1, '2']\narr2.push(1)\narr2.push('3')\n\n// 方法3：\ntype newType = number|string\nlet arr3:newType []= [3]\narr3.push(1)\narr4.push('5')\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-03-12T15:05:52.000Z",
+    "updateAt": "2023-03-12T23:11:18.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 424,
+    "prev": "d82af9bd-ac3b-4948-b7c5-83ed83e08e2e",
+    "next": "6cfd4286-3c93-45a3-9b63-a67ab7ddd6e6"
+  },
+  "post": {
+    "exerciseKey": "f2732eb3-de42-47be-949e-35219071fdc4",
+    "category": "QA",
+    "title": "如何定义一个数组，它的元素可能是字符串类型，也可能是数值类型？",
+    "level": 1,
+    "updateAt": "2023-03-12T23:11:18+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

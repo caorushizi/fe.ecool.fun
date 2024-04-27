@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1732,
+    "exerciseKey": "20be1725-4902-4135-8b80-7be60507fc13",
+    "category": "QA",
+    "renderType": "md",
+    "title": "VNode 有哪些属性？",
+    "desc": null,
+    "options": null,
+    "explanation": "Vue内部定义的Vnode对象包含了以下属性：\n\n* __v_isVNode: *true*，内部属性，有该属性表示为Vnode\n* __v_skip: true，内部属性，表示跳过响应式转换，reactive转换时会根据此属性进行判断\n* isCompatRoot?: *true*，用于是否做了兼容处理的判断\n* type: VNodeTypes，虚拟节点的类型\n* props: (VNodeProps & ExtraProps) | *null*，虚拟节点的props\n* key: *string* | *number* | *null*，虚拟阶段的key，可用于diff\n* ref: VNodeNormalizedRef | *null*，虚拟阶段的引用\n* scopeId: *string* | *null*，仅限于SFC(单文件组件)，在设置currentRenderingInstance当前渲染实例时，一期设置\n* slotScopeIds: *string*[] | *null*，仅限于单文件组件，与单文件组件的插槽有关\n* children: VNodeNormalizedChildren，子节点\n* component: ComponentInternalInstance | null，组件实例\n* dirs: DirectiveBinding[] | null，当前Vnode绑定的指令\n* transition: TransitionHooks<HostElement> | null，TransitionHooks\n* DOM相关属性\n\t* el: HostNode | *null*，宿主阶段\n\t* anchor: HostNode | *null* // fragment anchor\n\t* target: HostElement | *null* ，teleport target 传送的目标\n\t* targetAnchor: HostNode | *null* // teleport target anchor\n\t* staticCount: *number*，包含的静态节点的数量\n* suspense 悬挂有关的属性\n\t* suspense: SuspenseBoundary | *null*\n\t* ssContent: VNode | *null*\n\t* ssFallback: VNode | *null*\n* optimization only 用于优化的属性\n\t* shapeFlag: *number*\n\t* patchFlag: *number*\n\t* dynamicProps: *string*[] | *null*\n\t* dynamicChildren: VNode[] | *null*\n* 根节点会有的属性\n\t* appContext: AppContext | *null*，实例上下文\n\n可以看到在Vue内部，对于一个Vnode描述对象的属性大概有二十多个。\n\nVue为了给用于减轻一定的负担，但又不至于太封闭，就创建了渲染h。可以在用户需要的时候，通过h函数创建对应的Vnode即可。\n\n这样就给为一些高阶玩家保留了自由发挥的空间。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-04-05T08:31:30.000Z",
+    "updateAt": "2022-04-05T16:31:37.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 582,
+    "prev": "1f131907-c40f-485b-8ff1-67e7091fed68",
+    "next": "44305e95-4103-4ec6-b6e4-9b2b75014bdc"
+  },
+  "post": {
+    "exerciseKey": "20be1725-4902-4135-8b80-7be60507fc13",
+    "category": "QA",
+    "title": "VNode 有哪些属性？",
+    "level": 3,
+    "updateAt": "2022-04-05T16:31:37+00:00"
+  },
+  "tag": {
+    "id": 14,
+    "tagName": "Vue.js",
+    "type": "1",
+    "exerciseCount": 68
+  }
+}

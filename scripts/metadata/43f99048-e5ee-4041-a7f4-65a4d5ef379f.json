@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 279,
+    "exerciseKey": "43f99048-e5ee-4041-a7f4-65a4d5ef379f",
+    "category": "QA",
+    "renderType": "md",
+    "title": "说说 HTML、XML、XHTML 的区别",
+    "desc": null,
+    "options": null,
+    "explanation": "* HTML：超文本标记语言，是语法较为松散的、不严格的Web语言；\n* XML：可扩展的标记语言，主要用于存储数据和结构，可扩展；\n* XHTML：可扩展的超文本标记语言，基于XML，作用与HTML类似，但语法更严格。\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T07:35:55.000Z",
+    "updateAt": "2021-07-04T16:03:51.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1044,
+    "prev": "a4bbb8e2-1333-460a-8127-87f04f83c5b8",
+    "next": "a82eaabe-70e6-47ed-b29d-d036e80e0815"
+  },
+  "post": {
+    "exerciseKey": "43f99048-e5ee-4041-a7f4-65a4d5ef379f",
+    "category": "QA",
+    "title": "说说 HTML、XML、XHTML 的区别",
+    "level": 1,
+    "updateAt": "2021-07-04T16:03:51+00:00"
+  },
+  "tag": {
+    "id": 12,
+    "tagName": "HTML",
+    "type": "1",
+    "exerciseCount": 57
+  }
+}

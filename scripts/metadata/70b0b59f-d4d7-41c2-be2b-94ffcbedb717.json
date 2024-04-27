@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 455,
+    "exerciseKey": "70b0b59f-d4d7-41c2-be2b-94ffcbedb717",
+    "category": "QA",
+    "renderType": "md",
+    "title": "TypeScript 中的模块是什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "TypeScript 中的模块是相关变量、函数、类和接口的集合。\n你可以将模块视为包含执行任务所需的一切的容器。可以导入模块以轻松地在项目之间共享代码。\n```\nmodule module_name{\n  class xyz{\n    export sum(x, y){\n      return x+y;\n    }\n  }\n}\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-07T15:21:08.000Z",
+    "updateAt": "2021-07-11T10:58:22.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 894,
+    "prev": "15457f3a-3fba-48d2-902e-eda18ef47e18",
+    "next": "aa95a786-7e51-4769-ab64-80f1adaf3580"
+  },
+  "post": {
+    "exerciseKey": "70b0b59f-d4d7-41c2-be2b-94ffcbedb717",
+    "category": "QA",
+    "title": "TypeScript 中的模块是什么？",
+    "level": 1,
+    "updateAt": "2021-07-11T10:58:22+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

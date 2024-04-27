@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 304,
+    "exerciseKey": "d184edae-f95e-494b-8944-86e713028816",
+    "category": "QA",
+    "renderType": "md",
+    "title": "什么是受控组件？",
+    "desc": null,
+    "options": null,
+    "explanation": "在HTML当中，像<input>,<textarea>, 和 <select>这类表单元素会维持自身状态，并根据用户输入进行更新。但在React中，可变的状态通常保存在组件的状态属性中，并且只能用 setState() 方法进行更新。\n\n## 非受控组件\n\n非受控组件，即组件的状态不受React控制的组件，例如下边这个\n\n```react.js\nimport React, { Component } from 'react';\nimport ReactDOM from 'react-dom';\n\nclass Demo1 extends Component {\n    render() {\n        return (\n            <input />\n        )\n    }\n}\n\nReactDOM.render(<Demo1/>, document.getElementById('content'))\n```\n\n在这个最简单的输入框组件里,我们并没有干涉input中的value展示,即用户输入的内容都会展示在上面。如果我们通过props给组件设置一个初始默认值,defaultValue属性是React内部实现的一个属性,目的类似于input的placeholder属性。\n\nps: 此处如果使用value代替defaultValue,会发现输入框的值无法改变\n\n## 受控组件\n\n受控组件就是组件的状态受React控制。上面提到过，既然通过设置input的value属性, 无法改变输入框值,那么我们把它和state结合在一起,再绑定onChange事件,实时更新value值就行了。\n\n```react.js\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: props.value\n        }\n    }\n\n    handleChange(e) {\n        this.setState({\n            value: e.target.value\n        })\n    }\n\n    render() {\n        return (\n            <input value={this.state.value} onChange={e => this.handleChange(e)}/>\n        )\n    }\n}\n```\n\n\n\n",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T10:45:54.000Z",
+    "updateAt": "2021-07-04T19:24:47.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1022,
+    "prev": "5bdf6ed5-2178-4bef-8690-c04dcdf46930",
+    "next": "a67eec57-8dc1-40ee-9c8a-ccfbe25ca58d"
+  },
+  "post": {
+    "exerciseKey": "d184edae-f95e-494b-8944-86e713028816",
+    "category": "QA",
+    "title": "什么是受控组件？",
+    "level": 2.5,
+    "updateAt": "2021-07-04T19:24:47+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1953,
+    "exerciseKey": "b773eb98-1739-43a4-b0fc-4c0deed6cb13",
+    "category": "QA",
+    "renderType": "md",
+    "title": "请实现下面的 sum 方法",
+    "desc": "```ts\n/**\n * @file 假设加法是一个异步过程，如何计算多个数组之和？\n */\nfunction sleep(ms: number) {\n    return new Promise(r => {\n        setTimeout(() => {\n            r(undefined)\n        }, ms);\n    })\n}\n\nasync function asyncAdd(a: number, b: number) {\n    await sleep(1000);\n    return a + b;\n}\n\nfunction sum(arr: number[]): Promise<number> {\n    // 补全这里代码，涉及 arr 中两数求和只能使用 asyncAdd，禁止使用加号\n    throw new Error('功能待实现');\n}\n\nconsole.time('a')\nsum([1, 2, 3, 4, 5, 6, 7, 8])\n    .then(v => {\n        console.log(v) // 36\n        console.timeEnd('a') // a: <耗时>\n    })\n\nexport default {}\n```",
+    "options": null,
+    "explanation": "```ts\n/**\n * @file 假设加法是一个异步过程，如何计算多个数组之和？\n */\nfunction sleep(ms: number) {\n  return new Promise((r) => {\n    setTimeout(() => {\n      r(undefined);\n    }, ms);\n  });\n}\n\nasync function asyncAdd(a: number, b: number) {\n  await sleep(1000);\n  return a + b;\n}\n\nasync function sum(arr: number[]): Promise<number> {\n  // 参考答案\n  var s: number = arr[0];\n  for (var i = 1; i < arr.length; i++) {\n    s = await asyncAdd(s, arr[i]);\n  }\n  return s;\n}\n\nconsole.time(\"a\");\nsum([1, 2, 3, 4, 5, 6, 7, 8]).then((v) => {\n  console.log(v); // 36\n  console.timeEnd(\"a\"); // a: <耗时>\n});\n\nexport default {};\n\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-03-12T15:29:41.000Z",
+    "updateAt": "2023-03-12T23:30:23.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 419,
+    "prev": "8694932e-df3f-492f-8ef9-b0e7aa486f2f",
+    "next": "a27dcf10-1b97-4bb5-926e-b32c2e24ba67"
+  },
+  "post": {
+    "exerciseKey": "b773eb98-1739-43a4-b0fc-4c0deed6cb13",
+    "category": "QA",
+    "title": "请实现下面的 sum 方法",
+    "level": 1,
+    "updateAt": "2023-03-12T23:30:23+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

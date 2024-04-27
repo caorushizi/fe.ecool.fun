@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 134,
+    "exerciseKey": "462a3a5d-0364-41c1-b437-d8f63587ae1c",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出什么？",
+    "desc": "```javascript\nconst randomValue = 21;\n\nfunction getInfo() {\n\tconsole.log(typeof randomValue);\n\tconst randomValue = \"Lydia Hallie\";\n}\n\ngetInfo();\n```",
+    "options": "{\"options\":[\"\\\"number\\\"\",\"\\\"string\\\"\",\"undefined\",\"ReferenceError\"],\"isMulti\":false,\"answer\":[3]}",
+    "explanation": "通过 `const` 关键字声明的变量在被初始化之前不可被引用：这被称之为 _暂时性死区_。在函数 `getInfo` 中, 变量 `randomValue` 声明在`getInfo` 的作用域的此法环境中。在想要对 `typeof randomValue` 进行log之前，变量 `randomValue` 仍未被初始化： 错误`ReferenceError` 被抛出! JS引擎并不会根据作用域链网上寻找该变量，因为我们已经在 `getInfo` 函数中声明了 `randomValue` 变量。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:31:41.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1083,
+    "prev": "6a5130e7-9c13-4dce-9ab5-07ace7597d59",
+    "next": "e9b3318a-4d50-437b-8a59-532532cd7dc3"
+  },
+  "post": {
+    "exerciseKey": "462a3a5d-0364-41c1-b437-d8f63587ae1c",
+    "category": "Choice",
+    "title": "输出什么？",
+    "level": 0.5,
+    "updateAt": "2021-07-03T22:31:41+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

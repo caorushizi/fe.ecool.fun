@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 355,
+    "exerciseKey": "a7aba2d7-10f3-4ed9-8453-cc7b68edef77",
+    "category": "QA",
+    "renderType": "md",
+    "title": "药丸难题",
+    "desc": "医生给了病人两种药丸，每种两颗，两种药丸的成分不同，但外观一样，医生要求早上和晚上，每种药各吃一颗。现在药丸被混在了一起，难以分辨。如果病人没按照规定吃药或者不吃药，就会死亡。请问他要怎么做才能活下来？\n\n",
+    "options": null,
+    "explanation": "把所有的4颗药丸都切开成相等的两半，然后早上和晚上，分别吃掉每颗药丸的一半。",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T13:17:19.000Z",
+    "updateAt": "2021-07-04T21:24:50.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1006,
+    "prev": "0596de70-b8f3-41a0-8881-03e62bf54398",
+    "next": "7b0cfdab-9709-4c5a-91bb-7fdfbd99c327"
+  },
+  "post": {
+    "exerciseKey": "a7aba2d7-10f3-4ed9-8453-cc7b68edef77",
+    "category": "QA",
+    "title": "药丸难题",
+    "level": 2,
+    "updateAt": "2021-07-04T21:24:50+00:00"
+  },
+  "tag": {
+    "id": 17,
+    "tagName": "趣味题",
+    "type": "1",
+    "exerciseCount": 35
+  }
+}

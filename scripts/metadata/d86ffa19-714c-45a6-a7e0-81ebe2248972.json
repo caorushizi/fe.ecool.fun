@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 408,
+    "exerciseKey": "d86ffa19-714c-45a6-a7e0-81ebe2248972",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现 Array.prototype.map()",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nArray.prototype.map = function(callback, thisArg) {\n  if (this == undefined) {\n    throw new TypeError('this is null or not defined');\n  }\n  if (typeof callback !== 'function') {\n    throw new TypeError(callback + ' is not a function');\n  }\n  const res = [];\n  // 同理\n  const O = Object(this);\n  const len = O.length >>> 0;\n  for (let i = 0; i < len; i++) {\n    if (i in O) {\n      // 调用回调函数并传入新数组\n      res[i] = callback.call(thisArg, O[i], i, this);\n    }\n  }\n  return res;\n}\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:00:25.000Z",
+    "updateAt": "2021-07-07T00:12:51.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 939,
+    "prev": "f1974383-8f98-4cd9-8a8e-f0c51e61b275",
+    "next": "4af06e53-d9ca-4a28-8067-d4ffc3691827"
+  },
+  "post": {
+    "exerciseKey": "d86ffa19-714c-45a6-a7e0-81ebe2248972",
+    "category": "QA",
+    "title": "实现 Array.prototype.map()",
+    "level": 1,
+    "updateAt": "2021-07-07T00:12:51+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

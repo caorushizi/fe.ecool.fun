@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 478,
+    "exerciseKey": "887a5434-989a-45c3-bf97-b6988394ece6",
+    "category": "QA",
+    "renderType": "md",
+    "title": "简述微信小程序原理？",
+    "desc": null,
+    "options": null,
+    "explanation": "* 小程序本质就是一个单页面应用，所有的页面渲染和事件处理，都在一个页面内进行，但又可以通过微信客户端调用原生的各种接口；\n* 它的架构，是数据驱动的架构模式，它的UI和数据是分离的，所有的页面更新，都需要通过对数据的更改来实现；\n* 它从技术讲和现有的前端开发差不多，采用JavaScript、WXML、WXSS三种技术进行开发；\n* 功能可分为webview和appService两个部分；\n* webview用来展现UI，appService有来处理业务逻辑、数据及接口调用；\n* 两个部分在两个进程中运行，通过系统层JSBridge实现通信，实现UI的渲染、事件的处理等。",
+    "level": 4,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-08T15:29:42.000Z",
+    "updateAt": "2021-07-11T11:08:02.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 885,
+    "prev": "0c0db5d1-e09a-4699-911a-3cfa4f4bd765",
+    "next": "cb091ae7-6a50-441b-9513-ef6638e5f123"
+  },
+  "post": {
+    "exerciseKey": "887a5434-989a-45c3-bf97-b6988394ece6",
+    "category": "QA",
+    "title": "简述微信小程序原理？",
+    "level": 4,
+    "updateAt": "2021-07-11T11:08:02+00:00"
+  },
+  "tag": {
+    "id": 23,
+    "tagName": "小程序",
+    "type": "1",
+    "exerciseCount": 9
+  }
+}

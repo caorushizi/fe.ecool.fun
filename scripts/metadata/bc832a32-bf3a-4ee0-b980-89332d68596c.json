@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 657,
+    "exerciseKey": "bc832a32-bf3a-4ee0-b980-89332d68596c",
+    "category": "QA",
+    "renderType": "md",
+    "title": "在react中怎么实现组件间的过渡动画？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 一、是什么\n\n在日常开发中，页面切换时的转场动画是比较基础的一个场景\n\n当一个组件在显示与消失过程中存在过渡动画，可以很好的增加用户的体验\n\n在`react`中实现过渡动画效果会有很多种选择，如`react-transition-group`，`react-motion`，`Animated`，以及原生的`CSS`都能完成切换动画\n\n\n## 二、如何实现\n\n在`react`中，`react-transition-group`是一种很好的解决方案，其为元素添加`enter`，`enter-active`，`exit`，`exit-active`这一系列勾子\n\n可以帮助我们方便的实现组件的入场和离场动画\n\n其主要提供了三个主要的组件：\n\n- CSSTransition：在前端开发中，结合 CSS 来完成过渡动画效果\n- SwitchTransition：两个组件显示和隐藏切换时，使用该组件\n- TransitionGroup：将多个动画组件包裹在其中，一般用于列表中元素的动画\n\n### CSSTransition\n\n其实现动画的原理在于，当`CSSTransition`的`in`属性置为`true`时，`CSSTransition`首先会给其子组件加上`xxx-enter`、`xxx-enter-active`的`class`执行动画\n\n当动画执行结束后，会移除两个`class`，并且添加`-enter-done`的`class`\n\n所以可以利用这一点，通过`css`的`transition`属性，让元素在两个状态之间平滑过渡，从而得到相应的动画效果\n\n当`in`属性置为`false`时，`CSSTransition`会给子组件加上`xxx-exit`和`xxx-exit-active`的`class`，然后开始执行动画，当动画结束后，移除两个`class`，然后添加`-enter-done`的`class`\n\n如下例子：\n\n```jsx\nexport default class App2 extends React.PureComponent {\n\n  state = {show: true};\n\n  onToggle = () => this.setState({show: !this.state.show});\n\n  render() {\n    const {show} = this.state;\n    return (\n      <div className={'container'}>\n        <div className={'square-wrapper'}>\n          <CSSTransition\n            in={show}\n            timeout={500}\n            classNames={'fade'}\n            unmountOnExit={true}\n          >\n            <div className={'square'} />\n          </CSSTransition>\n        </div>\n        <Button onClick={this.onToggle}>toggle</Button>\n      </div>\n    );\n  }\n}\n```\n\n对应`css`样式如下：\n\n```css\n.fade-enter {\n  opacity: 0;\n  transform: translateX(100%);\n}\n\n.fade-enter-active {\n  opacity: 1;\n  transform: translateX(0);\n  transition: all 500ms;\n}\n\n.fade-exit {\n  opacity: 1;\n  transform: translateX(0);\n}\n\n.fade-exit-active {\n  opacity: 0;\n  transform: translateX(-100%);\n  transition: all 500ms;\n}\n```\n\n\n\n### SwitchTransition\n\n`SwitchTransition`可以完成两个组件之间切换的炫酷动画\n\n比如有一个按钮需要在`on`和`off`之间切换，我们希望看到`on`先从左侧退出，`off`再从右侧进入\n\n`SwitchTransition`中主要有一个属性`mode`，对应两个值：\n\n- in-out：表示新组件先进入，旧组件再移除；\n- out-in：表示就组件先移除，新组建再进入\n\n`SwitchTransition`组件里面要有`CSSTransition`，不能直接包裹你想要切换的组件\n\n里面的`CSSTransition`组件不再像以前那样接受`in`属性来判断元素是何种状态，取而代之的是`key`属性\n\n下面给出一个按钮入场和出场的示例，如下：\n\n```jsx\nimport { SwitchTransition, CSSTransition } from \"react-transition-group\";\n\nexport default class SwitchAnimation extends PureComponent {\n  constructor(props) {\n    super(props);\n\n    this.state = {\n      isOn: true\n    }\n  }\n\n  render() {\n    const {isOn} = this.state;\n\n    return (\n      <SwitchTransition mode=\"out-in\">\n        <CSSTransition classNames=\"btn\"\n                       timeout={500}\n                       key={isOn ? \"on\" : \"off\"}>\n          {\n          <button onClick={this.btnClick.bind(this)}>\n            {isOn ? \"on\": \"off\"}\n          </button>\n        }\n        </CSSTransition>\n      </SwitchTransition>\n    )\n  }\n\n  btnClick() {\n    this.setState({isOn: !this.state.isOn})\n  }\n}\n```\n\n`css`文件对应如下：\n\n```css\n.btn-enter {\n  transform: translate(100%, 0);\n  opacity: 0;\n}\n\n.btn-enter-active {\n  transform: translate(0, 0);\n  opacity: 1;\n  transition: all 500ms;\n}\n\n.btn-exit {\n  transform: translate(0, 0);\n  opacity: 1;\n}\n\n.btn-exit-active {\n  transform: translate(-100%, 0);\n  opacity: 0;\n  transition: all 500ms;\n}\n```\n\n\n\n### TransitionGroup\n\n当有一组动画的时候，就可将这些`CSSTransition`放入到一个`TransitionGroup`中来完成动画\n\n同样`CSSTransition`里面没有`in`属性，用到了`key`属性\n\n`TransitionGroup`在感知`children`发生变化的时候，先保存移除的节点，当动画结束后才真正移除\n\n其处理方式如下：\n\n- 插入的节点，先渲染dom，然后再做动画\n\n- 删除的节点，先做动画，然后再删除dom\n\n如下：\n\n```jsx\nimport React, { PureComponent } from 'react'\nimport { CSSTransition, TransitionGroup } from 'react-transition-group';\n\nexport default class GroupAnimation extends PureComponent {\n  constructor(props) {\n    super(props);\n\n    this.state = {\n      friends: []\n    }\n  }\n\n  render() {\n    return (\n      <div>\n        <TransitionGroup>\n          {\n            this.state.friends.map((item, index) => {\n              return (\n                <CSSTransition classNames=\"friend\" timeout={300} key={index}>\n                  <div>{item}</div>\n                </CSSTransition>\n              )\n            })\n          }\n        </TransitionGroup>\n        <button onClick={e => this.addFriend()}>+friend</button>\n      </div>\n    )\n  }\n\n  addFriend() {\n    this.setState({\n      friends: [...this.state.friends, \"coderwhy\"]\n    })\n  }\n}\n```\n\n对应`css`如下：\n\n```css\n.friend-enter {\n    transform: translate(100%, 0);\n    opacity: 0;\n}\n\n.friend-enter-active {\n    transform: translate(0, 0);\n    opacity: 1;\n    transition: all 500ms;\n}\n\n.friend-exit {\n    transform: translate(0, 0);\n    opacity: 1;\n}\n\n.friend-exit-active {\n    transform: translate(-100%, 0);\n    opacity: 0;\n    transition: all 500ms;\n}\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-10-24T04:25:40.000Z",
+    "updateAt": "2021-10-24T20:58:46.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 740,
+    "prev": "fff79f62-47be-438a-83bf-6f81bcc0dfe9",
+    "next": "7e425b82-69b3-41e3-997a-72090ce30e21"
+  },
+  "post": {
+    "exerciseKey": "bc832a32-bf3a-4ee0-b980-89332d68596c",
+    "category": "QA",
+    "title": "在react中怎么实现组件间的过渡动画？",
+    "level": 2,
+    "updateAt": "2021-10-24T20:58:46+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

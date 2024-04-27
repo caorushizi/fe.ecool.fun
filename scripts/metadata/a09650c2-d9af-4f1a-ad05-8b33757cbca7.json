@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1545,
+    "exerciseKey": "a09650c2-d9af-4f1a-ad05-8b33757cbca7",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何判断当前脚本运行在浏览器还是 node 环境中？",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nthis === window ? 'browser' : 'node';\n```\n\n通过判断 Global 对象是否为 window，如果不为 window，当前脚本没有运行在浏览器中。",
+    "level": 1.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:14:53.000Z",
+    "updateAt": "2021-11-17T22:24:37.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 735,
+    "prev": "b43082e8-2312-4594-ac1c-4f0d2d5da81c",
+    "next": "aea31e8b-4929-4a02-8fe5-8eb27fd663bf"
+  },
+  "post": {
+    "exerciseKey": "a09650c2-d9af-4f1a-ad05-8b33757cbca7",
+    "category": "QA",
+    "title": "如何判断当前脚本运行在浏览器还是 node 环境中？",
+    "level": 1.5,
+    "updateAt": "2021-11-17T22:24:37+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

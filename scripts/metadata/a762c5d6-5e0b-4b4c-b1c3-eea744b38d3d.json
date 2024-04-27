@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 46,
+    "exerciseKey": "a762c5d6-5e0b-4b4c-b1c3-eea744b38d3d",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出是什么？",
+    "desc": "```javascript\n!!null\n!!''\n!!1\n```",
+    "options": "{\"options\":[\"false true false\",\"false false true\",\"false true true\",\"true true false\"],\"isMulti\":false,\"answer\":[1]}",
+    "explanation": "`null` 是 [falsy](https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy)。 `!null` 的值是 `true`。 `!true` 的值是 `false`。\n`\"\"` 是 [falsy](https://developer.mozilla.org/zh-CN/docs/Glossary/Falsy)。 `!\"\"` 的值是 `true`。  `!true` 的值是 `false`。\n`1` 是 [truthy](https://developer.mozilla.org/zh-CN/docs/Glossary/Truthy)。 `!1` 的值是 `false`。 `!false` 的值是 `true`。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:11:33.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1157,
+    "prev": "d0fd0142-dd09-4d9a-9465-012c30cd921e",
+    "next": "7288dc5d-1485-4275-8a19-acf2bdc7f909"
+  },
+  "post": {
+    "exerciseKey": "a762c5d6-5e0b-4b4c-b1c3-eea744b38d3d",
+    "category": "Choice",
+    "title": "输出是什么？",
+    "level": 0.5,
+    "updateAt": "2021-07-03T22:11:33+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

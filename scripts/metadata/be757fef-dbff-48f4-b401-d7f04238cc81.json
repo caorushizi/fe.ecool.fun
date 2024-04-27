@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 109,
+    "exerciseKey": "be757fef-dbff-48f4-b401-d7f04238cc81",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "结果是什么?",
+    "desc": "```javascript\nPromise.resolve(5)\n```",
+    "options": "{\"options\":[\"5\",\"Promise {<pending>: 5}\",\"Promise {<fulfilled>: 5}\",\"Error\"],\"isMulti\":false,\"answer\":[2]}",
+    "explanation": "我们可以将我们想要的任何类型的值传递`Promise.resolve`，无论是否`promise`。 该方法本身返回带有已解析值的`Promise` (`<fulfilled>`)。 如果您传递常规函数，它将是具有常规值的已解决`promise`。 如果你通过了promise，它将是一个已经resolved的且带有传的值的promise。\n上述情况，我们传了数字5，因此返回一个resolved状态的promise，resolve值为`5`",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:28:41.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1103,
+    "prev": "2a420371-13f4-46fc-a5d8-d2338682d8d6",
+    "next": "a0544c68-4798-4f40-b233-bc3510170371"
+  },
+  "post": {
+    "exerciseKey": "be757fef-dbff-48f4-b401-d7f04238cc81",
+    "category": "Choice",
+    "title": "结果是什么?",
+    "level": 0.5,
+    "updateAt": "2021-07-03T22:28:41+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

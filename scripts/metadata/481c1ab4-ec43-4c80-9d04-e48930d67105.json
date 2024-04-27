@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1932,
+    "exerciseKey": "481c1ab4-ec43-4c80-9d04-e48930d67105",
+    "category": "QA",
+    "renderType": "md",
+    "title": "编程实现温度转换，已知温度转换的关系式是：华氏度＝32＋摄氏度×1.8，现在要求输入摄氏度，输出对应的华氏度，小数保留两位",
+    "desc": "",
+    "options": null,
+    "explanation": " ```js\nfunction convertTemperature(centigrade){\n\tif(typeof centigrade !== 'number'){\n\t\tthrow new Error('Wrong parameter type!')\n    }\n\n\treturn (32 + centigrade * 1.8).toFixed(2)\n}\n```",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-12-30T01:44:17.000Z",
+    "updateAt": "2023-01-08T20:48:01.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 459,
+    "prev": "149adb7b-11b7-4cc2-be36-f36b38d36f81",
+    "next": "dd99ac0b-0442-4b0e-aead-fe50315218f7"
+  },
+  "post": {
+    "exerciseKey": "481c1ab4-ec43-4c80-9d04-e48930d67105",
+    "category": "QA",
+    "title": "编程实现温度转换，已知温度转换的关系式是：华氏度＝32＋摄氏度×1.8，现在要求输入摄氏度，输出对应的华氏度，小数保留两位",
+    "level": 0.5,
+    "updateAt": "2023-01-08T20:48:01+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

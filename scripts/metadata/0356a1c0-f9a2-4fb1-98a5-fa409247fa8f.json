@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 446,
+    "exerciseKey": "0356a1c0-f9a2-4fb1-98a5-fa409247fa8f",
+    "category": "QA",
+    "renderType": "md",
+    "title": "forEach中return有效果吗？如何中断forEach循环？",
+    "desc": null,
+    "options": null,
+    "explanation": "在forEach中用return不会返回，函数会继续执行。\n\n## 中断方法\n\n* 使用try监视代码块，在需要中断的地方抛出异常。\n* 官方推荐方法（替换方法）：用every和some替代forEach函数。\n\t* every在碰到return false的时候，中止循环。\n    * some在碰到return true的时候，中止循环。",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T16:07:52.000Z",
+    "updateAt": "2021-07-07T00:14:58.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 906,
+    "prev": "8edaa033-4005-41cc-a255-f175f6c4eb6b",
+    "next": "919bfdcc-3d20-469f-b789-f99cc15410fe"
+  },
+  "post": {
+    "exerciseKey": "0356a1c0-f9a2-4fb1-98a5-fa409247fa8f",
+    "category": "QA",
+    "title": "forEach中return有效果吗？如何中断forEach循环？",
+    "level": 2.5,
+    "updateAt": "2021-07-07T00:14:58+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

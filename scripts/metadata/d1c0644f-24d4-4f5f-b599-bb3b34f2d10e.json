@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1945,
+    "exerciseKey": "d1c0644f-24d4-4f5f-b599-bb3b34f2d10e",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现下面的 reverseWord 方法",
+    "desc": "```ts\n/**\n * @file 反转句子\n * \n * 同时满足以下条件：1、去除首尾空格，2、单词间隔中多个空格变成一个；\n * 注意console示例运行结果\n */\n\nfunction reverseWord(str: string) {\n    // 补全此处代码\n    throw new Error('功能待实现');\n}\n\nconsole.log(reverseWord('the sky is blue')); // blue is sky the\n// 去除首尾空格\nconsole.log(reverseWord(\"  hello world  \")); // world hello\n// 单词间隔中多个空格变成一个\nconsole.log(reverseWord(\"a good   example\")); // example good a\n\nexport default {}\n```",
+    "options": null,
+    "explanation": "```ts\n/**\n * @file 反转句子\n * \n * 同时满足以下条件：1、去除首尾空格，2、单词间隔中多个空格变成一个；\n * 注意console示例运行结果\n */\n\nfunction reverseWord(str: string):string {\n    // 参考答案\n    return (<string[]>str.match(/\\S+/g)).reverse().join(\" \");\n}\n\nconsole.log(reverseWord('the sky is blue')); // blue is sky the\n// 去除首尾空格\nconsole.log(reverseWord(\"  hello world  \")); // world hello\n// 单词间隔中多个空格变成一个\nconsole.log(reverseWord(\"a good   example\")); // example good a\n\nexport default {}\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-03-12T15:22:46.000Z",
+    "updateAt": "2023-03-12T23:23:38.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 422,
+    "prev": "2f9c699c-f7be-4f31-8b1b-5d6271bc075e",
+    "next": "d82af9bd-ac3b-4948-b7c5-83ed83e08e2e"
+  },
+  "post": {
+    "exerciseKey": "d1c0644f-24d4-4f5f-b599-bb3b34f2d10e",
+    "category": "QA",
+    "title": "实现下面的 reverseWord 方法",
+    "level": 1,
+    "updateAt": "2023-03-12T23:23:38+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

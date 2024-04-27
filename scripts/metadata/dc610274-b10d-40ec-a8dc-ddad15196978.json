@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1664,
+    "exerciseKey": "dc610274-b10d-40ec-a8dc-ddad15196978",
+    "category": "QA",
+    "renderType": "md",
+    "title": "对于定长和不定长的数据，HTTP 是怎么传输的？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 定长包体\n\n对于定长包体而言，发送端在传输的时候一般会带上 `Content-Length`，来指明包体的长度。\n\n## 不定长包体\n\n介绍另外一个 http 头部字段：`Transfer-Encoding: chunked`。\n\n表示分块传输数据，设置这个字段后会自动产生两个效果:\n\n* Content-Length 字段会被忽略\n* 基于长连接持续推送动态内容\n\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-02-06T13:19:56.000Z",
+    "updateAt": "2022-02-06T21:47:51.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 614,
+    "prev": "2efd0e6a-c70c-4df5-965d-4e13b48fbd21",
+    "next": "482d976d-6697-4456-b0f5-8af4dd060dfc"
+  },
+  "post": {
+    "exerciseKey": "dc610274-b10d-40ec-a8dc-ddad15196978",
+    "category": "QA",
+    "title": "对于定长和不定长的数据，HTTP 是怎么传输的？",
+    "level": 3,
+    "updateAt": "2022-02-06T21:47:51+00:00"
+  },
+  "tag": {
+    "id": 16,
+    "tagName": "计算机网络",
+    "type": "1",
+    "exerciseCount": 72
+  }
+}

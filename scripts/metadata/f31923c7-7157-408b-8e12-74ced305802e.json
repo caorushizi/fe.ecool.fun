@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 334,
+    "exerciseKey": "f31923c7-7157-408b-8e12-74ced305802e",
+    "category": "QA",
+    "renderType": "md",
+    "title": "setState 之后发生了什么\n",
+    "desc": null,
+    "options": null,
+    "explanation": "**简单版本**： React 利用状态队列机制实现了 setState 的“异步”更新，避免频繁的重复更新 state。\n\n首先将新的 state 合并到状态更新队列中，然后根据更新队列和 shouldComponentUpdate 的状态来判断是否需要更新组件。\n\n**复杂版本**：\n\n* enqueueSetState 将 state 放入队列中，并调用 enqueueUpdate 处理要更新的 Component\n* 如果组件当前正处于 update 事务中，则先将 Component 存入 dirtyComponent 中。否则调用batchedUpdates 处理。\n* batchedUpdates 发起一次 transaction.perform() 事务\n* 开始执行事务初始化，运行，结束三个阶段\n\t* 初始化：事务初始化阶段没有注册方法，故无方法要执行\n\t* 运行：执行 setSate 时传入的 callback 方法\n\t* 结束：更新 isBatchingUpdates 为 false，并执行 FLUSH_BATCHED_UPDATES 这个 wrapper 中的close方法，FLUSH_BATCHED_UPDATES在close阶段，会循环遍历所有的 dirtyComponents，调用updateComponent 刷新组件，并执行它的 pendingCallbacks, 也就是 setState 中设置的 callback。\n\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T12:11:31.000Z",
+    "updateAt": "2021-07-04T21:29:43.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 999,
+    "prev": "e203426f-23a1-4872-8ff7-1d0d27e57a81",
+    "next": "1e01a341-f1c4-490b-966d-32433edd42bf"
+  },
+  "post": {
+    "exerciseKey": "f31923c7-7157-408b-8e12-74ced305802e",
+    "category": "QA",
+    "title": "setState 之后发生了什么\n",
+    "level": 3,
+    "updateAt": "2021-07-04T21:29:43+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

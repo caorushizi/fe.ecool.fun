@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1540,
+    "exerciseKey": "01c20a11-d5c8-4e32-bbb2-a8d3a5da1961",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何将 unknown 类型指定为一个更具体的类型？",
+    "desc": null,
+    "options": null,
+    "explanation": "* 使用 typeof 进行类型判断（这些缩小类型范围的技术都有助于TS基于控制流程下的类型分析）\n```ts\n  function unknownToString(value: unknown): string {\n    if (typeof value === \"string\") {\n     return value;\n    }\n  \n    return String(value);\n  }\n```\n\n* 对 unknown 类型使用类型断言\n\n要强制编译器信任类型为 unknown 的值为给定类型，则可以使用类型断言：\n\n```ts\n  const value: unknown = \"Hello World\";\n  const foo: string = value; // Error\n  const bar: string = value as string; // OK\n```\n\n断言错了时语法能通过检测，但是运行的时候就会报错了！\n\n```ts\n  const value: unknown = \"Hello World\";\n\n  const bar: number = value as number; // runtime Error\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T11:05:58.000Z",
+    "updateAt": "2021-11-17T19:07:45.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 737,
+    "prev": "aea31e8b-4929-4a02-8fe5-8eb27fd663bf",
+    "next": "01149afa-e389-4a9f-a534-204db829188b"
+  },
+  "post": {
+    "exerciseKey": "01c20a11-d5c8-4e32-bbb2-a8d3a5da1961",
+    "category": "QA",
+    "title": "如何将 unknown 类型指定为一个更具体的类型？",
+    "level": 2,
+    "updateAt": "2021-11-17T19:07:45+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 602,
+    "exerciseKey": "33363940-179b-4ae3-9cd3-7bf0a5619df9",
+    "category": "QA",
+    "renderType": "md",
+    "title": "箭头函数的 this 指向哪⾥？",
+    "desc": null,
+    "options": null,
+    "explanation": "箭头函数不同于传统JavaScript中的函数，箭头函数并没有属于⾃⼰的this，它所谓的this是捕获其所在上下⽂的 this 值，作为⾃⼰的 this 值，并且由于没有属于⾃⼰的this，所以是不会被new调⽤的，这个所谓的this也不会被改变。\n\n可以⽤Babel理解⼀下箭头函数:\n\n```js\n// ES6 \nconst obj = { \n  getArrow() { \n    return () => { \n      console.log(this === obj); \n    }; \n  } \n}\n```\n\n转化后：\n\n```js\n// ES5，由 Babel 转译\nvar obj = { \n   getArrow: function getArrow() { \n     var _this = this; \n     return function () { \n        console.log(_this === obj); \n     }; \n   } \n};\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-08-22T10:24:18.000Z",
+    "updateAt": "2021-08-22T18:38:33.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 776,
+    "prev": "0d68ac37-7345-4813-a9cd-95a5089c61ba",
+    "next": "31134096-417d-48df-8030-68dd004c40d1"
+  },
+  "post": {
+    "exerciseKey": "33363940-179b-4ae3-9cd3-7bf0a5619df9",
+    "category": "QA",
+    "title": "箭头函数的 this 指向哪⾥？",
+    "level": 3,
+    "updateAt": "2021-08-22T18:38:33+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

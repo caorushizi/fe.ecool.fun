@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1872,
+    "exerciseKey": "38114327-a110-4a75-8745-534924338657",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现一个数字转中文的方法",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\n//阿拉伯数字转中文数字\nfunction NoToChinese(num) {\n    if (!/^\\d*(\\.\\d*)?$/.test(num)) {\n        alert(\"Number is wrong!\");\n        return \"Number is wrong!\";\n    }\n    var AA = new Array(\"零\", \"一\", \"二\", \"三\", \"四\", \"五\", \"六\", \"七\", \"八\", \"九\");\n    var BB = new Array(\"\", \"十\", \"百\", \"千\", \"万\", \"亿\", \"点\", \"\");\n    var a = (\"\" + num).replace(/(^0*)/g, \"\").split(\".\"),\n        k = 0,\n        re = \"\";\n    for (var i = a[0].length - 1; i >= 0; i--) {\n        switch (k) {\n            case 0:\n                re = BB[7] + re;\n                break;\n            case 4:\n                if (!new RegExp(\"0{4}\\\\d{\" + (a[0].length - i - 1) + \"}$\").test(a[0]))\n                    re = BB[4] + re;\n                break;\n            case 8:\n                re = BB[5] + re;\n                BB[7] = BB[5];\n                k = 0;\n                break;\n        }\n        if (k % 4 == 2 && a[0].charAt(i + 2) != 0 && a[0].charAt(i + 1) == 0) re = AA[0] + re;\n        if (a[0].charAt(i) != 0) re = AA[a[0].charAt(i)] + BB[k % 4] + re;\n        k++;\n    }\n    if (a.length > 1) //加上小数部分(如果有小数部分) \n    {\n        re += BB[6];\n        for (var i = 0; i < a[1].length; i++) re += AA[a[1].charAt(i)];\n    }\n    return re;\n};\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-08-07T14:43:27.000Z",
+    "updateAt": "2022-08-12T20:03:13.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 495,
+    "prev": "c7b08d95-edf0-4d08-ac73-ce0b87c08e85",
+    "next": "1aa28332-a1a6-4778-812f-3226a2003614"
+  },
+  "post": {
+    "exerciseKey": "38114327-a110-4a75-8745-534924338657",
+    "category": "QA",
+    "title": "实现一个数字转中文的方法",
+    "level": 3,
+    "updateAt": "2022-08-12T20:03:13+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

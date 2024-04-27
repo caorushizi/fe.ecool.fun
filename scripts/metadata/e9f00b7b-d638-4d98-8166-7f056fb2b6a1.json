@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1680,
+    "exerciseKey": "e9f00b7b-d638-4d98-8166-7f056fb2b6a1",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Vue 中，假设 data 中有一个数组对象，修改数组元素时，是否会触发视图更新？",
+    "desc": null,
+    "options": null,
+    "explanation": "不会触发视图更新\n\n> 当你把一个普通的 JavaScript 对象传给 Vue 实例的 data 选项，Vue 将遍历此对象所有的属性，并使用  Object.defineProperty 把这些属性全部转为 getter/setter。Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是为什么 Vue 不支持 IE8 以及更低版本浏览器的原因。用户看不到 getter/setter，但是在内部它们让 Vue 追踪依赖，在属性被访问和修改时通知变化。这里需要注意的问题是浏览器控制台在打印数据对象时 getter/setter 的格式化并不同，所以你可能需要安装 vue-devtools 来获取更加友好的检查接口。 每个组件实例都有相应的 watcher 实例对象，它会在组件渲染的过程中把属性记录为依赖，之后当依赖项的 setter 被调用时，会通知 watcher 重新计算，从而致使它关联的组件得以更新。\n\n触发视图更新的方法有如下几种：\n\n## Vue.set\n\n可以设置对象或数组的值，通过key或数组索引，可以触发视图更新\n\n数组修改\n\n```js\nVue.set(array, indexOfItem, newValue)\n```\n\n对象修改\n\n```js\nVue.set(obj, keyOfItem, newValue)\n```\n \n## Vue.delete\n\n删除对象或数组中元素，通过key或数组索引，可以触发视图更新\n\n数组修改\n\n```js\nVue.delete(array, indexOfItem)\n```\n\n对象修改\n\n```js\nVue.delete(obj, keyOfItem)\n```\n \n## 数组对象直接修改属性，可以触发视图更新\n\n```js\nthis.array[0].isShow= true;\nthis.array.forEach(function(item){\n    item.isShow= true;\n});\n```\n\n## 数组赋值为新数组，可以触发视图更新\n\n```js\nthis.array = this.array.filter(...)\nthis.array = this.array.concat(...)\n```\n \n## Vue提供了如下的数组的变异方法，可以触发视图更新\n\nVue 将被侦听的数组的变更方法进行了包裹，所以它们也将会触发视图更新。\n\n这些被包裹过的方法包括：\n\n```js\npush()\npop()\nshift()\nunshift()\nsplice()  \nsort()\nreverse()\n```",
+    "level": 1.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-02-27T10:49:19.000Z",
+    "updateAt": "2022-02-27T18:49:26.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 602,
+    "prev": "1d338445-7c02-4ffa-9541-1f7a00896244",
+    "next": "48c834b2-fe33-42ce-8a99-f25235cbbcb6"
+  },
+  "post": {
+    "exerciseKey": "e9f00b7b-d638-4d98-8166-7f056fb2b6a1",
+    "category": "QA",
+    "title": "Vue 中，假设 data 中有一个数组对象，修改数组元素时，是否会触发视图更新？",
+    "level": 1.5,
+    "updateAt": "2022-02-27T18:49:26+00:00"
+  },
+  "tag": {
+    "id": 14,
+    "tagName": "Vue.js",
+    "type": "1",
+    "exerciseCount": 68
+  }
+}

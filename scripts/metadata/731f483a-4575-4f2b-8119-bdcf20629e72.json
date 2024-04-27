@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2041,
+    "exerciseKey": "731f483a-4575-4f2b-8119-bdcf20629e72",
+    "category": "QA",
+    "renderType": "md",
+    "title": "计算出下面数组中的平均时间",
+    "desc": "```js\nconst arr = [\"8:15\", \"6:35\", \"11:22\"]\n```",
+    "options": null,
+    "explanation": "将时间转换为分钟数，计算平均值后再将结果转换回小时和分钟即可。具体步骤如下：\n\n1. 遍历数组中的每个时间，将其转换为分钟数并求和。\n\n2. 将总分钟数除以时间数量得到平均值，取整数部分作为小时数，余数部分作为分钟数。\n\n3. 如果分钟数小于 10，则在前面添加一个零以保持两位数格式。\n\n4. 将小时数和分钟数组合成字符串形式的时间表示。\n\n```javascript\nconst arr = [\"8:15\", \"6:35\", \"11:22\"];\n\n// 1. 将时间转换为分钟数并求和\nconst totalMinutes = arr.reduce((acc, cur) => {\n  const [hours, minutes] = cur.split(':');\n  return acc + Number(hours) * 60 + Number(minutes);\n}, 0);\n\n// 2. 计算平均值并将结果转换回小时和分钟\nconst averageMinutes = Math.floor(totalMinutes / arr.length);\nconst hours = Math.floor(averageMinutes / 60);\nconst minutes = averageMinutes % 60;\n\n// 3. 格式化分钟数\nconst formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;\n\n// 4. 组合成字符串形式的时间\nconst averageTime = `${hours}:${formattedMinutes}`;\nconsole.log(averageTime); // 输出 \"8:44\"\n```\n\n因此，该数组中的时间的平均值为 \"8:44\"。",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-06-01T01:32:13.000Z",
+    "updateAt": "2023-06-06T09:22:43.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 329,
+    "prev": "e834149b-923e-4565-8c26-2a43a5b98085",
+    "next": "ac91c80a-17f4-4ede-931e-2f458660e3e0"
+  },
+  "post": {
+    "exerciseKey": "731f483a-4575-4f2b-8119-bdcf20629e72",
+    "category": "QA",
+    "title": "计算出下面数组中的平均时间",
+    "level": 2,
+    "updateAt": "2023-06-06T09:22:43+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

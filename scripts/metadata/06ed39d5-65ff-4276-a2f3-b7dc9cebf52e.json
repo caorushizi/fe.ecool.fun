@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2060,
+    "exerciseKey": "06ed39d5-65ff-4276-a2f3-b7dc9cebf52e",
+    "category": "QA",
+    "renderType": "md",
+    "title": "说说 Vuex 的原理",
+    "desc": null,
+    "options": null,
+    "explanation": "Vuex是Vue.js应用程序开发的状态管理模式和库。它为Vue应用程序提供了一个集中式的存储机制，用于管理应用程序的所有组件的状态。Vuex的设计受到了Flux和Redux的影响，它通过以下几个核心概念来工作：\n\n1. **State（状态）**：应用程序的数据存储在一个单一的状态树中，即`state`。这个状态树是响应式的，当状态发生变化时，相关的组件将自动更新。\n\n2. **Getter（获取器）**：`getter`允许从`state`中派生出一些衍生的状态，类似于计算属性。可以使用`getter`来对`state`进行处理和计算，并将其暴露给组件使用。\n\n3. **Mutation（突变）**：`mutation`是用于修改`state`的唯一途径。它定义了一些操作函数，每个函数都有一个特定的名称（称为`type`），并且可以在这些函数中改变`state`的值。`mutation`必须是同步的，以确保状态变更是可追踪的。\n\n4. **Action（动作）**：`action`用于处理异步操作和复杂的业务逻辑。类似于`mutation`，但`action`可以包含异步操作，可以在`action`中触发多个`mutation`，也可以在`action`中调用其他`action`。\n\n5. **Module（模块）**：为了更好地组织和拆分大型的应用程序，Vuex允许将`state`、`getter`、`mutation`和`action`划分为模块。每个模块都有自己的`state`、`getter`、`mutation`和`action`，并且可以被嵌套和组合。\n\n通过以上的核心概念，Vuex提供了一种可预测的状态管理方式，使得多个组件之间共享和同步状态变得更加容易和可控。它简化了应用程序的状态管理，提高了代码的可维护性和复用性。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-12-17T10:10:27.000Z",
+    "updateAt": "2023-12-17T18:10:35.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 267,
+    "prev": "c7505e46-4e58-4d34-b27d-b022c244cfad",
+    "next": "6d66ddb0-f53a-4286-b5e1-bf7ca3bcd34e"
+  },
+  "post": {
+    "exerciseKey": "06ed39d5-65ff-4276-a2f3-b7dc9cebf52e",
+    "category": "QA",
+    "title": "说说 Vuex 的原理",
+    "level": 3,
+    "updateAt": "2023-12-17T18:10:35+00:00"
+  },
+  "tag": {
+    "id": 14,
+    "tagName": "Vue.js",
+    "type": "1",
+    "exerciseCount": 68
+  }
+}

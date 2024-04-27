@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2068,
+    "exerciseKey": "a4905b6d-283a-48ee-8c19-6f390f7fd9bc",
+    "category": "QA",
+    "renderType": "md",
+    "title": "编写一个vue组件，组件内部使用插槽接收外部内容，v-model双向绑定，实现折叠展开的功能",
+    "desc": null,
+    "options": null,
+    "explanation": "下面是示例代码：\n\n```html\n<template>\n  <div>\n    <button @click=\"toggleCollapse\">\n      {{ collapsed ? '展开' : '折叠' }}\n    </button>\n    <div v-show=\"!collapsed\">\n      <slot></slot>\n    </div>\n  </div>\n</template>\n\n<script>\nexport default {\n  model: {\n    prop: 'collapsed',\n    event: 'toggle',\n  },\n  props: {\n    collapsed: {\n      type: Boolean,\n      default: true,\n    },\n  },\n  methods: {\n    toggleCollapse() {\n      this.$emit('toggle', !this.collapsed);\n    },\n  },\n};\n</script>\n```\n\n此组件包含一个按钮，根据`collapsed`属性的值显示\"折叠\"或\"展开\"文本。在按钮的`click`事件中，调用`toggleCollapse`方法来切换`collapsed`的状态，并通过自定义事件`toggle`将新的状态传递给父组件。\n\n组件内部有一个`v-show`指令，根据`collapsed`属性的值决定是否显示插槽内容。当`collapsed`为`true`时，插槽内容将被隐藏；当`collapsed`为`false`时，插槽内容将显示出来。\n\n在使用该组件时，可以使用`v-model`来进行双向绑定：\n\n```html\n<template>\n  <div>\n    <collapse-panel v-model=\"isCollapsed\">\n      <!-- 插入要折叠展开的内容 -->\n      <p>这是要折叠展开的内容</p>\n    </collapse-panel>\n  </div>\n</template>\n\n<script>\nimport CollapsePanel from '@/components/CollapsePanel.vue';\n\nexport default {\n  components: {\n    CollapsePanel,\n  },\n  data() {\n    return {\n      isCollapsed: true,\n    };\n  },\n};\n</script>\n```\n\n此外，将`isCollapsed`属性绑定到`v-model`指令上，以实现双向绑定。通过控制`isCollapsed`的值，可以折叠或展开插槽内的内容。",
+    "level": 3.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-12-17T10:31:13.000Z",
+    "updateAt": "2023-12-17T18:31:20.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 258,
+    "prev": "f355de02-e03c-4d97-ac11-cd1de62867ab",
+    "next": "4b1c17f5-a42b-4853-9ff5-792a23d45050"
+  },
+  "post": {
+    "exerciseKey": "a4905b6d-283a-48ee-8c19-6f390f7fd9bc",
+    "category": "QA",
+    "title": "编写一个vue组件，组件内部使用插槽接收外部内容，v-model双向绑定，实现折叠展开的功能",
+    "level": 3.5,
+    "updateAt": "2023-12-17T18:31:20+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

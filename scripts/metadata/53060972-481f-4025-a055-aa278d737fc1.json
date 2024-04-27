@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 268,
+    "exerciseKey": "53060972-481f-4025-a055-aa278d737fc1",
+    "category": "QA",
+    "renderType": "md",
+    "title": "HTML 标签中的 src 和 href 有什么区别",
+    "desc": null,
+    "options": null,
+    "explanation": "* href 是超文本引用，它是指向资源的位置，建立与目标文件的联系；\n* src 目的是把资源下载到页面中；\n\n浏览器解析 href 不会阻塞对文档的处理（这就是官方建议使用 link 引入而不是 @ import 的原因），src 会阻塞对文档的处理。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T05:52:56.000Z",
+    "updateAt": "2021-07-04T16:01:38.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1053,
+    "prev": "ba6327df-ba59-4870-921c-36b8516c4451",
+    "next": "06af30a2-e542-4cf0-9793-999267a4007d"
+  },
+  "post": {
+    "exerciseKey": "53060972-481f-4025-a055-aa278d737fc1",
+    "category": "QA",
+    "title": "HTML 标签中的 src 和 href 有什么区别",
+    "level": 0.5,
+    "updateAt": "2021-07-04T16:01:38+00:00"
+  },
+  "tag": {
+    "id": 12,
+    "tagName": "HTML",
+    "type": "1",
+    "exerciseCount": 57
+  }
+}

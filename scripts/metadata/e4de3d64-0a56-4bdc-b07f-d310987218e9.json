@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 45,
+    "exerciseKey": "e4de3d64-0a56-4bdc-b07f-d310987218e9",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "下面代码的输出是什么？",
+    "desc": "```javascript\n[[0, 1], [2, 3]].reduce(\n  (acc, cur) => {\n    return acc.concat(cur)\n  },\n  [1, 2]\n)\n```",
+    "options": "{\"options\":[\"[0, 1, 2, 3, 1, 2]\",\"[6, 1, 2]\",\"[1, 2, 0, 1, 2, 3]\",\"[1, 2, 6]\"],\"isMulti\":false,\"answer\":[2]}",
+    "explanation": "`[1, 2]`是初始值。\n\n初始值将会作为首次调用时第一个参数 `acc` 的值。\n\n* 在第一次执行时， `acc` 的值是 `[1, 2]`， `cur` 的值是 `[0, 1]`。合并它们，结果为 `[1, 2, 0, 1]`。\n* 第二次执行， `acc` 的值是 `[1, 2, 0, 1]`， `cur` 的值是 `[2, 3]`。合并它们，最终结果为 `[1, 2, 0, 1, 2, 3]`",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2022-01-09T13:17:08.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 681,
+    "prev": "7579cdab-94b8-4a25-ab87-77569bb7d86d",
+    "next": "ef8a8acb-e2bd-42d0-87b0-0414126a9ec0"
+  },
+  "post": {
+    "exerciseKey": "e4de3d64-0a56-4bdc-b07f-d310987218e9",
+    "category": "Choice",
+    "title": "下面代码的输出是什么？",
+    "level": 0.5,
+    "updateAt": "2022-01-09T13:17:08+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

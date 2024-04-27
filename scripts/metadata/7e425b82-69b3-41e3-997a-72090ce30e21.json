@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 656,
+    "exerciseKey": "7e425b82-69b3-41e3-997a-72090ce30e21",
+    "category": "QA",
+    "renderType": "md",
+    "title": "React构建组件的方式有哪些？有什么区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 一、是什么\n\n组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式\n\n在`React`中，一个类、一个函数都可以视为一个组件\n\n组件所存在的优势：\n\n- 降低整个系统的耦合度，在保持接口不变的情况下，我们可以替换不同的组件快速完成需求，例如输入框，可以替换为日历、时间、范围等组件作具体的实现\n- 调试方便，由于整个系统是通过组件组合起来的，在出现问题的时候，可以用排除法直接移除组件，或者根据报错的组件快速定位问题，之所以能够快速定位，是因为每个组件之间低耦合，职责单一，所以逻辑会比分析整个系统要简单\n- 提高可维护性，由于每个组件的职责单一，并且组件在系统中是被复用的，所以对代码进行优化可获得系统的整体升级\n\n\n\n## 二、如何构建\n\n在`React`目前来讲，组件的创建主要分成了三种方式：\n\n- 函数式创建\n- 通过 React.createClass 方法创建\n- 继承 React.Component 创建\n\n\n\n### 函数式创建\n\n在`React Hooks`出来之前，函数式组件可以视为无状态组件，只负责根据传入的`props`来展示视图，不涉及对`state`状态的操作\n\n大多数组件可以写为无状态组件，通过简单组合构建其他组件\n\n在`React`中，通过函数简单创建组件的示例如下：\n\n```jsx\nfunction HelloComponent(props, /* context */) {\n  return <div>Hello {props.name}</div>\n}\n```\n\n\n\n\n\n### 通过 React.createClass 方法创建\n\n`React.createClass`是react刚开始推荐的创建组件的方式，目前这种创建方式已经不怎么用了\n\n像上述通过函数式创建的组件的方式，最终会通过`babel`转化成`React.createClass`这种形式，转化成如下：\n\n```jsx\nfunction HelloComponent(props) /* context */{\n  return React.createElement(\n    \"div\",\n    null,\n    \"Hello \",\n    props.name\n  );\n}\n```\n\n由于上述的编写方式过于冗杂，目前基本上不使用上\n\n\n\n### 继承 React.Component 创建\n\n同样在`react hooks`出来之前，有状态的组件只能通过继承`React.Component`这种形式进行创建\n\n有状态的组件也就是组件内部存在维护的数据，在类创建的方式中通过`this.state`进行访问\n\n当调用`this.setState`修改组件的状态时，组价会再次会调用`render()`方法进行重新渲染\n\n通过继承`React.Component`创建一个时钟示例如下：\n\n```jsx\nclass Timer extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = { seconds: 0 };\n  }\n\n  tick() {\n    this.setState(state => ({\n      seconds: state.seconds + 1\n    }));\n  }\n\n  componentDidMount() {\n    this.interval = setInterval(() => this.tick(), 1000);\n  }\n\n  componentWillUnmount() {\n    clearInterval(this.interval);\n  }\n\n  render() {\n    return (\n      <div>\n        Seconds: {this.state.seconds}\n      </div>\n    );\n  }\n}\n```\n\n\n\n## 三、区别\n\n由于`React.createClass `创建的方式过于冗杂，并不建议使用\n\n而像函数式创建和类组件创建的区别主要在于需要创建的组件是否需要为有状态组件：\n\n- 对于一些无状态的组件创建，建议使用函数式创建的方式\n\n- 由于`react hooks`的出现，函数式组件创建的组件通过使用`hooks`方法也能使之成为有状态组件，再加上目前推崇函数式编程，所以这里建议都使用函数式的方式来创建组件\n\n在考虑组件的选择原则上，能用无状态组件则用无状态组件\n\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-10-24T04:24:50.000Z",
+    "updateAt": "2021-10-24T20:58:43.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 741,
+    "prev": "bc832a32-bf3a-4ee0-b980-89332d68596c",
+    "next": "f28ca2b5-ff42-4522-8cf3-b4e3e835b85d"
+  },
+  "post": {
+    "exerciseKey": "7e425b82-69b3-41e3-997a-72090ce30e21",
+    "category": "QA",
+    "title": "React构建组件的方式有哪些？有什么区别？",
+    "level": 1,
+    "updateAt": "2021-10-24T20:58:43+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 485,
+    "exerciseKey": "fa381450-0faf-4395-9207-7fa114c27440",
+    "category": "QA",
+    "renderType": "md",
+    "title": "TypeScript支持的访问修饰符有哪些？",
+    "desc": null,
+    "options": null,
+    "explanation": "TypeScript支持访问修饰符 public，private 和 protected，它们决定了类成员的可访问性。\n\n* 公共（public），类的所有成员，其子类以及该类的实例都可以访问。\n\n* 受保护（protected），该类及其子类的所有成员都可以访问它们。 但是该类的实例无法访问。\n\n* 私有（private），只有类的成员可以访问它们。\n\n如果未指定访问修饰符，则它是隐式公共的，因为它符合 JavaScript 的便利性。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-11T03:22:44.000Z",
+    "updateAt": "2023-04-18T09:06:52.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 401,
+    "prev": "8f4296bd-3a36-47d4-a13b-05b5b628c37e",
+    "next": "8688fc18-d0c2-4122-ac6f-ea86d8798d42"
+  },
+  "post": {
+    "exerciseKey": "fa381450-0faf-4395-9207-7fa114c27440",
+    "category": "QA",
+    "title": "TypeScript支持的访问修饰符有哪些？",
+    "level": 1,
+    "updateAt": "2023-04-18T09:06:52+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

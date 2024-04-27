@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1627,
+    "exerciseKey": "26bf47fe-07e4-4014-b3ea-8a745f70d718",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第35题】下面代码的输出是什么？",
+    "desc": "```js\nasync function testSometing() {\n  console.log(\"执行testSometing\");\n  return \"testSometing\";\n}\n\nasync function testAsync() {\n  console.log(\"执行testAsync\");\n  return Promise.resolve(\"hello async\");\n}\n\nasync function test() {\n  console.log(\"test start...\");\n  const v1 = await testSometing();\n  console.log(v1);\n  const v2 = await testAsync();\n  console.log(v2);\n  console.log(v1, v2);\n}\n\ntest();\n\nvar promise = new Promise(resolve => {\n  console.log(\"promise start...\");\n  resolve(\"promise\");\n});\npromise.then(val => console.log(val));\n\nconsole.log(\"test end...\");\n\n```",
+    "options": null,
+    "explanation": "这儿直接给出答案：\n\n```\n'test start...'\n'执行testSometing'\n'promise start...'\n'test end...'\n'testSometing'\n'执行testAsync'\n'promise'\n'hello async'\n'testSometing' 'hello async'\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T15:16:44.000Z",
+    "updateAt": "2022-01-09T23:23:51.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 647,
+    "prev": "32b06302-58e6-44df-acb7-6c975dcc2957",
+    "next": "7fdc5ee0-1c5f-483b-927b-140536ea83f2"
+  },
+  "post": {
+    "exerciseKey": "26bf47fe-07e4-4014-b3ea-8a745f70d718",
+    "category": "QA",
+    "title": "【Promise第35题】下面代码的输出是什么？",
+    "level": 3,
+    "updateAt": "2022-01-09T23:23:51+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

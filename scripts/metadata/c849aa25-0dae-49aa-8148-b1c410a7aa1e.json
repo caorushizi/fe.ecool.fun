@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 260,
+    "exerciseKey": "c849aa25-0dae-49aa-8148-b1c410a7aa1e",
+    "category": "QA",
+    "renderType": "md",
+    "title": "常用的 meta 元素有哪些？",
+    "desc": null,
+    "options": null,
+    "explanation": "> 作者：tonytony\n> 来源：掘金\n\n> The <meta> tag provides metadata about the HTML document. Metadata will not be displayed on the page, but will be machine parsable.\n\n<meta> 元素标签是提供有关HTML文档的元数据，元数据不会显示在页面上，但是能够被机器识别。\n\n总而言之, meta标签是用来让机器识别的，同时它对SEO起着重要的作用。\n\n## charset\n\n指定了html文档的编码格式，常用的是utf-8(Unicode的字符编码)，还有ISO-8859-1(拉丁字母的字符编码)。当然还有其他的，但是一般不常用也就不介绍了\n\n```html\n<meta charset=\"utf-8\">\n```\n\n## name & content\n\n指定元数据的名称(这部分对SEO非常有用)\n\n* author——定义了页面的作者\n\n```html\n<meta name=\"author\" content=\"Tony\">\n```\n\n* keywords——为搜索引擎提供关键字\n\n```html\n<meta name=\"keywords\" content=\"HTML, CSS, JavaScript\">\n```\n\n* description——对网页整体的描述\n\n```html\n<meta name=\"description\" content=\"My tutorials on HTML, CSS and JavaScript\">\n```\n\n* viewport——对页面视图相关进行定义\n\n```\nwidth=device-width——将页面宽度设置为跟随屏幕宽度变化而变化\ninitial-scale=1.0——设置浏览器首次加载页面时的初始缩放比例(0.0-10.0正数)\nmaximum-scale=1.0——允许用户缩放的最大比例(0.0-10.0正数)，必须大于等于minimum-scale\nminimum-scale=1.0——允许用户缩放的最小比例(0.0-10.0正数)，必须小于等于maximum-scale\nuser-scalable=no——是否允许用户手动缩放(yes或者no)\n```\n\n``` html\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, minmum-scale=1.0\">\n```\n\n* generator——包含生成页面软件的标识符\n\n> which contains the identifier of the software that generated the page.\n\n```html\n<meta name=\"generator\" content=\"Hexo 3.8.0\">\n```\n\n* theme-color——定义主题颜色\n\n```html\n<meta name=\"theme-color\" content=\"#222\">\n```\n\n* http-equiv & content\n\n> Provides an HTTP header for the information/value of the content attribute\n\n* refresh——每30s刷新一次文档\n\n```html\n<meta http-equiv=\"refresh\" content=\"30\">\n```\n\n* X-UA-Compatible——告知浏览器以何种版本渲染界面。下面的例子有限使用IE最新版本\n\n```html\n<meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n```\n\n关于是否有必要使用这一条在stack overflow尚且有争议。个人认为如果不想兼容低版本的IE，可以直接忽略这一条。\n\n* Cache-Control——请求和响应遵循的缓存机制，可以声明缓存的内容，修改过期时间，可多次声明\n\n> no-transform——不得对资源进行转换或转变。\n> no-siteapp——禁止百度进行转码\n\n```html\n<meta http-equiv=\"Cache-Control\" content=\"no-transform\">\n<meta http-equiv=\"Cache-Control\" content=\"no-siteapp\">\n```\n\n* property & content\n\n可以让网页成为一个富媒体对象，同意网页内容被其他网站引用，同时在应用的时候不会只是一个链接，会提取相应的信息展现给用户。\n\n```html\n<meta property=\"og:type\" content=\"website\">\n<meta property=\"og:url\" content=\"https://zjgyb.github.io/index.html\">\n<meta property=\"og:site_name\" content=\"tony's blog\">\n```\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T05:17:07.000Z",
+    "updateAt": "2021-07-04T16:01:06.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1059,
+    "prev": "2acd6447-af1d-4430-837f-a468b6c76ffe",
+    "next": "3538f4eb-5b78-4ffc-aeae-ccfdd45976a4"
+  },
+  "post": {
+    "exerciseKey": "c849aa25-0dae-49aa-8148-b1c410a7aa1e",
+    "category": "QA",
+    "title": "常用的 meta 元素有哪些？",
+    "level": 1,
+    "updateAt": "2021-07-04T16:01:06+00:00"
+  },
+  "tag": {
+    "id": 12,
+    "tagName": "HTML",
+    "type": "1",
+    "exerciseCount": 57
+  }
+}

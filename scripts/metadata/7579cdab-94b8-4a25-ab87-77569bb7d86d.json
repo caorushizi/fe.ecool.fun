@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1595,
+    "exerciseKey": "7579cdab-94b8-4a25-ab87-77569bb7d86d",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第一题】下面代码的输出是什么？",
+    "desc": "```js\nconst promise1 = new Promise((resolve, reject) => {\n  console.log('promise1')\n})\nconsole.log('1', promise1);\n```",
+    "options": null,
+    "explanation": "## 过程分析：\n\n* 从上至下，先遇到new Promise，执行该构造函数中的代码promise1\n* 然后执行同步代码1，此时promise1没有被resolve或者reject，因此状态还是pending\n\n## 结果\n\n```\n'promise1'\n'1' Promise{<pending>}\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T14:16:36.000Z",
+    "updateAt": "2022-01-09T22:19:07.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 680,
+    "prev": "214b0a32-c111-4c6c-aad6-4ecc14bd904a",
+    "next": "e4de3d64-0a56-4bdc-b07f-d310987218e9"
+  },
+  "post": {
+    "exerciseKey": "7579cdab-94b8-4a25-ab87-77569bb7d86d",
+    "category": "QA",
+    "title": "【Promise第一题】下面代码的输出是什么？",
+    "level": 1,
+    "updateAt": "2022-01-09T22:19:07+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 39,
+    "exerciseKey": "e39e2c86-5e5d-4412-907b-e40d98fbfb4c",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "下面会输出什么？",
+    "desc": "```javascript\nconst person = { name: 'Lydia' }\n\nfunction sayHi(age) {\n  console.log(`${this.name} is ${age}`)\n}\n\nsayHi.call(person, 21)\nsayHi.bind(person, 21)\n```",
+    "options": "{\"options\":[\"undefined is 21 Lydia is 21\",\"function function\",\"Lydia is 21 Lydia is 21\",\"Lydia is 21 function\"],\"isMulti\":false,\"answer\":[3]}",
+    "explanation": "使用这两种方法，我们都可以传递我们希望 `this` 关键字引用的对象。但是，`.call` 是**立即执行**的。\n`.bind` 返回函数的**副本**，但带有绑定上下文！它不是立即执行的。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2022-01-09T12:51:59.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 689,
+    "prev": "51f267dd-1550-48e2-9710-7cc8103dcc41",
+    "next": "19462061-029d-4111-a94e-a3b3ca87a1e1"
+  },
+  "post": {
+    "exerciseKey": "e39e2c86-5e5d-4412-907b-e40d98fbfb4c",
+    "category": "Choice",
+    "title": "下面会输出什么？",
+    "level": 1,
+    "updateAt": "2022-01-09T12:51:59+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

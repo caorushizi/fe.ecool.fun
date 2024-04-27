@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 463,
+    "exerciseKey": "1b2049cf-9800-420d-b4f3-09238226d162",
+    "category": "QA",
+    "renderType": "md",
+    "title": "npm 是什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "npm是Node.js的包管理工具，它的诞生也极大的促进了前端的发展，在现代前端开发中都离不开npm的身影。\n\n常见的使用场景有以下几种：\n\n* 允许用户从NPM服务器下载别人编写的第三方包到本地使用。\n* 允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。\n* 允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-08T14:56:40.000Z",
+    "updateAt": "2021-07-11T11:17:42.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 877,
+    "prev": "041f15e1-e0a7-450b-846c-a3078bc791c1",
+    "next": "30de2c61-c961-4613-90a0-b31e5eabf637"
+  },
+  "post": {
+    "exerciseKey": "1b2049cf-9800-420d-b4f3-09238226d162",
+    "category": "QA",
+    "title": "npm 是什么？",
+    "level": 1,
+    "updateAt": "2021-07-11T11:17:42+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

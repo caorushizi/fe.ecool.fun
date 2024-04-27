@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1863,
+    "exerciseKey": "c1480af9-8901-495f-8a26-f6c5e530a6a2",
+    "category": "QA",
+    "renderType": "md",
+    "title": "POST请求的 Content-Type 常见的有哪几种？",
+    "desc": null,
+    "options": null,
+    "explanation": "POST 请求的 Content-Type 可以有多种类型，常见的包括：\n\n1. `application/x-www-form-urlencoded`：用于普通的 HTML 表单提交，在请求正文中将表单字段编码为键值对。\n2. `multipart/form-data`：用于上传文件或二进制数据的表单提交，请求正文以多部分形式进行编码。\n3. `application/json`：用于发送 JSON 格式的数据，请求正文中的数据将以 JSON 形式进行传输。\n4. `text/plain`：纯文本格式，适用于发送纯文本数据。\n5.  `application/xml`：用于发送 XML 数据。\n6.  `text/html`：用于发送 HTML 数据。\n7.  `application/octet-stream`：用于发送二进制数据，如文件下载时使用。\n8.  `application/graphql`：用于发送 GraphQL 查询或请求。\n9.  `application/x-www-form-urlencoded;charset=UTF-8`：类似于 `application/x-www-form-urlencoded`，但指定了字符编码为 UTF-8。\n10.  其他自定义的 Content-Type 类型。\n\n服务器根据 Content-Type 来解析和处理请求数据，具体选择哪种 Content-Type 取决于请求所携带的数据类型和服务器端的要求。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-07-24T03:54:24.000Z",
+    "updateAt": "2023-12-19T11:28:31.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 216,
+    "prev": "e87bce7c-af1c-41f3-ae56-142be0e3c999",
+    "next": "0b096e94-b846-448b-ae4b-b4f500e96bf1"
+  },
+  "post": {
+    "exerciseKey": "c1480af9-8901-495f-8a26-f6c5e530a6a2",
+    "category": "QA",
+    "title": "POST请求的 Content-Type 常见的有哪几种？",
+    "level": 3,
+    "updateAt": "2023-12-19T11:28:31+00:00"
+  },
+  "tag": {
+    "id": 16,
+    "tagName": "计算机网络",
+    "type": "1",
+    "exerciseCount": 72
+  }
+}

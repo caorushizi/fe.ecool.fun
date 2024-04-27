@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 337,
+    "exerciseKey": "b19c5c77-658d-4004-a9c5-028fd81b3a9e",
+    "category": "QA",
+    "renderType": "md",
+    "title": "react 的虚拟dom是怎么实现的？\n",
+    "desc": null,
+    "options": null,
+    "explanation": "React 是把真实的 DOM 树转换为 JS 对象树，也就是 Virtual DOM。每次数据更新后，重新计算 VM，并和上一次生成的 VM 树进行对比，对发生变化的部分进行批量更新。除了性能之外，VM 的实现最大的好处在于和其他平台的集成。\n\n比如我们一个真是的 DOM 是这样的\n\n```html\n<button class=\"myButton\">\n  <span>this is button</span>\n</button>\n```\n\n那么在转化为 VM 之后就是这样的\n\n```json\n{\n  type: 'button',\n  props: {\n  \tclassName: 'myButton',\n    children: [{\n      type: 'span',\n      props: {\n        type: 'text'\n        children: 'this is button'\n      }\n    }]\n  }\n}\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T12:13:46.000Z",
+    "updateAt": "2021-07-04T21:29:57.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 997,
+    "prev": "4e2b8fc1-1919-43f8-9cd4-9d3dacc8bb91",
+    "next": "e203426f-23a1-4872-8ff7-1d0d27e57a81"
+  },
+  "post": {
+    "exerciseKey": "b19c5c77-658d-4004-a9c5-028fd81b3a9e",
+    "category": "QA",
+    "title": "react 的虚拟dom是怎么实现的？\n",
+    "level": 3,
+    "updateAt": "2021-07-04T21:29:57+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

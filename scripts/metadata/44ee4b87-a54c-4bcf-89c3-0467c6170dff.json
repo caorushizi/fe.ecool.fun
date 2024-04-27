@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1577,
+    "exerciseKey": "44ee4b87-a54c-4bcf-89c3-0467c6170dff",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何迁移仓库，同时保留原有的提交记录和分支？",
+    "desc": null,
+    "options": null,
+    "explanation": "```\ngit clone 仓库地址\ncd 项目\ngit push --mirror 新的仓库地址\n```\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-12-26T03:19:16.000Z",
+    "updateAt": "2021-12-26T16:04:55.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 705,
+    "prev": "a792448f-bd4c-4320-b3dc-c1dbe395c090",
+    "next": "aa20fdd3-2a4b-44a6-a97b-7bdbc6dd30d4"
+  },
+  "post": {
+    "exerciseKey": "44ee4b87-a54c-4bcf-89c3-0467c6170dff",
+    "category": "QA",
+    "title": "如何迁移仓库，同时保留原有的提交记录和分支？",
+    "level": 1,
+    "updateAt": "2021-12-26T16:04:55+00:00"
+  },
+  "tag": {
+    "id": 29,
+    "tagName": "工具",
+    "type": "1",
+    "exerciseCount": 30
+  }
+}

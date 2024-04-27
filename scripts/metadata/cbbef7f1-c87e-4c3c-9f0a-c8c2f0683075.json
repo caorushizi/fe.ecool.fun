@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 204,
+    "exerciseKey": "cbbef7f1-c87e-4c3c-9f0a-c8c2f0683075",
+    "category": "QA",
+    "renderType": "md",
+    "title": "说说new操作符具体干了什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 一、是什么\n\n在`JavaScript`中，`new`操作符用于创建一个给定构造函数的实例对象\n\n例子\n\n```js\nfunction Person(name, age){\n    this.name = name;\n    this.age = age;\n}\nPerson.prototype.sayName = function () {\n    console.log(this.name)\n}\nconst person1 = new Person('Tom', 20)\nconsole.log(person1)  // Person {name: \"Tom\", age: 20}\nperson1.sayName() // 'Tom'\n```\n\n从上面可以看到：\n\n- `new` 通过构造函数 `Person` 创建出来的实例可以访问到构造函数中的属性\n- `new` 通过构造函数 `Person` 创建出来的实例可以访问到构造函数原型链中的属性（即实例与构造函数通过原型链连接了起来）\n\n现在在构建函数中显式加上返回值，并且这个返回值是一个原始类型\n\n```js\nfunction Test(name) {\n  this.name = name\n  return 1\n}\nconst t = new Test('xxx')\nconsole.log(t.name) // 'xxx'\n```\n\n可以发现，构造函数中返回一个原始值，然而这个返回值并没有作用\n\n下面在构造函数中返回一个对象\n\n```js\nfunction Test(name) {\n  this.name = name\n  console.log(this) // Test { name: 'xxx' }\n  return { age: 26 }\n}\nconst t = new Test('xxx')\nconsole.log(t) // { age: 26 }\nconsole.log(t.name) // 'undefined'\n```\n\n从上面可以发现，构造函数如果返回值为一个对象，那么这个返回值会被正常使用\n\n\n\n## 二、流程\n\n从上面介绍中，我们可以看到`new`关键字主要做了以下的工作：\n\n- 创建一个新的对象`obj`\n- 将对象与构建函数通过原型链连接起来\n- 将构建函数中的`this`绑定到新建的对象`obj`上\n\n- 根据构建函数返回类型作判断，如果是原始值则被忽略，如果是返回对象，需要正常处理\n\n举个例子：\n\n```js\nfunction Person(name, age){\n    this.name = name;\n    this.age = age;\n}\nconst person1 = new Person('Tom', 20)\nconsole.log(person1)  // Person {name: \"Tom\", age: 20}\nperson1.sayName() // 'Tom'\n```\n\n流程图如下：\n\n ![](https://static.ecool.fun//article/7004e072-f843-4db5-9501-a2311d81885a.png)\n\n\n\n## 三、手写new操作符\n\n现在我们已经清楚地掌握了`new`的执行过程\n\n那么我们就动手来实现一下`new`\n\n```js\nfunction mynew(Func, ...args) {\n    // 1.创建一个新对象\n    const obj = {}\n    // 2.新对象原型指向构造函数原型对象\n    obj.__proto__ = Func.prototype\n    // 3.将构建函数的this指向新对象\n    let result = Func.apply(obj, args)\n    // 4.根据返回值判断\n    return result instanceof Object ? result : obj\n}\n```\n\n测试一下\n\n```js\nfunction mynew(func, ...args) {\n    const obj = {}\n    obj.__proto__ = func.prototype\n    let result = func.apply(obj, args)\n    return result instanceof Object ? result : obj\n}\nfunction Person(name, age) {\n    this.name = name;\n    this.age = age;\n}\nPerson.prototype.say = function () {\n    console.log(this.name)\n}\n\nlet p = mynew(Person, \"huihui\", 123)\nconsole.log(p) // Person {name: \"huihui\", age: 123}\np.say() // huihui\n```\n\n可以发现，代码虽然很短，但是能够模拟实现`new`",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-03T13:53:49.000Z",
+    "updateAt": "2024-02-29T15:03:56.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 19,
+    "prev": "f5dbd066-d3dd-4b92-9305-8ec83c387cde",
+    "next": "05452814-d4c0-43ae-bfbe-3807f7779726"
+  },
+  "post": {
+    "exerciseKey": "cbbef7f1-c87e-4c3c-9f0a-c8c2f0683075",
+    "category": "QA",
+    "title": "说说new操作符具体干了什么？",
+    "level": 2,
+    "updateAt": "2024-02-29T15:03:56+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

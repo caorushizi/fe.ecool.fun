@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 378,
+    "exerciseKey": "9caf3dd4-c7a3-44a1-98ee-37566a737c58",
+    "category": "QA",
+    "renderType": "html",
+    "title": "webpack有哪些常见的Plugin",
+    "desc": null,
+    "options": null,
+    "explanation": "<ul><li> define-plugin：定义环境变量</li><li> html-webpack-plugin：简化html文件创建</li><li> uglifyjs-webpack-plugin：通过<code>UglifyES</code>压缩<code>ES6</code>代码</li><li> webpack-parallel-uglify-plugin: 多核压缩,提高压缩速度</li><li> webpack-bundle-analyzer: 可视化webpack输出文件的体积</li><li> mini-css-extract-plugin: CSS提取到单独的文件中,支持按需加载<br/><br/></li></ul>",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-05T14:55:14.000Z",
+    "updateAt": "2021-07-07T00:10:49.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 959,
+    "prev": "6ccbf43f-c512-4e3c-82ce-fe925b8a0c07",
+    "next": "9dc34a20-34be-4c0f-a401-71d936cf4958"
+  },
+  "post": {
+    "exerciseKey": "9caf3dd4-c7a3-44a1-98ee-37566a737c58",
+    "category": "QA",
+    "title": "webpack有哪些常见的Plugin",
+    "level": 1,
+    "updateAt": "2021-07-07T00:10:49+00:00"
+  },
+  "tag": {
+    "id": 28,
+    "tagName": "工程化",
+    "type": "1",
+    "exerciseCount": 33
+  }
+}

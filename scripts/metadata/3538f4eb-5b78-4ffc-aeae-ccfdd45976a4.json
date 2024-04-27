@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 250,
+    "exerciseKey": "3538f4eb-5b78-4ffc-aeae-ccfdd45976a4",
+    "category": "QA",
+    "renderType": "md",
+    "title": "什么是跨域？",
+    "desc": null,
+    "options": null,
+    "explanation": "跨域本质是浏览器基于**同源策略**的一种安全手段\n\n同源策略（Sameoriginpolicy），是一种约定，它是浏览器最核心也最基本的安全功能\n\n所谓同源（即指在同一个域）具有以下三个相同点\n- 协议相同（protocol）\n- 主机相同（host）\n- 端口相同（port）\n\n反之非同源请求，也就是协议、端口、主机其中一项不相同的时候，这时候就会产生跨域\n\n>一定要注意跨域是浏览器的限制，你用抓包工具抓取接口数据，是可以看到接口已经把数据返回回来了，只是浏览器的限制，你获取不到数据。用postman请求接口能够请求到数据。这些再次印证了跨域是浏览器的限制。\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T03:49:49.000Z",
+    "updateAt": "2021-07-04T11:59:13.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1060,
+    "prev": "c849aa25-0dae-49aa-8148-b1c410a7aa1e",
+    "next": "052ca3d3-2a82-4f99-87fb-ccf6c4a8e630"
+  },
+  "post": {
+    "exerciseKey": "3538f4eb-5b78-4ffc-aeae-ccfdd45976a4",
+    "category": "QA",
+    "title": "什么是跨域？",
+    "level": 1,
+    "updateAt": "2021-07-04T11:59:13+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

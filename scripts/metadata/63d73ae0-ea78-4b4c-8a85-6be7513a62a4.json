@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 280,
+    "exerciseKey": "63d73ae0-ea78-4b4c-8a85-6be7513a62a4",
+    "category": "QA",
+    "renderType": "md",
+    "title": "什么是HTML5，以及和HTML的区别是什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "HTML5是HTML的新标准，其主要目标是无需任何额外的插件如Flash、Silverlight等，就可以传输所有内容。它囊括了动画、视频、丰富的图形用户界面等。\n\nHTML5是由万维网联盟（W3C）和 `Web Hypertext Application Technology Working Group` 合作创建的HTML新版本。\n\n## 区别\n\n从文档声明类型上看：\n\nHTML是很长的一段代码，很难记住。如下代码：\n```html\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n```\n\nHTML5却只有简简单单的声明，方便记忆。如下：\n\n```\n<!DOCTYPE html>\n```\n\n从语义结构上看：\n\n* HTML4.0：没有体现结构语义化的标签，通常都是这样来命名的 `<div id=\"header\"></div>`，这样表示网站的头部。\n* HTML5：在语义上却有很大的优势。提供了一些新的标签，比如：`<header><article><footer>`。\n\n## 拓展\n\n不输入<!DOCTYPE html>，浏览器将无法识别html文件，因此html将无法正常工作。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T07:37:18.000Z",
+    "updateAt": "2023-04-16T15:06:01.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 403,
+    "prev": "8688fc18-d0c2-4122-ac6f-ea86d8798d42",
+    "next": "5e131c75-d26e-4527-8f51-29d842f3c829"
+  },
+  "post": {
+    "exerciseKey": "63d73ae0-ea78-4b4c-8a85-6be7513a62a4",
+    "category": "QA",
+    "title": "什么是HTML5，以及和HTML的区别是什么？",
+    "level": 1,
+    "updateAt": "2023-04-16T15:06:01+00:00"
+  },
+  "tag": {
+    "id": 12,
+    "tagName": "HTML",
+    "type": "1",
+    "exerciseCount": 57
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 309,
+    "exerciseKey": "4caa6281-4592-4f6b-ac70-73effa2bcf0d",
+    "category": "QA",
+    "renderType": "md",
+    "title": "使用React Hooks有什么优势？",
+    "desc": null,
+    "options": null,
+    "explanation": "hooks 是react 16.8 引入的特性，他允许你在不写class的情况下操作state 和react的其他特性。\n\nReact Hooks 要解决的问题是状态共享，是继 render-props 和 higher-order components 之后的第三种状态共享方案，不会产生 JSX 嵌套地狱问题。\n\n这个状态指的是状态逻辑，所以称为状态逻辑复用会更恰当，因为只共享数据处理逻辑，不会共享数据本身。\n\n",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T10:56:35.000Z",
+    "updateAt": "2021-07-04T21:30:30.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 992,
+    "prev": "212673c7-7ea1-460a-b44f-2e3fe20f3397",
+    "next": "74f0cb29-9b52-40e7-adba-571d398fa6ad"
+  },
+  "post": {
+    "exerciseKey": "4caa6281-4592-4f6b-ac70-73effa2bcf0d",
+    "category": "QA",
+    "title": "使用React Hooks有什么优势？",
+    "level": 2,
+    "updateAt": "2021-07-04T21:30:30+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

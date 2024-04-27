@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 30,
+    "exerciseKey": "8d375b34-4323-48a3-9d02-9419cbf08f4e",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "下面代码中，sum 的值是什么？",
+    "desc": "```javascript\nconst sum = eval('10*10+5')\n```",
+    "options": "{\"options\":[\"105\",\"\\\"105\\\"\",\"TypeError\",\"\\\"10*10+5\\\"\"],\"isMulti\":false,\"answer\":[0]}",
+    "explanation": "代码以字符串形式传递进来，`eval` 对其求值。如果它是一个表达式，就像本例中那样，它对表达式求值。表达式是 `10 * 10 + 5`。这将返回数字 `105`。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2022-01-09T13:09:07.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 685,
+    "prev": "efc1c0ee-16ae-4c57-bef7-324a7747919c",
+    "next": "643af0aa-f567-45df-89ac-aaa8b4d8f927"
+  },
+  "post": {
+    "exerciseKey": "8d375b34-4323-48a3-9d02-9419cbf08f4e",
+    "category": "Choice",
+    "title": "下面代码中，sum 的值是什么？",
+    "level": 0.5,
+    "updateAt": "2022-01-09T13:09:07+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

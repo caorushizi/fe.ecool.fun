@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 113,
+    "exerciseKey": "943c425e-0b59-4ef6-b22d-6596c19a962a",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "哪些方法修改了原数组?",
+    "desc": "```javascript\nconst emojis = ['✨', '🥑', '😍']\n\nemojis.map(x => x + '✨')\nemojis.filter(x => x !== '🥑')\nemojis.find(x => x !== '🥑')\nemojis.reduce((acc, cur) => acc + '✨')\nemojis.slice(1, 2, '✨') \nemojis.splice(1, 2, '✨')\n```",
+    "options": "{\"options\":[\"All of them\",\"map reduce slice splice\",\"map slice splice\",\"splice\"],\"isMulti\":false,\"answer\":[3]}",
+    "explanation": "使用`splice`方法，我们通过删除，替换或添加元素来修改原始数组。 在这种情况下，我们从索引1中删除了2个元素（我们删除了`'🥑'`和`'😍'`），同时添加了✨emoji表情。\n`map`，`filter`和`slice`返回一个新数组，`find`返回一个元素，而`reduce`返回一个减小的值。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:29:14.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1099,
+    "prev": "c7c6762f-bc84-4b0c-9f05-79072db1e1ea",
+    "next": "8769cc70-a32f-4b69-893d-40e819dd6c5f"
+  },
+  "post": {
+    "exerciseKey": "943c425e-0b59-4ef6-b22d-6596c19a962a",
+    "category": "Choice",
+    "title": "哪些方法修改了原数组?",
+    "level": 1,
+    "updateAt": "2021-07-03T22:29:14+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

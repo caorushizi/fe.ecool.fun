@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 661,
+    "exerciseKey": "637b0af3-e1e1-42c0-9825-e34aa0a4e4a0",
+    "category": "QA",
+    "renderType": "md",
+    "title": "说说你对React Router的理解？常用的Router组件有哪些？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 一、是什么\n\n`react-router`等前端路由的原理大致相同，可以实现无刷新的条件下切换显示不同的页面\n\n路由的本质就是页面的`URL`发生改变时，页面的显示结果可以根据`URL`的变化而变化，但是页面不会刷新\n\n因此，可以通过前端路由可以实现单页(SPA)应用\n\n`react-router`主要分成了几个不同的包：\n\n- react-router: 实现了路由的核心功能\n- react-router-dom： 基于 react-router，加入了在浏览器运行环境下的一些功能\n- react-router-native：基于 react-router，加入了 react-native 运行环境下的一些功能\n\n- react-router-config: 用于配置静态路由的工具库\n\n\n\n\n\n## 二、有哪些\n\n这里主要讲述的是`react-router-dom`的常用`API`，主要是提供了一些组件：\n\n- BrowserRouter、HashRouter\n- Route\n- Link、NavLink\n- switch\n- redirect\n\n\n\n### BrowserRouter、HashRouter\n\n`Router`中包含了对路径改变的监听，并且会将相应的路径传递给子组件\n\n`BrowserRouter`是`history`模式，`HashRouter`模式\n\n使用两者作为最顶层组件包裹其他组件\n\n```jsx\nimport { BrowserRouter as Router } from \"react-router-dom\";\n\nexport default function App() {\n  return (\n    <Router>\n      <main>\n        <nav>\n          <ul>\n            <li>\n              < a href=\" \">Home</ a>\n            </li>\n            <li>\n              < a href=\"/about\">About</ a>\n            </li>\n            <li>\n              < a href=\"/contact\">Contact</ a>\n            </li>\n          </ul>\n        </nav>\n      </main>\n    </Router>\n  );\n}\n```\n\n\n\n### Route\n\n`Route`用于路径的匹配，然后进行组件的渲染，对应的属性如下：\n\n- path 属性：用于设置匹配到的路径\n- component 属性：设置匹配到路径后，渲染的组件\n- render 属性：设置匹配到路径后，渲染的内容\n- exact 属性：开启精准匹配，只有精准匹配到完全一致的路径，才会渲染对应的组件\n\n```jsx\nimport { BrowserRouter as Router, Route } from \"react-router-dom\";\n\nexport default function App() {\n  return (\n    <Router>\n      <main>\n        <nav>\n          <ul>\n            <li>\n              < a href=\"/\">Home</ a>\n            </li>\n            <li>\n              < a href=\"/about\">About</ a>\n            </li>\n            <li>\n              < a href=\"/contact\">Contact</ a>\n            </li>\n          </ul>\n        </nav>\n        <Route path=\"/\" render={() => <h1>Welcome!</h1>} />\n      </main>\n    </Router>\n  );\n}\n```\n\n\n\n\n\n### Link、NavLink\n\n通常路径的跳转是使用`Link`组件，最终会被渲染成`a`元素，其中属性`to`代替`a`标题的`href`属性\n\n`NavLink`是在`Link`基础之上增加了一些样式属性，例如组件被选中时，发生样式变化，则可以设置`NavLink`的一下属性：\n\n- activeStyle：活跃时（匹配时）的样式\n- activeClassName：活跃时添加的class\n\n如下：\n\n```js\n<NavLink to=\"/\" exact activeStyle={{color: \"red\"}}>首页</NavLink>\n<NavLink to=\"/about\" activeStyle={{color: \"red\"}}>关于</NavLink>\n<NavLink to=\"/profile\" activeStyle={{color: \"red\"}}>我的</NavLink>\n```\n\n如果需要实现`js`实现页面的跳转，那么可以通过下面的形式：\n\n通过`Route`作为顶层组件包裹其他组件后,页面组件就可以接收到一些路由相关的东西，比如`props.history`\n\n```jsx\nconst Contact = ({ history }) => (\n  <Fragment>\n    <h1>Contact</h1>\n    <button onClick={() => history.push(\"/\")}>Go to home</button>\n    <FakeText />\n  </Fragment>\n);\n```\n\n`props `中接收到的`history`对象具有一些方便的方法，如`goBack`，`goForward`,`push`\n\n\n\n### redirect\n\n用于路由的重定向，当这个组件出现时，就会执行跳转到对应的`to`路径中，如下例子：\n\n```js\nconst About = ({\n  match: {\n    params: { name },\n  },\n}) => (\n  // props.match.params.name\n  <Fragment>\n    {name !== \"tom\" ? <Redirect to=\"/\" /> : null}\n    <h1>About {name}</h1>\n    <FakeText />\n  </Fragment>\n)\n```\n\n上述组件当接收到的路由参数`name` 不等于 `tom` 的时候，将会自动重定向到首页\n\n\n\n\n\n### switch\n\n`swich`组件的作用适用于当匹配到第一个组件的时候，后面的组件就不应该继续匹配\n\n如下例子：\n\n```jsx\n<Switch>\n  <Route exact path=\"/\" component={Home} />\n  <Route path=\"/about\" component={About} />\n  <Route path=\"/profile\" component={Profile} />\n  <Route path=\"/:userid\" component={User} />\n  <Route component={NoMatch} />\n</Switch>\n```\n\n如果不使用`switch`组件进行包裹，相同 path 的就会被匹配到，然后一起展示。\n\n\n除了一些路由相关的组件之外，`react-router`还提供一些`hooks`，如下：\n\n- useHistory\n- useParams\n- useLocation\n\n\n\n### useHistory\n\n`useHistory`可以让组件内部直接访问`history`，无须通过`props`获取\n\n```js\nimport { useHistory } from \"react-router-dom\";\n\nconst Contact = () => {\n  const history = useHistory();\n  return (\n    <Fragment>\n      <h1>Contact</h1>\n      <button onClick={() => history.push(\"/\")}>Go to home</button>\n    </Fragment>\n  );\n};\n```\n\n\n\n### useParams\n\n\n\n```jsx\nconst About = () => {\n  const { name } = useParams();\n  return (\n    // props.match.params.name\n    <Fragment>\n      {name !== \"John Doe\" ? <Redirect to=\"/\" /> : null}\n      <h1>About {name}</h1>\n      <Route component={Contact} />\n    </Fragment>\n  );\n};\n```\n\n\n\n### useLocation\n\n`useLocation` 会返回当前 `URL `的 `location `对象\n\n```jsx\nimport { useLocation } from \"react-router-dom\";\n\nconst Contact = () => {\n  const { pathname } = useLocation();\n\n  return (\n    <Fragment>\n      <h1>Contact</h1>\n      <p>Current URL: {pathname}</p >\n    </Fragment>\n  );\n};\n```\n\n\n\n\n\n## 三、参数传递\n\n这些路由传递参数主要分成了三种形式：\n\n- 动态路由的方式\n- search传递参数\n- to传入对象\n\n\n\n### 动态路由\n\n动态路由的概念指的是路由中的路径并不会固定\n\n例如将`path`在`Route`匹配时写成`/detail/:id`，那么 `/detail/abc`、`/detail/123`都可以匹配到该`Route`\n\n```jsx\n<NavLink to=\"/detail/abc123\">详情</NavLink>\n\n<Switch>\n    ... 其他Route\n    <Route path=\"/detail/:id\" component={Detail}/>\n    <Route component={NoMatch} />\n</Switch>\n```\n\n获取参数方式如下：\n\n```jsx\nconsole.log(props.match.params.xxx)\n```\n\n\n\n### search传递参数\n\n在跳转的路径中添加了一些query参数；\n\n```jsx\n<NavLink to=\"/detail2?name=why&age=18\">详情2</NavLink>\n\n<Switch>\n  <Route path=\"/detail2\" component={Detail2}/>\n</Switch>\n```\n\n获取形式如下：\n\n```js\nconsole.log(props.location.search)\n```\n\n\n\n\n\n### to传入对象\n\n传递方式如下：\n\n```jsx\n<NavLink to={{\n    pathname: \"/detail2\", \n    query: {name: \"kobe\", age: 30},\n    state: {height: 1.98, address: \"洛杉矶\"},\n    search: \"?apikey=123\"\n  }}>\n  详情2\n</NavLink>\n```\n\n获取参数的形式如下：\n\n```js\nconsole.log(props.location)\n```\n",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-10-24T04:28:13.000Z",
+    "updateAt": "2023-03-26T08:40:51.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 413,
+    "prev": "023f27d0-f90b-446d-bd6c-293e95f9c9b8",
+    "next": "2b68a2b5-ab3a-4de4-af48-43ab5f7e99f8"
+  },
+  "post": {
+    "exerciseKey": "637b0af3-e1e1-42c0-9825-e34aa0a4e4a0",
+    "category": "QA",
+    "title": "说说你对React Router的理解？常用的Router组件有哪些？",
+    "level": 2,
+    "updateAt": "2023-03-26T08:40:51+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

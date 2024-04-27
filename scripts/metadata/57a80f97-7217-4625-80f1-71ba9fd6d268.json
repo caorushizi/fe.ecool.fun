@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 367,
+    "exerciseKey": "57a80f97-7217-4625-80f1-71ba9fd6d268",
+    "category": "QA",
+    "renderType": "html",
+    "title": "options请求方法及使用场景",
+    "desc": null,
+    "options": null,
+    "explanation": "<p style=\"text-align:left;text-indent:2em;\">OPTIONS是除了GET和POST之外的其中一种 HTTP请求方法。</p><p style=\"text-align:left;text-indent:2em;\">OPTIONS方法是用于请求获得由<code>Request-URI</code>标识的资源在请求/响应的通信过程中可以使用的功能选项。通过这个方法，客户端可以<strong>在采取具体资源请求之前，决定对该资源采取何种必要措施，或者了解服务器的性能</strong>。该请求方法的响应不能缓存。</p><p style=\"text-align:left;text-indent:2em;\">OPTIONS请求方法的<strong>主要用途</strong>有两个：</p><ul><li>获取服务器支持的所有HTTP请求方法；</li><li>用来检查访问权限。例如：JS 的 XMLHttpRequest对象进行 CORS 跨域资源共享时，对于复杂请求，就是使用 OPTIONS 方法发送嗅探请求，以判断是否有对指定资源的访问权限。</li></ul><p></p>",
+    "level": 1.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T15:51:22.000Z",
+    "updateAt": "2021-07-07T00:09:36.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 968,
+    "prev": "48502771-0558-47ba-84f6-00b0f3395236",
+    "next": "d7b4d0ce-dc04-4989-9244-88276318b6db"
+  },
+  "post": {
+    "exerciseKey": "57a80f97-7217-4625-80f1-71ba9fd6d268",
+    "category": "QA",
+    "title": "options请求方法及使用场景",
+    "level": 1.5,
+    "updateAt": "2021-07-07T00:09:36+00:00"
+  },
+  "tag": {
+    "id": 16,
+    "tagName": "计算机网络",
+    "type": "1",
+    "exerciseCount": 72
+  }
+}

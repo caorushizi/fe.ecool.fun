@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 572,
+    "exerciseKey": "394752d7-88aa-4512-bd7e-91711a3904b7",
+    "category": "QA",
+    "renderType": "md",
+    "title": "mete标签中的viewport 有什么用？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 什么是 Viewport?\n\nviewport 是用户网页的可视区域。\n\nviewport 翻译为中文可以叫做\"视区\"。\n\n手机浏览器是把页面放在一个虚拟的\"窗口\"（viewport）中，通常这个虚拟的\"窗口\"（viewport）比屏幕宽，这样就不用把每个网页挤到很小的窗口中（这样会破坏没有针对手机浏览器优化的网页的布局），用户可以通过平移和缩放来看网页的不同部分。\n\n## 设置 Viewport\n\n一个常用的针对移动网页优化过的页面的 viewport meta 标签大致如下：\n\n```html\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n```\n\n* width：控制 viewport 的大小，可以指定的一个值，如 600，或者特殊的值，如 device-width 为设备的宽度（单位为缩放为 100% 时的 CSS 的像素）。\n* height：和 width 相对应，指定高度。\n* initial-scale：初始缩放比例，也即是当页面第一次 load 的时候缩放比例。\n* maximum-scale：允许用户缩放到的最大比例。\n* minimum-scale：允许用户缩放到的最小比例。\n* user-scalable：用户是否可以手动缩放。",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-08-02T02:10:22.000Z",
+    "updateAt": "2021-08-08T18:50:53.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 798,
+    "prev": "09420ad4-4cd0-4c3d-9b56-970e21c8f208",
+    "next": "286f67d3-4e8d-48f5-962a-ed9cccc46335"
+  },
+  "post": {
+    "exerciseKey": "394752d7-88aa-4512-bd7e-91711a3904b7",
+    "category": "QA",
+    "title": "mete标签中的viewport 有什么用？",
+    "level": 2,
+    "updateAt": "2021-08-08T18:50:53+00:00"
+  },
+  "tag": {
+    "id": 12,
+    "tagName": "HTML",
+    "type": "1",
+    "exerciseCount": 57
+  }
+}

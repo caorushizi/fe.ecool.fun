@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 449,
+    "exerciseKey": "7f816cdc-b5e8-4939-9c85-004a4110210c",
+    "category": "QA",
+    "renderType": "md",
+    "title": "小程序 WXSS  与 CSS 的区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "* `wxss` 背景图片只能引入外链，不能使用本地图片\n* 小程序样式使用 `@import` 引入 外联样式文件，地址为相对路径。\n* 尺寸单位为  `rpx` , `rpx` 是响应式像素,可以根据屏幕宽度进行自适应。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-07T14:35:49.000Z",
+    "updateAt": "2021-07-11T10:53:17.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 899,
+    "prev": "17b59078-ccef-4190-9282-60805ddf6b3f",
+    "next": "66ee2368-475e-403c-afb2-2c3fd693a843"
+  },
+  "post": {
+    "exerciseKey": "7f816cdc-b5e8-4939-9c85-004a4110210c",
+    "category": "QA",
+    "title": "小程序 WXSS  与 CSS 的区别？",
+    "level": 0.5,
+    "updateAt": "2021-07-11T10:53:17+00:00"
+  },
+  "tag": {
+    "id": 23,
+    "tagName": "小程序",
+    "type": "1",
+    "exerciseCount": 9
+  }
+}

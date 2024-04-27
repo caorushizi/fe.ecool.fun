@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1767,
+    "exerciseKey": "5cb7ee1c-c527-40f9-b00b-eb65bde48657",
+    "category": "QA",
+    "renderType": "md",
+    "title": "第二个子元素的高度是多少",
+    "desc": "```html\n<div class=\"container\">\n    <div style=\"height: 100px\"></div>\n    <div style=\"min-height: 10px\"></div>\n</div>\n<style>\n    .container{\n        display: flex;\n    }\n    .container > div {\n        width: 100px;\n    }\n</style>\n```",
+    "options": null,
+    "explanation": "答案：100px\n\nFlex 布局会默认：\n\n* 把所有子项变成水平排列。\n* 默认不自动换行。\n* 让子项与其内容等宽，并把所有子项的高度变为最高子项的高度。\n\n> 本答案由“前端面试题宝典”收集整理，PC端访问请前往： https://fe.ecool.fun/ ",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-04-10T07:57:16.000Z",
+    "updateAt": "2022-04-10T15:57:18.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 563,
+    "prev": "a8c7e778-4bc6-40f2-ba07-865a4b2200aa",
+    "next": "5893d2cc-0ce2-473b-9d42-341860dfdec9"
+  },
+  "post": {
+    "exerciseKey": "5cb7ee1c-c527-40f9-b00b-eb65bde48657",
+    "category": "QA",
+    "title": "第二个子元素的高度是多少",
+    "level": 1,
+    "updateAt": "2022-04-10T15:57:18+00:00"
+  },
+  "tag": {
+    "id": 11,
+    "tagName": "CSS",
+    "type": "1",
+    "exerciseCount": 90
+  }
+}

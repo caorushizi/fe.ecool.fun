@@ -1,0 +1,632 @@
+<!doctype html>
+<html>
+  <head>
+    <title data-react-helmet="true">
+      async、await 实现原理- 题目详情 - 前端面试题宝典
+    </title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="fe,interview,前端,面试,面试题" />
+    <meta
+      name="description"
+      content="《前端面试题宝典》的目标是做全网最专业的的前端面试题库，为初、中级前端工程师提供面试题的刷题及面试技巧指导服务"
+    />
+    <link rel="icon" href="/fe.ico" type="image/x-icon" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?dd94ee499774a75a66365f9ea9d0b8fd";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+    <link rel="stylesheet" href="/umi.3f4ea44e.css" />
+    <script>
+      window.routerBase = "/";
+    </script>
+    <script>
+      //! umi version: 3.5.20
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <header class="header___1E4MV">
+        <div class="headerContent___176Qp">
+          <div class="leftBox___2LdvG">
+            <a href="/" title="前端面试题宝典"
+              ><img
+                class="logo___R8PNJ"
+                src="data:image/jpeg;base64,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"
+                alt="前端面试题宝典"
+            /></a>
+            <ul
+              class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-light"
+              role="menu"
+              tabindex="0"
+              data-menu-list="true"
+            >
+              <li
+                class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                style="opacity: 1; order: 0"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="ant-menu-title-content"><a href="/">首页</a></span>
+              </li>
+              <li
+                class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                style="opacity: 1; order: 1"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="ant-menu-title-content"
+                  ><a href="/topic-list" target="_blank">刷题</a></span
+                >
+              </li>
+              <li
+                class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                style="opacity: 1; order: 2"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="ant-menu-title-content"
+                  ><a href="/articles/interview" target="_blank">面经</a></span
+                >
+              </li>
+              <li
+                class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                style="opacity: 1; order: 3"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="ant-menu-title-content"
+                  ><a href="/articles/technology" target="_blank"
+                    >技术文章</a
+                  ></span
+                >
+              </li>
+              <li
+                class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                style="opacity: 1; order: 4"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="ant-menu-title-content"
+                  ><a href="/articles/skill" target="_blank">面试技巧</a></span
+                >
+              </li>
+              <li
+                class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                style="opacity: 1; order: 5"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="ant-menu-title-content"
+                  ><a href="/feedback?type=2" target="_blank">题库共建</a></span
+                >
+              </li>
+              <li
+                class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                style="opacity: 1; order: 6"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="ant-menu-title-content"
+                  ><a class="valueAdded___2lXAb" href="/coach" target="_blank"
+                    >辅导服务<img
+                      class="new___1QsIe"
+                      src="data:image/png;base64,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"
+                      alt="hot" /></a
+                ></span>
+              </li>
+              <li
+                class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child"
+                style="opacity: 1; order: 7"
+                role="menuitem"
+                tabindex="-1"
+              >
+                <span class="ant-menu-title-content"
+                  ><a href="/business" target="_blank">商业合作</a></span
+                >
+              </li>
+              <li
+                class="ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal"
+                style="
+                  opacity: 0;
+                  height: 0;
+                  overflow-y: hidden;
+                  order: 9007199254740991;
+                  pointer-events: none;
+                  position: absolute;
+                "
+                aria-hidden="true"
+                role="none"
+              >
+                <div
+                  role="menuitem"
+                  class="ant-menu-submenu-title"
+                  tabindex="-1"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <span
+                    role="img"
+                    aria-label="ellipsis"
+                    class="anticon anticon-ellipsis"
+                    ><svg
+                      viewBox="64 64 896 896"
+                      focusable="false"
+                      data-icon="ellipsis"
+                      width="1em"
+                      height="1em"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+                      ></path></svg></span
+                  ><i class="ant-menu-submenu-arrow"></i>
+                </div>
+              </li>
+            </ul>
+            <div style="display: none" aria-hidden="true"></div>
+          </div>
+          <div class="rightHeader___24PN5">
+            <span
+              class="ant-input-group-wrapper ant-input-search"
+              style="width: 200px"
+              ><span class="ant-input-wrapper ant-input-group"
+                ><input
+                  type="text"
+                  placeholder="关键字搜索面试题"
+                  class="ant-input"
+                  value="" /><span class="ant-input-group-addon"
+                  ><button
+                    type="button"
+                    class="ant-btn ant-btn-icon-only ant-input-search-button"
+                  >
+                    <span
+                      role="img"
+                      aria-label="search"
+                      class="anticon anticon-search"
+                      ><svg
+                        viewBox="64 64 896 896"
+                        focusable="false"
+                        data-icon="search"
+                        width="1em"
+                        height="1em"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+                        ></path></svg
+                    ></span></button></span></span
+            ></span>
+            <div class="mineBox___15JyH">
+              <button type="button" class="ant-btn ant-btn-primary">
+                <span>登 录</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="content-container detailBox___3lvLy">
+        <div>
+          <h2 class="title___3qmX3">
+            <span
+              class="ant-tag ant-tag-blue"
+              style="vertical-align: text-bottom"
+              >问答题</span
+            ><span>第<!-- -->1<!-- -->题：</span
+            ><span>async、await 实现原理</span>
+          </h2>
+          <div class="secondBox___2B0S4">
+            <div>
+              难度：
+              <ul
+                class="ant-rate ant-rate-disabled"
+                style="font-size: 16px"
+                tabindex="-1"
+                role="radiogroup"
+              >
+                <li class="ant-rate-star ant-rate-star-full">
+                  <div
+                    role="radio"
+                    aria-checked="true"
+                    aria-posinset="1"
+                    aria-setsize="5"
+                    tabindex="-1"
+                  >
+                    <div class="ant-rate-star-first">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                    <div class="ant-rate-star-second">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                  </div>
+                </li>
+                <li class="ant-rate-star ant-rate-star-full">
+                  <div
+                    role="radio"
+                    aria-checked="true"
+                    aria-posinset="2"
+                    aria-setsize="5"
+                    tabindex="-1"
+                  >
+                    <div class="ant-rate-star-first">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                    <div class="ant-rate-star-second">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                  </div>
+                </li>
+                <li class="ant-rate-star ant-rate-star-full">
+                  <div
+                    role="radio"
+                    aria-checked="true"
+                    aria-posinset="3"
+                    aria-setsize="5"
+                    tabindex="-1"
+                  >
+                    <div class="ant-rate-star-first">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                    <div class="ant-rate-star-second">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                  </div>
+                </li>
+                <li class="ant-rate-star ant-rate-star-full">
+                  <div
+                    role="radio"
+                    aria-checked="true"
+                    aria-posinset="4"
+                    aria-setsize="5"
+                    tabindex="-1"
+                  >
+                    <div class="ant-rate-star-first">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                    <div class="ant-rate-star-second">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                  </div>
+                </li>
+                <li class="ant-rate-star ant-rate-star-zero">
+                  <div
+                    role="radio"
+                    aria-checked="false"
+                    aria-posinset="5"
+                    aria-setsize="5"
+                    tabindex="-1"
+                  >
+                    <div class="ant-rate-star-first">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                    <div class="ant-rate-star-second">
+                      <span
+                        role="img"
+                        aria-label="star"
+                        class="anticon anticon-star"
+                        ><svg
+                          viewBox="64 64 896 896"
+                          focusable="false"
+                          data-icon="star"
+                          width="1em"
+                          height="1em"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 00.6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0046.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"
+                          ></path></svg
+                      ></span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <span>更新时间：<!-- -->2024-03-28</span>
+          </div>
+          <button
+            type="button"
+            class="ant-btn ant-btn-primary ant-btn-lg answerBtn___3rwds"
+          >
+            <span>查看答案</span>
+          </button>
+          <div class="footerBox___3BsGT">
+            <div class="footerContent___1m_7r">
+              <a
+                href="/topic-answer/29821d8e-dc41-4581-91fe-9fde7658a559?orderBy=updateTime&amp;order=desc&amp;tagId=0"
+                title="背题模式会默认展示题目和答案"
+                class="ant-btn ant-btn-link ant-btn-lg bottomBtn___2swFb"
+                ><span>切换至背题模式</span></a
+              >
+              <div>
+                <a
+                  style="margin-right: 20px"
+                  href="/topic/?orderBy=updateTime&amp;order=desc&amp;tagId=0"
+                  disabled=""
+                  class="ant-btn ant-btn-lg bottomBtn___2swFb"
+                  ><span>上一题</span></a
+                ><a
+                  style="margin-right: 20px"
+                  href="/topic/26e22fa9-becc-4552-b79a-da2f67451455?orderBy=updateTime&amp;order=desc&amp;tagId=0"
+                  class="ant-btn ant-btn-primary ant-btn-lg bottomBtn___2swFb"
+                  ><span>下一题</span></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="leftTools___36UaQ"></div>
+      <div class="rightTools___oO97e">
+        <div class="contentBox___1u0k-">
+          <h3>赞赏支持</h3>
+          <div>
+            <div>
+              <div class="ant-image" style="width: 150px; height: 150px">
+                <img
+                  class="ant-image-img"
+                  style="height: 150px"
+                  src="/static/fe-appreciate-mini.049000fc.png"
+                />
+                <div class="ant-image-mask">
+                  <div class="ant-image-mask-info">
+                    <span
+                      role="img"
+                      aria-label="eye"
+                      class="anticon anticon-eye"
+                      ><svg
+                        viewBox="64 64 896 896"
+                        focusable="false"
+                        data-icon="eye"
+                        width="1em"
+                        height="1em"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"
+                        ></path></svg></span
+                    >预览
+                  </div>
+                </div>
+              </div>
+              <p class="contentText___1z3oO">
+                题库维护不易，您的支持就是我们最大的动力！
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="bottomBtns___1trts">
+          <a
+            class="btn___gEEjn"
+            title="题目答案问题反馈"
+            target="_blank"
+            href="/feedback?type=1&amp;exerciseId=1772"
+            ><span
+              role="img"
+              aria-label="warning"
+              style="font-size: 20px; color: #8a919f"
+              class="anticon anticon-warning"
+              ><svg
+                viewBox="64 64 896 896"
+                focusable="false"
+                data-icon="warning"
+                width="1em"
+                height="1em"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M955.7 856l-416-720c-6.2-10.7-16.9-16-27.7-16s-21.6 5.3-27.7 16l-416 720C56 877.4 71.4 904 96 904h832c24.6 0 40-26.6 27.7-48zM480 416c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V416zm32 352a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+                ></path></svg></span
+          ></a>
+          <div class="ant-back-top toTopBtn___25xQ0"></div>
+        </div>
+      </div>
+      <footer class="footerBox___2vTrt">
+        <p class="recordInfo___veGKL">
+          ©2021-<!-- -->2024<!-- -->
+          <!-- -->前端面试题宝典<!-- -->
+          . All rights reserved.
+        </p>
+        <p class="recordInfo___veGKL">京ICP备18058343号</p>
+      </footer>
+    </div>
+    <script>
+      window.g_useSSR = true;
+      window.g_initialProps = {
+        data: {
+          id: 1772,
+          exerciseKey: "29821d8e-dc41-4581-91fe-9fde7658a559",
+          category: "QA",
+          renderType: "md",
+          title: "async、await 实现原理",
+          desc: null,
+          options: null,
+          explanation:
+            "# JavaScript 异步编程回顾\n\n由于 JavaScript 是单线程执行模型，因此必须支持异步编程才能提高运行效率。异步编程的语法目标是让异步过程写起来像同步过程。\n\n## 1. 回调函数\n\n回调函数，就是把任务的第二段单独写在一个函数里面，等到重新执行这个任务的时候，就直接调用这个函数。\n\n```js\nconst fs = require('fs')\nfs.readFile('\u002Fetc\u002Fpasswd', (err, data) =\u003E {\n  if (err) {\n    console.error(err)\n    return\n  }\n  console.log(data.toString())\n})\n```\n\n回调函数最大的问题是容易形成回调地狱，即多个回调函数嵌套，降低代码可读性，增加逻辑的复杂性，容易出错。\n\n```js\nfs.readFile(fileA, function (err, data) {\n  fs.readFile(fileB, function (err, data) {\n    \u002F\u002F ...\n  })\n})\n```\n\n## 2. Promise\n\n为解决回调函数的不足，社区创造出 Promise。\n\n```js\nconst fs = require('fs')\n\nconst readFileWithPromise = file =\u003E {\n  return new Promise((resolve, reject) =\u003E {\n    fs.readFile(file, (err, data) =\u003E {\n      if (err) {\n        reject(err)\n      } else {\n        resolve(data)\n      }\n    })\n  })\n}\n\nreadFileWithPromise('\u002Fetc\u002Fpasswd')\n  .then(data =\u003E {\n    console.log(data.toString())\n    return readFileWithPromise('\u002Fetc\u002Fprofile')\n  })\n  .then(data =\u003E {\n    console.log(data.toString())\n  })\n  .catch(err =\u003E {\n    console.log(err)\n  })\n```\n\n简单的 Promise 实现，窥探下本质\n\nPromise 实际上是利用编程技巧将回调函数的横向加载，改成纵向加载，达到链式调用的效果，避免回调地狱。最大问题是代码冗余，原来的任务被 Promise 包装了一下，不管什么操作，一眼看去都是一堆 then，原来的语义变得很不清楚。\n\n## 3. async、await\n\n为了解决 Promise 的问题，async、await 在 ES8 中被提了出来，是目前为止最好的解决方案\n\n```js\nconst fs = require('fs')\nasync function readFile() {\n  try {    \n    var f1 = await readFileWithPromise('\u002Fetc\u002Fpasswd')\n    console.log(f1.toString())\n    var f2 = await readFileWithPromise('\u002Fetc\u002Fprofile')\n    console.log(f2.toString())\n  } catch (err) {\n    console.log(err)\n  }\n}\\\n```\n\nasync、await 函数写起来跟同步函数一样，条件是需要接收 Promise 或原始类型的值。异步编程的最终目标是转换成人类最容易理解的形式。\n\n# async、await\n\n分析 async、await 实现原理之前，先介绍下预备知识\n\n## 1. generator\n\ngenerator 函数是协程在 ES6 的实现。协程简单来说就是多个线程互相协作，完成异步任务。\n\n![image-1-1620701628067.png](https:\u002F\u002Fstatic.ecool.fun\u002F\u002Farticle\u002F466ad367-1f3f-4f4c-8fa1-bd5dace7bbb7.jpeg)\n\n整个 generator 函数就是一个封装的异步任务，异步操作需要暂停的地方，都用 yield 语句注明。generator 函数的执行方法如下：\n\n```js\nfunction* gen(x) {\n  console.log('start')\n  const y = yield x * 2\n  return y\n}\n\nconst g = gen(1)\ng.next()   \u002F\u002F start { value: 2, done: false }\ng.next(4)  \u002F\u002F { value: 4, done: true }\n```\n\n* `gen()` 不会立即执行，而是一上来就暂停，返回一个 `Iterator` 对象（具体可以参考 [Iterator遍历器](https:\u002F\u002Flink.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fwangfupeng1988%2Fjs-async-tutorial%2Fblob%2Fmaster%2Fpart4-generator%2F02-iterator.md \"https:\u002F\u002Fgithub.com\u002Fwangfupeng1988\u002Fjs-async-tutorial\u002Fblob\u002Fmaster\u002Fpart4-generator\u002F02-iterator.md\") ）\n* 每次 `g.next()` 都会打破暂停状态去执行，直到遇到下一个 `yield` 或者 `return`\n* 遇到 `yield` 时，会执行 `yield` 后面的表达式，并返回执行之后的值，然后再次进入暂停状态，此时 `done: false` 。\n* `next` 函数可以接受参数，作为上个阶段异步任务的返回结果，被函数体内的变量接收\n* 遇到 `return` 时，会返回值，执行结束，即 `done: true`\n* 每次 `g.next()` 的返回值永远都是 `{value: ... , done: ...}` 的形式\n\n## 2. thunk函数\n\nJavaScript 中的 thunk 函数（译为转换程序）简单来说就是把带有回调函数的多参数函数转换成只接收回调函数的单参数版本\n\n```js\nconst fs = require('fs')\nconst thunkify = fn =\u003E (...rest) =\u003E callback =\u003E fn(...rest, callback)\nconst thunk = thunkify(fs.readFile)\nconst readFileThunk = thunk('\u002Fetc\u002Fpasswd', 'utf8')\nreadFileThunk((err, data) =\u003E {\n   \u002F\u002F ...\n})\n```\n\n单纯的 thunk 函数并没有很大的用处， 大牛们想到了和 generator 结合：\n\n```js\nfunction* readFileThunkWithGen() {\n  try {\n    const content1 = yield readFileThunk('\u002Fetc\u002Fpasswd', 'utf8')\n    console.log(content1)\n    const content2 = yield readFileThunk('\u002Fetc\u002Fprofile', 'utf8')\n    console.log(content2)\n    return 'done'\n  } catch (err) {\n    console.error(err)\n    return 'fail'\n  }  \n}\n\nconst g = readFileThunkWithGen()\ng.next().value((err, data) =\u003E {\n  if (err) {\n    return g.throw(err).value\n  }\n  g.next(data.toString()).value((err, data) =\u003E {\n    if (err) {\n      return g.throw(err).value\n    }\n    g.next(data.toString())\n  })\n})\n```\n\nthunk 函数的真正作用是统一多参数函数的调用方式，在 next 调用时把控制权交还给 generator，使 generator 函数可以使用递归方式自启动流程\n\n```js\nconst run = generator =\u003E {\n  const g = generator()\n  const next = (err, ...rest) =\u003E {\n    if (err) {\n      return g.throw(err).value\n    }\n    const result = g.next(rest.length \u003E 1 ? rest : rest[0])\n    if (result.done) {\n      return result.value\n    }\n    result.value(next)\n  }\n  next()\n}\nrun(readFileThunkWithGen)\n```\n\n有了自启动的加持之后，generator 函数内就可以写\"同步\"的代码了。generator 函数也可以与 Promise 结合：\n\n```js\nfunction* readFileWithGen() {\n  try {    \n    const content1 = yield readFileWithPromise('\u002Fetc\u002Fpasswd', 'utf8')\n    console.log(content1)\n    const content2 = yield readFileWithPromise('\u002Fetc\u002Fprofile', 'utf8')\n    console.log(content2)\n    return 'done'\n  } catch (err) {\n    console.error(err)\n    return 'fail'\n  }\n}\n\nconst run = generator =\u003E {\n  return new Promise((resolve, reject) =\u003E {\n    const g = generator()\n    const next = res =\u003E {\n      const result = g.next(res)\n      if (result.done) {\n        return resolve(result.value)\n      }\n      result.value\n        .then(\n          next,\n          err =\u003E reject(gen.throw(err).value)\n        )\n    }\n    next()\n  })\n}\n\nrun(readFileWithGen)\n  .then(res =\u003E console.log(res))\n  .catch(err =\u003E console.log(err))\n```\n\ngenerator 可以暂停执行，很容易让它和异步操作产生联系，因为我们在处理异步操作时，在等待的时候可以暂停当前任务，把程序控制权交还给其他程序，当异步任务有返回时，在回调中再把控制权交还给之前的任务。generator 实际上并没有改变 JavaScript 单线程、使用回调处理异步任务的本质。\n\n## 3. co 函数库\n\n每次执行 generator 函数时自己写启动器比较麻烦。 [co函数库](https:\u002F\u002Fgithub.com\u002Ftj\u002Fco) 是一个 generator 函数的自启动执行器，使用条件是 generator 函数的 yield 命令后面，只能是 thunk 函数或 Promise 对象，co 函数执行完返回一个 Promise 对象。\n\n```js\nconst co = require('co')\nco(readFileWithGen).then(res =\u003E console.log(res)) \u002F\u002F 'done'\nco(readFileThunkWithGen).then(res =\u003E console.log(res)) \u002F\u002F 'done'\n```\n\nco 函数库的源码实现其实就是把上面两种情况做了综合:\n\n```js\n\u002F\u002F 做了简化，与源码基本一致\nconst co = (generator, ...rest) =\u003E {\n  const ctx = this\n  return new Promise((resolve, reject) =\u003E {\n    const gen = generator.call(ctx, ...rest)\n    if (!gen || typeof gen.next !== 'function') {\n      return resolve(gen)\n    } \n    \n    const onFulfilled = res =\u003E {\n      let ret\n      try {\n        ret = gen.next(res)\n      } catch (e) {\n        return reject(e)\n      }\n      next(ret)\n    }    \n\n    const onRejected = err =\u003E {\n      let ret\n      try {\n        ret = gen.throw(err)\n      } catch (e) {\n        return reject(e)\n      }\n      next(ret)\n    }\n\n    const next = result =\u003E {\n      if (result.done) {\n        return resolve(result.value)\n      }\n      toPromise(result.value).then(onFulfilled, onRejected)\n    }\n\n    onFulfilled()\n  })  \n}\n\nconst toPromise = value =\u003E {\n  if (isPromise(value)) return value\n  if ('function' == typeof value) {\n    return new Promise((resolve, reject) =\u003E {\n      value((err, ...rest) =\u003E {\n        if (err) {\n          return reject(err)\n        }\n        resolve(rest.length \u003E 1 ? rest : rest[0])\n      })\n    })\n  }\n}\n\n```\n\n## 4. 理解 async、await\n\n一句话，async、await 是 co 库的官方实现。也可以看作自带启动器的 generator 函数的语法糖。不同的是，async、await 只支持 Promise 和原始类型的值，不支持 thunk 函数。\n\n```js\n\u002F\u002F generator with co\nco(function* () {\n  try {    \n    const content1 = yield readFileWithPromise('\u002Fetc\u002Fpasswd', 'utf8')\n    console.log(content1)\n    const content2 = yield readFileWithPromise('\u002Fetc\u002Fprofile', 'utf8')\n    console.log(content2)\n    return 'done'\n  } catch (err) {\n    console.error(err)\n    return 'fail'\n  }\n})\n\n\u002F\u002F async await\nasync function readfile() {\n  try {\n    const content1 = await readFileWithPromise('\u002Fetc\u002Fpasswd', 'utf8')\n    console.log(content1)\n    const content2 = await readFileWithPromise('\u002Fetc\u002Fprofile', 'utf8')\n    console.log(content2)\n    return 'done'\n  } catch (err) {\n    throw(err)\n  }\n}\nreadfile().then(\n  res =\u003E console.log(res),\n  err =\u003E console.error(err)\n)\n```\n\n# 总结\n\n不论以上哪种方式，都没有改变 JavaScript 单线程、使用回调处理异步任务的本质。人类总是追求最简单易于理解的编程方式。\n",
+          level: 4,
+          status: 2,
+          appId: 7,
+          createAt: "2022-04-14T01:30:57.000Z",
+          updateAt: "2024-03-28T10:40:27.000Z",
+          updateUserId: 11,
+          isCollected: false,
+          currentIndex: 1,
+          prev: "",
+          next: "26e22fa9-becc-4552-b79a-da2f67451455",
+        },
+      };
+    </script>
+
+    <script>
+      (function () {
+        var bp = document.createElement("script");
+        var curProtocol = window.location.protocol.split(":")[0];
+        if (curProtocol === "https") {
+          bp.src = "https://zz.bdstatic.com/linksubmit/push.js";
+        } else {
+          bp.src = "http://push.zhanzhang.baidu.com/push.js";
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+      })();
+    </script>
+
+    <script src="/umi.6f7dfcf7.js"></script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1861,
+    "exerciseKey": "77336d84-243e-49a0-b4b2-47bad83292e9",
+    "category": "QA",
+    "renderType": "md",
+    "title": "怎么预防按钮的重复点击？",
+    "desc": null,
+    "options": null,
+    "explanation": "先看看在那些场景会导致重复请求： \n\n1. 手速快，不小心双击操作按钮。 \n2. 很小心的点击了一次按钮，因为请求响应比较慢，页面没有任何提示，怀疑上次点击没生效，再次点击操作按钮。 \n3. 很小心的点击了一次按钮，因为请求响应比较慢，页面没有任何提示，刷新页面，再次点击操作按钮。\n\n## 前端方案\n\n我们可以对症下药： \n\n1. 控制按钮，在短时间内被多次点击，第一次以后的点击无效。 \n2. 控制按钮，在点击按钮触发的请求响应之前，再次点击无效。 \n3. 配置特殊的URL，然后控制这些URL请求的最小时间间隔。如果再次请求跟前一次请求间隔很小，弹窗二次提示，是否继续操作。\n\n### 防止无意识重复点击按钮\n\n给按钮添加控制，在`control` 毫秒内，第一次点击事件之后的点击事件不执行。\n\n```text\n<template>\n    <button @click=\"handleClick\"></button>\n</templage>\n<script>\nexport default {\n    methods: {\n        handleClick(event) {\n            if (this.disabled) return;\n            if (this.notAllowed) return;\n            // 点击完多少秒不能继续点\n            this.notAllowed = true;\n            setTimeout(()=>{\n                this.notAllowed = false;\n            }, this.control)\n            this.$emit('click', event, this);\n        }\n    }\n}\n</script>\n```\n\n当然时间间隔可以设置，默认为300毫秒。我们无意识的重复点击一般在300毫秒以内。\n\n### 按钮点击立马禁用，等响应回来才能继续点击\n\n触发点击的button实例传入fetch配置，代码如下：\n\n```js\ndoQuery: function (button) {\n    this.FesApi.fetch(`generalcard/query`, {\n        sub_card_type: this.query.sub_card_type,\n        code_type: this.query.code_type,\n        title: this.query.title,\n        card_id: this.query.card_id,\n        page_info: {\n            pageSize: this.paginationOption.page_info.pageSize,\n            currentPage: this.paginationOption.page_info.currentPage\n        }\n    }, {\n        //看这里，加上下面一行代码就行。。so easy\n        button: button\n    }).then(rst => {\n        // 成功处理\n    });\n}\n\n```\n\n在fetch函数内部，设置button的`disabled=true`，当响应回来时，设置`disabled=false`代码如下：\n\n```js\nconst action = function (url, data, option) {\n    // 如果传了button\n    if (option.button) {\n        option.button.currentDisabled = true;\n    }\n    // 记录日志\n    const log = requsetLog.creatLog(url, data);\n\n    return param(url, data, option)\n        .then(success, fail)\n        .then((response) => {\n            requsetLog.changeLogStatus(log, 'success');\n            if (option && option.button) {\n                option.button.currentDisabled = false;\n            }\n            return response;\n        })\n        .catch((error) => {\n            requsetLog.changeLogStatus(log, 'fail');\n            if (option && option.button) {\n                option.button.currentDisabled = false;\n            }\n            error.message && window.Toast.error(error.message);\n            throw error;\n        });\n};\n\n```\n\n### 从根本入手，一招击杀\n\n当页面刷新，页面状态重置，此时再次点击按钮，会判定为初次点击，而且按钮状态恢复可点击。我们可以设置哪些请求地址是重要的，它们请求间隔不能过小。如果过小，页面弹出覆层询问用户时候继续执行。 \n\n 设置代码如下：\n\n```js\nthis.FesApi.setImportant({\n    'generalcard/action': {\n        control: 10000,\n        message: '您在十秒内重复发起手工清算操作，是否继续？'\n    }\n})\n\n```\n\n而实现代码如下：\n\n```js\napi.fetch = function (url, data, option) {\n    if (requsetLog.importantApi[url]) {\n        const logs = requsetLog.getLogByURL(url, data);\n        if (logs.length > 0) {\n            const compareLog = logs[logs.length - 1];\n            if (compareLog.status === 'compare') {\n                requsetLog.creatLog(url, data, 'notAllowed');\n                return {\n                    then: () => {}\n                };\n            }\n            const importantApiOption = requsetLog.importantApi[url];\n            const control = importantApiOption.control || 10000;\n            const message = importantApiOption.message || util.format('fesMessages.importInterfaceTip', { s: control / 1000 });\n            if (new Date().getTime() - compareLog.timestamp < control) {\n                const oldStatus = compareLog.status;\n                requsetLog.changeLogStatus(compareLog, 'compare');\n                return new Promise(((resolve, reject) => {\n                    window.Message.confirm(util.format('fesMessages.tip'), message).then((index) => {\n                        if (compareLog.status === 'compare') {\n                            requsetLog.changeLogStatus(compareLog, oldStatus);\n                        }\n                        if (index === 0) {\n                            resolve(action(url, data, option));\n                        } else {\n                            reject(new Error('不允许相同操作间隔过小'));\n                        }\n                    });\n                }));\n            }\n            return action(url, data, option);\n        }\n        return action(url, data, option);\n    }\n    return action(url, data, option);\n};\n\n```\n\n攻击者可以绕过正常流程，模拟发起多次请求，所以仅仅在前端页面做好预防重复请求工作是不够的。后台接口需要设计得更健壮，具有幂等性。\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-07-24T03:25:43.000Z",
+    "updateAt": "2022-07-24T11:25:50.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 503,
+    "prev": "3f897e08-e0f7-4b68-90ac-e643167754bf",
+    "next": "39b2d340-18bd-464a-a0b7-6e45a3f0538b"
+  },
+  "post": {
+    "exerciseKey": "77336d84-243e-49a0-b4b2-47bad83292e9",
+    "category": "QA",
+    "title": "怎么预防按钮的重复点击？",
+    "level": 3,
+    "updateAt": "2022-07-24T11:25:50+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 42,
+    "exerciseKey": "88f7458f-418d-4362-bafa-f3ed98083d02",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出是什么？",
+    "desc": "```javascript\nconsole.log(typeof typeof 1)\n```",
+    "options": "{\"options\":[\"\\\"number\\\"\",\"\\\"string\\\"\",\"\\\"object\\\"\",\"\\\"undefined\\\"\"],\"isMulti\":false,\"answer\":[1]}",
+    "explanation": "`typeof 1` 返回 `\"number\"`。\n`typeof \"number\"` 返回 `\"string\"`。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:10:58.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1160,
+    "prev": "95dd5690-238f-46ab-b232-6bff6520240a",
+    "next": "f6b74eb2-442e-4a56-904f-bee79587138c"
+  },
+  "post": {
+    "exerciseKey": "88f7458f-418d-4362-bafa-f3ed98083d02",
+    "category": "Choice",
+    "title": "输出是什么？",
+    "level": 0.5,
+    "updateAt": "2021-07-03T22:10:58+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

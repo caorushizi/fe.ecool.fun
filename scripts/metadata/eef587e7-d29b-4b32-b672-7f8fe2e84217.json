@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 324,
+    "exerciseKey": "eef587e7-d29b-4b32-b672-7f8fe2e84217",
+    "category": "QA",
+    "renderType": "md",
+    "title": "React中，能否直接将 props 的值复制给 state？",
+    "desc": null,
+    "options": null,
+    "explanation": "应该避免这种写法：\n\n```react.js\nconstructor(props) {\n super(props);\n // 不要这样做\n this.state = { color: props.color };\n}\n```\n\n因为这样做毫无必要（你可以直接使用 this.props.color），同时还产生了 bug（更新 prop 中的 color 时，并不会影响 state）。\n\n只有在你刻意忽略 prop 更新的情况下使用。\n\n此时，应将 prop 重命名为 initialColor 或 defaultColor。必要时，你可以修改它的 key，以强制 **重置** 其内部 state。",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T11:45:40.000Z",
+    "updateAt": "2021-07-04T21:30:40.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 990,
+    "prev": "35528a50-c820-4037-beec-ec309c4f2a46",
+    "next": "212673c7-7ea1-460a-b44f-2e3fe20f3397"
+  },
+  "post": {
+    "exerciseKey": "eef587e7-d29b-4b32-b672-7f8fe2e84217",
+    "category": "QA",
+    "title": "React中，能否直接将 props 的值复制给 state？",
+    "level": 2,
+    "updateAt": "2021-07-04T21:30:40+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

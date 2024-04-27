@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 452,
+    "exerciseKey": "1464793e-3ece-4943-92af-cb470fee46f3",
+    "category": "QA",
+    "renderType": "md",
+    "title": "微信小程序的优劣势？",
+    "desc": null,
+    "options": null,
+    "explanation": "优势：\n```\n1、无需下载，通过搜索和扫一扫就可以打开。\n\n2、良好的用户体验：打开速度快。\n\n3、开发成本要比App要低。\n\n4、安卓上可以添加到桌面，与原生App差不多。\n\n5、为用户提供良好的安全保障。小程序的发布，微信拥有一套严格的审查流程，不能通过审查的小程序是无法发布到线上的。\n\n```\n劣势:\n```\n1、限制较多。页面大小不能超过1M。不能打开超过5个层级的页面。\n\n2、样式单一。小程序的部分组件已经是成型的了，样式不可以修改。例如：幻灯片、导航。\n\n3、推广面窄，不能分享朋友圈，只能通过分享给朋友，附近小程序推广。其中附近小程序也受到微信的限制。\n\n4、依托于微信，无法开发后台管理功能。\n```\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-07T15:02:36.000Z",
+    "updateAt": "2021-07-11T10:53:44.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 896,
+    "prev": "aa95a786-7e51-4769-ab64-80f1adaf3580",
+    "next": "92af3054-e90c-4c0d-a5af-2a54b19931ab"
+  },
+  "post": {
+    "exerciseKey": "1464793e-3ece-4943-92af-cb470fee46f3",
+    "category": "QA",
+    "title": "微信小程序的优劣势？",
+    "level": 1,
+    "updateAt": "2021-07-11T10:53:44+00:00"
+  },
+  "tag": {
+    "id": 23,
+    "tagName": "小程序",
+    "type": "1",
+    "exerciseCount": 9
+  }
+}

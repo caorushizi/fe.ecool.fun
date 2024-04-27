@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1566,
+    "exerciseKey": "e1584502-c0d4-416f-abe4-cc0a01c6002d",
+    "category": "QA",
+    "renderType": "md",
+    "title": "封装一个 javascript 的类型判断函数",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nfunction getType(value) {\n  // 判断数据是 null 的情况\n  if (value === null) {\n    return value + \"\";\n  }\n\n  // 判断数据是引用类型的情况\n  if (typeof value === \"object\") {\n    let valueClass = Object.prototype.toString.call(value),\n      type = valueClass.split(\" \")[1].split(\"\");\n\n    type.pop();\n\n    return type.join(\"\").toLowerCase();\n  } else {\n    // 判断数据是基本数据类型的情况和函数的情况\n    return typeof value;\n  }\n}\n```",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:42:27.000Z",
+    "updateAt": "2021-11-17T22:50:59.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 713,
+    "prev": "ecd8b4c8-cbb9-47c4-84e3-167e209637ae",
+    "next": "f7192fdf-cbfe-4b62-96af-a614e6a37055"
+  },
+  "post": {
+    "exerciseKey": "e1584502-c0d4-416f-abe4-cc0a01c6002d",
+    "category": "QA",
+    "title": "封装一个 javascript 的类型判断函数",
+    "level": 2.5,
+    "updateAt": "2021-11-17T22:50:59+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

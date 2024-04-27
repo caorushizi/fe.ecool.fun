@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 426,
+    "exerciseKey": "47240d74-7170-41b6-b85d-2a6977ea9a11",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现有并行限制的Promise调度器",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nclass Scheduler {\n  constructor() {\n    this.queue = [];\n    this.maxCount = 2;\n    this.runCounts = 0;\n  }\n  add(promiseCreator) {\n    this.queue.push(promiseCreator);\n  }\n  taskStart() {\n    for (let i = 0; i < this.maxCount; i++) {\n      this.request();\n    }\n  }\n  request() {\n    if (!this.queue || !this.queue.length || this.runCounts >= this.maxCount) {\n      return;\n    }\n    this.runCounts++;\n\n    this.queue.shift()().then(() => {\n      this.runCounts--;\n      this.request();\n    });\n  }\n}\n   \nconst timeout = time => new Promise(resolve => {\n  setTimeout(resolve, time);\n})\n  \nconst scheduler = new Scheduler();\n  \nconst addTask = (time,order) => {\n  scheduler.add(() => timeout(time).then(()=>console.log(order)))\n}\n  \n  \naddTask(1000, '1');\naddTask(500, '2');\naddTask(300, '3');\naddTask(400, '4');\nscheduler.taskStart()\n// 2\n// 3\n// 1\n// 4\n```\n```",
+    "level": 4,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:15:53.000Z",
+    "updateAt": "2021-07-07T00:13:52.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 922,
+    "prev": "22a4d7b2-40a6-44be-9910-86256ee1d557",
+    "next": "7375c380-9dd8-497e-9b74-e4cc0779532c"
+  },
+  "post": {
+    "exerciseKey": "47240d74-7170-41b6-b85d-2a6977ea9a11",
+    "category": "QA",
+    "title": "实现有并行限制的Promise调度器",
+    "level": 4,
+    "updateAt": "2021-07-07T00:13:52+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

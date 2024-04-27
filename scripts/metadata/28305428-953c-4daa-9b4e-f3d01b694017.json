@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 237,
+    "exerciseKey": "28305428-953c-4daa-9b4e-f3d01b694017",
+    "category": "QA",
+    "renderType": "md",
+    "title": "说说你对slot的理解？slot使用场景有哪些？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 一、slot是什么\n\n在HTML中 `slot` 元素 ，作为 `Web Components` 技术套件的一部分，是Web组件内的一个占位符\n\n该占位符可以在后期使用自己的标记语言填充\n\n举个栗子\n```html\n<template id=\"element-details-template\">\n  <slot name=\"element-name\">Slot template</slot>\n</template>\n<element-details>\n  <span slot=\"element-name\">1</span>\n</element-details>\n<element-details>\n  <span slot=\"element-name\">2</span>\n</element-details>\n```\n`template`不会展示到页面中，需要用先获取它的引用，然后添加到`DOM`中，\n\n```js\ncustomElements.define('element-details',\n  class extends HTMLElement {\n    constructor() {\n      super();\n      const template = document\n        .getElementById('element-details-template')\n        .content;\n      const shadowRoot = this.attachShadow({mode: 'open'})\n        .appendChild(template.cloneNode(true));\n  }\n})\n```\n\n在`Vue`中的概念也是如此\n\n`Slot` 艺名插槽，花名“占坑”，我们可以理解为`solt`在组件模板中占好了位置，当使用该组件标签时候，组件标签里面的内容就会自动填坑（替换组件模板中`slot`位置），作为承载分发内容的出口\n\n可以将其类比为插卡式的FC游戏机，游戏机暴露卡槽（插槽）让用户插入不同的游戏磁条（自定义内容）\n\n放张图感受一下\n![](https://static.ecool.fun//article/86be4e75-6050-44a1-8dbc-72e2d493834a.png)\n\n\n\n## 二、使用场景\n\n通过插槽可以让用户可以拓展组件，去更好地复用组件和对其做定制化处理\n\n如果父组件在使用到一个复用组件的时候，获取这个组件在不同的地方有少量的更改，如果去重写组件是一件不明智的事情\n\n通过`slot`插槽向组件内部指定位置传递内容，完成这个复用组件在不同场景的应用\n\n比如布局组件、表格列、下拉选、弹框显示内容等\n\n## 三、分类\n\n`slot`可以分来以下三种：\n\n- 默认插槽\n- 具名插槽\n- 作用域插槽\n\n\n\n### 默认插槽\n\n子组件用`<slot>`标签来确定渲染的位置，标签里面可以放`DOM`结构，当父组件使用的时候没有往插槽传入内容，标签内`DOM`结构就会显示在页面\n\n父组件在使用的时候，直接在子组件的标签内写入内容即可\n\n子组件`Child.vue`\n\n```js\n<template>\n    <slot>\n      <p>插槽后备的内容</p>\n    </slot>\n</template>\n```\n\n父组件\n\n```js\n<Child>\n  <div>默认插槽</div>  \n</Child>\n```\n\n\n\n### 具名插槽\n\n子组件用`name`属性来表示插槽的名字，不传为默认插槽\n\n父组件中在使用时在默认插槽的基础上加上`slot`属性，值为子组件插槽`name`属性值\n\n子组件`Child.vue`\n\n```js\n<template>\n    <slot>插槽后备的内容</slot>\n  <slot name=\"content\">插槽后备的内容</slot>\n</template>\n```\n\n父组件\n\n```js\n<child>\n    <template v-slot:default>具名插槽</template>\n    <!-- 具名插槽⽤插槽名做参数 -->\n    <template v-slot:content>内容...</template>\n</child>\n```\n\n\n\n### 作用域插槽\n\n子组件在作用域上绑定属性来将子组件的信息传给父组件使用，这些属性会被挂在父组件`v-slot`接受的对象上\n\n父组件中在使用时通过`v-slot:`（简写：#）获取子组件的信息，在内容中使用\n\n子组件`Child.vue`\n\n```js\n<template> \n  <slot name=\"footer\" testProps=\"子组件的值\">\n          <h3>没传footer插槽</h3>\n    </slot>\n</template>\n```\n\n父组件\n\n```js\n<child> \n    <!-- 把v-slot的值指定为作⽤域上下⽂对象 -->\n    <template v-slot:default=\"slotProps\">\n      来⾃⼦组件数据：{{slotProps.testProps}}\n    </template>\n  <template #default=\"slotProps\">\n      来⾃⼦组件数据：{{slotProps.testProps}}\n    </template>\n</child>\n```\n\n\n\n### 小结：\n\n- `v-slot`属性只能在`<template>`上使用，但在只有默认插槽时可以在组件标签上使用\n- 默认插槽名为`default`，可以省略default直接写`v-slot`\n- 缩写为`#`时不能不写参数，写成`#default`\n- 可以通过解构获取`v-slot={user}`，还可以重命名`v-slot=\"{user: newName}\"`和定义默认值`v-slot=\"{user = '默认值'}\"`\n\n\n\n## 四、原理分析\n\n`slot`本质上是返回`VNode`的函数，一般情况下，`Vue`中的组件要渲染到页面上需要经过`template -> render function -> VNode -> DOM` 过程，这里看看`slot`如何实现：\n\n编写一个`buttonCounter`组件，使用匿名插槽\n\n```js\nVue.component('button-counter', {\n  template: '<div> <slot>我是默认内容</slot></div>'\n})\n```\n\n使用该组件\n\n```js\nnew Vue({\n    el: '#app',\n    template: '<button-counter><span>我是slot传入内容</span></button-counter>',\n    components:{buttonCounter}\n})\n```\n\n获取`buttonCounter`组件渲染函数\n\n```js\n(function anonymous(\n) {\nwith(this){return _c('div',[_t(\"default\",[_v(\"我是默认内容\")])],2)}\n})\n```\n\n`_v`表示穿件普通文本节点，`_t`表示渲染插槽的函数\n\n渲染插槽函数`renderSlot`（做了简化）\n\n```js\nfunction renderSlot (\n  name,\n  fallback,\n  props,\n  bindObject\n) {\n  // 得到渲染插槽内容的函数    \n  var scopedSlotFn = this.$scopedSlots[name];\n  var nodes;\n  // 如果存在插槽渲染函数，则执行插槽渲染函数，生成nodes节点返回\n  // 否则使用默认值\n  nodes = scopedSlotFn(props) || fallback;\n  return nodes;\n}\n```\n\n`name`属性表示定义插槽的名字，默认值为`default`，`fallback`表示子组件中的`slot`节点的默认值\n\n关于`this.$scopredSlots`是什么，我们可以先看看`vm.slot`\n\n```js\nfunction initRender (vm) {\n  ...\n  vm.$slots = resolveSlots(options._renderChildren, renderContext);\n  ...\n}\n```\n\n`resolveSlots`函数会对`children`节点做归类和过滤处理，返回`slots`\n\n```js\nfunction resolveSlots (\n    children,\n    context\n  ) {\n    if (!children || !children.length) {\n      return {}\n    }\n    var slots = {};\n    for (var i = 0, l = children.length; i < l; i++) {\n      var child = children[i];\n      var data = child.data;\n      // remove slot attribute if the node is resolved as a Vue slot node\n      if (data && data.attrs && data.attrs.slot) {\n        delete data.attrs.slot;\n      }\n      // named slots should only be respected if the vnode was rendered in the\n      // same context.\n      if ((child.context === context || child.fnContext === context) &&\n        data && data.slot != null\n      ) {\n        // 如果slot存在(slot=\"header\") 则拿对应的值作为key\n        var name = data.slot;\n        var slot = (slots[name] || (slots[name] = []));\n        // 如果是tempalte元素 则把template的children添加进数组中，这也就是为什么你写的template标签并不会渲染成另一个标签到页面\n        if (child.tag === 'template') {\n          slot.push.apply(slot, child.children || []);\n        } else {\n          slot.push(child);\n        }\n      } else {\n        // 如果没有就默认是default\n        (slots.default || (slots.default = [])).push(child);\n      }\n    }\n    // ignore slots that contains only whitespace\n    for (var name$1 in slots) {\n      if (slots[name$1].every(isWhitespace)) {\n        delete slots[name$1];\n      }\n    }\n    return slots\n}\n```\n\n`_render`渲染函数通过`normalizeScopedSlots`得到`vm.$scopedSlots`\n\n```js\nvm.$scopedSlots = normalizeScopedSlots(\n  _parentVnode.data.scopedSlots,\n  vm.$slots,\n  vm.$scopedSlots\n);\n```\n\n作用域插槽中父组件能够得到子组件的值是因为在`renderSlot`的时候执行会传入`props`，也就是上述`_t`第三个参数，父组件则能够得到子组件传递过来的值\n",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T03:39:36.000Z",
+    "updateAt": "2024-01-25T14:35:42.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 132,
+    "prev": "adaa5c02-f04c-4247-b6d6-0fe3f1bd439c",
+    "next": "c1bcc1f1-3375-4c66-b3af-1ba1b937c01f"
+  },
+  "post": {
+    "exerciseKey": "28305428-953c-4daa-9b4e-f3d01b694017",
+    "category": "QA",
+    "title": "说说你对slot的理解？slot使用场景有哪些？",
+    "level": 2,
+    "updateAt": "2024-01-25T14:35:42+00:00"
+  },
+  "tag": {
+    "id": 14,
+    "tagName": "Vue.js",
+    "type": "1",
+    "exerciseCount": 68
+  }
+}

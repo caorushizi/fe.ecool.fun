@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 427,
+    "exerciseKey": "5893d2cc-0ce2-473b-9d42-341860dfdec9",
+    "category": "QA",
+    "renderType": "html",
+    "title": "设计模式分类",
+    "desc": null,
+    "options": null,
+    "explanation": "<p><br/> </p><ul><li> 创建型模式，共五种：<strong>工厂方法模式、抽象工厂模式</strong>、<strong>单例模式</strong>、建造者模式、<strong>原型模式。</strong><br/> </li><li> 结构型模式，共七种：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。<br/> </li><li> 行为型模式，共十一种：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</li></ul><p></p>",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:28:52.000Z",
+    "updateAt": "2022-04-10T15:32:08.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 564,
+    "prev": "5cb7ee1c-c527-40f9-b00b-eb65bde48657",
+    "next": "6a8dda85-ad38-4eec-86b5-dad87ad3c929"
+  },
+  "post": {
+    "exerciseKey": "5893d2cc-0ce2-473b-9d42-341860dfdec9",
+    "category": "QA",
+    "title": "设计模式分类",
+    "level": 3,
+    "updateAt": "2022-04-10T15:32:08+00:00"
+  },
+  "tag": {
+    "id": 27,
+    "tagName": "设计模式",
+    "type": "1",
+    "exerciseCount": 7
+  }
+}

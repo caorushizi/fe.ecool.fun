@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 315,
+    "exerciseKey": "f4198437-3b03-4a26-83ae-7b820a23b85d",
+    "category": "QA",
+    "renderType": "html",
+    "title": "sql 注入",
+    "desc": null,
+    "options": null,
+    "explanation": "<p><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">就是通过把SQL命令插入到Web表单递交或输入域名或页面请求的查询字符串，最终达到欺骗数据库服务器执行恶意的SQL命令,从而达到和服务器</span></span></span></span><br/><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">进行直接的交互</span></span></span></span></p><p><br/><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\"><span style=\"font-size:14ptpx\"><strong>预防方案</strong></span></span></span></span><br/></p><ul><li><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">i）后台进行输入验证，对敏感字符过滤。</span></span></span></span></li><li><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">ii）使用参数化查询，能避免拼接SQL，就不要拼接SQL语句。</span></span></span></span></li></ul><p><br/></p>",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T11:01:53.000Z",
+    "updateAt": "2021-07-05T00:08:36.000Z",
+    "updateUserId": 9,
+    "isCollected": false,
+    "currentIndex": 980,
+    "prev": "eb1c1598-ed1b-484e-8cae-e97a8f49c509",
+    "next": "1176d873-74da-4e0d-87b9-034c1287488a"
+  },
+  "post": {
+    "exerciseKey": "f4198437-3b03-4a26-83ae-7b820a23b85d",
+    "category": "QA",
+    "title": "sql 注入",
+    "level": 2,
+    "updateAt": "2021-07-05T00:08:36+00:00"
+  },
+  "tag": {
+    "id": 21,
+    "tagName": "前端安全",
+    "type": "1",
+    "exerciseCount": 21
+  }
+}

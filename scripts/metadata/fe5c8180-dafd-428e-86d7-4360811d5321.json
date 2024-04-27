@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 118,
+    "exerciseKey": "fe5c8180-dafd-428e-86d7-4360811d5321",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出什么？",
+    "desc": "```javascript\nconsole.log(`${(x => x)('I love')} to program`)\n```",
+    "options": "{\"options\":[\"I love to program\",\"undefined to program\",\"${(x => x)('I love') to program\",\"TypeError\"],\"isMulti\":false,\"answer\":[0]}",
+    "explanation": "带有模板字面量的表达式首先被执行。相当于字符串会包含表达式，这个立即执行函数 `(x => x)('I love')` 返回的值. 我们向箭头函数 `x => x` 传递 `'I love'` 作为参数。`x` 等价于返回的 `'I love'`。这就是结果 `I love to program`。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:30:01.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1094,
+    "prev": "7ce6573e-b10b-4962-a732-aec1ca3207a1",
+    "next": "d73bb354-253c-4832-80e1-0aa525bc7dc9"
+  },
+  "post": {
+    "exerciseKey": "fe5c8180-dafd-428e-86d7-4360811d5321",
+    "category": "Choice",
+    "title": "输出什么？",
+    "level": 0.5,
+    "updateAt": "2021-07-03T22:30:01+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1800,
+    "exerciseKey": "cbdbe075-a81e-4c8b-a264-1ffb95a7ee49",
+    "category": "QA",
+    "renderType": "md",
+    "title": "将数组的length设置为0，取第一个元素会返回什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "设置 `length = 0` 会清空数组，所以会返回 `undefined`",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-05-11T14:38:05.000Z",
+    "updateAt": "2022-05-11T22:38:11.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 541,
+    "prev": "5adab921-8dfb-4a65-9f44-38ae8a70820f",
+    "next": "3e2c519b-9142-40e9-bef6-6b1d975be351"
+  },
+  "post": {
+    "exerciseKey": "cbdbe075-a81e-4c8b-a264-1ffb95a7ee49",
+    "category": "QA",
+    "title": "将数组的length设置为0，取第一个元素会返回什么？",
+    "level": 0.5,
+    "updateAt": "2022-05-11T22:38:11+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

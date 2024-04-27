@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1773,
+    "exerciseKey": "7f131792-7ef0-47c3-b794-c03b5339867c",
+    "category": "QA",
+    "renderType": "md",
+    "title": "vue 中 $route 和 $router 有什么区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "在 Vue.js 中，$route 和 $router 都是与路由相关的对象，但它们之间有以下区别：\n\n1. $route：$route 是一个当前路由信息的对象，包括当前 URL 路径、查询参数、路径参数等信息。$route 对象是只读的，不可以直接修改其属性值，而需要通过路由跳转来更新。\n\n2. $router：$router 是 Vue Router 的实例对象，包括了许多用于导航控制和路由操作的 API，例如 push、replace、go、forward 等方法。$router 可以用来动态地改变 URL，从而实现页面间的无刷新跳转。\n\n因此，$route 和 $router 在功能上有所不同，$route 主要用于获取当前路由信息，$router 则是用于进行路由操作，例如跳转到指定的路由、前进、后退等。通常来说，$route 和 $router 是紧密关联的，并且常常一起使用。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-04-14T01:33:50.000Z",
+    "updateAt": "2023-05-21T16:32:53.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 375,
+    "prev": "9764b6d2-511b-40e3-9430-34b62711396c",
+    "next": "5a7e6ba9-31c0-45c2-8997-1ce10f2bf330"
+  },
+  "post": {
+    "exerciseKey": "7f131792-7ef0-47c3-b794-c03b5339867c",
+    "category": "QA",
+    "title": "vue 中 $route 和 $router 有什么区别？",
+    "level": 1,
+    "updateAt": "2023-05-21T16:32:53+00:00"
+  },
+  "tag": {
+    "id": 14,
+    "tagName": "Vue.js",
+    "type": "1",
+    "exerciseCount": 68
+  }
+}

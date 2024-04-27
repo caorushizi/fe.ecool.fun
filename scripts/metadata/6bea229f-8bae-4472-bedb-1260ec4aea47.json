@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1889,
+    "exerciseKey": "6bea229f-8bae-4472-bedb-1260ec4aea47",
+    "category": "QA",
+    "renderType": "md",
+    "title": "cookie 怎么设置只在 https 时携带？",
+    "desc": null,
+    "options": null,
+    "explanation": "答案：设置 `cookie` 的 `secure` 属性。\n\n`secure`选项用来设置`cookie`只在确保安全的请求中才会发送。当请求是`HTTPS`或者其他安全协议时，包含 `secure` 选项的 `cookie` 才能被发送至服务器。\n\n默认情况下，cookie不会带secure选项(即为空)。所以默认情况下，不管是HTTPS协议还是HTTP协议的请求，cookie 都会被发送至服务端。\n\n但要注意一点，secure选项只是限定了在安全情况下才可以传输给服务端，但并不代表你不能看到这个 cookie。\n\n\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-09-06T01:26:15.000Z",
+    "updateAt": "2022-09-18T19:19:51.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 490,
+    "prev": "cb703abf-4024-4ad1-8135-782ef6afe339",
+    "next": "82f034bf-f411-4569-b442-af7b6c229eb9"
+  },
+  "post": {
+    "exerciseKey": "6bea229f-8bae-4472-bedb-1260ec4aea47",
+    "category": "QA",
+    "title": "cookie 怎么设置只在 https 时携带？",
+    "level": 1,
+    "updateAt": "2022-09-18T19:19:51+00:00"
+  },
+  "tag": {
+    "id": 16,
+    "tagName": "计算机网络",
+    "type": "1",
+    "exerciseCount": 72
+  }
+}

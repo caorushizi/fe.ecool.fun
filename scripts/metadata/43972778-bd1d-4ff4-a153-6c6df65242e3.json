@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 501,
+    "exerciseKey": "43972778-bd1d-4ff4-a153-6c6df65242e3",
+    "category": "QA",
+    "renderType": "md",
+    "title": "观察者模式和发布订阅模式分别是什么？有什么区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "观察者模式：一个对象（观察者）订阅另一个对象（主题），当主题被激活的时候，触发观察者里面的事件。\n\n![image.png](https://static.ecool.fun//article/61a5cc50-92b5-4d73-bcd7-9882db09243b.png)\n\n发布订阅模式：订阅者把自己想要订阅的事件注册到调度中心，当发布者发布事件到调度中心（就是该事件被触发），再由调度中心统一调度订阅者注册到调度中心的处理代码。\n\n![image.png](https://static.ecool.fun//article/e22d0187-4bc3-4248-9cb8-b4b13e9943a8.png)\n\n对比一下：\n\n![image.png](https://static.ecool.fun//article/c7985036-e17f-4dec-9bdb-ef3b7bf9b895.png)\n\n可以发现两种模式下的角色数量不一样：\n\n* 观察者模式里，只有两个角色：观察者 和 被观察者\n* 发布订阅模式里，却不仅仅只有发布者和订阅者两个角色，还有一个调度中心\n\n从使用场景上：\n\n* 观察者模式比较适合在单个应用内部使用\n* 发布订阅模式则是比较适合跨应用的场景",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-11T07:32:23.000Z",
+    "updateAt": "2024-01-25T19:10:45.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 98,
+    "prev": "f2005269-95e7-4d83-acbf-673a7bba78f9",
+    "next": "8740bcd2-4a52-4c22-aed1-d573eb42dfa9"
+  },
+  "post": {
+    "exerciseKey": "43972778-bd1d-4ff4-a153-6c6df65242e3",
+    "category": "QA",
+    "title": "观察者模式和发布订阅模式分别是什么？有什么区别？",
+    "level": 3,
+    "updateAt": "2024-01-25T19:10:45+00:00"
+  },
+  "tag": {
+    "id": 27,
+    "tagName": "设计模式",
+    "type": "1",
+    "exerciseCount": 7
+  }
+}

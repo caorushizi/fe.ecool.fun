@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1599,
+    "exerciseKey": "c3d12ae7-e074-4072-a07a-aad43ec87e94",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第七题】下面代码的输出是什么？",
+    "desc": "```js\nconsole.log('start')\nsetTimeout(() => {\n  console.log('time')\n})\nPromise.resolve().then(() => {\n  console.log('resolve')\n})\nconsole.log('end')\n```",
+    "options": null,
+    "explanation": "## 解析\n\n* 刚开始整个脚本作为一个宏任务来执行，对于同步代码直接压入执行栈进行执行，因此先打印出start和end。\n* setTimout作为一个宏任务被放入宏任务队列(下一个)\n* Promise.then作为一个微任务被放入微任务队列\n* 本次宏任务执行完，检查微任务，发现Promise.then，执行它\n* 接下来进入下一个宏任务，发现setTimeout，执行。\n\n## 结果\n\n```\n'start'\n'end'\n'resolve'\n'time'\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T14:30:11.000Z",
+    "updateAt": "2022-01-09T23:00:47.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 674,
+    "prev": "a7ccbacc-5415-4c3f-b168-5fcc4d7792ee",
+    "next": "1b7efa22-c54d-4dc9-a54e-7faa69f5b821"
+  },
+  "post": {
+    "exerciseKey": "c3d12ae7-e074-4072-a07a-aad43ec87e94",
+    "category": "QA",
+    "title": "【Promise第七题】下面代码的输出是什么？",
+    "level": 2,
+    "updateAt": "2022-01-09T23:00:47+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

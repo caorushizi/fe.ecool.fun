@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 411,
+    "exerciseKey": "c8245703-a177-4deb-a8be-24f73a3267b8",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现 Function.prototype.apply()",
+    "desc": "第一个参数是绑定的this，默认为window，第二个参数是数组或类数组",
+    "options": null,
+    "explanation": "```js\nFunction.prototype.apply = function(context = window, args) {\n  if (typeof this !== 'function') {\n    throw new TypeError('Type Error');\n  }\n  const fn = Symbol('fn');\n  context[fn] = this;\n\n  const res = context[fn](...args);\n  delete context[fn];\n  return res;\n}\n\n```",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:02:12.000Z",
+    "updateAt": "2021-07-07T00:12:58.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 936,
+    "prev": "827a8f47-1144-4ab1-9d6c-b7d3b3d6aebf",
+    "next": "b66b6742-6ef1-4359-82ae-c69e2a041549"
+  },
+  "post": {
+    "exerciseKey": "c8245703-a177-4deb-a8be-24f73a3267b8",
+    "category": "QA",
+    "title": "实现 Function.prototype.apply()",
+    "level": 2.5,
+    "updateAt": "2021-07-07T00:12:58+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

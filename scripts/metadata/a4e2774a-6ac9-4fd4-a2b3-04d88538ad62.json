@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1573,
+    "exerciseKey": "a4e2774a-6ac9-4fd4-a2b3-04d88538ad62",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何查找一篇英文文章中出现频率最高的单词？",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nfunction findMostWord(article) {\n  // 合法性判断\n  if (!article) return;\n\n  // 参数处理\n  article = article.trim().toLowerCase();\n\n  let wordList = article.match(/[a-z]+/g),\n    visited = [],\n    maxNum = 0,\n    maxWord = \"\";\n\n  article = \" \" + wordList.join(\"  \") + \" \";\n\n  // 遍历判断单词出现次数\n  wordList.forEach(function(item) {\n    if (visited.indexOf(item) < 0) {\n      let word = new RegExp(\" \" + item + \" \", \"g\"),\n        num = article.match(word).length;\n\n      if (num > maxNum) {\n        maxNum = num;\n        maxWord = item;\n      }\n    }\n  });\n\n  return maxWord + \"  \" + maxNum;\n}\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:48:11.000Z",
+    "updateAt": "2021-11-17T22:51:10.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 710,
+    "prev": "bde6a595-899a-453a-85c4-0b774b75fb9e",
+    "next": "7b48e19d-6596-4853-875f-067f9bb048a8"
+  },
+  "post": {
+    "exerciseKey": "a4e2774a-6ac9-4fd4-a2b3-04d88538ad62",
+    "category": "QA",
+    "title": "如何查找一篇英文文章中出现频率最高的单词？",
+    "level": 3,
+    "updateAt": "2021-11-17T22:51:10+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

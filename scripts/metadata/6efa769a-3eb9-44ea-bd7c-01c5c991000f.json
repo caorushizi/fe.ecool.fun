@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1563,
+    "exerciseKey": "6efa769a-3eb9-44ea-bd7c-01c5c991000f",
+    "category": "QA",
+    "renderType": "md",
+    "title": "怎么使用 js 实现拖拽功能？\n",
+    "desc": null,
+    "options": null,
+    "explanation": "一个元素的拖拽过程，我们可以分为三个步骤:\n1. 第一步是鼠标按下目标元素\n2. 第二步是鼠标保持按下的状态移动鼠标\n3. 第三步是鼠标抬起，拖拽过程结束\n\n这三步分别对应了三个事件，mousedown 事件，mousemove 事件和 mouseup 事件。只有在鼠标按下的状态移动鼠标我们才会执行拖拽事件，因此我们需要在 mousedown 事件中设置一个状态来标识鼠标已经按下，然后在 mouseup 事件中再取消这个状态。在 mousedown 事件中我们首先应该判断，目标元素是否为拖拽元素，如果是拖拽元素，我们就设置状态并且保存这个时候鼠标的位置。然后在 mousemove 事件中，我们通过判断鼠标现在的位置和以前位置的相对移动，来确定拖拽元素在移动中的坐标。最后 mouseup 事件触发后，清除状态，结束拖拽事件。",
+    "level": 3.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:39:59.000Z",
+    "updateAt": "2021-11-17T22:49:44.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 718,
+    "prev": "1ea15cb6-7aa1-4d94-8bae-f20fa5594c87",
+    "next": "d9ddb08c-beb1-4aa4-8c54-cbccc0395fc5"
+  },
+  "post": {
+    "exerciseKey": "6efa769a-3eb9-44ea-bd7c-01c5c991000f",
+    "category": "QA",
+    "title": "怎么使用 js 实现拖拽功能？\n",
+    "level": 3.5,
+    "updateAt": "2021-11-17T22:49:44+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 629,
+    "exerciseKey": "f53e39b7-9de1-4a49-b95d-6c73591d5512",
+    "category": "QA",
+    "renderType": "md",
+    "title": "js中如何判断一个值是否是数组类型？",
+    "desc": null,
+    "options": null,
+    "explanation": "## instanceof\n\n```js\nconst arr= [];\narr instanceof Array; // true\n```\n\n## Array.isArray\n\n```js\nconst arr = []\nArray.isArray(arr) // true\n\nconst obj = {}\nArray.isArray(obj) // false\n```\n\n## Object.prototype.isPrototypeOf\n\n使用Object的原型方法isPrototypeOf，判断两个对象的原型是否一样, isPrototypeOf() 方法用于测试一个对象是否存在于另一个对象的原型链上。\n\n```js\nconst arr = [];\nObject.prototype.isPrototypeOf(arr, Array.prototype); // true\n```\n\n## Object.getPrototypeOf\n\nObject.getPrototypeOf() 方法返回指定对象的原型（内部[[Prototype]]属性的值）。\n\n```js\nconst arr = []\nObject.getPrototypeOf(arr) === Array.prototype // true\n```\n\n## Object.prototype.toString\n\n借用Object原型的call或者apply方法，调用toString()是否为[object Array]\n\n```js\nconst arr = []\nObject.prototype.toString.call(arr) === '[object Array]' // true\n\nconst obj = {}\nObject.prototype.toString.call(obj) // \"[object Object]\"\n```\n\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-09-25T03:04:29.000Z",
+    "updateAt": "2021-09-25T19:06:22.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 754,
+    "prev": "a6c99a3d-88a1-4806-8443-89368f608ba1",
+    "next": "b4001078-1e40-481b-8fcd-c4d48e6dd855"
+  },
+  "post": {
+    "exerciseKey": "f53e39b7-9de1-4a49-b95d-6c73591d5512",
+    "category": "QA",
+    "title": "js中如何判断一个值是否是数组类型？",
+    "level": 1,
+    "updateAt": "2021-09-25T19:06:22+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

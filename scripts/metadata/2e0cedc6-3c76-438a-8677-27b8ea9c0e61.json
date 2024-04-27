@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1926,
+    "exerciseKey": "2e0cedc6-3c76-438a-8677-27b8ea9c0e61",
+    "category": "QA",
+    "renderType": "md",
+    "title": "使用TS实现一个判断传入参数是否是数组类型的方法",
+    "desc": null,
+    "options": null,
+    "explanation": "unknown 用于变量类型不确定，但肯定可以确定的情形下，比如下面这个示例中，参数总归会有个值，根据这个值的类型进行不同的处理，这里使用 unknown 替代 any 则会更加类型安全。\n\n```typescript\nfunction isArray(x: unknown): boolean {\n\treturn Array.isArray(x)\n}\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-12-30T01:31:53.000Z",
+    "updateAt": "2023-03-12T22:38:45.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 428,
+    "prev": "b828c477-4689-4a3d-ab51-e41d76bd62e2",
+    "next": "0295b261-f56a-41fd-847b-7f6947284279"
+  },
+  "post": {
+    "exerciseKey": "2e0cedc6-3c76-438a-8677-27b8ea9c0e61",
+    "category": "QA",
+    "title": "使用TS实现一个判断传入参数是否是数组类型的方法",
+    "level": 2,
+    "updateAt": "2023-03-12T22:38:45+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

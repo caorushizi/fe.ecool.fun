@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1691,
+    "exerciseKey": "d3f21598-edfa-48f4-b2d3-d0c19d754b10",
+    "category": "QA",
+    "renderType": "md",
+    "title": "怎么实现图片懒加载？",
+    "desc": null,
+    "options": null,
+    "explanation": "懒加载是一种网页性能优化的方式，它能极大的提升用户体验。就比如说图片，图片一直是影响网页性能的主要元凶，现在一张图片超过几兆已经是很经常的事了。如果每次进入页面就请求所有的图片资源，那么可能等图片加载出来用户也早就走了。所以，我们需要懒加载，进入页面的时候，只请求可视区域的图片资源。\n\n总结出来就两个点：\n\n1. 全部加载的话会影响用户体验\n2. 浪费用户的流量，有些用户并不想全部看完，全部加载会耗费大量流量。\n\n# 实现方式\n\n## html 实现\n\n最简单的实现方式是给 `img` 标签加上 `loading=\"lazy\"`，比如\n\n```html\n<img src=\"./example.jpg\" loading=\"lazy\">\n```\n\n该属性的兼容性也还行，大家生产环境可以使用。\n\n![image.png](https://static.ecool.fun//article/d08ca711-557a-4da4-88c7-8bdcb20a7fab.png)\n\n## js实现原理\n\n我们通过js监听页面的滚动也能实现。\n\n使用js实现的原理主要是判断当前图片是否到了可视区域：\n\n* 拿到所有的图片 dom 。\n* 遍历每个图片判断当前图片是否到了可视区范围内。\n* 如果到了就设置图片的 src 属性。\n* 绑定 window 的 scroll 事件，对其进行事件监听。\n\n在页面初始化的时候，<img>图片的src实际上是放在data-src属性上的，当元素处于可视范围内的时候，就把data-src赋值给src属性，完成图片加载。\n\n```html\n// 在一开始加载的时候\n<img data-src=\"http://xx.com/xx.png\" src=\"\" />\n\n// 在进入可视范围内时\n<img data-src=\"http://xx.com/xx.png\" src=\"http://xx.com/xx.png\" />\n```\n\n<div>使用背景图来实现，原理也是一样的，把图片链接存放在 `data-src` 中，在可视范围时，就把data-src赋值给 `background-image` 属性，完成图片加载。\n\n```html\n// 在一开始加载的时候\n<div\n  data-src=\"http://xx.com/xx.png\"\n  style=\"background-image: none;background-size: cover;\"\n></div>\n\n// 在进入可视范围内时\n<div\n  data-src=\"http://xx.com/xx.png\"\n  style=\"background-image: url(http://xx.com/xx.png);background-size: cover;\"\n></div>\n```\n\n下面展示一个demo：\n\n```html\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Lazyload</title>\n    <style>\n      img {\n        display: block;\n        margin-bottom: 50px;\n        height: 200px;\n        width: 400px;\n      }\n    </style>\n  </head>\n  <body>\n    <img src=\"./img/default.png\" data-src=\"./img/1.jpg\" />\n    <img src=\"./img/default.png\" data-src=\"./img/2.jpg\" />\n    <img src=\"./img/default.png\" data-src=\"./img/3.jpg\" />\n    <img src=\"./img/default.png\" data-src=\"./img/4.jpg\" />\n    <img src=\"./img/default.png\" data-src=\"./img/5.jpg\" />\n    <img src=\"./img/default.png\" data-src=\"./img/6.jpg\" />\n    <img src=\"./img/default.png\" data-src=\"./img/7.jpg\" />\n    <img src=\"./img/default.png\" data-src=\"./img/8.jpg\" />\n    <img src=\"./img/default.png\" data-src=\"./img/9.jpg\" />\n    <img src=\"./img/default.png\" data-src=\"./img/10.jpg\" />\n  </body>\n</html>\n```\n\n先获取所有图片的 dom，通过 `window.innerHeight || document.documentElement.clientHeight|| document.body.clientHeight` 获取可视区高度，再使用 `element.getBoundingClientRect()` API 直接得到元素相对浏览的 top 值， 遍历每个图片判断当前图片是否到了可视区范围内。代码如下：\n\n```js\nfunction lazyload() {\n  let viewHeight = window.innerHeight || document.documentElement.clientHeight|| document.body.clientHeight //获取可视区高度，兼容不同浏览器\n  let imgs = document.querySelectorAll('img[data-src]')\n  imgs.forEach((item, index) => {\n    if (item.dataset.src === '') return\n\n    // 用于获得页面中某个元素的左，上，右和下分别相对浏览器视窗的位置\n    let rect = item.getBoundingClientRect()\n    if (rect.bottom >= 0 && rect.top < viewHeight) {\n      item.src = item.dataset.src\n      item.removeAttribute('data-src')\n    }\n  })\n}\n```\n\n最后给 window 绑定 onscroll 事件\n\n```js\nwindow.addEventListener('scroll', lazyload)\n```\n\n主要就完成了一个图片懒加载的操作了。但是这样存在较大的性能问题，因为 scroll 事件会在很短的时间内触发很多次，严重影响页面性能，为了提高网页性能，我们需要一个节流函数来控制函数的多次触发，在一段时间内（如 200ms）只执行一次回调。\n\n下面实现一个节流函数\n\n```js\nfunction throttle(fn, delay) {\n  let timer\n  let prevTime\n  return function (...args) {\n    const currTime = Date.now()\n    const context = this\n    if (!prevTime) prevTime = currTime\n    clearTimeout(timer)\n\n    if (currTime - prevTime > delay) {\n      prevTime = currTime\n      fn.apply(context, args)\n      clearTimeout(timer)\n      return\n    }\n\n    timer = setTimeout(function () {\n      prevTime = Date.now()\n      timer = null\n      fn.apply(context, args)\n    }, delay)\n  }\n}\n```\n\n然后修改一下 srcoll 事件\n\n```js\nwindow.addEventListener('scroll', throttle(lazyload, 200))\n```\n\n## 拓展： IntersectionObserver\n\n通过上面例子的实现，我们要实现懒加载都需要去监听 scroll 事件，尽管我们可以通过函数节流的方式来阻止高频率的执行函数，但是我们还是需要去计算 scrollTop，offsetHeight 等属性，有没有简单的不需要计算这些属性的方式呢，答案就是 `IntersectionObserver`。\n\n`IntersectionObserver` 是一个比较新的 API，可以自动\"观察\"元素是否可见，Chrome 51+ 已经支持。由于可见（visible）的本质是，目标元素与视口产生一个交叉区，所以这个 API 叫做\"交叉观察器\"。我们来看一下它的用法：\n\n```js\nvar io = new IntersectionObserver(callback, option)\n\n// 开始观察\nio.observe(document.getElementById('example'))\n\n// 停止观察\nio.unobserve(element)\n\n// 关闭观察器\nio.disconnect()\n\n```\n\nIntersectionObserver 是浏览器原生提供的构造函数，接受两个参数：callback 是可见性变化时的回调函数，option 是配置对象（该参数可选）。\n\n目标元素的可见性变化时，就会调用观察器的回调函数 callback。callback 一般会触发两次。一次是目标元素刚刚进入视口（开始可见），另一次是完全离开视口（开始不可见）。\n\n下面我们用 IntersectionObserver 实现图片懒加载\n\n```js\nconst imgs = document.querySelectorAll('img[data-src]')\nconst config = {\n  rootMargin: '0px',\n  threshold: 0,\n}\nlet observer = new IntersectionObserver((entries, self) => {\n  entries.forEach((entry) => {\n    if (entry.isIntersecting) {\n      let img = entry.target\n      let src = img.dataset.src\n      if (src) {\n        img.src = src\n        img.removeAttribute('data-src')\n      }\n      // 解除观察\n      self.unobserve(entry.target)\n    }\n  })\n}, config)\n\nimgs.forEach((image) => {\n  observer.observe(image)\n})\n\n```\n\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-03-09T15:08:39.000Z",
+    "updateAt": "2024-01-25T19:36:20.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 46,
+    "prev": "4fae3374-d530-49b9-b626-c176eb5ee22b",
+    "next": "1036468a-13c7-49d5-af8f-31c31135ceea"
+  },
+  "post": {
+    "exerciseKey": "d3f21598-edfa-48f4-b2d3-d0c19d754b10",
+    "category": "QA",
+    "title": "怎么实现图片懒加载？",
+    "level": 3,
+    "updateAt": "2024-01-25T19:36:20+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

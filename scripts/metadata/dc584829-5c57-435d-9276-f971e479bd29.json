@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1553,
+    "exerciseKey": "dc584829-5c57-435d-9276-f971e479bd29",
+    "category": "QA",
+    "renderType": "md",
+    "title": "toPrecision 和 toFixed 和 Math.round 有什么区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "* toPrecision 用于处理精度，精度是从左至右第一个不为 0 的数开始数起。\n* toFixed 是对小数点后指定位数取整，从小数点开始数起。\n* Math.round 是将一个数字四舍五入到一个整数。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:28:01.000Z",
+    "updateAt": "2021-11-17T22:48:54.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 728,
+    "prev": "f43ed53b-220f-4583-86fe-974e880090e8",
+    "next": "e8118221-94ab-44c9-ab83-299e6eefee15"
+  },
+  "post": {
+    "exerciseKey": "dc584829-5c57-435d-9276-f971e479bd29",
+    "category": "QA",
+    "title": "toPrecision 和 toFixed 和 Math.round 有什么区别？",
+    "level": 1,
+    "updateAt": "2021-11-17T22:48:54+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

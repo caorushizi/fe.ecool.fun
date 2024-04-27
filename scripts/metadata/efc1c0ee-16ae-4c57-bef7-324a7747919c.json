@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 19,
+    "exerciseKey": "efc1c0ee-16ae-4c57-bef7-324a7747919c",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出是什么？",
+    "desc": "```javascript\nclass Chameleon {\n  static colorChange(newColor) {\n    this.newColor = newColor\n    return this.newColor\n  }\n\n  constructor({ newColor = 'green' } = {}) {\n    this.newColor = newColor\n  }\n}\n\nconst freddie = new Chameleon({ newColor: 'purple' })\n\nconsole.log(freddie.colorChange('orange'));\n```",
+    "options": "{\"options\":[\"orange\",\"purple\",\"green\",\"TypeError\"],\"isMulti\":false,\"answer\":[3]}",
+    "explanation": "`colorChange` 是一个静态方法。静态方法被设计为只能被创建它们的构造器使用（也就是 `Chameleon`），并且不能传递给实例。因为 `freddie` 是一个实例，静态方法不能被实例使用，因此抛出了 `TypeError` 错误。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2022-01-09T13:10:26.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 684,
+    "prev": "06e95561-9b06-4cd8-b700-4305c1743808",
+    "next": "8d375b34-4323-48a3-9d02-9419cbf08f4e"
+  },
+  "post": {
+    "exerciseKey": "efc1c0ee-16ae-4c57-bef7-324a7747919c",
+    "category": "Choice",
+    "title": "输出是什么？",
+    "level": 0.5,
+    "updateAt": "2022-01-09T13:10:26+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

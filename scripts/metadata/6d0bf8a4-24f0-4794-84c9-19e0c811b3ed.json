@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1950,
+    "exerciseKey": "6d0bf8a4-24f0-4794-84c9-19e0c811b3ed",
+    "category": "QA",
+    "renderType": "md",
+    "title": "请实现下面的 product 方法",
+    "desc": "/**\n * @file 计算数组笛卡尔积\n */\n\n// 示例\nproduct([1, 2], [3, 4]) // [[1, 3], [1, 4], [2, 3], [2, 4]]\n\nfunction product(xList: number[], yList: number[]): [number, number][] {\n    // 补全内部实现\n    throw new Error('功能待实现');\n}\n\nexport default {}",
+    "options": null,
+    "explanation": "```ts\n/**\n * @file 计算数组笛卡尔积\n */\n\n// 示例\nconsole.log(product([1, 2], [3, 4])); // [[1, 3], [1, 4], [2, 3], [2, 4]]\n\nfunction product(xList: number[], yList: number[]): [number, number][] {\n  // 参考答案\n  return xList.reduce((v, t) => {\n    return v.concat(yList.map((item) => [t, item]));\n  }, [] as [number, number][]);\n}\n\nexport default {};\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-03-12T15:27:23.000Z",
+    "updateAt": "2023-03-12T23:30:36.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 417,
+    "prev": "0da5c58e-1299-477f-95f1-9e05ebf8aa2e",
+    "next": "8694932e-df3f-492f-8ef9-b0e7aa486f2f"
+  },
+  "post": {
+    "exerciseKey": "6d0bf8a4-24f0-4794-84c9-19e0c811b3ed",
+    "category": "QA",
+    "title": "请实现下面的 product 方法",
+    "level": 1,
+    "updateAt": "2023-03-12T23:30:36+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

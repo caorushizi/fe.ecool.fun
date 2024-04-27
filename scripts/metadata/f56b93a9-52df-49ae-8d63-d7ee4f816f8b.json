@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 406,
+    "exerciseKey": "f56b93a9-52df-49ae-8d63-d7ee4f816f8b",
+    "category": "QA",
+    "renderType": "md",
+    "title": "数组去重",
+    "desc": "```js\nconst arr = [1, 1, '1', 17, true, true, false, false, 'true', 'a', {}, {}];\n// => [1, '1', 17, true, false, 'true', 'a', {}, {}]\n```\n",
+    "options": null,
+    "explanation": "* 方法一：利用Set\n```js\nconst res1 = Array.from(new Set(arr));\n```\n\n* 方法二：两层for循环+splice\n```js\nconst unique1 = arr => {\n  let len = arr.length;\n  for (let i = 0; i < len; i++) {\n    for (let j = i + 1; j < len; j++) {\n      if (arr[i] === arr[j]) {\n        arr.splice(j, 1);\n        // 每删除一个树，j--保证j的值经过自加后不变。同时，len--，减少循环次数提升性能\n        len--;\n        j--;\n      }\n    }\n  }\n  return arr;\n}\n```\n\n* 方法三：利用indexOf\n```js\nconst unique2 = arr => {\n  const res = [];\n  for (let i = 0; i < arr.length; i++) {\n    if (res.indexOf(arr[i]) === -1) res.push(arr[i]);\n  }\n  return res;\n}\n```\n\n当然也可以用include、filter，思路大同小异。\n\n* 方法四：利用include\n```js\nconst unique3 = arr => {\n  const res = [];\n  for (let i = 0; i < arr.length; i++) {\n    if (!res.includes(arr[i])) res.push(arr[i]);\n  }\n  return res;\n}\n```\n\n* 方法五：利用filter\n```js\nconst unique4 = arr => {\n  return arr.filter((item, index) => {\n    return arr.indexOf(item) === index;\n  });\n}\n```\n\n* 方法六：利用Map\n```js\nconst unique5 = arr => {\n  const map = new Map();\n  const res = [];\n  for (let i = 0; i < arr.length; i++) {\n    if (!map.has(arr[i])) {\n      map.set(arr[i], true)\n      res.push(arr[i]);\n    }\n  }\n  return res;\n}\n```\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T14:57:47.000Z",
+    "updateAt": "2021-07-07T00:12:34.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 941,
+    "prev": "4af06e53-d9ca-4a28-8067-d4ffc3691827",
+    "next": "d2396e88-33d5-4374-ba81-b41609a57289"
+  },
+  "post": {
+    "exerciseKey": "f56b93a9-52df-49ae-8d63-d7ee4f816f8b",
+    "category": "QA",
+    "title": "数组去重",
+    "level": 1,
+    "updateAt": "2021-07-07T00:12:34+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 144,
+    "exerciseKey": "cb23ddfc-db2e-4d2a-b859-9238d30daed9",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出什么？",
+    "desc": "```javascript\nclass Counter {\n  #number = 10\n\n  increment() {\n    this.#number++\n  }\n\n  getNum() {\n    return this.#number\n  }\n}\n\nconst counter = new Counter()\ncounter.increment()\n\nconsole.log(counter.#number)\n```",
+    "options": "{\"options\":[\"10\",\"11\",\"undefined\",\"SyntaxError\"],\"isMulti\":false,\"answer\":[3]}",
+    "explanation": "在 ES2020 中，通过 `#` 我们可以给 class 添加私有变量。在 class 的外部我们无法获取该值。当我们尝试输出 `counter.#number`，语法错误被抛出：我们无法在 class `Counter` 外部获取它!",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:33:30.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1075,
+    "prev": "b586c729-13ac-45ae-807c-8a7a0a23c7a4",
+    "next": "1ddb78cb-2581-4995-8c0e-a6ea22b564ca"
+  },
+  "post": {
+    "exerciseKey": "cb23ddfc-db2e-4d2a-b859-9238d30daed9",
+    "category": "Choice",
+    "title": "输出什么？",
+    "level": 1,
+    "updateAt": "2021-07-03T22:33:30+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

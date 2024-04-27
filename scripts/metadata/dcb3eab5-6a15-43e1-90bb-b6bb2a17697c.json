@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 302,
+    "exerciseKey": "dcb3eab5-6a15-43e1-90bb-b6bb2a17697c",
+    "category": "QA",
+    "renderType": "md",
+    "title": "什么是高阶组件？",
+    "desc": null,
+    "options": null,
+    "explanation": "高阶组件就是一个函数，且该函数接受一个组件作为参数，并返回一个新的组件。基本上，这是从React的组成性质派生的一种模式，我们称它们为“纯”组件， 因为它们可以接受任何动态提供的子组件，但它们不会修改或复制其输入组件的任何行为。\n\n```react.js\nconst EnhancedComponent = higherOrderComponent(WrappedComponent);\n```\n\n* 高阶组件（HOC）是 React 中用于复用组件逻辑的一种高级技巧\n* 高阶组件的参数为一个组件返回一个新的组件\n* 组件是将 props 转换为 UI，而高阶组件是将组件转换为另一个组件\n",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T10:43:16.000Z",
+    "updateAt": "2021-07-04T19:24:42.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1024,
+    "prev": "a67eec57-8dc1-40ee-9c8a-ccfbe25ca58d",
+    "next": "702b094e-0bdc-4be6-b8c7-e2a70dc13688"
+  },
+  "post": {
+    "exerciseKey": "dcb3eab5-6a15-43e1-90bb-b6bb2a17697c",
+    "category": "QA",
+    "title": "什么是高阶组件？",
+    "level": 2,
+    "updateAt": "2021-07-04T19:24:42+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

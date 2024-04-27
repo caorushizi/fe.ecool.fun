@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1588,
+    "exerciseKey": "257565c9-6179-4faa-a592-168f6269cc99",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Math.ceil()、Math.round()、Math.floor()三者的区别是什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "* Math.ceil()上取整\n* Math.round() 四舍五入\n* Math.floor()下取整\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-12-26T03:56:33.000Z",
+    "updateAt": "2021-12-26T16:06:03.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 697,
+    "prev": "389f9946-a2d7-4bba-adde-f18330e5b2e4",
+    "next": "a7e1aeb6-aaf9-43fe-92ac-fd574fb60a96"
+  },
+  "post": {
+    "exerciseKey": "257565c9-6179-4faa-a592-168f6269cc99",
+    "category": "QA",
+    "title": "Math.ceil()、Math.round()、Math.floor()三者的区别是什么？",
+    "level": 1,
+    "updateAt": "2021-12-26T16:06:03+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 120,
+    "exerciseKey": "fc6beb89-dcf0-456e-a4d0-746ec0968295",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "哪一个方法会返回 'Hello world!' ？",
+    "desc": "```javascript\nconst myMap = new Map()\nconst myFunc = () => 'greeting'\n\nmyMap.set(myFunc, 'Hello world!')\n\n//1\nmyMap.get('greeting')\n//2\nmyMap.get(myFunc)\n//3\nmyMap.get(() => 'greeting')\n```",
+    "options": "{\"options\":[\"1\",\"2\",\"2 and 3\",\"All of them\"],\"isMulti\":false,\"answer\":[1]}",
+    "explanation": "当通过 `set` 方法添加一个键值对，一个传递给 `set`方法的参数将会是键名，第二个参数将会是值。在这个case里，键名为 _函数_ `() => 'greeting'`，值为`'Hello world'`。 `myMap` 现在就是 `{ () => 'greeting' => 'Hello world!' }`。\n1 是错的，因为键名不是 `'greeting'` 而是 `() => 'greeting'`。\n3 是错的，因为我们给`get` 方法传递了一个新的函数。对象受 _引用_ 影响。函数也是对象，因此两个函数严格上并不等价，尽管他们相同：他们有两个不同的内存引用地址。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-04T18:12:48.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1040,
+    "prev": "f57f9350-c543-46e3-8419-1ea5ab453971",
+    "next": "343c64fa-f996-4d17-a20f-dec32f7b256b"
+  },
+  "post": {
+    "exerciseKey": "fc6beb89-dcf0-456e-a4d0-746ec0968295",
+    "category": "Choice",
+    "title": "哪一个方法会返回 'Hello world!' ？",
+    "level": 0.5,
+    "updateAt": "2021-07-04T18:12:48+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

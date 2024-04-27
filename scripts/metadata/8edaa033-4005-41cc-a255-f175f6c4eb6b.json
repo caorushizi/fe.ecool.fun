@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 443,
+    "exerciseKey": "8edaa033-4005-41cc-a255-f175f6c4eb6b",
+    "category": "QA",
+    "renderType": "md",
+    "title": "[] == ![]结果是什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "== 中，左右两边都需要转换为数字然后进行比较。\n\n[]转换为数字为0。\n\n![] 首先是转换为布尔值，由于[]作为一个引用类型转换为布尔值为true, 因此![]为false，进而在转换成数字，变为0。 0 == 0 ， 结果为true",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T16:01:51.000Z",
+    "updateAt": "2021-07-07T00:15:29.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 905,
+    "prev": "b97ddbf9-57fd-493f-888d-1ffb7981f10a",
+    "next": "0356a1c0-f9a2-4fb1-98a5-fa409247fa8f"
+  },
+  "post": {
+    "exerciseKey": "8edaa033-4005-41cc-a255-f175f6c4eb6b",
+    "category": "QA",
+    "title": "[] == ![]结果是什么？",
+    "level": 2,
+    "updateAt": "2021-07-07T00:15:29+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

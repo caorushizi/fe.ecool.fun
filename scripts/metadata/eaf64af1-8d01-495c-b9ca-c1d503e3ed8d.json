@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 327,
+    "exerciseKey": "eaf64af1-8d01-495c-b9ca-c1d503e3ed8d",
+    "category": "QA",
+    "renderType": "md",
+    "title": "简述下 React 的事件代理机制？",
+    "desc": null,
+    "options": null,
+    "explanation": "React 并不会把所有的处理函数直接绑定在真实的节点上。而是把所有的事件绑定到结构的最外层，使用一个统一的事件监听器，这个事件监听器上维持了一个映射来保存所有组件内部的事件监听和处理函数。\n\n当组件挂载或卸载时，只是在这个统一的事件监听器上插入或删除一些对象。\n\n当事件发生时，首先被这个统一的事件监听器处理，然后在映射里找到真正的事件处理函数并调用。\n\n这样做的优点是解决了兼容性问题，并且简化了事件处理和回收机制（不需要手动的解绑事件，React 已经在内部处理了）。但是有些事件 React 并没有实现，比如 window 的 resize 事件。\n\n## 2023.2.19更新:\n\n在`React@17.0.3`版本中：\n\n* 所有事件都是委托在`id = root`的DOM元素中（网上很多说是在`document`中，`17`版本不是了）；\n* 在应用中所有节点的事件监听其实都是在`id = root`的DOM元素中触发；\n* `React`自身实现了一套事件冒泡捕获机制；\n* `React`实现了合成事件`SyntheticEvent`；\n* `React`在`17`版本不再使用事件池了（网上很多说使用了对象池来管理合成事件对象的创建销毁，那是`16`版本及之前）；\n* 事件一旦在`id = root`的DOM元素中委托，其实是一直在触发的，只是没有绑定对应的回调函数；\n\n![image.png](https://static.ecool.fun//article/eeeadcee-a840-40f8-9a26-3f2f747b2ef6.jpeg) \n\n盗用一张官方图，按官方解释，之所以会将事件委托从`document`中移到`id = root`的DOM元素，是为了**可以更加安全地进行新旧版本 React 树的嵌套**。\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T12:01:29.000Z",
+    "updateAt": "2024-01-25T19:00:42.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 113,
+    "prev": "36be973b-0351-4a18-b6b8-5e68023e7b96",
+    "next": "f59d29a2-7ff8-41ca-8176-a24f1ca6d0f5"
+  },
+  "post": {
+    "exerciseKey": "eaf64af1-8d01-495c-b9ca-c1d503e3ed8d",
+    "category": "QA",
+    "title": "简述下 React 的事件代理机制？",
+    "level": 3,
+    "updateAt": "2024-01-25T19:00:42+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

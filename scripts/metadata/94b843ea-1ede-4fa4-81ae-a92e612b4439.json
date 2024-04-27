@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2020,
+    "exerciseKey": "94b843ea-1ede-4fa4-81ae-a92e612b4439",
+    "category": "QA",
+    "renderType": "md",
+    "title": "useMemo 和 useCallback 有什么区别？",
+    "desc": "",
+    "options": null,
+    "explanation": " 在 React 中，`useMemo` 和 `useCallback` 都是用来优化性能的钩子函数，但它们的用途和作用稍有不同。\n\n1. **useMemo**:\n`useMemo` 的主要作用是在组件重新渲染时，用来缓存计算结果，以避免不必要的重复计算。它接收两个参数：一个回调函数和一个依赖数组。回调函数用于进行计算，而依赖数组用于指定在数组中列出的依赖项发生变化时，才重新计算并返回新的值，否则会返回上一次缓存的值。\n\n```jsx\nconst memoizedValue = useMemo(() => {\n  // 进行耗时的计算\n  return someValue;\n}, [dependency1, dependency2]);\n```\n\n在上面的示例中，只有当 `dependency1` 或者 `dependency2` 发生变化时，`useMemo` 才会重新计算并返回新的值，否则会复用之前的值。\n\n2. **useCallback**:\n`useCallback` 的作用是在组件重新渲染时，返回一个记忆化的回调函数，以避免不必要的函数重新创建。它也接收两个参数：一个回调函数和一个依赖数组。当依赖项发生变化时，会返回一个新的回调函数，否则会复用之前的回调函数。\n\n```jsx\nconst memoizedCallback = useCallback(() => {\n  // 处理事件的回调函数\n}, [dependency1, dependency2]);\n```\n\n在这个示例中，只有当 `dependency1` 或者 `dependency2` 发生变化时，`useCallback` 才会返回一个新的回调函数，否则会返回之前的回调函数。\n\n总结区别：\n- `useMemo` 主要用于缓存计算结果，适用于任何需要缓存值的场景。\n- `useCallback` 主要用于缓存回调函数，适用于需要传递给子组件的事件处理函数，以避免不必要的重新渲染。\n\n另外，在大多数情况下，你不必在每个函数组件中都使用 `useMemo` 或 `useCallback`。\n\n只有当你在性能测试中发现了性能问题，或者在特定情况下需要优化函数的创建和计算时，再考虑使用这些钩子。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-05-30T01:12:57.000Z",
+    "updateAt": "2023-08-30T19:30:38.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 295,
+    "prev": "72489e71-cf2d-4c98-8fd3-d43f7bfe217e",
+    "next": "b9ca2e1f-d720-4b6a-ab77-acc5edd03c99"
+  },
+  "post": {
+    "exerciseKey": "94b843ea-1ede-4fa4-81ae-a92e612b4439",
+    "category": "QA",
+    "title": "useMemo 和 useCallback 有什么区别？",
+    "level": 1,
+    "updateAt": "2023-08-30T19:30:38+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

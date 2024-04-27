@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 263,
+    "exerciseKey": "76a7ac01-6de6-4391-976d-b703da5b78ec",
+    "category": "QA",
+    "renderType": "md",
+    "title": "label标签有什么用？",
+    "desc": null,
+    "options": null,
+    "explanation": "label标签来定义表单控制间的关系。当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。\n\n```html\n<label for=\"Name\">Number:</label>\n<input type='text' name=\"Name\" id=\"Name\"/>\n\n<label>Date:<input type=\"text\" name=\"B\"/></label>\n```\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T05:35:10.000Z",
+    "updateAt": "2022-06-25T14:32:36.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 524,
+    "prev": "07d98297-cc3c-434b-9eb5-307858ded62d",
+    "next": "838b4eda-1f58-4215-9bb5-3e59db973286"
+  },
+  "post": {
+    "exerciseKey": "76a7ac01-6de6-4391-976d-b703da5b78ec",
+    "category": "QA",
+    "title": "label标签有什么用？",
+    "level": 1,
+    "updateAt": "2022-06-25T14:32:36+00:00"
+  },
+  "tag": {
+    "id": 12,
+    "tagName": "HTML",
+    "type": "1",
+    "exerciseCount": 57
+  }
+}

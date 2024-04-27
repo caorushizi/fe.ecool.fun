@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2049,
+    "exerciseKey": "c1728539-a263-46bd-b5b7-583191a4ccf8",
+    "category": "QA",
+    "renderType": "html",
+    "title": "object-fit 用法",
+    "desc": null,
+    "options": null,
+    "explanation": "<h1>object-fit</h1><p><strong><code>object-fit</code></strong> <u><a href=\"https://developer.mozilla.org/zh-CN/docs/Web/CSS\">CSS</a></u> 属性指定<u><a href=\"https://developer.mozilla.org/zh-CN/docs/Web/CSS/Replaced_element\">可替换元素</a></u>（例如：<code><u><a href=\"https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img\">&lt;img&gt;</a></u></code> 或 <code><u><a href=\"https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video\">&lt;video&gt;</a></u></code>）的内容应该如何适应到其使用高度和宽度确定的框。</p><p><br/>你可以通过使用 <code><u><a href=\"https://developer.mozilla.org/zh-CN/docs/Web/CSS/object-position\">object-position</a></u></code> 属性来切换被替换元素的内容对象在元素框内的对齐方式。</p><p></p><p><a href=\"https://developer.mozilla.org/zh-CN/docs/Web/CSS/object-fit#%E8%AF%AD%E6%B3%95\">语法</a></p><pre><code><br/>object-fit: contain; <br/>object-fit: cover; <br/>object-fit: fill; <br/>object-fit: none; <br/>object-fit: scale-down; /* Global values */ <br/>object-fit: inherit; <br/>object-fit: initial; <br/>object-fit: revert; <br/>object-fit: revert-layer; <br/>object-fit: unset; </code></pre><p></p><p><br/>object-fit 属性由下列的值中的单独一个关键字来指定。</p><p></p><p><code>contain</code></p><p>被替换的内容将被缩放，以在填充元素的内容框时保持其宽高比。整个对象在填充盒子的同时保留其长宽比，因此如果宽高比与框的宽高比不匹配，该对象将被添加“<u><a href=\"https://zh.wikipedia.org/wiki/%E9%BB%91%E9%82%8A\" target=\"_blank\" class=\"external\">黑边</a></u>”。</p><p><code>cover</code></p><p>被替换的内容在保持其宽高比的同时填充元素的整个内容框。如果对象的宽高比与内容框不相匹配，该对象将被剪裁以适应内容框。</p><p><code>fill</code></p><p>被替换的内容正好填充元素的内容框。整个对象将完全填充此框。如果对象的宽高比与内容框不相匹配，那么该对象将被拉伸以适应内容框。</p><p><code>none</code></p><p>被替换的内容将保持其原有的尺寸。</p><p><code>scale-down</code></p><p>内容的尺寸与 <code>none</code> 或 <code>contain</code> 中的一个相同，取决于它们两个之间谁得到的对象尺寸会更小一些。</p><p></p><p></p>",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-10-10T03:00:52.000Z",
+    "updateAt": "2023-10-10T11:01:01.000Z",
+    "updateUserId": 9,
+    "isCollected": false,
+    "currentIndex": 276,
+    "prev": "49ec948f-9b64-4d28-b97f-3796518a6c16",
+    "next": "8cbb58f4-7fb1-4c88-9e15-ed38eb0bd283"
+  },
+  "post": {
+    "exerciseKey": "c1728539-a263-46bd-b5b7-583191a4ccf8",
+    "category": "QA",
+    "title": "object-fit 用法",
+    "level": 2,
+    "updateAt": "2023-10-10T11:01:01+00:00"
+  },
+  "tag": {
+    "id": 11,
+    "tagName": "CSS",
+    "type": "1",
+    "exerciseCount": 90
+  }
+}

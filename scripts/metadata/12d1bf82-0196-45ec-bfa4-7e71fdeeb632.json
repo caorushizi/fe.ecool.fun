@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 476,
+    "exerciseKey": "12d1bf82-0196-45ec-bfa4-7e71fdeeb632",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Typescript中never 和 void 的区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "* void 表示没有任何类型（可以被赋值为 null 和 undefined）。\n* never 表示一个不包含值的类型，即表示永远不存在的值。\n* 拥有 void 返回值类型的函数能正常运行。拥有 never 返回值类型的函数无法正常返回，无法终止，或会抛出异常。",
+    "level": 1.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-08T15:14:58.000Z",
+    "updateAt": "2021-07-11T11:08:33.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 879,
+    "prev": "30de2c61-c961-4613-90a0-b31e5eabf637",
+    "next": "c50852c5-6471-4bd3-8392-02ab58e4c726"
+  },
+  "post": {
+    "exerciseKey": "12d1bf82-0196-45ec-bfa4-7e71fdeeb632",
+    "category": "QA",
+    "title": "Typescript中never 和 void 的区别？",
+    "level": 1.5,
+    "updateAt": "2021-07-11T11:08:33+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

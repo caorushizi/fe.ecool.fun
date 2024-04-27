@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1612,
+    "exerciseKey": "7a27cdc8-5f66-4cea-8350-c20d0bd2836b",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第20题】下面代码的输出是什么？",
+    "desc": "```js\nPromise.resolve(1)\n  .then(2)\n  .then(Promise.resolve(3))\n  .then(console.log)\n```",
+    "options": null,
+    "explanation": "## 解析\n\n.then 或者 .catch 的参数期望是函数，传入非函数则会发生值透传。\n\n第一个then和第二个then中传入的都不是函数，一个是数字类型，一个是对象类型，因此发生了透传，将resolve(1) 的值直接传到最后一个then里。\n\n## 结果\n\n```\n1\n```",
+    "level": 3.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T14:50:07.000Z",
+    "updateAt": "2022-01-09T23:01:57.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 661,
+    "prev": "9656ede7-6815-4a00-9df3-60c0219e4383",
+    "next": "090868ab-fef9-4759-8b81-20708a165fa1"
+  },
+  "post": {
+    "exerciseKey": "7a27cdc8-5f66-4cea-8350-c20d0bd2836b",
+    "category": "QA",
+    "title": "【Promise第20题】下面代码的输出是什么？",
+    "level": 3.5,
+    "updateAt": "2022-01-09T23:01:57+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

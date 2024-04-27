@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1548,
+    "exerciseKey": "6b910440-48ae-49f9-8659-8aa880d239fb",
+    "category": "QA",
+    "renderType": "md",
+    "title": "什么是“前端路由”？什么时候适合使用“前端路由”？“前端路由”有哪些优点和缺点？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 什么是前端路由？\n\n前端路由就是把不同路由对应不同的内容或页面的任务交给前端来做，之前是通过服务端根据 url 的不同返回不同的页面实现的。\n\n## 什么时候使用前端路由？\n\n在单页面应用，大部分页面结构不变，只改变部分内容的使用\n\n## 前端路由有什么优点和缺点？\n\n优点：用户体验好，不需要每次都从服务器全部获取，快速展现给用户\n\n缺点：单页面无法记住之前滚动的位置，无法在前进，后退的时候记住滚动的位置\n\n## 实现方式\n\n前端路由一共有两种实现方式，一种是通过 **hash** 的方式，一种是通过使用 **pushState** 的方式。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:22:19.000Z",
+    "updateAt": "2021-11-17T22:25:01.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 732,
+    "prev": "7ff627a9-0948-4352-9b70-69aad59fe2ec",
+    "next": "eb451be3-dc88-481c-b8a8-da6c8d278e95"
+  },
+  "post": {
+    "exerciseKey": "6b910440-48ae-49f9-8659-8aa880d239fb",
+    "category": "QA",
+    "title": "什么是“前端路由”？什么时候适合使用“前端路由”？“前端路由”有哪些优点和缺点？",
+    "level": 3,
+    "updateAt": "2021-11-17T22:25:01+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

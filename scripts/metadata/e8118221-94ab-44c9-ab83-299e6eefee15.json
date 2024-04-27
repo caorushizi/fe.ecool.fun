@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1567,
+    "exerciseKey": "e8118221-94ab-44c9-ab83-299e6eefee15",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何判断一个对象是否为空对象？",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nfunction checkNullObj(obj) {\n  return Object.keys(obj).length === 0;\n}\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:42:52.000Z",
+    "updateAt": "2021-11-17T22:48:42.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 729,
+    "prev": "dc584829-5c57-435d-9276-f971e479bd29",
+    "next": "a8cc1054-2087-4adb-992c-33b88a188ddf"
+  },
+  "post": {
+    "exerciseKey": "e8118221-94ab-44c9-ab83-299e6eefee15",
+    "category": "QA",
+    "title": "如何判断一个对象是否为空对象？",
+    "level": 3,
+    "updateAt": "2021-11-17T22:48:42+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 283,
+    "exerciseKey": "9f860d42-8504-4562-8b9a-4a415ba5782a",
+    "category": "QA",
+    "renderType": "md",
+    "title": "webSocket如何兼容低浏览器\n",
+    "desc": null,
+    "options": null,
+    "explanation": "* Adobe Flash Socket；\n* ActiveX HTMLFile (IE) ；\n* 基于 multipart 编码发送 XHR；\n* 基于长轮询的 XHR；",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T07:41:27.000Z",
+    "updateAt": "2021-07-04T16:07:25.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1042,
+    "prev": "343c64fa-f996-4d17-a20f-dec32f7b256b",
+    "next": "a4bbb8e2-1333-460a-8127-87f04f83c5b8"
+  },
+  "post": {
+    "exerciseKey": "9f860d42-8504-4562-8b9a-4a415ba5782a",
+    "category": "QA",
+    "title": "webSocket如何兼容低浏览器\n",
+    "level": 1,
+    "updateAt": "2021-07-04T16:07:25+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

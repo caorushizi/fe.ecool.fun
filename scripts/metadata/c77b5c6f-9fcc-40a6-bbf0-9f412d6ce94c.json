@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 414,
+    "exerciseKey": "c77b5c6f-9fcc-40a6-bbf0-9f412d6ce94c",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现 debounce（防抖）函数\n",
+    "desc": null,
+    "options": null,
+    "explanation": "触发高频时间后n秒内函数只会执行一次,如果n秒内高频时间再次触发,则重新计算时间。\n\n```js\nconst debounce = (fn, time) => {\n  let timeout = null;\n  return function() {\n    clearTimeout(timeout)\n    timeout = setTimeout(() => {\n      fn.apply(this, arguments);\n    }, time);\n  }\n};\n\n```\n\n防抖常应用于用户进行搜索输入节约请求资源，window触发resize事件时进行防抖只触发一次。\n\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:04:15.000Z",
+    "updateAt": "2021-07-07T00:13:07.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 933,
+    "prev": "c50bec05-c350-46bd-a2a6-dd5f9a6cdf46",
+    "next": "c6c4c722-bd37-41dd-b736-e836260b7863"
+  },
+  "post": {
+    "exerciseKey": "c77b5c6f-9fcc-40a6-bbf0-9f412d6ce94c",
+    "category": "QA",
+    "title": "实现 debounce（防抖）函数\n",
+    "level": 1,
+    "updateAt": "2021-07-07T00:13:07+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

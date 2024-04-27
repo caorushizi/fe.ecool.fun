@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 106,
+    "exerciseKey": "a0544c68-4798-4f40-b233-bc3510170371",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出什么?",
+    "desc": "```javascript\nconst one = (false || {} || null)\nconst two = (null || false || \"\")\nconst three = ([] || 0 || true)\n\nconsole.log(one, two, three)\n```",
+    "options": "{\"options\":[\"false null []\",\"null \\\"\\\" true\",\"{} \\\"\\\" []\",\"null null true\"],\"isMulti\":false,\"answer\":[2]}",
+    "explanation": "使用`||`运算符，我们可以返回第一个真值。 如果所有值都是假值，则返回最后一个值。\n`（false || {} || null）`：空对象`{}`是一个真值。 这是第一个（也是唯一的）真值，它将被返回。`one`等于`{}`。\n`（null || false ||“”）`：所有值都是假值。 这意味着返回传递的值`\"\"`。 `two`等于`\"\"`。\n`（[] || 0 ||“”）`：空数组`[]`是一个真值。 这是第一个返回的真值。 `three`等于`[]`。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:28:19.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1104,
+    "prev": "be757fef-dbff-48f4-b401-d7f04238cc81",
+    "next": "00146aa9-9e0e-4217-a99e-9404476520a1"
+  },
+  "post": {
+    "exerciseKey": "a0544c68-4798-4f40-b233-bc3510170371",
+    "category": "Choice",
+    "title": "输出什么?",
+    "level": 0.5,
+    "updateAt": "2021-07-03T22:28:19+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

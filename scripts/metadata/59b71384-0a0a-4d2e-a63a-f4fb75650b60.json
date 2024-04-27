@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1629,
+    "exerciseKey": "59b71384-0a0a-4d2e-a63a-f4fb75650b60",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第37题】下面代码的输出是什么？",
+    "desc": "```js\nasync function async1 () {\n  try {\n    await Promise.reject('error!!!')\n  } catch(e) {\n    console.log(e)\n  }\n  console.log('async1');\n  return Promise.resolve('async1 success')\n}\nasync1().then(res => console.log(res))\nconsole.log('script start')\n\n```",
+    "options": null,
+    "explanation": "```\n'script start'\n'error!!!'\n'async1'\n'async1 success'\n\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T15:18:09.000Z",
+    "updateAt": "2022-01-09T23:24:02.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 645,
+    "prev": "570eed0a-2340-4c59-a6c0-967db6a7dc48",
+    "next": "32b06302-58e6-44df-acb7-6c975dcc2957"
+  },
+  "post": {
+    "exerciseKey": "59b71384-0a0a-4d2e-a63a-f4fb75650b60",
+    "category": "QA",
+    "title": "【Promise第37题】下面代码的输出是什么？",
+    "level": 3,
+    "updateAt": "2022-01-09T23:24:02+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

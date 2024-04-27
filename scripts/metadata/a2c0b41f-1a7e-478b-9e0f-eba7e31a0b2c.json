@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1601,
+    "exerciseKey": "a2c0b41f-1a7e-478b-9e0f-eba7e31a0b2c",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第九题】下面两段代码分别输出什么？",
+    "desc": "代码一：\n```js\nsetTimeout(() => {\n  console.log('timer1');\n  setTimeout(() => {\n    console.log('timer3')\n  }, 0)\n}, 0)\nsetTimeout(() => {\n  console.log('timer2')\n}, 0)\nconsole.log('start')\n```\n\n代码二：\n```js\nsetTimeout(() => {\n  console.log('timer1');\n  Promise.resolve().then(() => {\n    console.log('promise')\n  })\n}, 0)\nsetTimeout(() => {\n  console.log('timer2')\n}, 0)\nconsole.log('start')\n```",
+    "options": null,
+    "explanation": "代码一输出：\n```\n'start'\n'timer1'\n'timer2'\n'timer3'\n```\n\n代码二输出：\n```\n'start'\n'timer1'\n'promise'\n'timer2'\n```\n\n这两个例子，看着好像只是把第一个定时器中的内容换了一下而已。\n\n一个是为定时器timer3，一个是为Promise.then\n\n但是如果是定时器timer3的话，它会在timer2后执行，而Promise.then却是在timer2之前执行。\n\n你可以这样理解，Promise.then是微任务，它会被加入到本轮中的微任务列表，而定时器timer3是宏任务，它会被加入到下一轮的宏任务中。\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T14:35:34.000Z",
+    "updateAt": "2022-01-09T23:01:06.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 672,
+    "prev": "fa6c1ad8-274c-4830-aee9-6799d6a7fdc1",
+    "next": "a7ccbacc-5415-4c3f-b168-5fcc4d7792ee"
+  },
+  "post": {
+    "exerciseKey": "a2c0b41f-1a7e-478b-9e0f-eba7e31a0b2c",
+    "category": "QA",
+    "title": "【Promise第九题】下面两段代码分别输出什么？",
+    "level": 3,
+    "updateAt": "2022-01-09T23:01:06+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

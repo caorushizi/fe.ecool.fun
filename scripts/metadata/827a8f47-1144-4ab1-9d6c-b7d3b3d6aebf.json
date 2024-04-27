@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 412,
+    "exerciseKey": "827a8f47-1144-4ab1-9d6c-b7d3b3d6aebf",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现 Function.prototype.call",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nFunction.prototype.call = function(context = window, ...args) {\n  if (typeof this !== 'function') {\n    throw new TypeError('Type Error');\n  }\n  const fn = Symbol('fn');\n  context[fn] = this;\n\n  const res = context[fn](...args);\n  delete context[fn];\n  return res;\n}\n\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:02:36.000Z",
+    "updateAt": "2021-07-07T00:13:01.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 935,
+    "prev": "c6c4c722-bd37-41dd-b736-e836260b7863",
+    "next": "c8245703-a177-4deb-a8be-24f73a3267b8"
+  },
+  "post": {
+    "exerciseKey": "827a8f47-1144-4ab1-9d6c-b7d3b3d6aebf",
+    "category": "QA",
+    "title": "实现 Function.prototype.call",
+    "level": 2,
+    "updateAt": "2021-07-07T00:13:01+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

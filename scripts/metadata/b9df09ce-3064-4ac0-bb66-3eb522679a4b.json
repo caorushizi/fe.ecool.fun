@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 447,
+    "exerciseKey": "b9df09ce-3064-4ac0-bb66-3eb522679a4b",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现一个方法，清除字符串前后的空格。",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nfunction trim(str) {\n    if (str & typeof str === \"string\") {\n        return str.replace(/(^s*)|(s*)$/g,\"\"); //去除前后空白符\n    }\n}\n```\n",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T16:08:54.000Z",
+    "updateAt": "2021-07-07T00:14:40.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 910,
+    "prev": "ba7ffa60-aa92-4e66-9b14-78520f4deeee",
+    "next": "5a6bab0d-b96e-42ce-bfce-ba3b38e32728"
+  },
+  "post": {
+    "exerciseKey": "b9df09ce-3064-4ac0-bb66-3eb522679a4b",
+    "category": "QA",
+    "title": "实现一个方法，清除字符串前后的空格。",
+    "level": 2,
+    "updateAt": "2021-07-07T00:14:40+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

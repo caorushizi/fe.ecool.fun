@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1942,
+    "exerciseKey": "86c1abd9-9552-42ab-93d5-16076a877db0",
+    "category": "QA",
+    "renderType": "md",
+    "title": "js函数有哪几种声明方式？有什么区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "有 `表达式` 和 `声明式` 两种函数声明方式\n\n* 函数的声明式写法为：`function test(){}`，这种写法会导致函数提升，所有通过`function`关键字声明的变量都会被解释器优先编译，不管声明在什么位置都可以调用它，但是它本身并不会被执行。\n\n```js\ntest(); // 测试\nfunction test() {\n  console.log(\"测试\");\n}\ntest(); // 测试\n```\n\n* 函数的表达式写法为：`var test = function(){}`，这种写法不会导致函数提升，必须先声明后调用，不然就会报错。\n\n```js\ntest(); // 报错：TypeError: test is not a function\nvar test = function() {\n  console.log(\"测试\");\n};\n```\n\n## 二者的区别\n\n```javascript\n//函数声明式\nfunction greeting(){\n      console.log(\"hello world\");  \n}\n//函数表达式\nvar greeting = function(){\n    console.log(\"hello world\"); \n}\n```\n\n1. 函数声明式变量会声明提前 函数表达式变量不会声明提前\n2. **函数声明**中的`函数名`是必需的，而**函数表达式**中的`函数名则是可选的`。\n3. 函数表达式可以在定义的时候直接在表达式后面加()执行，而函数声明则不可以。  \n\n```javascript  \nfunction fun(){  \n   console.log('我是一个函数声明式')  \n}();   //unexpected token  \n\nvar foo = function (){  \n    console.log('我是一个函数表达式')  \n}();   //我是一个函数表达式  \n\n```\n\n4. 自执行函数即使带有函数名，它里面的函数还是属于函数表达式。  \n\n```javascript  \n(function fun(){  \n    console.log('我是一个函数表达式')  \n})()  //我是一个函数表达式  \n```  \n\n因为函数只是整个自执行函数的一部分。\n\n\n\n\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-03-12T09:16:49.000Z",
+    "updateAt": "2023-03-12T17:17:03.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 431,
+    "prev": "478e5483-7797-4844-be41-c7b96a383c00",
+    "next": "69360791-290f-44c8-ba87-6bfe7a5260ad"
+  },
+  "post": {
+    "exerciseKey": "86c1abd9-9552-42ab-93d5-16076a877db0",
+    "category": "QA",
+    "title": "js函数有哪几种声明方式？有什么区别？",
+    "level": 1,
+    "updateAt": "2023-03-12T17:17:03+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

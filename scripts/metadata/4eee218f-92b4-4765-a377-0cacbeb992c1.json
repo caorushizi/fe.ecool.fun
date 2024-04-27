@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1885,
+    "exerciseKey": "4eee218f-92b4-4765-a377-0cacbeb992c1",
+    "category": "QA",
+    "renderType": "md",
+    "title": "单行文本怎么实现两端对齐？",
+    "desc": null,
+    "options": null,
+    "explanation": "说起两端对齐，大家首先想到的可能是 `text-align: justify;`，但justify对最后一行无效。\n\n通常这样的排版对整段文字是极好的，我们并不希望当最后一行只有两个字时也两端对齐，毕竟这是不便于阅读的，那么当我们只有一行文本，但要实现单行文本两端对齐怎么解决？\n\n## 方法一：添加一行\n\n根据justify对最后一行无效，我们可以新增一行，使该行文本不是最后一行，实现如下：\n\n```html\n//html\n<div class=\"item\">\n    <span class=\"label\" >{{item.label}}</span>：\n    <span class=\"value\">{{item.value}}</span>\n</div>\n```\n\n```css\n//scss\n.item {\n    height: 32px;\n    line-height: 32px;\n    margin-bottom: 8px;\n    .label {\n        display: inline-block;\n        height: 100%;\n        width: 100px;\n        text-align: justify;\n        vertical-align: top;\n        &::after {\n            display: inline-block;\n            width: 100%;\n            content: '';\n            height: 0;\n        }\n    }\n    .value {\n        padding-right: 10px;\n    }\n}\n```\n\n## 方法二： text-align-last\n\ntext-align-last，该属性定义的是一段文本中最后一行在被强制换行之前的对齐规则。\n\n```css\n//scss\n.item {\n    margin-bottom: 8px;\n    .label {\n        display: inline-block;\n        height: 100%;\n        min-width: 100px;\n        text-align: justify;\n        text-align-last: justify;\n    }\n    .value {\n        padding-right: 10px;\n    }\n}\n```\n\n现在的浏览器基本都支持该属性。\n\n![](https://static.ecool.fun//article/da3bafad-51c3-482b-a953-955e08bd220c.png)\n\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-08-20T12:43:46.000Z",
+    "updateAt": "2023-12-19T11:09:04.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 222,
+    "prev": "16cd86d3-cdc5-4c8c-946b-19f72408525f",
+    "next": "54940522-41b4-42f5-ae3e-83d520d1cff5"
+  },
+  "post": {
+    "exerciseKey": "4eee218f-92b4-4765-a377-0cacbeb992c1",
+    "category": "QA",
+    "title": "单行文本怎么实现两端对齐？",
+    "level": 1,
+    "updateAt": "2023-12-19T11:09:04+00:00"
+  },
+  "tag": {
+    "id": 11,
+    "tagName": "CSS",
+    "type": "1",
+    "exerciseCount": 90
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1951,
+    "exerciseKey": "5bd5fdd4-706a-49dd-9cbe-1f2a05779ffe",
+    "category": "QA",
+    "renderType": "md",
+    "title": "请实现下面的 sleep 方法",
+    "desc": "```ts\n/**\n * @file 返回一个 Promise，并在 ms 毫秒后 Promise 变为完成状态\n */\n\nexport function sleep(ms: number): Promise<undefined> {\n  // 补全此处代码\n    throw new Error('功能待实现');\n}\n\nasync function main(){\n    console.log('a')\n    await sleep(1000);\n    console.log('b');\n    await sleep(1000);\n    console.log('c');\n}\nmain()\n\nexport default {}\n```",
+    "options": null,
+    "explanation": "```ts\n/**\n * @file 返回一个 Promise，并在 ms 毫秒后 Promise 变为完成状态\n */\n\nexport function sleep(ms: number): Promise<undefined> {\n  // 参考答案\n  return new Promise(\n    (\n      resolve: (value: undefined) => void,\n      reject: (value: undefined) => void\n    ) => {\n      setTimeout(() => {\n        resolve(undefined);\n      }, ms);\n    }\n  );\n}\n\nasync function main() {\n  console.log(\"a\");\n  await sleep(1000);\n  console.log(\"b\");\n  await sleep(1000);\n  console.log(\"c\");\n}\nmain();\n\nexport default {};\n\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-03-12T15:28:04.000Z",
+    "updateAt": "2023-05-31T20:28:33.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 333,
+    "prev": "00499f71-c1c2-46aa-9e87-d3ae7b79f268",
+    "next": "0bfc8fed-e416-4d1b-bbac-ab71ee678f1a"
+  },
+  "post": {
+    "exerciseKey": "5bd5fdd4-706a-49dd-9cbe-1f2a05779ffe",
+    "category": "QA",
+    "title": "请实现下面的 sleep 方法",
+    "level": 3,
+    "updateAt": "2023-05-31T20:28:33+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

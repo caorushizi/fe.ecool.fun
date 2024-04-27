@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 651,
+    "exerciseKey": "6515d22e-88eb-4a3f-9d02-2950cf35cb85",
+    "category": "QA",
+    "renderType": "md",
+    "title": "说说你在React项目是如何捕获错误的？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 一、是什么\n\n错误在我们日常编写代码是非常常见的\n\n举个例子，在`react`项目中去编写组件内`JavaScript`代码错误会导致 `React` 的内部状态被破坏，导致整个应用崩溃，这是不应该出现的现象\n\n作为一个框架，`react`也有自身对于错误的处理的解决方案\n\n\n## 二、如何做\n\n为了解决出现的错误导致整个应用崩溃的问题，`react16`引用了**错误边界**新的概念\n\n错误边界是一种 `React` 组件，这种组件可以捕获发生在其子组件树任何位置的 `JavaScript` 错误，并打印这些错误，同时展示降级 `UI`，而并不会渲染那些发生崩溃的子组件树\n\n错误边界在渲染期间、生命周期方法和整个组件树的构造函数中捕获错误\n\n形成错误边界组件的两个条件：\n\n- 使用了  static getDerivedStateFromError()\n- 使用了 componentDidCatch()\n\n抛出错误后，请使用 `static getDerivedStateFromError()` 渲染备用 UI ，使用 `componentDidCatch()` 打印错误信息，如下：\n\n```jsx\nclass ErrorBoundary extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = { hasError: false };\n  }\n\n  static getDerivedStateFromError(error) {\n    // 更新 state 使下一次渲染能够显示降级后的 UI\n    return { hasError: true };\n  }\n\n  componentDidCatch(error, errorInfo) {\n    // 你同样可以将错误日志上报给服务器\n    logErrorToMyService(error, errorInfo);\n  }\n\n  render() {\n    if (this.state.hasError) {\n      // 你可以自定义降级后的 UI 并渲染\n      return <h1>Something went wrong.</h1>;\n    }\n\n    return this.props.children; \n  }\n}\n```\n\n然后就可以把自身组件的作为错误边界的子组件，如下：\n\n```jsx\n<ErrorBoundary>\n  <MyWidget />\n</ErrorBoundary>\n```\n\n下面这些情况无法捕获到异常：\n\n- 事件处理\n- 异步代码\n- 服务端渲染\n- 自身抛出来的错误\n\n在`react 16`版本之后，会把渲染期间发生的所有错误打印到控制台\n\n除了错误信息和 JavaScript 栈外，React 16 还提供了组件栈追踪。现在你可以准确地查看发生在组件树内的错误信息：\n\n ![](https://static.ecool.fun//article/25f14d20-37c4-491a-84d8-64d76e60373c.png)\n\n可以看到在错误信息下方文字中存在一个组件栈，便于我们追踪错误\n\n对于错误边界无法捕获的异常，如事件处理过程中发生问题并不会捕获到，是因为其不会在渲染期间触发，并不会导致渲染时候问题\n\n这种情况可以使用`js`的`try...catch...`语法，如下：\n\n```jsx\nclass MyComponent extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = { error: null };\n    this.handleClick = this.handleClick.bind(this);\n  }\n\n  handleClick() {\n    try {\n      // 执行操作，如有错误则会抛出\n    } catch (error) {\n      this.setState({ error });\n    }\n  }\n\n  render() {\n    if (this.state.error) {\n      return <h1>Caught an error.</h1>\n    }\n    return <button onClick={this.handleClick}>Click Me</button>\n  }\n}\n```\n\n\n除此之外还可以通过监听`onerror`事件\n\n```js\nwindow.addEventListener('error', function(event) { ... })\n```\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-10-24T04:19:12.000Z",
+    "updateAt": "2024-01-25T19:25:34.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 64,
+    "prev": "6eec7f26-3bdc-4015-86fc-a75d495311a6",
+    "next": "190f1c7f-4fb5-4fb1-bb7c-f2cc977d50d8"
+  },
+  "post": {
+    "exerciseKey": "6515d22e-88eb-4a3f-9d02-2950cf35cb85",
+    "category": "QA",
+    "title": "说说你在React项目是如何捕获错误的？",
+    "level": 3,
+    "updateAt": "2024-01-25T19:25:34+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

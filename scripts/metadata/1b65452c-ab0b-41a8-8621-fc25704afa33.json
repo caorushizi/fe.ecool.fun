@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 635,
+    "exerciseKey": "1b65452c-ab0b-41a8-8621-fc25704afa33",
+    "category": "QA",
+    "renderType": "md",
+    "title": "JS中怎么阻止事件冒泡和默认事件？",
+    "desc": null,
+    "options": null,
+    "explanation": "## event.stopPropagation()方法\n\n这是阻止事件的冒泡方法，不让事件向 document 上蔓延，但是默认事件任然会执行，当你掉用这个方法的时候，如果点击一个连接，这个连接仍然会被打开，\n\n## event.preventDefault()方法\n\n这是阻止默认事件的方法，比如在a标签的绑定事件上调用此方法，链接则不会被打开，但是会发生冒泡，冒泡会传递到上一层的父元素；\n\n## return false\n\n这个方法比较暴力，他会同事阻止事件冒泡也会阻止默认事件；写上此代码，连接不会被打开，事件也不会传递到上一层的父元素；可以理解为return false就等于同时调用了event.stopPropagation()和event.preventDefault()\n\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-09-25T10:25:46.000Z",
+    "updateAt": "2021-09-25T19:07:24.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 749,
+    "prev": "1592fd61-1555-4646-a2a0-438828b5b8e5",
+    "next": "d8fe4e1f-93ef-440b-a06b-81d22897afa2"
+  },
+  "post": {
+    "exerciseKey": "1b65452c-ab0b-41a8-8621-fc25704afa33",
+    "category": "QA",
+    "title": "JS中怎么阻止事件冒泡和默认事件？",
+    "level": 1,
+    "updateAt": "2021-09-25T19:07:24+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

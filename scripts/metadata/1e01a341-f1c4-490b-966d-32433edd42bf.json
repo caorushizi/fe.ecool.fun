@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 332,
+    "exerciseKey": "1e01a341-f1c4-490b-966d-32433edd42bf",
+    "category": "QA",
+    "renderType": "md",
+    "title": "React中为什么要给组件设置 key？",
+    "desc": null,
+    "options": null,
+    "explanation": "在开发过程中，我们需要保证某个元素的 key 在其同级元素中具有唯一性。\n\n在 React Diff 算法中React 会借助元素的 Key 值来判断该元素是新创建的还是被移动而来的元素，从而减少不必要的元素重新渲染。\n\n此外，React 还需要借助 Key 值来判断元素与本地状态的关联关系。\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T12:04:26.000Z",
+    "updateAt": "2021-07-04T21:29:37.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1000,
+    "prev": "f31923c7-7157-408b-8e12-74ced305802e",
+    "next": "116db48b-6ad5-40f1-9f60-c5a525673395"
+  },
+  "post": {
+    "exerciseKey": "1e01a341-f1c4-490b-966d-32433edd42bf",
+    "category": "QA",
+    "title": "React中为什么要给组件设置 key？",
+    "level": 1,
+    "updateAt": "2021-07-04T21:29:37+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

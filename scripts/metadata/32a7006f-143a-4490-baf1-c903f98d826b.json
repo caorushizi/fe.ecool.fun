@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1537,
+    "exerciseKey": "32a7006f-143a-4490-baf1-c903f98d826b",
+    "category": "QA",
+    "renderType": "md",
+    "title": "使用 useState （const [test, setTest] = useState([])）时，为什么连续调用 setTest({...test, newValue}) 会出现值的丢失？",
+    "desc": null,
+    "options": null,
+    "explanation": "useState是异步执行的，也就是执行 setTest 后，不会立即更新 test 的结果，多次调用时，出现了值覆盖的情况。\n\n如果本次的状态更新依赖于上一次最近的状态更新，那么我们可以给 setTest 传递一个函数进去，函数的参数即为最后一次更新的状态的值：\n\n```react\nsetTest(prevState => ([\n\t...prevState,\n    newValue\n]))\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T08:18:17.000Z",
+    "updateAt": "2023-03-26T08:34:59.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 415,
+    "prev": "2b68a2b5-ab3a-4de4-af48-43ab5f7e99f8",
+    "next": "0da5c58e-1299-477f-95f1-9e05ebf8aa2e"
+  },
+  "post": {
+    "exerciseKey": "32a7006f-143a-4490-baf1-c903f98d826b",
+    "category": "QA",
+    "title": "使用 useState （const [test, setTest] = useState([])）时，为什么连续调用 setTest({...test, newValue}) 会出现值的丢失？",
+    "level": 3,
+    "updateAt": "2023-03-26T08:34:59+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

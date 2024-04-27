@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1977,
+    "exerciseKey": "8fd9b84e-356e-4db8-b3b3-4a6532c5825f",
+    "category": "QA",
+    "renderType": "md",
+    "title": "React 中，怎么实现父组件调用子组件中的方法？",
+    "desc": null,
+    "options": null,
+    "explanation": " 要实现父组件调用子组件中的方法，需要通过以下步骤进行操作：\n\n1. 在子组件中，创建一个公开的方法。这可以通过在子组件类中定义一个方法或者使用 React Hooks 中的 `useImperativeHandle` 来实现。\n\n   - 如果是类组件，可以在子组件类中定义一个方法，并将其挂载到实例上。例如：\n\n     ```jsx\n     class ChildComponent extends React.Component {\n       childMethod() {\n         // 子组件中需要执行的操作\n       }\n\n       render() {\n         // 子组件的渲染逻辑\n       }\n     }\n     ```\n\n   - 如果是函数式组件，可以使用 `useImperativeHandle` Hook 将指定的方法暴露给父组件。例如：\n\n     ```jsx\n     import { forwardRef, useImperativeHandle } from 'react';\n\n     function ChildComponent(props, ref) {\n       useImperativeHandle(ref, () => ({\n         childMethod() {\n           // 子组件中需要执行的操作\n         }\n       }));\n\n       // 子组件的渲染逻辑\n     }\n\n     export default forwardRef(ChildComponent);\n     ```\n\n2. 在父组件中，首先引用或创建对子组件的引用。可以使用 `ref` 对象来保存对子组件的引用。\n\n   - 如果是类组件，可以使用 `createRef` 创建一个 `ref` 对象，并将其传递给子组件的 `ref` prop。例如：\n\n     ```jsx\n     class ParentComponent extends React.Component {\n       constructor(props) {\n         super(props);\n         this.childRef = React.createRef();\n       }\n\n       handleClick() {\n         // 调用子组件的方法\n         this.childRef.current.childMethod();\n       }\n\n       render() {\n         return (\n           <div>\n             <ChildComponent ref={this.childRef} />\n             <button onClick={() => this.handleClick()}>调用子组件方法</button>\n           </div>\n         );\n       }\n     }\n     ```\n\n   - 如果是函数式组件，可以使用 `useRef` 创建一个 `ref` 对象，并将其传递给子组件的 `ref` prop。例如：\n\n     ```jsx\n     function ParentComponent() {\n       const childRef = useRef(null);\n\n       const handleClick = () => {\n         // 调用子组件的方法\n         childRef.current.childMethod();\n       };\n\n       return (\n         <div>\n           <ChildComponent ref={childRef} />\n           <button onClick={handleClick}>调用子组件方法</button>\n         </div>\n       );\n     }\n     ```\n\n通过以上步骤，父组件就能够成功调用子组件中暴露的方法了。请注意，在函数式组件中，需要使用 `forwardRef` 来包裹子组件，并通过 `ref` 参数来定义暴露的方法。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-05-15T13:29:39.000Z",
+    "updateAt": "2023-09-24T19:48:28.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 278,
+    "prev": "8cbb58f4-7fb1-4c88-9e15-ed38eb0bd283",
+    "next": "0003100e-5f40-499e-9e00-8bbbc5e90976"
+  },
+  "post": {
+    "exerciseKey": "8fd9b84e-356e-4db8-b3b3-4a6532c5825f",
+    "category": "QA",
+    "title": "React 中，怎么实现父组件调用子组件中的方法？",
+    "level": 3,
+    "updateAt": "2023-09-24T19:48:28+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

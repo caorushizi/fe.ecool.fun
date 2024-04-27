@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1826,
+    "exerciseKey": "98cd24a6-d666-4ddd-a696-f74fbe1552a1",
+    "category": "QA",
+    "renderType": "md",
+    "title": "为什么有时候⽤translate来改变位置⽽不是使用position进行定位？",
+    "desc": null,
+    "options": null,
+    "explanation": "translate 是 transform 属性的⼀个值。\n\n改变transform或opacity不会触发浏览器重新布局（reflow）或重绘（repaint），只会触发复合（compositions）。\n\n⽽改变绝对定位会触发重新布局，进⽽触发重绘和复合。\n\ntransform使浏览器为元素创建⼀个 GPU 图层，但改变绝对定位会使⽤到 CPU。 \n\n因此translate()更⾼效，可以缩短平滑动画的绘制时间。 \n\n⽽translate改变位置时，元素依然会占据其原始空间，绝对定位就不会发⽣这种情况。\n\n具体的原理可查看 [【前端基础系列】CSS篇-带你搞懂“硬件加速”](https://mp.weixin.qq.com/s?__biz=Mzk0NTI2NDgxNQ==&mid=2247484939&idx=1&sn=229467c549cec5e3980671f488a4d89e&chksm=c31947cbf46ecedd13f930b44e9bc2a25ce706a8d30fce56c54584598015640338a6e075b8ff#rd)",
+    "level": 1.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-06-25T05:56:29.000Z",
+    "updateAt": "2022-06-25T14:35:12.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 522,
+    "prev": "ad2a65d2-9330-4f65-9be7-b61e11e10c02",
+    "next": "07d98297-cc3c-434b-9eb5-307858ded62d"
+  },
+  "post": {
+    "exerciseKey": "98cd24a6-d666-4ddd-a696-f74fbe1552a1",
+    "category": "QA",
+    "title": "为什么有时候⽤translate来改变位置⽽不是使用position进行定位？",
+    "level": 1.5,
+    "updateAt": "2022-06-25T14:35:12+00:00"
+  },
+  "tag": {
+    "id": 11,
+    "tagName": "CSS",
+    "type": "1",
+    "exerciseCount": 90
+  }
+}

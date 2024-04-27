@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 197,
+    "exerciseKey": "d1bb4169-cd53-4398-b4a1-5e0c533c87dc",
+    "category": "QA",
+    "renderType": "md",
+    "title": "JavaScript中的原型，原型链分别是什么? ",
+    "desc": null,
+    "options": null,
+    "explanation": "## 一、原型\n\n`JavaScript` 常被描述为一种基于原型的语言——每个对象拥有一个原型对象\n\n当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾\n\n准确地说，这些属性和方法定义在Object的构造器函数（constructor functions）之上的`prototype`属性上，而非实例对象本身\n\n下面举个例子：\n\n函数可以有属性。 每个函数都有一个特殊的属性叫作原型`prototype` \n\n```js\nfunction doSomething(){}\nconsole.log( doSomething.prototype );\n```\n\n控制台输出\n\n```js\n{\n    constructor: ƒ doSomething(),\n    __proto__: {\n        constructor: ƒ Object(),\n        hasOwnProperty: ƒ hasOwnProperty(),\n        isPrototypeOf: ƒ isPrototypeOf(),\n        propertyIsEnumerable: ƒ propertyIsEnumerable(),\n        toLocaleString: ƒ toLocaleString(),\n        toString: ƒ toString(),\n        valueOf: ƒ valueOf()\n    }\n}\n```\n\n上面这个对象，就是大家常说的原型对象\n\n可以看到，原型对象有一个自有属性`constructor`，这个属性指向该函数，如下图关系展示\n\n ![](https://static.ecool.fun//article/2deaaac4-9732-4c1c-a3dd-8506adf9d0fe.png)\n\n\n\n\n\n## 二、原型链\n\n原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推。这种关系常被称为原型链 (prototype chain)，它解释了为何一个对象会拥有定义在其他对象中的属性和方法\n\n在对象实例和它的构造器之间建立一个链接（它是`__proto__`属性，是从构造函数的`prototype`属性派生的），之后通过上溯原型链，在构造器中找到这些属性和方法\n\n下面举个例子：\n\n```js\nfunction Person(name) {\n    this.name = name;\n    this.age = 18;\n    this.sayName = function() {\n        console.log(this.name);\n    }\n}\n// 第二步 创建实例\nvar person = new Person('person')\n```\n\n根据代码，我们可以得到下图\n\n ![](https://static.ecool.fun//article/9db8820a-8e19-4755-8edf-fc09231ff6ef.png)\n\n下面分析一下：\n\n- 构造函数`Person`存在原型对象`Person.prototype`\n- 构造函数生成实例对象`person`，`person`的`__proto__`指向构造函数`Person`原型对象\n- `Person.prototype.__proto__` 指向内置对象，因为 `Person.prototype` 是个对象，默认是由 `Object `函数作为类创建的，而 `Object.prototype` 为内置对象\n\n- `Person.__proto__` 指向内置匿名函数 `anonymous`，因为 Person 是个函数对象，默认由 Function 作为类创建\n\n- `Function.prototype` 和 `Function.__proto__ `同时指向内置匿名函数 `anonymous`，这样原型链的终点就是 `null`\n\n\n\n## 三、总结\n\n下面首先要看几个概念：\n\n`__proto__`作为不同对象之间的桥梁，用来指向创建它的构造函数的原型对象的\n\n ![](https://static.ecool.fun//article/0c2d0d47-2b06-43ed-92e4-129425b6af0c.png)\n\n每个对象的`__proto__`都是指向它的构造函数的原型对象`prototype`的\n\n```js\nperson1.__proto__ === Person.prototype\n```\n\n构造函数是一个函数对象，是通过 `Function `构造器产生的\n\n```js\nPerson.__proto__ === Function.prototype\n```\n\n原型对象本身是一个普通对象，而普通对象的构造函数都是`Object`\n\n```js\nPerson.prototype.__proto__ === Object.prototype\n```\n\n刚刚上面说了，所有的构造器都是函数对象，函数对象都是 `Function `构造产生的\n\n```js\nObject.__proto__ === Function.prototype\n```\n\n`Object `的原型对象也有`__proto__`属性指向`null`，`null`是原型链的顶端\n\n```js\nObject.prototype.__proto__ === null\n```\n\n下面作出总结：\n\n- 一切对象都是继承自`Object`对象，`Object` 对象直接继承根源对象` null`\n\n- 一切的函数对象（包括 `Object` 对象），都是继承自 `Function` 对象\n\n- `Object` 对象直接继承自 `Function` 对象\n\n- `Function`对象的`__proto__`会指向自己的原型对象，最终还是继承自`Object`对象\n\n",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-03T13:50:21.000Z",
+    "updateAt": "2024-01-24T17:34:28.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 165,
+    "prev": "21144fa1-41b7-4077-97cd-b0c6030b10e0",
+    "next": "e9bcc1f4-1b0a-4213-9d3a-8e64c97c7848"
+  },
+  "post": {
+    "exerciseKey": "d1bb4169-cd53-4398-b4a1-5e0c533c87dc",
+    "category": "QA",
+    "title": "JavaScript中的原型，原型链分别是什么? ",
+    "level": 2.5,
+    "updateAt": "2024-01-24T17:34:28+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

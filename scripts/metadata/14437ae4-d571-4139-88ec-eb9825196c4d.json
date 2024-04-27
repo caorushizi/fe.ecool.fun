@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 123,
+    "exerciseKey": "14437ae4-d571-4139-88ec-eb9825196c4d",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出什么？",
+    "desc": "```javascript\nlet num = 1;\nconst list = [\"🥳\", \"🤠\", \"🥰\", \"🤪\"];\n\nconsole.log(list[(num += 1)]);\n```",
+    "options": "{\"options\":[\"🤠\",\"🥰\",\"SyntaxError\",\"ReferenceError\"],\"isMulti\":false,\"answer\":[1]}",
+    "explanation": "通过 `+=` 操作符，我们对值 `num` 进行加 `1` 操作。 `num` 有初始值 `1`，因此 `1 + 1` 的执行结果为 `2`。数组 `list` 的第二项为 🥰，`console.log(list[2])` 输出 🥰.",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:30:35.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1092,
+    "prev": "22d88306-35f1-4538-898c-2ce3e5303fea",
+    "next": "7ce6573e-b10b-4962-a732-aec1ca3207a1"
+  },
+  "post": {
+    "exerciseKey": "14437ae4-d571-4139-88ec-eb9825196c4d",
+    "category": "Choice",
+    "title": "输出什么？",
+    "level": 0.5,
+    "updateAt": "2021-07-03T22:30:35+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

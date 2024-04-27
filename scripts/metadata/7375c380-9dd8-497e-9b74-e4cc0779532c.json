@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 424,
+    "exerciseKey": "7375c380-9dd8-497e-9b74-e4cc0779532c",
+    "category": "QA",
+    "renderType": "md",
+    "title": "字符串解析问题\n",
+    "desc": "实现函数使得将str字符串中的{}内的变量替换，如果属性不存在保持原样（比如{a.d}）\n\n```js\nvar a = {\n\tb: 123,\n\tc: '456',\n\te: '789',\n}\nvar str=`a{a.b}aa{a.c}aa {a.d}aaaa`;\n// => 'a123aa456aa {a.d}aaaa'\n```",
+    "options": null,
+    "explanation": "```js\nconst fn1 = (str, obj) => {\n\tlet res = '';\n    // 标志位，标志前面是否有{\n\tlet flag = false;\n\tlet start;\n\tfor (let i = 0; i < str.length; i++) {\n\t\tif (str[i] === '{') {\n\t\t\tflag = true;\n\t\t\tstart = i + 1;\n\t\t\tcontinue;\n\t\t}\n\t\tif (!flag) res += str[i];\n\t\telse {\n\t\t\tif (str[i] === '}') {\n\t\t\t\tflag = false;\n\t\t\t\tres += match(str.slice(start, i), obj);\n\t\t\t}\n\t\t}\n\t}\n\treturn res;\n}\n// 对象匹配操作\nconst match = (str, obj) => {\n\tconst keys = str.split('.').slice(1);\n\tlet index = 0;\n\tlet o = obj;\n\twhile (index < keys.length) {\n\t\tconst key = keys[index];\n\t\tif (!o[key]) {\n\t\t\treturn `{${str}}`;\n\t\t} else {\n\t\t\to = o[key];\n\t\t}\n\t\tindex++;\n\t}\n\treturn o;\n}\n\n```",
+    "level": 3.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:13:03.000Z",
+    "updateAt": "2021-07-07T00:13:47.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 923,
+    "prev": "47240d74-7170-41b6-b85d-2a6977ea9a11",
+    "next": "3d3c752d-f969-44ce-acaf-18e43d52f069"
+  },
+  "post": {
+    "exerciseKey": "7375c380-9dd8-497e-9b74-e4cc0779532c",
+    "category": "QA",
+    "title": "字符串解析问题\n",
+    "level": 3.5,
+    "updateAt": "2021-07-07T00:13:47+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

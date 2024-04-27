@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1551,
+    "exerciseKey": "23cebacc-48d3-4b48-9393-5c424afffab0",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Unicode 和 UTF-8 之间有什么关系？",
+    "desc": null,
+    "options": null,
+    "explanation": "Unicode可以认为是字符的编号，即每个字符在Unicode表里面的序号，每个字符对应一个不同的 Unicode 编码，它只规定了符号的二进制代码，却没有规定这个二进制代码在计算机中如何编码传输。\n\nutf8是一种编码方式，类似于哈夫曼编码过程，就是把常用（位置靠前）的Unicode字符用短编码表示，不常用的字符用长代码表示，从而实现更小的整个文档的文件大小。在 UTF-8 编码中，英文字母是一个字节，中文（非生僻字）是 2~3 个字节。\n\n可以认为， utf8 是对 Unicode 的一种压缩算法。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:26:15.000Z",
+    "updateAt": "2023-04-02T19:15:26.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 405,
+    "prev": "5e131c75-d26e-4527-8f51-29d842f3c829",
+    "next": "77778585-d890-4a84-9d69-4a9042f571d7"
+  },
+  "post": {
+    "exerciseKey": "23cebacc-48d3-4b48-9393-5c424afffab0",
+    "category": "QA",
+    "title": "Unicode 和 UTF-8 之间有什么关系？",
+    "level": 1,
+    "updateAt": "2023-04-02T19:15:26+00:00"
+  },
+  "tag": {
+    "id": 30,
+    "tagName": "计算机基础",
+    "type": "1",
+    "exerciseCount": 16
+  }
+}

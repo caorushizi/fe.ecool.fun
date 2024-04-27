@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 571,
+    "exerciseKey": "286f67d3-4e8d-48f5-962a-ed9cccc46335",
+    "category": "QA",
+    "renderType": "md",
+    "title": "CSS中的 “flex:1;” 是什么意思？",
+    "desc": null,
+    "options": null,
+    "explanation": "flex 是 flex-grow, flex-shrink 和 flex-basis的简写。\n\n除了auto (1 1 auto) 和 none (0 0 auto)这两个快捷值外，还有以下设置方式：\n\n* 当 flex 取值为一个非负数字，则该数字为 flex-grow 值，flex-shrink 取 1，flex-basis 取 0%，如下是等同的：\n\n```css\n.item {flex: 1;}\n.item {\n    flex-grow: 1;\n    flex-shrink: 1;\n    flex-basis: 0%;\n}\n```\n\n* 当 flex 取值为 0 时，对应的三个值分别为 0 1 0%\n\n```css\n.item {flex: 0;}\n.item {\n    flex-grow: 0;\n    flex-shrink: 1;\n    flex-basis: 0%;\n}\n```\n\n* 当 flex 取值为一个长度或百分比，则视为 flex-basis 值，flex-grow 取 1，flex-shrink 取 1，有如下等同情况（注意 0% 是一个百分比而不是一个非负数字）\n\n```css\n.item-1 {flex: 0%;}\n.item-1 {\n    flex-grow: 1;\n    flex-shrink: 1;\n    flex-basis: 0%;\n}\n\n.item-2 {flex: 24px;}\n.item-2 {\n    flex-grow: 1;\n    flex-shrink: 1;\n    flex-basis: 24px;\n}\n```\n\n* 当 flex 取值为两个非负数字，则分别视为 flex-grow 和 flex-shrink 的值，flex-basis 取 0%，如下是等同的：\n\n```css\n.item {flex: 2 3;}\n.item {\n    flex-grow: 2;\n    flex-shrink: 3;\n    flex-basis: 0%;\n}\n```\n\n* 当 flex 取值为一个非负数字和一个长度或百分比，则分别视为 flex-grow 和 flex-basis 的值，flex-shrink 取 1，如下是等同的：\n\n```\n.item {flex: 11 32px;}\n.item {\n    flex-grow: 11;\n    flex-shrink: 1;\n    flex-basis: 32px;\n}\n```\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-08-01T11:05:55.000Z",
+    "updateAt": "2021-08-08T18:50:43.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 799,
+    "prev": "394752d7-88aa-4512-bd7e-91711a3904b7",
+    "next": "5c174882-c1e7-4c08-a71a-f4c991be552f"
+  },
+  "post": {
+    "exerciseKey": "286f67d3-4e8d-48f5-962a-ed9cccc46335",
+    "category": "QA",
+    "title": "CSS中的 “flex:1;” 是什么意思？",
+    "level": 1,
+    "updateAt": "2021-08-08T18:50:43+00:00"
+  },
+  "tag": {
+    "id": 11,
+    "tagName": "CSS",
+    "type": "1",
+    "exerciseCount": 90
+  }
+}

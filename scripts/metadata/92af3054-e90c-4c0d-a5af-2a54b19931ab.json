@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 451,
+    "exerciseKey": "92af3054-e90c-4c0d-a5af-2a54b19931ab",
+    "category": "QA",
+    "renderType": "md",
+    "title": "小程序页面间有哪些传递数据的方法？",
+    "desc": null,
+    "options": null,
+    "explanation": "* 使用全局变量实现数据传递\n* 页面跳转或重定向时，使用url带参数传递数据\n* 使用组件模板 template传递参数\n* 使用缓存传递参数\n* 使用数据库传递数据",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-07T14:56:29.000Z",
+    "updateAt": "2021-07-11T10:53:38.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 897,
+    "prev": "1464793e-3ece-4943-92af-cb470fee46f3",
+    "next": "17b59078-ccef-4190-9282-60805ddf6b3f"
+  },
+  "post": {
+    "exerciseKey": "92af3054-e90c-4c0d-a5af-2a54b19931ab",
+    "category": "QA",
+    "title": "小程序页面间有哪些传递数据的方法？",
+    "level": 1,
+    "updateAt": "2021-07-11T10:53:38+00:00"
+  },
+  "tag": {
+    "id": 23,
+    "tagName": "小程序",
+    "type": "1",
+    "exerciseCount": 9
+  }
+}

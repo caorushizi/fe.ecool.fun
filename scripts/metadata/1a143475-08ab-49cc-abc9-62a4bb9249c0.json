@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1738,
+    "exerciseKey": "1a143475-08ab-49cc-abc9-62a4bb9249c0",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何获取到一个实例对象的原型对象？",
+    "desc": null,
+    "options": null,
+    "explanation": "* 从 `构造函数` 获得 原型对象：\n\n```\n构造函数.prototype\n```\n\n* 从 `对象实例` 获得 `父级原型对象`：\n\n```\n方法一： 对象实例.__proto__        【 有兼容性问题，不建议使用】\n方法二：Object.getPrototypeOf( 对象实例 )\n```\n\n",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-04-05T09:28:08.000Z",
+    "updateAt": "2022-04-05T17:28:16.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 579,
+    "prev": "5652afd0-efdc-4f2d-a5e2-e4cc0669638a",
+    "next": "87f39c64-2eb7-497f-b78a-4a84decd642d"
+  },
+  "post": {
+    "exerciseKey": "1a143475-08ab-49cc-abc9-62a4bb9249c0",
+    "category": "QA",
+    "title": "如何获取到一个实例对象的原型对象？",
+    "level": 0.5,
+    "updateAt": "2022-04-05T17:28:16+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

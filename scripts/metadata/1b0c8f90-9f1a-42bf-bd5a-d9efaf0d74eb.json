@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 622,
+    "exerciseKey": "1b0c8f90-9f1a-42bf-bd5a-d9efaf0d74eb",
+    "category": "QA",
+    "renderType": "md",
+    "title": "document.write和innerHTML有什么区别",
+    "desc": null,
+    "options": null,
+    "explanation": "* document.write是直接写入到页面的内容流，如果在写之前没有调用document.open, 浏览器会自动调用open。每次写完关闭之后重新调用该函数，会导致页面被重写。\n* innerHTML则是DOM页面元素的一个属性，代表该元素的html内容。你可以精确到某一个具体的元素来进行更改。如果想修改document的内容，则需要修改document.documentElement.innerElement。\n* innerHTML将内容写入某个DOM节点，不会导致页面全部重绘\n* innerHTML很多情况下都优于document.write，其原因在于其允许更精确的控制要刷新页面的那一个部分。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-09-25T01:59:56.000Z",
+    "updateAt": "2021-09-25T19:05:16.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 760,
+    "prev": "9dc542a0-b323-4c7a-9199-f1f2678714cf",
+    "next": "b4137265-8ebe-4fc8-be75-8dfaf125af6c"
+  },
+  "post": {
+    "exerciseKey": "1b0c8f90-9f1a-42bf-bd5a-d9efaf0d74eb",
+    "category": "QA",
+    "title": "document.write和innerHTML有什么区别",
+    "level": 0.5,
+    "updateAt": "2021-09-25T19:05:16+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

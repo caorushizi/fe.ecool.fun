@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 409,
+    "exerciseKey": "f1974383-8f98-4cd9-8a8e-f0c51e61b275",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现 Array.prototype.forEach()",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nArray.prototype.forEach = function(callback, thisArg) {\n  if (this == null) {\n    throw new TypeError('this is null or not defined');\n  }\n  if (typeof callback !== \"function\") {\n    throw new TypeError(callback + ' is not a function');\n  }\n  const O = Object(this);\n  const len = O.length >>> 0;\n  let k = 0;\n  while (k < len) {\n    if (k in O) {\n      callback.call(thisArg, O[k], k, O);\n    }\n    k++;\n  }\n}\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:01:03.000Z",
+    "updateAt": "2021-07-07T00:12:53.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 938,
+    "prev": "b66b6742-6ef1-4359-82ae-c69e2a041549",
+    "next": "d86ffa19-714c-45a6-a7e0-81ebe2248972"
+  },
+  "post": {
+    "exerciseKey": "f1974383-8f98-4cd9-8a8e-f0c51e61b275",
+    "category": "QA",
+    "title": "实现 Array.prototype.forEach()",
+    "level": 2,
+    "updateAt": "2021-07-07T00:12:53+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

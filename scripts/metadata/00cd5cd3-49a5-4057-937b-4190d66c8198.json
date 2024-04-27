@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1557,
+    "exerciseKey": "00cd5cd3-49a5-4057-937b-4190d66c8198",
+    "category": "QA",
+    "renderType": "md",
+    "title": "offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "clientWidth/clientHeight 返回的是元素的内部宽度，它的值只包含 content + padding，如果有滚动条，不包含滚动条。\n\nclientTop 返回的是上边框的宽度。\n\nclientLeft 返回的左边框的宽度。\n\noffsetWidth/offsetHeight 返回的是元素的布局宽度，它的值包含 content + padding + border 包含了滚动条。\n\noffsetTop 返回的是当前元素相对于其 offsetParent 元素的顶部的距离。\n\noffsetLeft 返回的是当前元素相对于其 offsetParent 元素的左部的距离。\n\nscrollWidth/scrollHeight 返回值包含 content + padding + 溢出内容的尺寸。\n\nscrollTop 属性返回的是一个元素的内容垂直滚动的像素数。\n\nscrollLeft 属性返回的是元素滚动条到元素左边的距离。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:35:03.000Z",
+    "updateAt": "2021-11-17T22:49:09.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 724,
+    "prev": "c79bd75a-aa6d-4228-9e55-c9fb41e97253",
+    "next": "4bc2059f-c8c1-46f9-a768-0e43f8a06665"
+  },
+  "post": {
+    "exerciseKey": "00cd5cd3-49a5-4057-937b-4190d66c8198",
+    "category": "QA",
+    "title": "offsetWidth/offsetHeight,clientWidth/clientHeight 与 scrollWidth/scrollHeight 的区别？",
+    "level": 1,
+    "updateAt": "2021-11-17T22:49:09+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

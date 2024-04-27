@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 35,
+    "exerciseKey": "643af0aa-f567-45df-89ac-aaa8b4d8f927",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "下面的输出是什么？",
+    "desc": "```javascript\nfor (let i = 1; i < 5; i++) {\n  if (i === 3) continue\n  console.log(i)\n}\n```",
+    "options": "{\"options\":[\"1 2\",\"1 2 3\",\"1 2 4\",\"1 3 4\"],\"isMulti\":false,\"answer\":[2]}",
+    "explanation": "如果某个条件返回 `true`，则 `continue` 语句跳过本次迭代。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2022-01-09T13:05:53.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 686,
+    "prev": "8d375b34-4323-48a3-9d02-9419cbf08f4e",
+    "next": "70dbc6db-7714-4ba9-9913-cf8cc2a444f7"
+  },
+  "post": {
+    "exerciseKey": "643af0aa-f567-45df-89ac-aaa8b4d8f927",
+    "category": "Choice",
+    "title": "下面的输出是什么？",
+    "level": 1,
+    "updateAt": "2022-01-09T13:05:53+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

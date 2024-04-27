@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 15,
+    "exerciseKey": "ef8a8acb-e2bd-42d0-87b0-0414126a9ec0",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出是什么？",
+    "desc": "```javascript\nconsole.log(+true,!\"Lydia\");\n```",
+    "options": "{\"options\":[\"1 false\",\"false NaN\",\"false false\"],\"isMulti\":false,\"answer\":[0]}",
+    "explanation": "一元操作符加号尝试将 bool 转为 number。`true` 转换为 number 的话为 `1`，`false` 为 `0`。\n字符串 `'Lydia'` 是一个真值，真值取反那么就返回 `false`。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2022-01-09T13:13:58.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 682,
+    "prev": "e4de3d64-0a56-4bdc-b07f-d310987218e9",
+    "next": "06e95561-9b06-4cd8-b700-4305c1743808"
+  },
+  "post": {
+    "exerciseKey": "ef8a8acb-e2bd-42d0-87b0-0414126a9ec0",
+    "category": "Choice",
+    "title": "输出是什么？",
+    "level": 1,
+    "updateAt": "2022-01-09T13:13:58+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

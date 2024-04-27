@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1871,
+    "exerciseKey": "45f892d7-8da0-4fd9-8550-8a7865cfcd43",
+    "category": "QA",
+    "renderType": "md",
+    "title": "react是否支持给标签设置自定义的属性，比如给video标签设置webkit-playsinline？",
+    "desc": null,
+    "options": null,
+    "explanation": "如果你在react中这么样写：\n\n```js\n// Your code:\n<div mycustomattribute=\"something\" />\n```\n\n在react 15中将被渲染成：\n\n```js\n// React 15 output:\n<div />\n```\n\n在react 16及之后的版本中将被渲染成：\n\n```js\n// React 16 output:\n<div mycustomattribute=\"something\" />\n```\n\n但这个会有限制，如果自定义的属性不是 `string`, `number` 或者 `object`，该属性依然会被忽略。\n\n所以目前可以这样添加 webkit-playsinline 属性：\n\n```js\n<video width=\"750\" height=\"500\" controls webkit-playsinline=\"true\">\n\t<source src=\"https://media.w3.org/2010/05/sintel/trailer.mp4\" type=\"video/mp4\"/>\n</video>\n```\n\n另外，还可以通过 `setAttribute` 进行设置，比如：\n\n```js\nimport * as React from 'react';\nimport { Component } from 'react';\n\nexport class VideoComponent extends Component {\n  videoContainer: HTMLDivElement;\n  componentDidMount() {\n    const video = document.createElement('video');\n    video.autoplay = true;\n    video.loop = true;\n    video.muted = true; // fixes autoplay in chrome\n    video.setAttribute('playsinline', 'true'); // fixes autoplay in webkit (ie. mobile safari)\n\n    const source = document.createElement('source');\n    source.src = '/path/to/your/video.mp4';\n    source.type = 'video/mp4';\n    video.appendChild(source);\n\n    this.videoContainer.appendChild(video);\n  }\n  render() {\n    return (\n      <div ref={(ref) => { this.videoContainer = ref; }} />\n    );\n  }\n}\n\n```\n\n",
+    "level": 3.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-08-07T14:42:46.000Z",
+    "updateAt": "2022-10-11T10:34:59.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 472,
+    "prev": "be48725a-798c-4ae8-bd7e-47197b789802",
+    "next": "841bfe02-d07d-45db-9e65-b9c250595d80"
+  },
+  "post": {
+    "exerciseKey": "45f892d7-8da0-4fd9-8550-8a7865cfcd43",
+    "category": "QA",
+    "title": "react是否支持给标签设置自定义的属性，比如给video标签设置webkit-playsinline？",
+    "level": 3.5,
+    "updateAt": "2022-10-11T10:34:59+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

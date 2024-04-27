@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 660,
+    "exerciseKey": "89865bbd-72ac-4866-b4f6-a24f9c594d07",
+    "category": "QA",
+    "renderType": "md",
+    "title": "你在React项目中是如何使用Redux的? 项目结构是如何划分的？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 一、背景\n\n`redux`是用于数据状态管理，而`react`是一个视图层面的库\n\n如果将两者连接在一起，可以使用官方推荐`react-redux`库，其具有高效且灵活的特性\n\n`react-redux`将组件分成：\n\n- 容器组件：存在逻辑处理\n- UI 组件：只负责现显示和交互，内部不处理逻辑，状态由外部控制\n\n通过`redux`将整个应用状态存储到`store`中，组件可以派发`dispatch`行为`action`给`store`\n\n其他组件通过订阅`store`中的状态`state`来更新自身的视图\n\n\n## 二、如何做\n\n使用`react-redux`分成了两大核心：\n\n- Provider\n- connection\n\n### Provider\n\n在`redux`中存在一个`store`用于存储`state`，如果将这个`store`存放在顶层元素中，其他组件都被包裹在顶层元素之上\n\n那么所有的组件都能够受到`redux`的控制，都能够获取到`redux`中的数据\n\n使用方式如下：\n\n```js\n<Provider store = {store}>\n    <App />\n<Provider>\n```\n\n\n\n### connection\n\n`connect`方法将`store`上的`getState `和 `dispatch `包装成组件的`props`\n\n导入`conect`如下：\n\n```js\nimport { connect } from \"react-redux\";\n```\n\n用法如下：\n\n```js\nconnect(mapStateToProps, mapDispatchToProps)(MyComponent)\n```\n\n可以传递两个参数：\n\n- mapStateToProps\n\n- mapDispatchToProps\n\n\n\n### mapStateToProps\n\n把`redux`中的数据映射到`react`中的`props`中去\n\n如下：\n\n```jsx\nconst mapStateToProps = (state) => {\n    return {\n        // prop : state.xxx  | 意思是将state中的某个数据映射到props中\n        foo: state.bar\n    }\n}\n```\n\n组件内部就能够通过`props`获取到`store`中的数据\n\n```cons\nclass Foo extends Component {\n    constructor(props){\n        super(props);\n    }\n    render(){\n        return(\n         // 这样子渲染的其实就是state.bar的数据了\n            <div>this.props.foo</div>\n        )\n    }\n}\nFoo = connect()(Foo)\nexport default Foo\n```\n\n\n### mapDispatchToProps\n\n将`redux`中的`dispatch`映射到组件内部的`props`中\n\n```jsx\nconst mapDispatchToProps = (dispatch) => { // 默认传递参数就是dispatch\n  return {\n    onClick: () => {\n      dispatch({\n        type: 'increatment'\n      });\n    }\n  };\n}\n\n```\n\n```js\nclass Foo extends Component {\n    constructor(props){\n        super(props);\n    }\n    render(){\n        return(\n         \n             <button onClick = {this.props.onClick}>点击increase</button>\n        )\n    }\n}\nFoo = connect()(Foo);\nexport default Foo;\n```\n\n\n### 小结\n\n整体流程图大致如下所示：\n\n ![](https://static.ecool.fun//article/e4119eaa-94ff-4261-9334-d6f4248b55bf.png)\n\n\n\n## 三、项目结构\n\n可以根据项目具体情况进行选择，以下列出两种常见的组织结构\n\n#### 按角色组织（MVC）\n\n角色如下：\n\n- reducers \n- actions\n- components \n- containers \n\n参考如下：\n\n```js\nreducers/\n  todoReducer.js\n  filterReducer.js\nactions/\n  todoAction.js\n  filterActions.js\ncomponents/\n  todoList.js\n  todoItem.js\n  filter.js\ncontainers/\n  todoListContainer.js\n  todoItemContainer.js\n  filterContainer.js\n```\n\n#### 按功能组织\n\n使用`redux`使用功能组织项目，也就是把完成同一应用功能的代码放在一个目录下，一个应用功能包含多个角色的代码\n\n`Redux`中，不同的角色就是`reducer`、`actions`和视图，而应用功能对应的就是用户界面的交互模块\n\n参考如下：\n\n```js\ntodoList/\n  actions.js\n  actionTypes.js\n  index.js\n  reducer.js\n  views/\n    components.js\n    containers.js\nfilter/\n  actions.js\n  actionTypes.js\n  index.js\n  reducer.js\n  views/\n    components.js\n    container.js\n```\n\n每个功能模块对应一个目录，每个目录下包含同样的角色文件：\n\n- actionTypes.js 定义action类型\n- actions.js 定义action构造函数\n- reducer.js  定义这个功能模块如果响应actions.js定义的动作\n- views 包含功能模块中所有的React组件，包括展示组件和容器组件\n- index.js 把所有的角色导入，统一导出\n\n其中`index`模块用于导出对外的接口\n\n```js\nimport * as actions from './actions.js';\nimport reducer from './reducer.js';\nimport view from './views/container.js';\n\nexport { actions, reducer, view };\n```\n\n导入方法如下：\n\n```js\nimport { actions, reducer, view as TodoList } from './xxxx'\n```\n",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-10-24T04:27:35.000Z",
+    "updateAt": "2024-01-25T19:27:41.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 59,
+    "prev": "b7edb0a3-10d1-4857-907b-cc99acaf3516",
+    "next": "025473a3-19c3-4398-94ab-c3d72002dcce"
+  },
+  "post": {
+    "exerciseKey": "89865bbd-72ac-4866-b4f6-a24f9c594d07",
+    "category": "QA",
+    "title": "你在React项目中是如何使用Redux的? 项目结构是如何划分的？",
+    "level": 2.5,
+    "updateAt": "2024-01-25T19:27:41+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

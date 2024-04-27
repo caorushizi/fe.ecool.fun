@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1819,
+    "exerciseKey": "e0fd403c-a34d-418e-8a92-18cfa6e00e1b",
+    "category": "QA",
+    "renderType": "md",
+    "title": "说说你对自定义hook的理解",
+    "desc": null,
+    "options": null,
+    "explanation": "# 自定义Hook\n通过自定义 Hook，可以将组件逻辑提取到可重用的函数中。\n\n可以理解成Hook就是用来放一些重复代码的函数。\n\n下面我将做手动实现一个列表渲染、删除的组件，然后把它做成自定义Hook。\n\n## 示例\n\n定义数据列表\n```js\nconst initialState = [\n  { id: 1, name: \"qiu\" },\n  { id: 2, name: \"yan\" },\n  { id: 2, name: \"xi\" }\n];\n```\n创建一个App组件并渲染它\n```js\nfunction App(props) {\n  const [state, setState] = useState(initialState);\n  const deleteLi = (index) => {\n    setState((state) => {\n      const newState = JSON.parse(JSON.stringify(state));//深拷贝数据\n      newState.splice(index, 1);\n      return newState;\n    });\n  };\n  return (\n    <>\n      <ul>\n        {state\n          ? state.map((v, index) => {\n              return (\n                <li key={index}>\n                  {index + \"、\"}\n                  {v.name}\n                  <button\n                    onClick={() => {\n                      deleteLi(index);\n                    }}\n                  >\n                    X\n                  </button>\n                </li>\n              );\n            })\n          : \\\"加载中\\\"}\n      </ul>\n    </>\n  );\n}\n```\n\n上面的代码，我对一个数组进行渲染+删除操作，当点击按钮时，就会删除数组的对应index的数据，从而执行页面更新\n![](https://static.ecool.fun//article/ca13d1e7-2b9e-45d5-a785-2c979d22750f.jpeg)\n\n## 封装成Hook\n```js\nconst useList = () => {\n  const [state, setState] = useState(initialState);\n  const deleteLi = (index) => {\n    setState((state) => {\n      const newState = JSON.parse(JSON.stringify(state));\n      newState.splice(index, 1);\n      return newState;\n    });\n  };\n  return { state, setState, deleteLi };//返回查、改、删\n};\n```\n我把上面的业务逻辑都放在`useList`这个函数中，并将查、改、删的API给放在一个对象中return出去。这样就形成了一个自定义Hook\n\n## 使用自定义Hook\n\n一般可以将自定义Hook给单独放在一个文件中，如果要使用，就引过来\n\n```js\n+ import useList from \\\"./useList\\\";\n```\n在需要使用的App组件中执行自定义Hook并接收API\n```js\nfunction App(props) {\n  const { state, deleteLi } = useList();//这里接收return出来的查、删API\n  return (\n \t... //这里跟最开始的App组件里是一样的，为了页面整洁，就不贴代码了\n  );\n}\n```\n\n# 总结\n\n所谓的自定义Hook，实际上就是把很多重复的逻辑都放在一个函数里面，通过闭包的方式给`return`出来，这是非常高级的方式，程序员崇尚代码简洁，如果说以后业务开发时需要大量的重复代码，我们就可以将它封装成自定义Hook。\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-05-29T13:35:18.000Z",
+    "updateAt": "2024-01-24T17:20:19.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 196,
+    "prev": "33a7cf04-f6d0-4b57-9a9b-60983f09b553",
+    "next": "78f23cb3-8ee7-4f02-a995-e74ce3ad3836"
+  },
+  "post": {
+    "exerciseKey": "e0fd403c-a34d-418e-8a92-18cfa6e00e1b",
+    "category": "QA",
+    "title": "说说你对自定义hook的理解",
+    "level": 1,
+    "updateAt": "2024-01-24T17:20:19+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

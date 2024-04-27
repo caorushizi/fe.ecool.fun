@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 90,
+    "exerciseKey": "0180cac7-51ae-4cc6-afe2-bfecf5448123",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "下面代码的输出是什么？",
+    "desc": "```javascript\nfetch('https://www.website.com/api/user/1')\n  .then(res => res.json())\n  .then(res => console.log(res))\n```",
+    "options": "{\"options\":[\"fetch方法的结果\",\"第二次调用fetch方法的结果\",\"前一个.then()中回调方法返回的结果\",\"总是undefined\"],\"isMulti\":false,\"answer\":[2]}",
+    "explanation": "第二个`.then`中`res`的值等于前一个`.then`中的回调函数返回的值。 你可以像这样继续链接`.then`，将值传递给下一个处理程序。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:25:04.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1119,
+    "prev": "0b4af1f7-d0bc-4a85-8c28-f620b5d6d23e",
+    "next": "59d6fb97-59bc-4f6c-ba90-cb16b96478ee"
+  },
+  "post": {
+    "exerciseKey": "0180cac7-51ae-4cc6-afe2-bfecf5448123",
+    "category": "Choice",
+    "title": "下面代码的输出是什么？",
+    "level": 1,
+    "updateAt": "2021-07-03T22:25:04+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

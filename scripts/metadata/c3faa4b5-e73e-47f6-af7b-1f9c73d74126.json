@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1682,
+    "exerciseKey": "c3faa4b5-e73e-47f6-af7b-1f9c73d74126",
+    "category": "QA",
+    "renderType": "md",
+    "title": "使用原生js实现以下效果：点击容器内的图标，图标边框变成border:1px solid red，点击空白处重置",
+    "desc": null,
+    "options": null,
+    "explanation": " ```js\n \nconst box = document.getElementById('box');\n\nfunction isIcon(target) {\n  return target.className.includes('icon');\n}\n\nbox.onclick = function(e) {\n  e.stopPropagation();\n  const target = e.target;\n  if (isIcon(target)) {\n    target.style.border = '1px solid red';\n  }\n}\n\nconst doc = document;\n\ndoc.onclick = function(e) {\n  const children = box.children;\n  for(let i = 0; i < children.length; i++) {\n    if (isIcon(children[i])) {\n      children[i].style.border = 'none';\n    }\n  }\n}\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-03-07T04:44:33.000Z",
+    "updateAt": "2022-10-30T11:13:33.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 465,
+    "prev": "748b2bec-7e35-4d5b-81e1-c6fb29f00464",
+    "next": "6248429c-3007-4f72-a429-19d433e60346"
+  },
+  "post": {
+    "exerciseKey": "c3faa4b5-e73e-47f6-af7b-1f9c73d74126",
+    "category": "QA",
+    "title": "使用原生js实现以下效果：点击容器内的图标，图标边框变成border:1px solid red，点击空白处重置",
+    "level": 2,
+    "updateAt": "2022-10-30T11:13:33+00:00"
+  },
+  "tag": {
+    "id": 11,
+    "tagName": "CSS",
+    "type": "1",
+    "exerciseCount": 90
+  }
+}

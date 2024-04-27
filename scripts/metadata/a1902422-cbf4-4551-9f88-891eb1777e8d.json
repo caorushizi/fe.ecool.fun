@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1625,
+    "exerciseKey": "a1902422-cbf4-4551-9f88-891eb1777e8d",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第33题】下面代码的输出是什么？",
+    "desc": "```js\nasync function async1 () {\n  console.log('async1 start');\n  await new Promise(resolve => {\n    console.log('promise1')\n    resolve('promise resolve')\n  })\n  console.log('async1 success');\n  return 'async1 end'\n}\nconsole.log('srcipt start')\nasync1().then(res => {\n  console.log(res)\n})\nnew Promise(resolve => {\n  console.log('promise2')\n  setTimeout(() => {\n    console.log('timer')\n  })\n})\n\n```",
+    "options": null,
+    "explanation": "## 解析\n\n这道题也不难，不过有一点需要注意的，在async1中的`new Promise` resovle的值，和`async1().then()`里的值是没有关系的，很多小伙伴可能看到`resovle('promise resolve')`就会误以为是`async1().then()`中的返回值。\n\n## 结果\n\n```\n'script start'\n'async1 start'\n'promise1'\n'promise2'\n'async1 success'\n'async1 end'\n'timer'\n```",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T15:13:01.000Z",
+    "updateAt": "2022-01-09T23:15:28.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 649,
+    "prev": "7fdc5ee0-1c5f-483b-927b-140536ea83f2",
+    "next": "52ba6f44-41dd-44cb-a2f4-2dc1589fb02b"
+  },
+  "post": {
+    "exerciseKey": "a1902422-cbf4-4551-9f88-891eb1777e8d",
+    "category": "QA",
+    "title": "【Promise第33题】下面代码的输出是什么？",
+    "level": 2.5,
+    "updateAt": "2022-01-09T23:15:28+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

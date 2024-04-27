@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1610,
+    "exerciseKey": "e0e3dbcd-2e8a-4756-9241-bbb23af9c2e8",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第18题】下面代码的输出是什么？",
+    "desc": "```js\nPromise.resolve().then(() => {\n  return new Error('error!!!')\n}).then(res => {\n  console.log(\"then: \", res)\n}).catch(err => {\n  console.log(\"catch: \", err)\n})\n```",
+    "options": null,
+    "explanation": "## 解析\n\n返回任意一个非 promise 的值都会被包裹成 promise 对象，因此这里的`return new Error('error!!!')`也被包裹成了`return Promise.resolve(new Error('error!!!'))`。\n\n## 结果\n```\n\"then: \" \"Error: error!!!\"\n```\n\n此题中，当然如果想抛出一个错误的话，可以用下面的任意一种：\n\n```js\nreturn Promise.reject(new Error('error!!!'));\n// or\nthrow new Error('error!!!')\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T14:47:19.000Z",
+    "updateAt": "2022-01-09T23:01:49.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 663,
+    "prev": "090868ab-fef9-4759-8b81-20708a165fa1",
+    "next": "30dd1b36-496d-4a65-a3e7-75be59b36570"
+  },
+  "post": {
+    "exerciseKey": "e0e3dbcd-2e8a-4756-9241-bbb23af9c2e8",
+    "category": "QA",
+    "title": "【Promise第18题】下面代码的输出是什么？",
+    "level": 3,
+    "updateAt": "2022-01-09T23:01:49+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

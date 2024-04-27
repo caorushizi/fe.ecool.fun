@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 270,
+    "exerciseKey": "ba6327df-ba59-4870-921c-36b8516c4451",
+    "category": "QA",
+    "renderType": "md",
+    "title": "DOCTYPE 标签有什么用？",
+    "desc": null,
+    "options": null,
+    "explanation": "DOCTYPE声明于文档最前面，告诉浏览器以何种方式来渲染页面。\n\nHTML5中的声明方式如下：\n```html\n<!DOCTYPE html>\n```\n\n",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T05:54:53.000Z",
+    "updateAt": "2021-07-04T16:01:45.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1052,
+    "prev": "362a44f0-8be1-4e5b-abfc-f3ddadc4aa2e",
+    "next": "53060972-481f-4025-a055-aa278d737fc1"
+  },
+  "post": {
+    "exerciseKey": "ba6327df-ba59-4870-921c-36b8516c4451",
+    "category": "QA",
+    "title": "DOCTYPE 标签有什么用？",
+    "level": 0.5,
+    "updateAt": "2021-07-04T16:01:45+00:00"
+  },
+  "tag": {
+    "id": 12,
+    "tagName": "HTML",
+    "type": "1",
+    "exerciseCount": 57
+  }
+}

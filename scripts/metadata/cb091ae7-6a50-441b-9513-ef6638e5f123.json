@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 465,
+    "exerciseKey": "cb091ae7-6a50-441b-9513-ef6638e5f123",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Typescript中 interface 和 type 的差别是什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "## 相同点\n\n* 都可以描述一个对象或者函数\n\n**interface**\n```typescript\ninterface User {\n  name: string\n  age: number\n}\n\ninterface SetUser {\n  (name: string, age: number): void;\n}\n```\n\n**type**\n```typescript\ntype User = {\n  name: string\n  age: number\n};\n\ntype SetUser = (name: string, age: number)=> void;\n```\n\n* 都允许拓展（extends）\n\ninterface 和 type 都可以拓展，并且两者并不是相互独立的，也就是说 interface 可以 extends type, type 也可以 extends interface 。 虽然效果差不多，但是两者语法不同。\n\n**interface extends interface**\n```typescript\ninterface Name { \n  name: string; \n}\ninterface User extends Name { \n  age: number; \n}\n```\n\n**type extends type**\n```typescript\ntype Name = { \n  name: string; \n}\ntype User = Name & { age: number  };\n```\n\n**interface extends type**\n```typescript\ntype Name = { \n  name: string; \n}\ninterface User extends Name { \n  age: number; \n}\n```\n\n**type extends interface**\n```typescript\ninterface Name { \n  name: string; \n}\ntype User = Name & { \n  age: number; \n}\n```\n\n## 不同点\n\n* type 可以而 interface 不行\n\n**type 可以声明基本类型别名，联合类型，元组等类型**\n```typescript\n// 基本类型别名\ntype Name = string\n\n// 联合类型\ninterface Dog {\n    wong();\n}\ninterface Cat {\n    miao();\n}\n\ntype Pet = Dog | Cat\n\n// 具体定义数组每个位置的类型\ntype PetList = [Dog, Pet]\n```\n\n**type 语句中还可以使用 typeof 获取实例的 类型进行赋值**\n```typescript\n// 当你想获取一个变量的类型时，使用 typeof\nlet div = document.createElement('div');\ntype B = typeof div\n```\n\n**其他骚操作**\n```typescript\ntype StringOrNumber = string | number;  \ntype Text = string | { text: string };  \ntype NameLookup = Dictionary<string, Person>;  \ntype Callback<T> = (data: T) => void;  \ntype Pair<T> = [T, T];  \ntype Coordinates = Pair<number>;  \ntype Tree<T> = T | { left: Tree<T>, right: Tree<T> };\n```\n\n* interface 可以而 type 不行\n\n**interface 能够声明合并**\n\n```typescript\ninterface User {\n  name: string\n  age: number\n}\n\ninterface User {\n  sex: string\n}\n\n/*\nUser 接口为 {\n  name: string\n  age: number\n  sex: string \n}\n*/\n```\n\n一般来说，如果不清楚什么时候用interface/type，能用 interface 实现，就用 interface , 如果不能就用 type 。\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-08T15:00:36.000Z",
+    "updateAt": "2021-07-11T11:06:56.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 886,
+    "prev": "887a5434-989a-45c3-bf97-b6988394ece6",
+    "next": "d4a6dd39-06ce-454f-b1ef-4ec580faf27c"
+  },
+  "post": {
+    "exerciseKey": "cb091ae7-6a50-441b-9513-ef6638e5f123",
+    "category": "QA",
+    "title": "Typescript中 interface 和 type 的差别是什么？",
+    "level": 3,
+    "updateAt": "2021-07-11T11:06:56+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

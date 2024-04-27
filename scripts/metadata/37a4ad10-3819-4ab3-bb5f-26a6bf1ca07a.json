@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1604,
+    "exerciseKey": "37a4ad10-3819-4ab3-bb5f-26a6bf1ca07a",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第12题】下面代码的输出是什么？",
+    "desc": "```js\nconst promise1 = new Promise((resolve, reject) => {\n  setTimeout(() => {\n    resolve(\"success\");\n    console.log(\"timer1\");\n  }, 1000);\n  console.log(\"promise1里的内容\");\n});\nconst promise2 = promise1.then(() => {\n  throw new Error(\"error!!!\");\n});\nconsole.log(\"promise1\", promise1);\nconsole.log(\"promise2\", promise2);\nsetTimeout(() => {\n  console.log(\"timer2\");\n  console.log(\"promise1\", promise1);\n  console.log(\"promise2\", promise2);\n}, 2000);\n```",
+    "options": null,
+    "explanation": "和之前的题目比较类似，不做详细分析\n\n```\n'promise1里的内容'\n'promise1' Promise{<pending>}\n'promise2' Promise{<pending>}\n'timer1'\ntest5.html:102 Uncaught (in promise) Error: error!!! at test.html:102\n'timer2'\n'promise1' Promise{<resolved>: \"success\"}\n'promise2' Promise{<rejected>: Error: error!!!}\n\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T14:39:10.000Z",
+    "updateAt": "2022-01-09T23:01:19.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 669,
+    "prev": "f6f14b00-ae3f-43a9-9085-12333dd0cb8c",
+    "next": "d9a36bb7-972c-4afb-abb6-fcbaa30612cf"
+  },
+  "post": {
+    "exerciseKey": "37a4ad10-3819-4ab3-bb5f-26a6bf1ca07a",
+    "category": "QA",
+    "title": "【Promise第12题】下面代码的输出是什么？",
+    "level": 3,
+    "updateAt": "2022-01-09T23:01:19+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

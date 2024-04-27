@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 353,
+    "exerciseKey": "7b0cfdab-9709-4c5a-91bb-7fdfbd99c327",
+    "category": "QA",
+    "renderType": "md",
+    "title": "球的重量",
+    "desc": "有8个球，其中1个比另外的要略重。在不用砝码的前提下，你最少要称几次，才能找出这个球？",
+    "options": null,
+    "explanation": "最少称**两次**。\n\n把所有的球分成三组，其中两组每组3个球，另一组2个球；首先，将3个球的两组进行称重，\n\n* 如果其中一组比较重，从这组球当中任选两个，再次称重\n  * 如果轻重不等，重的球就是你要找的。\n  * 如果轻重相等，剩下那个球就是你要找的。\n* 如果第一次称重时两组球一样重，那么就把剩下一组的两个球进行称重，就能得到答案",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T13:15:27.000Z",
+    "updateAt": "2021-07-04T21:24:49.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1007,
+    "prev": "a7aba2d7-10f3-4ed9-8453-cc7b68edef77",
+    "next": "393d4762-e0b3-4fe6-9c5e-25d26f3680a8"
+  },
+  "post": {
+    "exerciseKey": "7b0cfdab-9709-4c5a-91bb-7fdfbd99c327",
+    "category": "QA",
+    "title": "球的重量",
+    "level": 3,
+    "updateAt": "2021-07-04T21:24:49+00:00"
+  },
+  "tag": {
+    "id": 17,
+    "tagName": "趣味题",
+    "type": "1",
+    "exerciseCount": 35
+  }
+}

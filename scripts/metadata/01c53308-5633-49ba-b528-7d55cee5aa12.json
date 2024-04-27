@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1995,
+    "exerciseKey": "01c53308-5633-49ba-b528-7d55cee5aa12",
+    "category": "QA",
+    "renderType": "md",
+    "title": "koa 框架中，该怎么处理中间件的异常？",
+    "desc": null,
+    "options": null,
+    "explanation": "Koa 中间件的异常处理是通过 `try...catch` 语句和错误处理中间件实现的。当某个中间件函数抛出了异常时，Koa 会自动将控制权交给下一个错误处理中间件，如果没有错误处理中间件，则返回默认的 500 错误响应。\n\n下面是一个简单的 Koa 错误处理中间件示例代码：\n\n```javascript\nconst Koa = require('koa');\nconst app = new Koa();\n\napp.use(async (ctx, next) => {\n  try {\n    await next();\n  } catch (err) {\n    ctx.status = err.status || 500;\n    ctx.body = {\n      message: err.message,\n      error: err.stack\n    };\n  }\n});\n\napp.use(async (ctx, next) => {\n  if (Math.random() < 0.5) {\n    throw new Error('Oops! Something went wrong.');\n  } else {\n    ctx.body = {\n      message: 'Hello, world!'\n    };\n  }\n});\n\napp.listen(3000);\nconsole.log('Server running on http://localhost:3000');\n```\n\n在上述代码中，通过 `try...catch` 捕获了第二个中间件函数中可能抛出的异常，并使用第一个中间件作为错误处理中间件进行处理。当出现异常时，第一个中间件会将错误状态码和错误信息添加到上下文对象的响应头中，并返回一个错误对象。如果没有出现异常，则执行下一个中间件函数并返回正常的响应结果。\n\n在编写 Koa 中间件时，需要遵循良好的异常处理方式，不要在中间件函数中直接抛出异常，而应该将异常对象包装成 `Error` 对象并返回。并且，在继承洋葱模型时，需要注意错误处理中间件的顺序和位置，以保证程序的稳定运行。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-05-24T01:20:55.000Z",
+    "updateAt": "2023-05-31T09:09:50.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 355,
+    "prev": "734b2b9c-dd2e-4f59-be6e-b4b0fb2c7b74",
+    "next": "d1556373-ae6c-4145-9111-e5cd74417497"
+  },
+  "post": {
+    "exerciseKey": "01c53308-5633-49ba-b528-7d55cee5aa12",
+    "category": "QA",
+    "title": "koa 框架中，该怎么处理中间件的异常？",
+    "level": 3,
+    "updateAt": "2023-05-31T09:09:50+00:00"
+  },
+  "tag": {
+    "id": 18,
+    "tagName": "Node.js",
+    "type": "1",
+    "exerciseCount": 26
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1930,
+    "exerciseKey": "c7505e46-4e58-4d34-b27d-b022c244cfad",
+    "category": "QA",
+    "renderType": "md",
+    "title": "什么是 CI/CD？",
+    "desc": null,
+    "options": null,
+    "explanation": "CI/CD是持续集成（Continuous Integration）和持续交付/持续部署（Continuous Delivery/Continuous Deployment）的缩写。\n\n- 持续集成（Continuous Integration，CI）：CI是一种开发实践，通过频繁地将代码集成到共享的版本控制库中，并自动进行构建、测试和静态代码分析等过程，以早期发现和解决代码集成问题。主要目标是减少集成冲突和快速反馈，提高开发团队的协作效率和代码质量。\n\n- 持续交付/持续部署（Continuous Delivery/Continuous Deployment，CD）：CD是在CI的基础上进一步自动化整个软件交付流程的实践。持续交付指将软件交付到可部署环境的过程，包括自动化构建、自动化测试、文档生成和打包等，以确保每次交付都是可靠和可重复的。持续部署则更进一步，指将软件自动部署到生产环境，从而减少人工干预和降低发布的风险。\n\nCI/CD的目标是通过自动化和持续的流程来提高软件开发和交付的效率、质量和可靠性。它帮助团队集中精力于开发新功能，并能够快速、频繁地将这些功能交付给最终用户。CI/CD在现代软件开发中被广泛采用，为团队提供了一种更加可靠和高效的软件交付方式。",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-12-30T01:40:45.000Z",
+    "updateAt": "2023-12-17T18:12:13.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 266,
+    "prev": "252664a5-1524-46f0-b6ae-ae7e2874f6e2",
+    "next": "06ed39d5-65ff-4276-a2f3-b7dc9cebf52e"
+  },
+  "post": {
+    "exerciseKey": "c7505e46-4e58-4d34-b27d-b022c244cfad",
+    "category": "QA",
+    "title": "什么是 CI/CD？",
+    "level": 2,
+    "updateAt": "2023-12-17T18:12:13+00:00"
+  },
+  "tag": {
+    "id": 28,
+    "tagName": "工程化",
+    "type": "1",
+    "exerciseCount": 33
+  }
+}

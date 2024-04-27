@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 251,
+    "exerciseKey": "38c7340e-cb35-43e0-8ea0-20e75b2780a5",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Vue项目中如何解决跨域问题？",
+    "desc": null,
+    "options": null,
+    "explanation": "解决跨域的方法有很多，下面列举了三种：\n\n- JSONP\n- CORS\n- Proxy\n\n而在`vue`项目中，我们主要针对`CORS`或`Proxy`这两种方案进行展开\n\n### CORS\n\nCORS （Cross-Origin Resource Sharing，跨域资源共享）是一个系统，它由一系列传输的HTTP头组成，这些HTTP头决定浏览器是否阻止前端 JavaScript 代码获取跨域请求的响应\n\n`CORS` 实现起来非常方便，只需要增加一些 `HTTP` 头，让服务器能声明允许的访问来源\n\n只要后端实现了 `CORS`，就实现了跨域\n\n ![](https://static.ecool.fun//article/1dab26ff-003d-49b3-ab94-f25032f40170.png)\n\n以` koa`框架举例\n\n添加中间件，直接设置`Access-Control-Allow-Origin`请求头\n\n```js\napp.use(async (ctx, next)=> {\n  ctx.set('Access-Control-Allow-Origin', '*');\n  ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');\n  ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');\n  if (ctx.method == 'OPTIONS') {\n    ctx.body = 200; \n  } else {\n    await next();\n  }\n})\n```\n\nps: `Access-Control-Allow-Origin` 设置为*其实意义不大，可以说是形同虚设，实际应用中，上线前我们会将`Access-Control-Allow-Origin` 值设为我们目标`host`\n\n### Proxy\n代理（Proxy）也称网络代理，是一种特殊的网络服务，允许一个（一般为客户端）通过这个服务与另一个网络终端（一般为服务器）进行非直接的连接。一些网关、路由器等网络设备具备网络代理功能。一般认为代理服务有利于保障网络终端的隐私或安全，防止攻击\n\n\n**方案一**\n\n如果是通过`vue-cli`脚手架工具搭建项目，我们可以通过`webpack`为我们起一个本地服务器作为请求的代理对象\n\n通过该服务器转发请求至目标服务器，得到结果再转发给前端，但是最终发布上线时如果web应用和接口服务器不在一起仍会跨域\n\n在`vue.config.js`文件，新增以下代码\n\n```js\namodule.exports = {\n    devServer: {\n        host: '127.0.0.1',\n        port: 8084,\n        open: true,// vue项目启动时自动打开浏览器\n        proxy: {\n            '/api': { // '/api'是代理标识，用于告诉node，url前面是/api的就是使用代理的\n                target: \"http://xxx.xxx.xx.xx:8080\", //目标地址，一般是指后台服务器地址\n                changeOrigin: true, //是否跨域\n                pathRewrite: { // pathRewrite 的作用是把实际Request Url中的'/api'用\"\"代替\n                    '^/api': \"\" \n                }\n            }\n        }\n    }\n}\n```\n\n通过`axios`发送请求中，配置请求的根路径\n\n```js\naxios.defaults.baseURL = '/api'\n```\n\n\n\n**方案二**\n\n此外，还可通过服务端实现代理请求转发\n\n以`express`框架为例\n\n```js\nvar express = require('express');\nconst proxy = require('http-proxy-middleware')\nconst app = express()\napp.use(express.static(__dirname + '/'))\napp.use('/api', proxy({ target: 'http://localhost:4000', changeOrigin: false\n                      }));\nmodule.exports = app\n```\n\n\n\n**方案三**\n\n通过配置`nginx`实现代理\n\n```js\nserver {\n    listen    80;\n    # server_name www.josephxia.com;\n    location / {\n        root  /var/www/html;\n        index  index.html index.htm;\n        try_files $uri $uri/ /index.html;\n    }\n    location /api {\n        proxy_pass  http://127.0.0.1:3000;\n        proxy_redirect   off;\n        proxy_set_header  Host       $host;\n        proxy_set_header  X-Real-IP     $remote_addr;\n        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;\n    }\n}\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T03:51:10.000Z",
+    "updateAt": "2024-01-25T15:39:14.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 123,
+    "prev": "252525e4-0c4c-4e41-9279-41bc59f06f85",
+    "next": "f43b7906-f51f-454f-8028-ea027ae3e121"
+  },
+  "post": {
+    "exerciseKey": "38c7340e-cb35-43e0-8ea0-20e75b2780a5",
+    "category": "QA",
+    "title": "Vue项目中如何解决跨域问题？",
+    "level": 2,
+    "updateAt": "2024-01-25T15:39:14+00:00"
+  },
+  "tag": {
+    "id": 14,
+    "tagName": "Vue.js",
+    "type": "1",
+    "exerciseCount": 68
+  }
+}

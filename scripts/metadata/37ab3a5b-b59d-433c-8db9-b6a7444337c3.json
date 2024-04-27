@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 341,
+    "exerciseKey": "37ab3a5b-b59d-433c-8db9-b6a7444337c3",
+    "category": "QA",
+    "renderType": "md",
+    "title": "React Hooks带来了什么便利？",
+    "desc": null,
+    "options": null,
+    "explanation": "在没有 hooks 之前，我们使用函数定义的组件中，不能使用 React 的 state、各种生命周期钩子类组件的特性。在 React 16.8 之后，推出了新功能： Hooks，通过 hooks 我们可以再函数定义的组件中使用类组件的特性。\n\n好处:\n\n* 跨组件复用: 其实 render props / HOC 也是为了复用，相比于它们，Hooks 作为官方的底层 API，最为轻量，而且改造成本小，不会影响原来的组件层次结构和传说中的嵌套地狱；\n* 相比而言，类组件的实现更为复杂\n\t* 不同的生命周期会使逻辑变得分散且混乱，不易维护和管理；\n\t* 时刻需要关注this的指向问题；\n\t* 代码复用代价高，高阶组件的使用经常会使整个组件树变得臃肿；\n* 状态与 UI 隔离: 正是由于 Hooks 的特性，状态逻辑会变成更小的粒度，并且极容易被抽象成一个自定义 Hooks，组件中的状态和 UI 变得更为清晰和隔离。\n\n**注意**:\n\n* 避免在 循环/条件判断/嵌套函数 中调用 hooks，保证调用顺序的稳定；\n* 不能在useEffect中使用useState，React 会报错提示；\n* 类组件不会被替换或废弃，不需要强制改造类组件，两种方式能并存\n\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T12:26:12.000Z",
+    "updateAt": "2021-07-04T21:30:12.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 994,
+    "prev": "74f0cb29-9b52-40e7-adba-571d398fa6ad",
+    "next": "99fc6f13-b239-4697-8b20-5fdb03702be6"
+  },
+  "post": {
+    "exerciseKey": "37ab3a5b-b59d-433c-8db9-b6a7444337c3",
+    "category": "QA",
+    "title": "React Hooks带来了什么便利？",
+    "level": 3,
+    "updateAt": "2021-07-04T21:30:12+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

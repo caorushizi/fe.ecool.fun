@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 267,
+    "exerciseKey": "06af30a2-e542-4cf0-9793-999267a4007d",
+    "category": "QA",
+    "renderType": "md",
+    "title": "iframe是什么？有哪些优缺点？",
+    "desc": null,
+    "options": null,
+    "explanation": "iframe 可以在一个网站里面嵌入另一个网站的内容。\n\n## iframe的优点\n\n* iframe能够原封不动的把嵌入的网页展现出来。\n* 如果有多个网页引用iframe，那么你只需要修改iframe的内容，就可以实现调用的每一个页面内容的更改，方便快捷。\n* 网页如果为了统一风格，头部和版本都是一样的，就可以写成一个页面，用iframe来嵌套，可以增加代码的可重用。\n* 如果遇到加载缓慢的第三方内容如图标和广告，这些问题可以由iframe来解决。\n\n## iframe的缺点\n\n* 会产生很多页面，不容易管理。\n* iframe框架结构有时会让人感到迷惑，如果框架个数多的话，可能会出现上下、左右滚动条，会分散访问者的注意力，用户体验度差。 * 代码复杂，无法被一些搜索引擎索引到，这一点很关键，现在的搜索引擎爬虫还不能很好的处理iframe中的内容，所以使用iframe会不利于搜索引擎优化。\n* 很多的移动设备（PDA 手机）无法完全显示框架，设备兼容性差。\n* iframe 里面的样式、脚本资源，会增加请求次数，对于大型网站是不可取的。\n* iframe 会阻碍页面的 onload 事件，给用户页面加载很慢的感觉。\n\niframe 已经渐渐的退出了前端开发的舞台。\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T05:50:50.000Z",
+    "updateAt": "2021-07-04T16:01:34.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1054,
+    "prev": "53060972-481f-4025-a055-aa278d737fc1",
+    "next": "5570174b-5bd1-4e00-a9cf-49f6ae227758"
+  },
+  "post": {
+    "exerciseKey": "06af30a2-e542-4cf0-9793-999267a4007d",
+    "category": "QA",
+    "title": "iframe是什么？有哪些优缺点？",
+    "level": 1,
+    "updateAt": "2021-07-04T16:01:34+00:00"
+  },
+  "tag": {
+    "id": 12,
+    "tagName": "HTML",
+    "type": "1",
+    "exerciseCount": 57
+  }
+}

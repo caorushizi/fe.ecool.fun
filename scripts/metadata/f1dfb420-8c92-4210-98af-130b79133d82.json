@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 425,
+    "exerciseKey": "f1dfb420-8c92-4210-98af-130b79133d82",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现 Promise.all",
+    "desc": null,
+    "options": null,
+    "explanation": "// 简易版\n```javascript\nPromise.myAll = function(promiseArr) {\n  return new Promise((resolve, reject) => {\n    const ans = [];\n    let index = 0;\n    for (let i = 0; i < promiseArr.length; i++) {\n      promiseArr[i]\n      .then(res => {\n        ans[i] = res;\n        index++;\n        if (index === promiseArr.length) {\n          resolve(ans);\n        }\n      })\n      .catch(err => reject(err));\n    }\n  })\n}\n```\n\n// 终极版\n\n```javascript\n// 输入不仅仅只有Array\nfunction promiseAll (args) {\n  return new Promise((resolve, reject) => {\n    const promiseResults = [];\n    let iteratorIndex = 0;\n    // 已完成的数量，用于最终的返回，不能直接用完成数量作为iteratorIndex\n    // 输出顺序和完成顺序是两码事\n    let fullCount = 0;\n    // 用于迭代iterator数据\n    for (const item of args) {\n      // for of 遍历顺序，用于返回正确顺序的结果\n      // 因iterator用forEach遍历后的key和value一样，所以必须存一份for of的 iteratorIndex\n      let resultIndex = iteratorIndex;\n      iteratorIndex += 1;\n      // 包一层，以兼容非promise的情况\n      Promise.resolve(item).then(res => {\n        promiseResults[resultIndex] = res;\n        fullCount += 1;\n        // Iterator 接口的数据无法单纯的用length和size判断长度，不能局限于Array和 Map类型中\n        if (fullCount === iteratorIndex) {\n          resolve(promiseResults)\n        }\n      }).catch(err => {\n        reject(err)\n      })\n    }\n    // 处理空 iterator 的情况\n    if(iteratorIndex===0){\n      resolve(promiseResults)\n    }\n  }\n  )\n}\nif (!Promise.all) Promise.all = promiseAll;\n```\n\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:14:34.000Z",
+    "updateAt": "2021-08-13T10:14:46.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 793,
+    "prev": "c00fbf63-deef-433c-aa48-a10812107b0e",
+    "next": "a93416a5-73ab-49be-98d0-42c829616f9a"
+  },
+  "post": {
+    "exerciseKey": "f1dfb420-8c92-4210-98af-130b79133d82",
+    "category": "QA",
+    "title": "实现 Promise.all",
+    "level": 3,
+    "updateAt": "2021-08-13T10:14:46+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

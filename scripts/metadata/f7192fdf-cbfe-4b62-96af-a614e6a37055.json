@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1569,
+    "exerciseKey": "f7192fdf-cbfe-4b62-96af-a614e6a37055",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何确定页面的可用性时间，什么是 Performance API？",
+    "desc": null,
+    "options": null,
+    "explanation": "Performance API 用于精确度量、控制、增强浏览器的性能表现。这个 API 为测量网站性能，提供以前没有办法做到的精度。\n\n使用 getTime 来计算脚本耗时的缺点，首先，getTime方法（以及 Date 对象的其他方法）都只能精确到毫秒级别（一秒的千分之一），想要得到更小的时间差别就无能为力了。其次，这种写法只能获取代码运行过程中的时间进度，无法知道一些后台事件的时间进度，比如浏览器用了多少时间从服务器加载网页。\n\n为了解决这两个不足之处，ECMAScript 5引入“高精度时间戳”这个 API，部署在 performance 对象上。它的精度可以达到1毫秒\n的千分之一（1秒的百万分之一）。\n\nnavigationStart：当前浏览器窗口的前一个网页关闭，发生 unload 事件时的 Unix 毫秒时间戳。如果没有前一个网页，则等于 fetchStart 属性。\n\nloadEventEnd：返回当前网页 load 事件的回调函数运行结束时的 Unix 毫秒时间戳。如果该事件还没有发生，返回 0。\n\n根据上面这些属性，可以计算出网页加载各个阶段的耗时。比如，网页加载整个过程的耗时的计算方法如下：\n\n```\nvar t = performance.timing;\nvar pageLoadTime = t.loadEventEnd - t.navigationStart;\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:44:19.000Z",
+    "updateAt": "2021-11-17T22:50:06.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 714,
+    "prev": "e1584502-c0d4-416f-abe4-cc0a01c6002d",
+    "next": "ed7cbf26-e39b-4de5-82f6-c1a60ff7ee15"
+  },
+  "post": {
+    "exerciseKey": "f7192fdf-cbfe-4b62-96af-a614e6a37055",
+    "category": "QA",
+    "title": "如何确定页面的可用性时间，什么是 Performance API？",
+    "level": 1,
+    "updateAt": "2021-11-17T22:50:06+00:00"
+  },
+  "tag": {
+    "id": 20,
+    "tagName": "性能优化",
+    "type": "1",
+    "exerciseCount": 25
+  }
+}

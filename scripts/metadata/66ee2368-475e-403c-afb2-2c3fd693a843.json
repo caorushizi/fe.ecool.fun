@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 448,
+    "exerciseKey": "66ee2368-475e-403c-afb2-2c3fd693a843",
+    "category": "QA",
+    "renderType": "md",
+    "title": "简述一下微信小程序的主要文件有哪些？",
+    "desc": null,
+    "options": null,
+    "explanation": "* WXML——模板文件\n* JSON——配置/设置文件，如标题,tabbar,页面注册\n* WXSS——样式文件，样式可直接用import导入\n* JS——脚本逻辑文件，逻辑处理，网络请求\n* app.json——配置文件入口，整个小程序的全局配置，网络超时时间、底部tab、页面路径，window字段是小程序所有页面的顶部背景颜色、文字颜色\n* app.js——可以没有内容，可以在里边监听生命周期函数、声明全局变量\n* app.wxss——全局配置样式文件",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-07T14:31:54.000Z",
+    "updateAt": "2021-07-11T10:53:08.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 900,
+    "prev": "7f816cdc-b5e8-4939-9c85-004a4110210c",
+    "next": "879ca17c-91e6-488d-a835-d89715f382c0"
+  },
+  "post": {
+    "exerciseKey": "66ee2368-475e-403c-afb2-2c3fd693a843",
+    "category": "QA",
+    "title": "简述一下微信小程序的主要文件有哪些？",
+    "level": 1,
+    "updateAt": "2021-07-11T10:53:08+00:00"
+  },
+  "tag": {
+    "id": 23,
+    "tagName": "小程序",
+    "type": "1",
+    "exerciseCount": 9
+  }
+}

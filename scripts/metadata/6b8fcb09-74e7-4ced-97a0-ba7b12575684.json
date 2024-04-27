@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1965,
+    "exerciseKey": "6b8fcb09-74e7-4ced-97a0-ba7b12575684",
+    "category": "QA",
+    "renderType": "md",
+    "title": "单页应用如何提高加载速度？\n",
+    "desc": null,
+    "options": null,
+    "explanation": "* 使用代码分割：将代码拆分成小块并按需加载（懒加载），以避免不必要的网络请求和减少加载时间。\n* 缓存资源：利用浏览器缓存来存储重复使用的文件，例如 CSS 和 JS 文件、图片等。\n* 预加载关键资源：在首次渲染之前，先提前加载关键资源，例如首页所需的 JS、CSS 或数据，以保证关键内容的快速呈现。\n* 使用合适的图片格式：选择合适的图片格式（例如 JPEG、PNG、WebP 等），并根据需要进行压缩以减少文件大小。对于一些小图标，可以使用 `iconfont` 等字体文件来代替。\n* 启用 Gzip 压缩：使用服务器端的 Gzip 压缩算法对文件进行压缩，以减少传输时间和带宽消耗。\n* 使用 CDN：使用内容分发网络（CDN）来缓存和传递文件，以提高文件的下载速度和可靠性。\n* 优化 API 请求：尽可能地减少 API 调用的数量，并使用缓存和延迟加载等技术来优化 API 请求的效率。\n* 使用服务器端渲染：使用服务器端渲染（SSR）来生成 HTML，以减少客户端渲染所需的时间和资源。但需要注意，SSR 也可能增加了服务器的负担并使网站更复杂。",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-04-27T11:19:41.000Z",
+    "updateAt": "2023-04-27T19:19:49.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 394,
+    "prev": "fe892098-5e9b-4c35-b321-cba5418f61be",
+    "next": "ea493a51-70e5-481b-b5ec-2ce6900a7eea"
+  },
+  "post": {
+    "exerciseKey": "6b8fcb09-74e7-4ced-97a0-ba7b12575684",
+    "category": "QA",
+    "title": "单页应用如何提高加载速度？\n",
+    "level": 2,
+    "updateAt": "2023-04-27T19:19:49+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

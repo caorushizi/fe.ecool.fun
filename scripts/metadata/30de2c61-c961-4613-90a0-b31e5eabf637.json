@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 475,
+    "exerciseKey": "30de2c61-c961-4613-90a0-b31e5eabf637",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Typescript中什么是类类型接口？",
+    "desc": null,
+    "options": null,
+    "explanation": "* 如果接口用于一个类的话，那么接口会表示“行为的抽象”\n* 对类的约束，让类去实现接口，类可以实现多个接口\n* 接口只能约束类的公有成员（实例属性/方法），无法约束私有成员、构造函数、静态属性/方法",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-08T15:12:46.000Z",
+    "updateAt": "2021-07-11T11:08:41.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 878,
+    "prev": "1b2049cf-9800-420d-b4f3-09238226d162",
+    "next": "12d1bf82-0196-45ec-bfa4-7e71fdeeb632"
+  },
+  "post": {
+    "exerciseKey": "30de2c61-c961-4613-90a0-b31e5eabf637",
+    "category": "QA",
+    "title": "Typescript中什么是类类型接口？",
+    "level": 2,
+    "updateAt": "2021-07-11T11:08:41+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

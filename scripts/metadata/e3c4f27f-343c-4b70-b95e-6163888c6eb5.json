@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 61,
+    "exerciseKey": "e3c4f27f-343c-4b70-b95e-6163888c6eb5",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出是什么?",
+    "desc": "```javascript\nconst set = new Set([1, 1, 2, 3, 4]);\n\nconsole.log(set);\n```",
+    "options": "{\"options\":[\"[1, 1, 2, 3, 4]\",\"[1, 2, 3, 4]\",\"{1, 1, 2, 3, 4}\",\"{1, 2, 3, 4}\"],\"isMulti\":false,\"answer\":[3]}",
+    "explanation": "`Set`对象是独一无二的值的集合：也就是说同一个值在其中仅出现一次。\n我们传入了数组`[1, 1, 2, 3, 4]`，他有一个重复值`1`.以为一个集合里不能有两个重复的值，其中一个就被移除了。所以结果是 `{1, 2, 3, 4}`.",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:14:46.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1144,
+    "prev": "43fc5697-d7c8-4d68-9ac7-f074d8a7b185",
+    "next": "e5696d2f-2fdb-474a-b6d0-52f180eee942"
+  },
+  "post": {
+    "exerciseKey": "e3c4f27f-343c-4b70-b95e-6163888c6eb5",
+    "category": "Choice",
+    "title": "输出是什么?",
+    "level": 0.5,
+    "updateAt": "2021-07-03T22:14:46+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

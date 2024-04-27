@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2035,
+    "exerciseKey": "00499f71-c1c2-46aa-9e87-d3ae7b79f268",
+    "category": "QA",
+    "renderType": "md",
+    "title": "请按以下要求实现方法 fn ：遇到退格字符就删除前面的字符，遇到两个退格就删除两个字符",
+    "desc": "```js\n// 比较含有退格的字符串，\"<-\"代表退格键，\"<\"和\"-\"均为正常字符\n// 输入：\"a<-b<-\", \"c<-d<-\"，结果：true，解释：都为\"\"\n// 输入：\"<-<-ab<-\", \"<-<-<-<-a\"，结果：true，解释：都为\"a\"\n// 输入：\"<-<ab<-c\", \"<<-<a<-<-c\"，结果：false，解释：\"<ac\" !== \"c\"\n\nfunction fn(str1, str2) {\n\n}\n```",
+    "options": null,
+    "explanation": "```js \nfunction fn(str1, str2) { \n\n  const doDelete = (str) => {\n    let flag = 0;// 0 - 正常字符；1 - <；2 - <-\n    const stack = [];\n    for(let i = 0; i < str.length; i++) {\n      const char = str[i];\n      stack.push(char);\n\n      if(char === '<' && !flag) {\n        flag += 1\n      } else if(flag === 1) {\n        if(char === '-') {\n          flag += 1\n        } else {\n          flag -= 1\n        }\n      }\n\n      if(flag === 2) {\n        stack.pop();\n        stack.pop();\n        stack.pop();\n        flag = 0\n      }\n    }\n    // console.log(String(stack))\n    return String(stack);\n  }\n\n  return doDelete(str1) === doDelete(str2);\n}\n\nconsole.log(fn(\"a<-b<-\", \"c<-d<-\"))\nconsole.log(fn(\"<-<-ab<-\", \"<-<-<-<-a\"))\nconsole.log(fn(\"<-<ab<-c\", \"<<-<a<-<-c\"))\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-05-31T01:21:10.000Z",
+    "updateAt": "2023-06-01T09:27:38.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 332,
+    "prev": "ef148af4-31d3-457d-b8ad-4a257ab0bb40",
+    "next": "5bd5fdd4-706a-49dd-9cbe-1f2a05779ffe"
+  },
+  "post": {
+    "exerciseKey": "00499f71-c1c2-46aa-9e87-d3ae7b79f268",
+    "category": "QA",
+    "title": "请按以下要求实现方法 fn ：遇到退格字符就删除前面的字符，遇到两个退格就删除两个字符",
+    "level": 3,
+    "updateAt": "2023-06-01T09:27:38+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

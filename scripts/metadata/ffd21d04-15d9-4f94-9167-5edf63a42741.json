@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1711,
+    "exerciseKey": "ffd21d04-15d9-4f94-9167-5edf63a42741",
+    "category": "QA",
+    "renderType": "md",
+    "title": "怎么做移动端的样式适配？",
+    "desc": null,
+    "options": null,
+    "explanation": "以下是一些常见的移动端样式适配方法：\n\n1. **响应式设计（Responsive Design）：**\n   - 使用CSS媒体查询（Media Queries）来根据设备的特征（如屏幕宽度、高度、方向等）应用不同的样式。\n   - 通过设置百分比宽度、最大宽度或相对单位（比如 rem）来确保元素相对于其容器的大小进行自适应。\n\n```css\n@media only screen and (max-width: 768px) {\n  /* 在小屏幕上的样式 */\n}\n\n@media only screen and (min-width: 769px) and (max-width: 1024px) {\n  /* 在中等屏幕上的样式 */\n}\n\n@media only screen and (min-width: 1025px) {\n  /* 在大屏幕上的样式 */\n}\n```\n\n2. **弹性布局（Flexbox）和网格布局（Grid）：**\n   - 使用弹性布局和网格布局可以更方便地创建灵活的布局，使页面元素能够根据屏幕大小自动调整位置。\n\n```css\n.container {\n  display: flex;\n  flex-wrap: wrap;\n}\n\n.item {\n  flex: 1;\n}\n```\n\n3. **移动端优先（Mobile-first）：**\n   - 首先定义移动端的样式，然后使用媒体查询逐渐添加更大屏幕上的样式，以确保基本功能在小屏幕上也能正常工作。\n\n```css\n/* 移动端样式 */\nbody {\n  font-size: 14px;\n}\n\n/* 大屏幕样式 */\n@media only screen and (min-width: 768px) {\n  body {\n    font-size: 16px;\n  }\n}\n```\n\n4. **图片和多媒体适配：**\n   - 使用`max-width: 100%`确保图片和多媒体在小屏幕上不会溢出其容器。\n   - 使用`picture`元素或`srcset`属性提供不同尺寸的图片。\n\n```css\nimg {\n  max-width: 100%;\n  height: auto;\n}\n```\n\n5. **交互友好：**\n   - 使用合适的尺寸和间距，确保链接、按钮等可点击元素在触摸屏上易于点击。\n\n```css\n/* 适当的触摸区域大小 */\na, button {\n  padding: 10px;\n}\n```\n\n6. **测试和调试：**\n   - 在不同设备和浏览器上测试你的样式，确保页面在各种情况下都有良好的表现。\n   - 使用浏览器开发者工具检查元素并模拟不同设备的情况。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-03-20T15:26:26.000Z",
+    "updateAt": "2024-01-25T19:43:39.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 40,
+    "prev": "be6f7f8b-d386-4f99-a0bc-f9b5a0512f99",
+    "next": "2f8aa80e-e3b0-4d10-843d-83e947dda744"
+  },
+  "post": {
+    "exerciseKey": "ffd21d04-15d9-4f94-9167-5edf63a42741",
+    "category": "QA",
+    "title": "怎么做移动端的样式适配？",
+    "level": 3,
+    "updateAt": "2024-01-25T19:43:39+00:00"
+  },
+  "tag": {
+    "id": 11,
+    "tagName": "CSS",
+    "type": "1",
+    "exerciseCount": 90
+  }
+}

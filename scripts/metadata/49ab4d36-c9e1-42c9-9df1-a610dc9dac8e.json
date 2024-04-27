@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2019,
+    "exerciseKey": "49ab4d36-c9e1-42c9-9df1-a610dc9dac8e",
+    "category": "QA",
+    "renderType": "md",
+    "title": "下面代码的输出是什么？",
+    "desc": "```js\nconst obj = {\n fn1: () => console.log(this),\n fn2: function() {console.log(this)}\n}\n\nobj.fn1();\nobj.fn2();\n\nconst x = new obj.fn1();\nconst y = new obj.fn2();\n```",
+    "options": null,
+    "explanation": "在上面的代码中，obj 对象包含两个方法 fn1 和 fn2。fn1 使用箭头函数定义，而 fn2 使用普通函数定义。\n\n对于箭头函数，它没有自己的 this 值，也就是说它会捕获上下文中的 this 值，因此 fn1 中的 this 指向的是全局对象 window（或者 undefined，如果运行环境是严格模式）。因此，当我们调用 obj.fn1() 时，输出结果为 **window**（或 undefined）。\n\n对于普通函数，它的 this 值是在运行时动态绑定的。因此，当我们调用 obj.fn2() 时，输出结果为 **obj 对象本身**。\n\n接下来，代码中分别使用 new 运算符创建了 obj.fn1 和 obj.fn2 的实例 x 和 y。\n\n**由于箭头函数没有自己的 this 值，所以尝试使用 new 运算符创建实例会导致 TypeError 错误。**也就是 `new obj.fn1() ` 会报错。\n\n而对于普通函数，new 运算符可以正确地创建实例，并且 this 值指向新创建的实例对象。但因为上面执行  `new obj.fn1() `  时 js 已经报错，`new obj.fn2(); ` 并不会执行。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-05-30T01:12:25.000Z",
+    "updateAt": "2023-09-24T11:26:16.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 283,
+    "prev": "6a451db6-ddbe-4f76-8519-8ce6d47af8b3",
+    "next": "c130f552-a50b-4a88-b74c-bd992dfab692"
+  },
+  "post": {
+    "exerciseKey": "49ab4d36-c9e1-42c9-9df1-a610dc9dac8e",
+    "category": "QA",
+    "title": "下面代码的输出是什么？",
+    "level": 3,
+    "updateAt": "2023-09-24T11:26:16+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

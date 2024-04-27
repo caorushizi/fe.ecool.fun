@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 147,
+    "exerciseKey": "a7afe475-998a-4be3-97a0-c8c7ccabd6e6",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出什么？",
+    "desc": "```javascript\nclass Bird {\n\tconstructor() {\n\t\tconsole.log(\"I'm a bird. 🦢\");\n\t}\n}\n\nclass Flamingo extends Bird {\n\tconstructor() {\n\t\tconsole.log(\"I'm pink. 🌸\");\n\t\tsuper();\n\t}\n}\n\nconst pet = new Flamingo();\n```",
+    "options": "{\"options\":[\"I'm pink. 🌸\",\"I'm pink. 🌸 I'm a bird. 🦢\",\"I'm a bird. 🦢 I'm pink. 🌸\",\"Nothing, we didn't call any method\"],\"isMulti\":false,\"answer\":[1]}",
+    "explanation": "我们创建了类 `Flamingo` 的实例 `pet`。\n\n当我们实例化这个实例，`Flamingo` 中的 `constructor` 被调用。\n\n首先，输出 `\"I'm pink. 🌸\"`, 之后我们调用`super()`。`super()` 调用父类的构造函数，`Bird`。`Bird` 的构造函数被调用，并输出 `\"I'm a bird. 🦢\"`。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2023-03-04T22:52:46.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 436,
+    "prev": "a0e34df4-b603-4b18-bcd6-ebf8c94b3325",
+    "next": "fe86322b-4990-4f6b-a473-d37a8e3ecb2d"
+  },
+  "post": {
+    "exerciseKey": "a7afe475-998a-4be3-97a0-c8c7ccabd6e6",
+    "category": "Choice",
+    "title": "输出什么？",
+    "level": 0.5,
+    "updateAt": "2023-03-04T22:52:46+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

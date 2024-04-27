@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1820,
+    "exerciseKey": "f2e93a54-e57f-4c52-bd8c-9b9474c437ac",
+    "category": "QA",
+    "renderType": "md",
+    "title": "new fn与new fn()有什么区别吗？",
+    "desc": null,
+    "options": null,
+    "explanation": "用 `new` 创建构造函数的实例时，通常情况下 `new` 的构造函数后面需要带括号（譬如：`new Parent()`）。\n\n有些情况下`new`的构造函数后带括号和不带括号的情况一致，譬如：\n\n```js\nfunction Parent(){\n  this.num = 1;\n}\nconsole.log(new Parent());//输出Parent对象：{num:1}\nconsole.log(new Parent);//输出Parent对象：{num:1}\n```\n\n但有些情况下new的构造函数后带括号和不带括号的情况并不一致，譬如：\n\n```js\nfunction Parent(){\n  this.num = 1;\n}\nconsole.log(new Parent().num);//1\nconsole.log(new Parent.num);//报错\n```\n\n结果分析：\n\n从报错信息来看，`new Parent.num`执行顺序是这样的：先执行`Parent.num`，此时返回结果为`undefined`；后执行`new`，因`new`后面必须跟构造函数，所以`new undefined`会报错。\n\n`new Parent().num`相当于`(new Parent()).num`，所以结果返回1。\n\n从结果来看，`new Parent.num`代码相当于`new (Parent.num)；`，`new Parent().num`相当于`(new Parent()).num`。由此看来 `new` 的构造函数后跟括号优先级会提升。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-06-05T09:46:34.000Z",
+    "updateAt": "2022-06-05T17:46:45.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 529,
+    "prev": "b9bab51e-ab87-400a-9284-b996e853ecec",
+    "next": "060a3711-75a5-4bb3-bb18-9e6e358da4bf"
+  },
+  "post": {
+    "exerciseKey": "f2e93a54-e57f-4c52-bd8c-9b9474c437ac",
+    "category": "QA",
+    "title": "new fn与new fn()有什么区别吗？",
+    "level": 1,
+    "updateAt": "2022-06-05T17:46:45+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

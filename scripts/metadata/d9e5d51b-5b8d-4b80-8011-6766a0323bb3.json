@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 542,
+    "exerciseKey": "d9e5d51b-5b8d-4b80-8011-6766a0323bb3",
+    "category": "QA",
+    "renderType": "md",
+    "title": "解析url",
+    "desc": "/**\n * 解析一个url，并生成window.location对象包含的域\n * location:\n * {\n *      href: '包含完整的url',\n *      origin: '包含协议到pathname之前的内容',\n *      protocol: 'url使用的协议，包含末尾的:',\n *      username: '用户名', // 暂时不支持\n *      password: '密码',  // 暂时不支持\n *      host: '完整主机名，包含:和端口',\n *      hostname: '主机名，不包含端口'\n *      port: '端口号',\n *      pathname: '服务器上访问资源的路径/开头',\n *      search: 'query string，?开头',\n *      hash: '#开头的fragment identifier'\n * }\n *\n * @param {string} url 需要解析的url\n * @return {Object} 包含url信息的对象\n */\n",
+    "options": null,
+    "explanation": "## 方案一\n```javascript\nfunction parseUrl(url) {\n    var result = {};\n    var keys = ['href', 'origin', 'protocol', 'host',\n                'hostname', 'port', 'pathname', 'search', 'hash'];\n    var i, len;\n    var regexp = /(([^:]+:)\\/\\/(([^:\\/\\?#]+)(:\\d+)?))(\\/[^?#]*)?(\\?[^#]*)?(#.*)?/;\n\n    var match = regexp.exec(url);\n\t console.info('match=', match);\n\t \n    if (match) {\n        for (i = keys.length - 1; i >= 0; --i) {\n            result[keys[i]] = match[i] ? match[i] : '';\n        }\n    }\n\t console.info('result=', result);\n    return result;\n}\n```\n\n## 方案二\n\n```javascript\nfunction parseURL(url) {\n  //创建一个 a 标签，并将 url 赋值给标签的 href 属性。\n  const a = document.createElement('a')\n  a.href = url\n  return {\n    source: url,\n    protocol: a.protocol.replace(':', ''), // 协议\n    host: a.hostname,   // 主机名称\n    port: a.port,   // 端口号\n    query: a.search,  // 查询字符串\n    params: (function () {  // 查询参数\n      let ret = {},\n        seg = a.search.replace(/^\\?/, '').split('&'),\n        len = seg.length, i = 0, s\n      for (; i < len; i++) {\n        if (!seg[i]) {\n          continue\n        }\n        s = seg[i].split('=')\n        ret[s[0]] = decodeURIComponent(s[1])\n      }\n      return ret\n    })(),\n    file: (a.pathname.match(/\\/([^\\/?#]+)$/i) || [, ''])[1], // 文件名\n    hash: a.hash.replace('#', ''), // 哈希参数\n    path: a.pathname.replace(/^([^\\/])/, '/$1'), // 路径\n    relative: (a.href.match(/tps?:\\/\\/[^\\/]+(.+)/) || [, ''])[1],  // 相对路径\n    segments: a.pathname.replace(/^\\//, '').split('/') // 路径片段\n  }\n}\n\nparseUrl(\"http://test.com:8080?name=1&password=2#page1\");\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-19T14:42:45.000Z",
+    "updateAt": "2021-07-25T10:32:20.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 813,
+    "prev": "025b1291-525e-4605-ac8a-6a53baf94d5d",
+    "next": "4c911fbf-c243-476a-ad8d-09a7868b304e"
+  },
+  "post": {
+    "exerciseKey": "d9e5d51b-5b8d-4b80-8011-6766a0323bb3",
+    "category": "QA",
+    "title": "解析url",
+    "level": 1,
+    "updateAt": "2021-07-25T10:32:20+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

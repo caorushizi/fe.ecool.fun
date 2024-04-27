@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 432,
+    "exerciseKey": "5a6bab0d-b96e-42ce-bfce-ba3b38e32728",
+    "category": "QA",
+    "renderType": "html",
+    "title": "工厂模式",
+    "desc": null,
+    "options": null,
+    "explanation": "<p><strong>1.什么是工厂模式</strong><br/> </p><ul><li>它提供了一种创建对象的最佳方式。在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。实现了创建者和调用者分离，工厂模式分为简单工厂、工厂方法、抽象工厂模式</li></ul><p><strong> 2.工厂模式好处</strong><br/> </p><ul><li>工厂模式是我们最常用的实例化对象模式了，是用工厂方法代替new操作的一种模式。</li><li>利用工厂模式可以降低程序的耦合性，为后期的维护修改提供了很大的便利。</li><li>将选择实现类、创建对象统一管理和控制。从而将调用者跟我们的实现类解耦。</li></ul><p> </p>",
+    "level": 1.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:38:16.000Z",
+    "updateAt": "2021-07-07T00:14:33.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 911,
+    "prev": "b9df09ce-3064-4ac0-bb66-3eb522679a4b",
+    "next": "7e7da360-d6e1-4f9f-b987-7e740b8d8d7e"
+  },
+  "post": {
+    "exerciseKey": "5a6bab0d-b96e-42ce-bfce-ba3b38e32728",
+    "category": "QA",
+    "title": "工厂模式",
+    "level": 1.5,
+    "updateAt": "2021-07-07T00:14:33+00:00"
+  },
+  "tag": {
+    "id": 27,
+    "tagName": "设计模式",
+    "type": "1",
+    "exerciseCount": 7
+  }
+}

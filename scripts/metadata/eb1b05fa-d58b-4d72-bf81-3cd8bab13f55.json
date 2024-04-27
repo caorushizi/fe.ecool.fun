@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 326,
+    "exerciseKey": "eb1b05fa-d58b-4d72-bf81-3cd8bab13f55",
+    "category": "QA",
+    "renderType": "md",
+    "title": "react-router 里的 <Link> 标签和 <a> 标签有什么区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "对比 <a> 标签, Link 避免了不必要的重新渲染。\n\nreact-router是伴随着react框架出现的路由系统，它也是公认的一种优秀的路由解决方案。在使用react-router时候，我们常常会使用其自带的路径跳转组件Link,通过实现跳转；\n\nreact-router 接管了其默认的链接跳转行为，与传统的页面跳转有区别的是，Link 的 **“跳转”** 行为只会触发相匹配的对应的页面内容更新，而不会刷新整个页面。\n\nLink 跳转做了三件事情：\n\n* 有onclick那就执行onclick\n* click的时候阻止a标签默认事件\n* 根据跳转 href，用 history 跳转，此时只是链接变了，并没有刷新页面\n\n而 a 标签就是普通的超链接了，用于从当前页面跳转到href指向的另一个页面（非锚点情况）。\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T12:01:00.000Z",
+    "updateAt": "2023-03-26T08:44:38.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 410,
+    "prev": "32135204-0c1c-459c-977b-d12895bd5a70",
+    "next": "75022926-8fe3-4f93-bab2-4e3c8e31c170"
+  },
+  "post": {
+    "exerciseKey": "eb1b05fa-d58b-4d72-bf81-3cd8bab13f55",
+    "category": "QA",
+    "title": "react-router 里的 <Link> 标签和 <a> 标签有什么区别？",
+    "level": 3,
+    "updateAt": "2023-03-26T08:44:38+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

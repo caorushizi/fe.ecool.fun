@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2033,
+    "exerciseKey": "ac91c80a-17f4-4ede-931e-2f458660e3e0",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现 compose 函数, 类似于 koa 的中间件洋葱模型",
+    "desc": "```js\n// 题目需求\nlet middleware = []\nmiddleware.push((next) => {\n    console.log(1)\n    next()\n    console.log(1.1)\n})\nmiddleware.push((next) => {\n    console.log(2)\n    next()\n    console.log(2.1)\n})\nmiddleware.push((next) => {\n    console.log(3)\n    next()\n    console.log(3.1)\n})\n\nlet fn = compose(middleware)\nfn()\n\n\n/*\n1\n2\n3\n3.1\n2.1\n1.1\n*/\n\n//实现compose函数\nfunction compose(middlewares) {\n\n}\n```",
+    "options": null,
+    "explanation": "```js\n/**\n * Compose `middleware` returning\n * a fully valid middleware comprised\n * of all those which are passed.\n *\n * @param {Array} middleware\n * @return {Function}\n * @api public\n */\nfunction compose (middleware) {\n  // 校验传入的参数是数组，校验数组中每一项是函数\n  if (!Array.isArray(middleware)) throw new TypeError('Middleware stack must be an array!')\n  for (const fn of middleware) {\n    if (typeof fn !== 'function') throw new TypeError('Middleware must be composed of functions!')\n  }\n\n  /**\n   * @param {Object} context\n   * @return {Promise}\n   * @api public\n   */\n\n  return function (context, next) {\n    // last called middleware #\n    let index = -1\n    return dispatch(0)\n    function dispatch (i) {\n      // 一个函数中多次调用报错\n      // await next()\n      // await next()\n      if (i <= index) return Promise.reject(new Error('next() called multiple times'))\n      index = i\n      // 取出数组里的 fn1, fn2, fn3...\n      let fn = middleware[i]\n      // 最后 相等，next 为 undefined\n      if (i === middleware.length) fn = next\n      // 直接返回 Promise.resolve()\n      if (!fn) return Promise.resolve()\n      try {\n        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)))\n      } catch (err) {\n        return Promise.reject(err)\n      }\n    }\n  }\n}\n\n\n```",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-05-31T01:19:33.000Z",
+    "updateAt": "2023-06-04T11:54:48.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 330,
+    "prev": "731f483a-4575-4f2b-8119-bdcf20629e72",
+    "next": "ef148af4-31d3-457d-b8ad-4a257ab0bb40"
+  },
+  "post": {
+    "exerciseKey": "ac91c80a-17f4-4ede-931e-2f458660e3e0",
+    "category": "QA",
+    "title": "实现 compose 函数, 类似于 koa 的中间件洋葱模型",
+    "level": 3,
+    "updateAt": "2023-06-04T11:54:48+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

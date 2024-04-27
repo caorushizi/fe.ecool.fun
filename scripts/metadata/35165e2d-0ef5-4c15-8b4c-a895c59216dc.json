@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1677,
+    "exerciseKey": "35165e2d-0ef5-4c15-8b4c-a895c59216dc",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Vuex 是什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。\n\n简单点总结，Vuex是一种状态管理模式，存在的目的是共享可复用的组件状态。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-02-27T10:08:29.000Z",
+    "updateAt": "2022-02-27T18:19:05.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 604,
+    "prev": "48c834b2-fe33-42ce-8a99-f25235cbbcb6",
+    "next": "48ea6174-729d-4d41-ab63-eeaa3781068b"
+  },
+  "post": {
+    "exerciseKey": "35165e2d-0ef5-4c15-8b4c-a895c59216dc",
+    "category": "QA",
+    "title": "Vuex 是什么？",
+    "level": 1,
+    "updateAt": "2022-02-27T18:19:05+00:00"
+  },
+  "tag": {
+    "id": 14,
+    "tagName": "Vue.js",
+    "type": "1",
+    "exerciseCount": 68
+  }
+}

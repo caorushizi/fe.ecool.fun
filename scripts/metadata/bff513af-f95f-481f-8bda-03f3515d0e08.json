@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 588,
+    "exerciseKey": "bff513af-f95f-481f-8bda-03f3515d0e08",
+    "category": "QA",
+    "renderType": "md",
+    "title": "使用Promise实现每隔1秒输出1,2,3",
+    "desc": null,
+    "options": null,
+    "explanation": "这道题比较简单的一种做法是可以用Promise配合着reduce不停的在promise后面叠加.then，请看下面的代码：\n\n```javascript\nconst arr = [1, 2, 3]\narr.reduce((p, x) => {\n  return p.then(() => {\n    return new Promise(r => {\n      setTimeout(() => r(console.log(x)), 1000)\n    })\n  })\n}, Promise.resolve())\n```\n\n还可以更简单一点写：\n\n```javascript\nconst arr = [1, 2, 3]\narr.reduce((p, x) => p.then(() => new Promise(r => setTimeout(() => r(console.log(x)), 1000))), Promise.resolve())\n```\n",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-08-11T13:16:40.000Z",
+    "updateAt": "2021-08-15T15:28:47.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 785,
+    "prev": "de0467f1-fe29-442c-8122-3373f20c32fa",
+    "next": "154d4288-8195-4fd4-87bb-2844cb22a4e5"
+  },
+  "post": {
+    "exerciseKey": "bff513af-f95f-481f-8bda-03f3515d0e08",
+    "category": "QA",
+    "title": "使用Promise实现每隔1秒输出1,2,3",
+    "level": 3,
+    "updateAt": "2021-08-15T15:28:47+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

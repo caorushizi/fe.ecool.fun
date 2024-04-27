@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 468,
+    "exerciseKey": "3bdbc545-1273-41a8-b93f-cb642dae0ada",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何在TypeScript中实现继承？",
+    "desc": null,
+    "options": null,
+    "explanation": "继承是一种从另一个类获取一个类的属性和行为的机制。它是OOPs语言的一个重要方面，并且具有从现有类创建新类的能力，继承成员的类称为基类，继承这些成员的类称为派生类。\n\n继承可以通过使用extend关键字来实现。我们可以通过下面的例子来理解它。\n```\nclass Shape {     \n   Area:number     \n   constructor(area:number) {     \n      this.Area = area    \n   }     \n}     \nclass Circle extends Shape {     \n   display():void {     \n      console.log(\"圆的面积: \"+this.Area)     \n   }     \n}    \nvar obj = new Circle(320);     \nobj.display()  \n```\n",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-08T15:04:14.000Z",
+    "updateAt": "2021-07-11T11:19:30.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 874,
+    "prev": "59af70f8-871d-4358-aac1-e5dc4a0ca6df",
+    "next": "290f820a-5d60-466a-aa8c-c51ee79a8f2a"
+  },
+  "post": {
+    "exerciseKey": "3bdbc545-1273-41a8-b93f-cb642dae0ada",
+    "category": "QA",
+    "title": "如何在TypeScript中实现继承？",
+    "level": 2.5,
+    "updateAt": "2021-07-11T11:19:30+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

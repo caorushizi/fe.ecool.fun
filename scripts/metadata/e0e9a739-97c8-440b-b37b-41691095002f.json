@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 346,
+    "exerciseKey": "e0e9a739-97c8-440b-b37b-41691095002f",
+    "category": "QA",
+    "renderType": "md",
+    "title": "汽车所停车位的编号是多少？",
+    "desc": "![image.png](https://i.loli.net/2021/07/04/PDrVeKpzqLWM2w8.png)",
+    "options": null,
+    "explanation": "**87**\n\n将图片倒出来看",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T12:40:02.000Z",
+    "updateAt": "2021-07-04T20:55:15.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1014,
+    "prev": "a714a7e1-5905-4209-9d8b-ac52709933bc",
+    "next": "c93c4f3d-e1ff-4fd0-844c-1e610e429532"
+  },
+  "post": {
+    "exerciseKey": "e0e9a739-97c8-440b-b37b-41691095002f",
+    "category": "QA",
+    "title": "汽车所停车位的编号是多少？",
+    "level": 3,
+    "updateAt": "2021-07-04T20:55:15+00:00"
+  },
+  "tag": {
+    "id": 17,
+    "tagName": "趣味题",
+    "type": "1",
+    "exerciseCount": 35
+  }
+}

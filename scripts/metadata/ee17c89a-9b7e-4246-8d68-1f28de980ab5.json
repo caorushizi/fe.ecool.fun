@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 482,
+    "exerciseKey": "ee17c89a-9b7e-4246-8d68-1f28de980ab5",
+    "category": "QA",
+    "renderType": "md",
+    "title": "微前端中的应用隔离是什么，一般是怎么实现的？\n",
+    "desc": null,
+    "options": null,
+    "explanation": "应用隔离问题主要分为主应用和微应用，微应用和微应用之间的JavaScript执行环境隔离，CSS样式隔离。\n\n## CSS隔离\n\n当主应用和微应用同屏渲染时，就可能会有一些样式会相互污染，如果要彻底隔离CSS污染，可以采用CSS Module 或者命名空间的方式，给每个微应用模块以特定前缀，即可保证不会互相干扰，可以采用webpack的postcss插件，在打包时添加特定的前缀。\n\n而对于微应用与微应用之间的CSS隔离就非常简单，在每次应用加载时，将该应用所有的link和style 内容进行标记。在应用卸载后，同步卸载页面上对应的link和style即可。\n\n## JavaScript隔离\n\n每当微应用的JavaScript被加载并运行时，它的核心实际上是对全局对象Window的修改以及一些全局事件的改变，例如jQuery这个js运行后，会在Window上挂载一个window.$对象，对于其他库React，Vue也不例外。\n\n为此，需要在加载和卸载每个微应用的同时，尽可能消除这种冲突和影响，最普遍的做法是采用沙箱机制（SandBox）。\n\n沙箱机制的核心是让局部的JavaScript运行时，对外部对象的访问和修改处在可控的范围内，即无论内部怎么运行，都不会影响外部的对象。通常在Node.js端可以采用vm模块，而对于浏览器，则需要结合with关键字和window.Proxy对象来实现浏览器端的沙箱。",
+    "level": 4,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-11T01:39:04.000Z",
+    "updateAt": "2021-07-11T11:08:25.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 881,
+    "prev": "c50852c5-6471-4bd3-8392-02ab58e4c726",
+    "next": "a93f6d22-f862-4d3c-8656-2adbdef9e96e"
+  },
+  "post": {
+    "exerciseKey": "ee17c89a-9b7e-4246-8d68-1f28de980ab5",
+    "category": "QA",
+    "title": "微前端中的应用隔离是什么，一般是怎么实现的？\n",
+    "level": 4,
+    "updateAt": "2021-07-11T11:08:25+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

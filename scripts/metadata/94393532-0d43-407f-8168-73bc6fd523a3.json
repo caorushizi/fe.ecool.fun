@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1810,
+    "exerciseKey": "94393532-0d43-407f-8168-73bc6fd523a3",
+    "category": "QA",
+    "renderType": "md",
+    "title": "cookie 的有效时间设置为 0 会怎么样",
+    "desc": null,
+    "options": null,
+    "explanation": "Cookie过期时间设置为0，表示跟随系统默认，其销毁与Session销毁时间相同，会在浏览器关闭后删除。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-05-16T05:08:54.000Z",
+    "updateAt": "2023-09-10T19:17:28.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 293,
+    "prev": "289617b6-a28f-4528-be36-ac9e08e9d2c1",
+    "next": "72489e71-cf2d-4c98-8fd3-d43f7bfe217e"
+  },
+  "post": {
+    "exerciseKey": "94393532-0d43-407f-8168-73bc6fd523a3",
+    "category": "QA",
+    "title": "cookie 的有效时间设置为 0 会怎么样",
+    "level": 1,
+    "updateAt": "2023-09-10T19:17:28+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

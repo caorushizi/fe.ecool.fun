@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 440,
+    "exerciseKey": "a24f7d09-79df-4468-af94-654e8cfd3288",
+    "category": "QA",
+    "renderType": "md",
+    "title": "typeof 是否能正确判断类型？",
+    "desc": null,
+    "options": null,
+    "explanation": "对于原始类型来说，除了 null 都可以调用typeof显示正确的类型。\n\n```js\ntypeof 1 // 'number'\ntypeof '1' // 'string'\ntypeof undefined // 'undefined'\ntypeof true // 'boolean'\ntypeof Symbol() // 'symbol'\n\n```\n\n但对于引用数据类型，除了函数之外，都会显示\"object\"。\n\n\n\n```js\ntypeof [] // 'object'\ntypeof {} // 'object'\ntypeof console.log // 'function'\n\n```\n\n因此采用typeof判断对象数据类型是不合适的，采用instanceof会更好，instanceof的原理是基于原型链的查询，只要处于原型链中，判断永远为true\n\n\n\n```js\n\nconst Person = function() {}\nconst p1 = new Person()\np1 instanceof Person // true\nvar str1 = 'hello world'\nstr1 instanceof String // false\nvar str2 = new String('hello world')\nstr2 instanceof String // true\n\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T16:00:14.000Z",
+    "updateAt": "2021-07-07T00:14:25.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 914,
+    "prev": "1d87535d-c1c8-4c6e-b6f5-583c80193217",
+    "next": "62bf96e4-7471-44d1-9c30-d22ccb98e1d3"
+  },
+  "post": {
+    "exerciseKey": "a24f7d09-79df-4468-af94-654e8cfd3288",
+    "category": "QA",
+    "title": "typeof 是否能正确判断类型？",
+    "level": 2,
+    "updateAt": "2021-07-07T00:14:25+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

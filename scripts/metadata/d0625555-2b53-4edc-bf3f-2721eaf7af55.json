@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1585,
+    "exerciseKey": "d0625555-2b53-4edc-bf3f-2721eaf7af55",
+    "category": "QA",
+    "renderType": "md",
+    "title": "解释下如下代码的意图：Array.prototype.slice.apply(arguments)",
+    "desc": null,
+    "options": null,
+    "explanation": "arguments 为类数组对象，并不是真正的数组。\n\nslice可以实现数组的浅拷贝。\n\n由于 arguments不是真正的数组，所以没有slice方法，通过apply可以调用数组对象的slice方法，从而将arguments 类数组转换为数组。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-12-26T03:44:35.000Z",
+    "updateAt": "2021-12-26T16:05:46.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 699,
+    "prev": "a7e1aeb6-aaf9-43fe-92ac-fd574fb60a96",
+    "next": "1934d168-5248-425b-9648-2c14f2b4f570"
+  },
+  "post": {
+    "exerciseKey": "d0625555-2b53-4edc-bf3f-2721eaf7af55",
+    "category": "QA",
+    "title": "解释下如下代码的意图：Array.prototype.slice.apply(arguments)",
+    "level": 1,
+    "updateAt": "2021-12-26T16:05:46+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

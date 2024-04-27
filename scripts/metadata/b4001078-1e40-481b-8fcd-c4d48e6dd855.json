@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 628,
+    "exerciseKey": "b4001078-1e40-481b-8fcd-c4d48e6dd855",
+    "category": "QA",
+    "renderType": "md",
+    "title": "浏览器为什么要有跨域限制？",
+    "desc": null,
+    "options": null,
+    "explanation": "因为存在浏览器同源策略，所以才会有跨域问题。那么浏览器是出于何种原因会有跨域的限制呢。其实不难想到，跨域限制主要的目的就是为了用户的上网安全。\n\n如果浏览器没有同源策略，会存在什么样的安全问题呢。下面从 DOM 同源策略和 XMLHttpRequest 同源策略来举例说明：\n\n**如果没有 DOM 同源策略**，也就是说不同域的 iframe 之间可以相互访问，那么黑客可以这样进行攻击：\n\n* 做一个假网站，里面用 iframe 嵌套一个银行网站 http://mybank.com。\n* 把 iframe 宽高啥的调整到页面全部，这样用户进来除了域名，别的部分和银行的网站没有任何差别。\n* 这时如果用户输入账号密码，我们的主网站可以跨域访问到 http://mybank.com 的 dom 节点，就可以拿到用户的账户密码了。\n\n\n**如果没有 XMLHttpRequest 同源策略**，那么黑客可以进行 CSRF（跨站请求伪造） 攻击：\n\n* 用户登录了自己的银行页面 http://mybank.com，http://mybank.com 向用户的 cookie 中添加用户标识。\n* 用户浏览了恶意页面 http://evil.com，执行了页面中的恶意 AJAX 请求代码。\n* http://evil.com 向 http://mybank.com 发起 AJAX HTTP 请求，请求会默认把 http://mybank.com 对应 cookie 也同时发送过去。\n* 银行页面从发送的 cookie 中提取用户标识，验证用户无误，response 中返回请求数据。此时数据就泄露了。\n* 而且由于 Ajax 在后台执行，用户无法感知这一过程。\n\n因此，有了浏览器同源策略，我们才能更安全的上网。\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-09-25T02:49:50.000Z",
+    "updateAt": "2021-09-25T19:06:13.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 755,
+    "prev": "f53e39b7-9de1-4a49-b95d-6c73591d5512",
+    "next": "4ca8dcc9-9ce6-457c-b6ef-3c2e322aeba5"
+  },
+  "post": {
+    "exerciseKey": "b4001078-1e40-481b-8fcd-c4d48e6dd855",
+    "category": "QA",
+    "title": "浏览器为什么要有跨域限制？",
+    "level": 1,
+    "updateAt": "2021-09-25T19:06:13+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

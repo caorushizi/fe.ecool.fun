@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 358,
+    "exerciseKey": "7b581439-bd9d-486d-a045-ff33f1d32b99",
+    "category": "QA",
+    "renderType": "md",
+    "title": "绳子计时问题",
+    "desc": "有若干根相同的不均匀的绳子，烧完一根绳子的时间是1小时，问如何计时1小时15分钟？",
+    "options": null,
+    "explanation": "把第一根绳子两头同时点燃，同时把第二根绳子点燃一头。\n\n当第一根绳子烧完时，时间为半个小时。\n\n这时把第二根绳子的另一头也点燃，开始计时，当第二根绳子烧完时，停止计时，那么这段时间就是15分钟。\n\n也就是说，只需要3根绳子就可以计时一个小时15分钟。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T13:28:25.000Z",
+    "updateAt": "2021-07-04T21:29:12.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1004,
+    "prev": "37cce645-6114-44e4-a440-3b7f0c9f8887",
+    "next": "0596de70-b8f3-41a0-8881-03e62bf54398"
+  },
+  "post": {
+    "exerciseKey": "7b581439-bd9d-486d-a045-ff33f1d32b99",
+    "category": "QA",
+    "title": "绳子计时问题",
+    "level": 3,
+    "updateAt": "2021-07-04T21:29:12+00:00"
+  },
+  "tag": {
+    "id": 17,
+    "tagName": "趣味题",
+    "type": "1",
+    "exerciseCount": 35
+  }
+}

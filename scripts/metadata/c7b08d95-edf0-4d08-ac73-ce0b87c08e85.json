@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1870,
+    "exerciseKey": "c7b08d95-edf0-4d08-ac73-ce0b87c08e85",
+    "category": "QA",
+    "renderType": "md",
+    "title": "使用css实现一个无限循环动画",
+    "desc": null,
+    "options": null,
+    "explanation": "想要实现CSS动画的无限循环，其实主要就是要使用`animation-iteration-count`这个属性，将其设置为`infinite`，动画就会一直循环播放。\n\n例如：\n\n```html\n<image class=\"anima\" mode=\"widthFix\" @click=\"nav\" src=\"@/static/1_btn.png\"></image>\n```\n\n```css\n.anima {\n  animation-name: likes; // 动画名称\n  animation-direction: alternate; // 动画在奇数次（1、3、5...）正向播放，在偶数次（2、4、6...）反向播放。\n  animation-timing-function: linear; // 动画执行方式，linear：匀速；ease：先慢再快后慢；ease-in：由慢速开始；ease-out：由慢速结束；ease-in-out：由慢速开始和结束；\n  animation-delay: 0s; // 动画延迟时间\n  animation-iteration-count: infinite; //  动画播放次数，infinite：一直播放\n  animation-duration: 1s; // 动画完成时间\n}\n\n@keyframes likes {\n  0%{\n  \ttransform: scale(1);\n  }\n  25%{\n  \ttransform: scale(0.9);\n  }\n  50%{\n  \ttransform: scale(0.85);\n  }\n  75%{\n  \ttransform: scale(0.9);\n  }\n  100%{\n  \ttransform: scale(1);\n  }\n}\n```\n",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-08-07T14:42:24.000Z",
+    "updateAt": "2022-08-12T20:07:18.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 494,
+    "prev": "4f82e436-764e-401e-933d-e46f05512720",
+    "next": "38114327-a110-4a75-8745-534924338657"
+  },
+  "post": {
+    "exerciseKey": "c7b08d95-edf0-4d08-ac73-ce0b87c08e85",
+    "category": "QA",
+    "title": "使用css实现一个无限循环动画",
+    "level": 1,
+    "updateAt": "2022-08-12T20:07:18+00:00"
+  },
+  "tag": {
+    "id": 11,
+    "tagName": "CSS",
+    "type": "1",
+    "exerciseCount": 90
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 495,
+    "exerciseKey": "eab191f2-2cc4-4bb9-b04c-370d834b7a7f",
+    "category": "QA",
+    "renderType": "md",
+    "title": "JSBridge是什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "JSBridge是给 JavaScript 提供调用 Native 功能的接口，让混合开发中的前端部分可以方便地使用 Native 的功能（例如：地址位置、摄像头）。\n\n实际上，JSBridge 就像其名称中的Bridge的意义一样，是 Native 和非 Native 之间的桥梁，它的核心是构建 Native 和非 Native 间消息通信的通道，而且这个通信的通道是双向的。\n\n```\n双向通信的通道:\n\nJS 向 Native 发送消息: 调用相关功能、通知 Native 当前 JS 的相关状态等。\nNative 向 JS 发送消息: 回溯调用结果、消息推送、通知 JS 当前 Native 的状态等。\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-11T06:58:39.000Z",
+    "updateAt": "2021-07-11T16:10:06.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 859,
+    "prev": "7904bc3e-62e0-44a1-ac3e-bdd737471b7e",
+    "next": "7f7e5941-1079-476a-8a62-8ca51879c7ab"
+  },
+  "post": {
+    "exerciseKey": "eab191f2-2cc4-4bb9-b04c-370d834b7a7f",
+    "category": "QA",
+    "title": "JSBridge是什么？",
+    "level": 2,
+    "updateAt": "2021-07-11T16:10:06+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

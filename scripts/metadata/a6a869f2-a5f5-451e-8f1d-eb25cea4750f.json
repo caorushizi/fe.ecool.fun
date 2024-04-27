@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 419,
+    "exerciseKey": "a6a869f2-a5f5-451e-8f1d-eb25cea4750f",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现深拷贝",
+    "desc": null,
+    "options": null,
+    "explanation": "```js\nconst cloneDeep1 = (target, hash = new WeakMap()) => {\n  // 对于传入参数处理\n  if (typeof target !== 'object' || target === null) {\n    return target;\n  }\n  // 哈希表中存在直接返回\n  if (hash.has(target)) return hash.get(target);\n\n  const cloneTarget = Array.isArray(target) ? [] : {};\n  hash.set(target, cloneTarget);\n\n  // 针对Symbol属性\n  const symKeys = Object.getOwnPropertySymbols(target);\n  if (symKeys.length) {\n    symKeys.forEach(symKey => {\n      if (typeof target[symKey] === 'object' && target[symKey] !== null) {\n        cloneTarget[symKey] = cloneDeep1(target[symKey]);\n      } else {\n        cloneTarget[symKey] = target[symKey];\n      }\n    })\n  }\n\n  for (const i in target) {\n    if (Object.prototype.hasOwnProperty.call(target, i)) {\n      cloneTarget[i] =\n        typeof target[i] === 'object' && target[i] !== null\n        ? cloneDeep1(target[i], hash)\n        : target[i];\n    }\n  }\n  return cloneTarget;\n}\n\n```",
+    "level": 3.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-06T15:09:05.000Z",
+    "updateAt": "2021-07-07T00:13:25.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 928,
+    "prev": "f8787bfb-ca4c-4b0f-98d9-4ad5e0a3774d",
+    "next": "665b5487-848c-424b-b6a5-800169ee8fd5"
+  },
+  "post": {
+    "exerciseKey": "a6a869f2-a5f5-451e-8f1d-eb25cea4750f",
+    "category": "QA",
+    "title": "实现深拷贝",
+    "level": 3.5,
+    "updateAt": "2021-07-07T00:13:25+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

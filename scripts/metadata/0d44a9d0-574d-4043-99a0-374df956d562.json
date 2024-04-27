@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 36,
+    "exerciseKey": "0d44a9d0-574d-4043-99a0-374df956d562",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出是什么？",
+    "desc": "```javascript\nString.prototype.giveLydiaPizza = () => {\n  return 'Just give Lydia pizza already!'\n}\n\nconst name = 'Lydia'\n\nname.giveLydiaPizza()\n```",
+    "options": "{\"options\":[\"\\\"Just give Lydia pizza already!\\\"\",\"TypeError: not a function\",\"SyntaxError\",\"undefined\"],\"isMulti\":false,\"answer\":[0]}",
+    "explanation": "`String` 是内置的构造函数，我们可以向它添加属性。我只是在它的原型中添加了一个方法。基本类型字符串被自动转换为字符串对象，由字符串原型函数生成。因此，所有 string(string 对象)都可以访问该方法！",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:10:20.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1163,
+    "prev": "3928ae37-e2f5-49ba-bfc1-7076ebc049f3",
+    "next": "ecb779c3-a28f-45c8-bcdc-25b8d7948e1a"
+  },
+  "post": {
+    "exerciseKey": "0d44a9d0-574d-4043-99a0-374df956d562",
+    "category": "Choice",
+    "title": "输出是什么？",
+    "level": 1,
+    "updateAt": "2021-07-03T22:10:20+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

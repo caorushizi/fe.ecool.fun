@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1905,
+    "exerciseKey": "d281c552-c5d1-4d42-b2fa-0e0774884bbf",
+    "category": "QA",
+    "renderType": "md",
+    "title": "一个滚动公告组件，如何在鼠标滑入时停止播放，在鼠标离开时继续等待滑入时的剩余等待时间后播放？",
+    "desc": null,
+    "options": null,
+    "explanation": "轮播图的定时滚动，一般是使用 setInterval 实现。\n \n可以监听轮播图的 `mouseover` 和 `mouseout` 事件，如果 `mouseover` 被触发，就清除定时轮播，并记录下一次轮播的剩余等待时间`xs`，如果 `mouseout` 被触发，就在 `xs` 的时间后立即进行切换，并且开启定时轮播。\n\n当然其中的细节还比较多，比如 `mouseover` 的过程中手动切换了轮播图该怎么处理等等。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-10-09T12:35:22.000Z",
+    "updateAt": "2022-10-12T09:36:11.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 470,
+    "prev": "6100dbed-3600-470f-90b1-b1c6ef213a52",
+    "next": "be48725a-798c-4ae8-bd7e-47197b789802"
+  },
+  "post": {
+    "exerciseKey": "d281c552-c5d1-4d42-b2fa-0e0774884bbf",
+    "category": "QA",
+    "title": "一个滚动公告组件，如何在鼠标滑入时停止播放，在鼠标离开时继续等待滑入时的剩余等待时间后播放？",
+    "level": 1,
+    "updateAt": "2022-10-12T09:36:11+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

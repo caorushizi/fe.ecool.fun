@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1840,
+    "exerciseKey": "969cddcd-b1ac-4285-86f6-ae0a8eaf828a",
+    "category": "QA",
+    "renderType": "md",
+    "title": "HTML5 有哪些 drag 相关的 API ？\n",
+    "desc": null,
+    "options": null,
+    "explanation": "\n- dragstart：事件主体是被拖放元素，在开始拖放被拖放元素时触发。 \n- darg：事件主体是被拖放元素，在正在拖放被拖放元素时触发。 \n- dragenter：事件主体是目标元素，在被拖放元素进入某元素时触发。 \n- dragover：事件主体是目标元素，在被拖放在某元素内移动时触发。 \n- dragleave：事件主体是目标元素，在被拖放元素移出目标元素是触发。 \n- drop：事件主体是目标元素，在目标元素完全接受被拖放元素时触发。 \n- dragend：事件主体是被拖放元素，在整个拖放操作结束时触发。",
+    "level": 1.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-06-25T06:34:57.000Z",
+    "updateAt": "2022-06-25T14:36:21.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 513,
+    "prev": "8c1fba6c-2423-4da2-9696-9dc3d2a2f76c",
+    "next": "8e135d77-c081-4419-b0b3-2e43461d5b55"
+  },
+  "post": {
+    "exerciseKey": "969cddcd-b1ac-4285-86f6-ae0a8eaf828a",
+    "category": "QA",
+    "title": "HTML5 有哪些 drag 相关的 API ？\n",
+    "level": 1.5,
+    "updateAt": "2022-06-25T14:36:21+00:00"
+  },
+  "tag": {
+    "id": 12,
+    "tagName": "HTML",
+    "type": "1",
+    "exerciseCount": 57
+  }
+}

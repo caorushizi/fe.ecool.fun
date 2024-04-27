@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2069,
+    "exerciseKey": "495c791c-c14e-43d6-ab82-b49829ce5591",
+    "category": "QA",
+    "renderType": "md",
+    "title": "setTimeout 延时写成0，一般可以什么场景下使用？",
+    "desc": null,
+    "options": null,
+    "explanation": "将`setTimeout`的延时参数设置为0通常用于创建一个宏任务，使用0延时仍然会导致一些延迟，但它比较接近于立即执行。\n\n以下是一些通常会使用0延时的情况：\n\n1. **UI渲染后的回调**：当我们需要在当前事件循环结束后，等待浏览器完成UI渲染后再执行回调函数时，可以使用0延时。这样可以确保回调在界面更新之后执行，以避免阻塞UI线程。\n\n2. **异步操作处理**：有时我们需要将某些操作推迟到下一个事件循环周期，以便让其他异步操作优先执行。通过将操作放置在0延时的`setTimeout`回调中，可以使其成为下一个事件循环周期的微任务，并确保在其他异步操作之后执行。\n\n3. **性能优化**：在某些情况下，将操作延迟到下一个事件循环周期可以提高性能。例如，在处理大量数据或循环迭代时，通过将每个迭代步骤延迟到0延时的`setTimeout`中，可以分批处理，减少单次操作的执行时间，从而避免长时间的JavaScript执行阻塞。",
+    "level": 1.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-12-17T10:43:06.000Z",
+    "updateAt": "2024-01-14T09:49:05.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 205,
+    "prev": "4cf47e01-92e5-4e04-ab83-f4eca1953e23",
+    "next": "4c0c461d-35da-4944-be7a-88e75e861d62"
+  },
+  "post": {
+    "exerciseKey": "495c791c-c14e-43d6-ab82-b49829ce5591",
+    "category": "QA",
+    "title": "setTimeout 延时写成0，一般可以什么场景下使用？",
+    "level": 1.5,
+    "updateAt": "2024-01-14T09:49:05+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 330,
+    "exerciseKey": "37cce645-6114-44e4-a440-3b7f0c9f8887",
+    "category": "QA",
+    "renderType": "md",
+    "title": "React 中如果绑定事件使用匿名函数有什么影响？",
+    "desc": null,
+    "options": null,
+    "explanation": "```react.js\nclass Demo {\n  render() {\n    return <button onClick={(e) => {\n      alert('我点击了按钮')\n    }}>\n      按钮\n    </button>\n  }\n}\n\n```\n\n这样的写法，因为使用的是匿名函数，所以组件每次都会认为是一个新的 props，不会使用缓存优化，在性能上会有一定的损耗。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T12:03:14.000Z",
+    "updateAt": "2021-07-04T21:29:24.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1003,
+    "prev": "a9a357ca-9ee4-404d-a48a-49ba46f78166",
+    "next": "7b581439-bd9d-486d-a045-ff33f1d32b99"
+  },
+  "post": {
+    "exerciseKey": "37cce645-6114-44e4-a440-3b7f0c9f8887",
+    "category": "QA",
+    "title": "React 中如果绑定事件使用匿名函数有什么影响？",
+    "level": 1,
+    "updateAt": "2021-07-04T21:29:24+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

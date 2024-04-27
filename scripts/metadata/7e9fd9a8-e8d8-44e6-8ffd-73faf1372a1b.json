@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1798,
+    "exerciseKey": "7e9fd9a8-e8d8-44e6-8ffd-73faf1372a1b",
+    "category": "QA",
+    "renderType": "md",
+    "title": "刷新浏览器后，Vuex的数据是否存在？如何解决？",
+    "desc": null,
+    "options": null,
+    "explanation": "在vue项目中用vuex来做全局的状态管理， 发现当刷新网页后，保存在vuex实例store里的数据会丢失。\n\n原因：因为 `store` 里的数据是保存在运行内存中的，当页面刷新时，页面会重新加载vue实例，store里面的数据就会被重新赋值初始化。\n\n我们有两种方法解决该问题：\n\n1. 使用 `vuex-along`\n2. 使用 `localStorage` 或者 `sessionStroage`\n\n## 使用vuex-along\n\n`vuex-along` 的实质也是将 `vuex` 中的数据存放到 `localStorage` 或者 `sessionStroage` 中，只不过这个存取过程组件会帮我们完成，我们只需要用vuex的读取数据方式操作就可以了，简单介绍一下 `vuex-along` 的使用方法。\n\n安装 `vuex-along`:\n\n> npm install vuex-along --save\n\n配置 `vuex-along`: 在 `store/index.js` 中最后添加以下代码:\n\n```js\nimport VueXAlong from 'vuex-along' //导入插件\nexport default new Vuex.Store({\n    //modules: {\n        //controler  //模块化vuex\n    //},\n    plugins: [VueXAlong({\n        name: 'store',     //存放在localStroage或者sessionStroage 中的名字\n        local: false,      //是否存放在local中  false 不存放 如果存放按照下面session的配置\n        session: { list: [], isFilter: true } //如果值不为false 那么可以传递对象 其中 当isFilter设置为true时， list 数组中的值就会被过滤调,这些值不会存放在seesion或者local中\n    })]\n});\n```\n\n## 使用 `localStorage` 或者 `sessionStroage`\n\n```js\ncreated() {\n    //在页面加载时读取sessionStorage里的状态信息\n    if (sessionStorage.getItem(\"store\")) {\n      this.$store.replaceState(\n        Object.assign(\n          {},\n          this.$store.state,\n          JSON.parse(sessionStorage.getItem(\"store\"))\n        )\n      );\n    }\n    //在页面刷新时将vuex里的信息保存到sessionStorage里\n    window.addEventListener(\"beforeunload\", () => {\n      sessionStorage.setItem(\"store\", JSON.stringify(this.$store.state));\n    });\n},\n```\n\n",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-05-11T14:17:49.000Z",
+    "updateAt": "2022-05-11T22:17:56.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 543,
+    "prev": "3e2c519b-9142-40e9-bef6-6b1d975be351",
+    "next": "be6669ec-4d94-4c6a-9fc9-1b243e6ea777"
+  },
+  "post": {
+    "exerciseKey": "7e9fd9a8-e8d8-44e6-8ffd-73faf1372a1b",
+    "category": "QA",
+    "title": "刷新浏览器后，Vuex的数据是否存在？如何解决？",
+    "level": 2,
+    "updateAt": "2022-05-11T22:17:56+00:00"
+  },
+  "tag": {
+    "id": 14,
+    "tagName": "Vue.js",
+    "type": "1",
+    "exerciseCount": 68
+  }
+}

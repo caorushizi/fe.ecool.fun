@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1762,
+    "exerciseKey": "8ee27192-8ae7-4e03-a32c-b00db276a83f",
+    "category": "QA",
+    "renderType": "md",
+    "title": "以下代码的输出是什么？",
+    "desc": "```js\nvar name = 'window'\nconst obj = {\n    name: 'obj',\n    sayName:function() {\n        console.log(this.name)\n    },\n}\nobj.sayMyName = () => {\n    console.log(this.name)\n}\nconst fn1 = obj.sayName\nconst fn2 = obj.sayMyName\nfn1() \nobj.sayName() \nfn2() \nobj.sayMyName() \n```",
+    "options": null,
+    "explanation": "依次输出：\n\n```\nwindow\nobj\nwindow\nwindow\n```\n\n本次主要考察对this指向的理解，题目比较简单，不做具体的分析。\n\n> 本答案由“前端面试题宝典”收集整理，PC端访问请前往： https://fe.ecool.fun/ ",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-04-10T07:01:24.000Z",
+    "updateAt": "2022-04-10T15:01:30.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 567,
+    "prev": "aa2840ae-f884-4fcb-a08b-e20310654dbd",
+    "next": "9c119d14-fe3b-4f23-9a51-222c50529890"
+  },
+  "post": {
+    "exerciseKey": "8ee27192-8ae7-4e03-a32c-b00db276a83f",
+    "category": "QA",
+    "title": "以下代码的输出是什么？",
+    "level": 1,
+    "updateAt": "2022-04-10T15:01:30+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

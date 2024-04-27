@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2007,
+    "exerciseKey": "684fd560-4d1b-4c3f-ac15-1e1bff86c443",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现一个函数, 可以间隔输出",
+    "desc": "```js\nfunction createRepeat(fn, repeat, interval) {}\n\nconst fn = createRepeat(console.log, 3, 4);\n\nfn('helloWorld'); // 每4秒输出一次helloWorld, 输出3次\n```",
+    "options": null,
+    "explanation": "可以使用 JavaScript 中的定时器函数 setInterval 来实现，具体如下： \n\n```js\nfunction createRepeat(fn, repeat, interval) {\n\tlet count = 0;\n\n\treturn (param) => {\n\t\tconst timer = setInterval(() => {\n\t\t    fn(param)\n\t\t    count++;\n\t\t    if (count >= repeat) {\n\t\t      clearInterval(timer);\n\t\t    }\n\t    }, interval * 1000);\n\t}\n}\n```",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-05-28T02:40:27.000Z",
+    "updateAt": "2023-05-31T19:55:52.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 347,
+    "prev": "8169e336-3daa-4e6c-9f85-13c4a9a31467",
+    "next": "3734a9cd-2ef6-4b29-8eaf-f86ffc5dfdf7"
+  },
+  "post": {
+    "exerciseKey": "684fd560-4d1b-4c3f-ac15-1e1bff86c443",
+    "category": "QA",
+    "title": "实现一个函数, 可以间隔输出",
+    "level": 2.5,
+    "updateAt": "2023-05-31T19:55:52+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

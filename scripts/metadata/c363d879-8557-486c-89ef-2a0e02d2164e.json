@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1575,
+    "exerciseKey": "c363d879-8557-486c-89ef-2a0e02d2164e",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第五题】下面代码的输出是什么？",
+    "desc": "```js\nconst fn = () => (new Promise((resolve, reject) => {\n  console.log(1);\n  resolve('success')\n}))\nfn().then(res => {\n  console.log(res)\n})\nconsole.log('start')\n```",
+    "options": null,
+    "explanation": "## 分析\n\nfn函数直接返回了一个new Promise的，而且fn函数的调用是在start之前，所以它里面的内容应该会先执行。\n\n## 结果\n\n```\n1\n'start'\n'success'\n```",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-20T09:47:37.000Z",
+    "updateAt": "2022-01-09T22:24:14.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 677,
+    "prev": "3c969c35-6d25-4932-977e-d9ba31000ccd",
+    "next": "db6857d7-1559-4abe-816d-545b9be4e05e"
+  },
+  "post": {
+    "exerciseKey": "c363d879-8557-486c-89ef-2a0e02d2164e",
+    "category": "QA",
+    "title": "【Promise第五题】下面代码的输出是什么？",
+    "level": 1,
+    "updateAt": "2022-01-09T22:24:14+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

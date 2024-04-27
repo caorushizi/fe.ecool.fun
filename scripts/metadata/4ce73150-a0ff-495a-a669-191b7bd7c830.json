@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 362,
+    "exerciseKey": "4ce73150-a0ff-495a-a669-191b7bd7c830",
+    "category": "QA",
+    "renderType": "html",
+    "title": "HTTP和HTTPS的区别",
+    "desc": null,
+    "options": null,
+    "explanation": "<p><code>HTTPS</code>是在<code>HTTP</code>的基础上加入了<code>SSL</code>协议，<code>SSL</code>依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密（在传输层）<br/> <code>HTTP</code> + 加密 + 认证 + 完整性保护 = <code>HTTPS</code><br/> </p><ol><li> <code>HTTPS</code>协议需要到CA申请证书或自制证书<br/> </li><li> <code>HTTP</code>的信息是明文传输；<br/> <code>HTTPS</code>则是具有安全性的ssl加密<br/> </li><li> <code>HTTP</code>是直接与TCP进行数据传输；<br/> 而<code>HTTPS</code>运行在<code>SSL/TLS</code>(安全传输层协议)之上，<code>SSL/TLS</code>运行在<code>TCP</code>之上，用的端口也不一样，前者是80（需要国内备案），后者是443<br/> </li><li> <code>HTTP</code>的连接很简单，是无状态的；<br/> <code>HTTPS</code>协议是由<code>SSL+HTTP</code>协议构建的，可进行加密传输、身份认证的网络协议，比<code>HTTP</code>协议安全<br/> </li></ol><p> </p>",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T15:45:43.000Z",
+    "updateAt": "2021-07-07T00:09:27.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 970,
+    "prev": "d7b4d0ce-dc04-4989-9244-88276318b6db",
+    "next": "549f8d07-a907-4c86-93c1-d3e8fef30613"
+  },
+  "post": {
+    "exerciseKey": "4ce73150-a0ff-495a-a669-191b7bd7c830",
+    "category": "QA",
+    "title": "HTTP和HTTPS的区别",
+    "level": 2,
+    "updateAt": "2021-07-07T00:09:27+00:00"
+  },
+  "tag": {
+    "id": 16,
+    "tagName": "计算机网络",
+    "type": "1",
+    "exerciseCount": 72
+  }
+}

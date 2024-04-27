@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 33,
+    "exerciseKey": "979c6688-b432-487d-81bb-7250ae59840a",
+    "category": "Choice",
+    "renderType": "md",
+    "title": "输出是什么？",
+    "desc": "```javascript\nconst obj = { 1: 'a', 2: 'b', 3: 'c' }\nconst set = new Set([1, 2, 3, 4, 5])\n\nobj.hasOwnProperty('1')\nobj.hasOwnProperty(1)\nset.has('1')\nset.has(1)\n```",
+    "options": "{\"options\":[\"false true false true\",\"false true true true\",\"true true false true\",\"true true true true\"],\"isMulti\":false,\"answer\":[2]}",
+    "explanation": "所有对象的键（不包括 Symbol）在底层都是字符串，即使你自己没有将其作为字符串输入。这就是为什么 `obj.hasOwnProperty('1')` 也返回 `true`。\n对于集合，它不是这样工作的。在我们的集合中没有 `'1'`：`set.has('1')` 返回 `false`。它有数字类型为 `1`，`set.has(1)` 返回 `true`。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-02T15:33:04.000Z",
+    "updateAt": "2021-07-03T22:10:04.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1165,
+    "prev": "ecb779c3-a28f-45c8-bcdc-25b8d7948e1a",
+    "next": "368a4fdc-4c5f-4a97-81a8-eab34a3fcb7c"
+  },
+  "post": {
+    "exerciseKey": "979c6688-b432-487d-81bb-7250ae59840a",
+    "category": "Choice",
+    "title": "输出是什么？",
+    "level": 0.5,
+    "updateAt": "2021-07-03T22:10:04+00:00"
+  },
+  "tag": {
+    "id": 32,
+    "tagName": "选择题",
+    "type": "1",
+    "exerciseCount": 151
+  }
+}

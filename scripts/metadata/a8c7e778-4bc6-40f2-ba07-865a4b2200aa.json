@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1768,
+    "exerciseKey": "a8c7e778-4bc6-40f2-ba07-865a4b2200aa",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现lodash中的get方法",
+    "desc": "使用 lodash 中的 get 函数可避免长链的 key 时获取不到属性而出现问题，此时进行异常避免时及其服务，如 `o.a && o.a.b && o.a.b.c && o.a.b.c.d`\n\n实现类似 `lodash.get` ，有以下测试用例:\n\n```\nvar object = { 'a': [{ 'b': { 'c': 3 } }] };\n \nget(object, 'a[0].b.c');\n// => 3\n \nget(object, ['a', '0', 'b', 'c']);\n// => 3\n \nget(object, 'a.b.c', 'default');\n// => 'default'\n```",
+    "options": null,
+    "explanation": "```js\n/**\n* object: 对象\n* path: 输入的路径\n* defaultVal: 默认值\n**/\n \nfunction get(object, path, defaultVal='undefined') {\n    // 先将path处理成统一格式\n    let newPath = [];\n    if (Array.isArray(path)) {\n        newPath = path;\n    } else {\n        // 先将字符串中的'['、']'去除替换为'.'，split分割成数组形式\n        newPath = path.replace(/\\[/g,'.').replace(/\\]/g,'').split('.');\n    }\n \n    // 递归处理，返回最后结果\n    return newPath.reduce((o, k) => {\n        console.log(o, k); // 此处o初始值为下边传入的 object，后续值为每次取的内部值\n        return (o || {})[k]\n    }, object) || defaultVal;   \n}\n```",
+    "level": 2.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-04-10T08:08:26.000Z",
+    "updateAt": "2022-04-10T16:08:28.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 562,
+    "prev": "80e34587-60c8-4788-af46-96eec6f5f887",
+    "next": "5cb7ee1c-c527-40f9-b00b-eb65bde48657"
+  },
+  "post": {
+    "exerciseKey": "a8c7e778-4bc6-40f2-ba07-865a4b2200aa",
+    "category": "QA",
+    "title": "实现lodash中的get方法",
+    "level": 2.5,
+    "updateAt": "2022-04-10T16:08:28+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

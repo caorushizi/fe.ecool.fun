@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1963,
+    "exerciseKey": "bc3c6285-2523-4d07-94c4-9dc539b63ece",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现 useUpdate 方法，调用时强制组件重新渲染",
+    "desc": null,
+    "options": null,
+    "explanation": "可以利用 `useReducer` 每次调用 `updateReducer` 方法，来达到强制组件重新渲染的目的。\n\n```js\nimport { useReducer } from 'react';\n\nconst updateReducer = (num: number): number => (num + 1) % 1_000_000;\n\nexport default function useUpdate(): () => void {\n  const [, update] = useReducer(updateReducer, 0);\n\n  return update;\n}\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-04-26T08:59:04.000Z",
+    "updateAt": "2023-05-02T20:07:40.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 388,
+    "prev": "fe737e1d-6ee1-4344-9ab7-7d3dafb749f6",
+    "next": "f2523d23-7648-47b1-a1b0-f7a01fb92c64"
+  },
+  "post": {
+    "exerciseKey": "bc3c6285-2523-4d07-94c4-9dc539b63ece",
+    "category": "QA",
+    "title": "实现 useUpdate 方法，调用时强制组件重新渲染",
+    "level": 2,
+    "updateAt": "2023-05-02T20:07:40+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

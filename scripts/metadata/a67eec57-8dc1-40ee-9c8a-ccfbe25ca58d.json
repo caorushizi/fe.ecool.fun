@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 303,
+    "exerciseKey": "a67eec57-8dc1-40ee-9c8a-ccfbe25ca58d",
+    "category": "QA",
+    "renderType": "md",
+    "title": "constructor中super与props参数一起使用的目的是什么？",
+    "desc": null,
+    "options": null,
+    "explanation": "在调用方法之前，子类构造函数无法使用this引用super()。\n\n在ES6中，在子类的constructor中必须先调用super才能引用this。\n\n在constructor中可以使用this.props\n\n* 使用props：\n\n```react.js\nclass MyComponent extends React.Component {\n    constructor(props) {\n        super(props);\n        console.log(this.props);  // Prints { name: 'sudheer',age: 30 }\n    }\n}\n```\n\n* 不使用props：\n\n```react.js\nclass MyComponent extends React.Component {\n    constructor(props) {\n        super();\n        console.log(this.props); // Prints undefined\n        // But Props parameter is still available\n        console.log(props); // Prints { name: 'sudheer',age: 30 }\n    }\n\n    render() {\n        // No difference outside constructor\n        console.log(this.props) // Prints { name: 'sudheer',age: 30 }\n    }\n}\n```\n\n上面的代码片段揭示了this.props行为仅在构造函数中有所不同。外部构造函数相同。",
+    "level": 1,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T10:44:18.000Z",
+    "updateAt": "2021-07-04T19:24:45.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1023,
+    "prev": "d184edae-f95e-494b-8944-86e713028816",
+    "next": "dcb3eab5-6a15-43e1-90bb-b6bb2a17697c"
+  },
+  "post": {
+    "exerciseKey": "a67eec57-8dc1-40ee-9c8a-ccfbe25ca58d",
+    "category": "QA",
+    "title": "constructor中super与props参数一起使用的目的是什么？",
+    "level": 1,
+    "updateAt": "2021-07-04T19:24:45+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 101
+  }
+}

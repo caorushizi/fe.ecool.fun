@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1808,
+    "exerciseKey": "c6530c46-d02f-40b2-8e6e-c11a6daf3f12",
+    "category": "QA",
+    "renderType": "md",
+    "title": "postMessage 有哪些使用场景？",
+    "desc": null,
+    "options": null,
+    "explanation": "# window.postMessage 定义\n \n`window.postMessage()` 方法可以安全地实现跨源通信。`window.postMessage()` 方法提供了一种受控机制来规避此限制，只要正确的使用，这种方法就很安全\n\n## 用途\n可用于两个不同的Ifrom（不同源） 之间的通讯\n\n## [语法](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage#syntax \"Permalink to 语法\")\n\n```\notherWindow.postMessage(message, targetOrigin, [transfer]);\n```\n\n## 参数说明\n-   `data`\n\n    从其他 window 中传递过来的对象。\n\n-   `origin`\n\n    调用 `postMessage`  时消息发送方窗口的 [origin](https://developer.mozilla.org/en-US/docs/Origin \"This is a link to an unwritten page\") . 这个字符串由 协议、“://“、域名、“ : 端口号”拼接而成。例如 “`https://example.org` (隐含端口 `443`)”、“`http://example.net` (隐含端口 `80`)”、“`http://example.com:8080`”。请注意，这个origin不能保证是该窗口的当前或未来origin，因为postMessage被调用后可能被导航到不同的位置。\n\n-   `source`\n\n    对发送消息的[窗口](https://developer.mozilla.org/en-US/docs/Web/API/Window)对象的引用; 您可以使用此来在具有不同origin的两个窗口之间建立双向通信。\n\n## 例子\n\n### 子框架传递信息\n\n\n```\n<script>\n\n// 子框架向父框架发送信息\n\nfunction goParentIfromPostMessage(msg,parentUrl){\n\n    var parentUrl = window.parent.location.origin;\n\n        window.onload=function(){\n\n        window.parent.postMessage(msg,parentUrl);\n\n        }\n    }\n }\n \n    goParentIfromPostMessage('msgStr',parentIfromUrl)\n\n</script>\n\n```\n\n### 父框架接收端\n\n```\n<script>\n\n        window.addEventListener('message',function(e){\n\n            console.log(e.origin,e.data);\n\n            console.log(e.data);\n\n        })\n\n</script>\n\n ```\n这样即可以实现简单的框架跨域通信，但是会有一些安全问题\n\n## [安全问题](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage#security_concerns \"Permalink to 安全问题\")\n\n**如果您不希望从其他网站接收message，请不要为message事件添加任何事件侦听器。** 这是一个完全万无一失的方式来避免安全问题。\n\n如果您确实希望从其他网站接收message，请**始终使用origin和source属性验证发件人的身份**。 任何窗口（包括例如http://evil.example.com）都可以向任何其他窗口发送消息，并且您不能保证未知发件人不会发送恶意消息。 但是，验证身份后，您仍然应该**始终验证接收到的消息的语法**。 否则，您信任只发送受信任邮件的网站中的安全漏洞可能会在您的网站中打开跨网站脚本漏洞。\n\n**当您使用postMessage将数据发送到其他窗口时，始终指定精确的目标origin，而不是*。** 恶意网站可以在您不知情的情况下更改窗口的位置，因此它可以拦截使用postMessage发送的数据。\n\n### [示例](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage#example \"Permalink to 示例\")\n\n```\n/*\n * A窗口的域名是<http://example.com:8080>，以下是A窗口的script标签下的代码：\n */\n\nvar popup = window.open(...popup details...);\n\n// 如果弹出框没有被阻止且加载完成\n\n// 这行语句没有发送信息出去，即使假设当前页面没有改变location（因为targetOrigin设置不对）\npopup.postMessage(\"The user is 'bob' and the password is 'secret'\",\n                  \"https://secure.example.net\");\n\n// 假设当前页面没有改变location，这条语句会成功添加message到发送队列中去（targetOrigin设置对了）\npopup.postMessage(\"hello there!\", \"http://example.org\");\n\nfunction receiveMessage(event)\n{\n  // 我们能相信信息的发送者吗?  (也许这个发送者和我们最初打开的不是同一个页面).\n  if (event.origin !== \"http://example.org\")\n    return;\n\n  // event.source 是我们通过window.open打开的弹出页面 popup\n  // event.data 是 popup发送给当前页面的消息 \"hi there yourself!  the secret response is: rheeeeet!\"\n}\nwindow.addEventListener(\"message\", receiveMessage, false);\n```\n\n```\n/*\n * 弹出页 popup 域名是<http://example.org>，以下是script标签中的代码:\n */\n\n//当A页面postMessage被调用后，这个function被addEventListener调用\nfunction receiveMessage(event)\n{\n  // 我们能信任信息来源吗？\n  if (event.origin !== \"http://example.com:8080\")\n    return;\n\n  // event.source 就当前弹出页的来源页面\n  // event.data 是 \"hello there!\"\n\n  // 假设你已经验证了所受到信息的origin (任何时候你都应该这样做), 一个很方便的方式就是把event.source\n  // 作为回信的对象，并且把event.origin作为targetOrigin\n  event.source.postMessage(\"hi there yourself!  the secret response \" +\n                           \"is: rheeeeet!\",\n                           event.origin);\n}\n\nwindow.addEventListener(\"message\", receiveMessage, false);\n```\n\n",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-05-16T05:01:56.000Z",
+    "updateAt": "2022-05-16T13:02:00.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 537,
+    "prev": "d545f64f-073b-4e71-bc08-59a5aea4d269",
+    "next": "deb034d1-2a96-45b4-8576-132f2af9c797"
+  },
+  "post": {
+    "exerciseKey": "c6530c46-d02f-40b2-8e6e-c11a6daf3f12",
+    "category": "QA",
+    "title": "postMessage 有哪些使用场景？",
+    "level": 2,
+    "updateAt": "2022-05-16T13:02:00+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

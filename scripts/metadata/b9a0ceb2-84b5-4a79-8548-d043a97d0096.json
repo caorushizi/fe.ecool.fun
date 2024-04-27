@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 511,
+    "exerciseKey": "b9a0ceb2-84b5-4a79-8548-d043a97d0096",
+    "category": "QA",
+    "renderType": "md",
+    "title": "common.js和es6中模块引入的区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "Common]S是一种模块规范，最初被应用于Nodejs，成为Nodejs 的模块规范。\n\n运行在浏览器端的JavaScript由于也缺少类似的规范，在ES6出来之前，前端也实现了一套相同的模块规范(例如: AMD)，用来对前端模块进行管理。\n\n自ES6起，引入了一套新的ES6 Module规范，在语言标准的层面上实现了模块功能，而且实现得相当简单，有望成为浏览器和服务器通用的模块解决方案。\n\n在使用上的差别主要有:\n\n* CommonJS模块输出的是一个值的拷贝，ES6模块输出的是值的引用CommonJS模块是运行时加载，ES6模块是编译时输出接口。\n* CommonJs是单个值导出，ES6 Module可以导出多个\n* CommonJs是动态语法可以写在判断里，ES6 Module静态语法只能写在顶层CommonJs的this是当前模块，ES6 Module的this是undefined",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-11T08:03:18.000Z",
+    "updateAt": "2021-07-11T16:10:43.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 844,
+    "prev": "c6027c9d-6c64-4765-9358-5d01c37149c4",
+    "next": "cf3a9965-7761-4d5e-8b0a-cbde804517b8"
+  },
+  "post": {
+    "exerciseKey": "b9a0ceb2-84b5-4a79-8548-d043a97d0096",
+    "category": "QA",
+    "title": "common.js和es6中模块引入的区别？",
+    "level": 2,
+    "updateAt": "2021-07-11T16:10:43+00:00"
+  },
+  "tag": {
+    "id": 18,
+    "tagName": "Node.js",
+    "type": "1",
+    "exerciseCount": 26
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 2028,
+    "exerciseKey": "beeaa808-12ab-4dda-b270-219aacfb3633",
+    "category": "QA",
+    "renderType": "md",
+    "title": "多叉树指定层节点的个数",
+    "desc": null,
+    "options": null,
+    "explanation": "可以使用递归的方式遍历树，并计算每层节点的数量\n\n```javascript\nfunction getNodeCountAtLevel(tree, level) {\n  // 递归终止条件：当当前节点为null时，返回0\n  if (!tree) {\n    return 0;\n  }\n\n  // 当层数为0时，表示找到目标层级，返回1\n  if (level === 0) {\n    return 1;\n  }\n\n  let count = 0;\n\n  // 遍历当前节点的所有子节点，并累加每个子节点的指定层级节点数量\n  for (const child of tree.children) {\n    count += getNodeCountAtLevel(child, level - 1);\n  }\n\n  return count;\n}\n```\n\n上述代码中，`tree` 表示多叉树的根节点，每个节点都包含一个 `children` 数组，存储了其所有子节点。`level` 表示目标层级，从0开始。",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2023-05-30T01:20:34.000Z",
+    "updateAt": "2023-07-08T15:41:48.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 312,
+    "prev": "311b7a3b-04a6-47ab-be75-42345638817b",
+    "next": "75bfc3cb-35b7-464b-bf6f-ae2722da04e8"
+  },
+  "post": {
+    "exerciseKey": "beeaa808-12ab-4dda-b270-219aacfb3633",
+    "category": "QA",
+    "title": "多叉树指定层节点的个数",
+    "level": 2,
+    "updateAt": "2023-07-08T15:41:48+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 109
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 470,
+    "exerciseKey": "59af70f8-871d-4358-aac1-e5dc4a0ca6df",
+    "category": "QA",
+    "renderType": "md",
+    "title": "如何检查TypeScript中的null和undefined ？",
+    "desc": null,
+    "options": null,
+    "explanation": "通过使用一个缓冲检查，我们可以检查空和未定义:\n```\nif (x == null) {  \n}  \n```\n如果我们使用严格的检查，它将总是对设置为null的值为真，而对未定义的变量不为真。\n\n例子\n```\nvar a: number;  \nvar b: number = null;  \nfunction check(x, name) {  \n    if (x == null) {  \n        console.log(name + ' == null');  \n    }  \n    if (x === null) {  \n        console.log(name + ' === null');  \n    }  \n    if (typeof x === 'undefined') {  \n        console.log(name + ' is undefined');  \n    }  \n}  \ncheck(a, 'a');  \ncheck(b, 'b');  \n```\n输出\n```\n\"a == null\"  \n\"a is undefined\"  \n\"b == null\"  \n\"b === null\"  \n```\n",
+    "level": 4,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-08T15:07:28.000Z",
+    "updateAt": "2021-07-11T11:19:33.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 873,
+    "prev": "01011a04-509e-4f6f-89d5-aa348d76ae2b",
+    "next": "3bdbc545-1273-41a8-b93f-cb642dae0ada"
+  },
+  "post": {
+    "exerciseKey": "59af70f8-871d-4358-aac1-e5dc4a0ca6df",
+    "category": "QA",
+    "title": "如何检查TypeScript中的null和undefined ？",
+    "level": 4,
+    "updateAt": "2021-07-11T11:19:33+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}

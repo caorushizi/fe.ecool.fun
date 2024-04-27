@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1827,
+    "exerciseKey": "ad2a65d2-9330-4f65-9be7-b61e11e10c02",
+    "category": "QA",
+    "renderType": "md",
+    "title": "CSS预处理器/后处理器是什么？为什么要使用它们？",
+    "desc": null,
+    "options": null,
+    "explanation": "\n**预处理器，** 如：`less`，`sass`，`stylus`，用来预编译`sass`或者`less`，增加了`css`代码的复用性。层级，`mixin`， 变量，循环， 函数等对编写以及开发UI组件都极为方便。\n\n\n**后处理器，** 如： `postCss`，通常是在完成的样式表中根据`css`规范处理`css`，让其更加有效。目前最常做的是给`css`属性添加浏览器私有前缀，实现跨浏览器兼容性的问题。\n\n\n`css`预处理器为`css`增加一些编程特性，无需考虑浏览器的兼容问题，可以在`CSS`中使用变量，简单的逻辑程序，函数等在编程语言中的一些基本的性能，可以让`css`更加的简洁，增加适应性以及可读性，可维护性等。\n\n\n其它`css`预处理器语言：`Sass（Scss）`, `Less`, `Stylus`, `Turbine`, `Swithch css`, `CSS Cacheer`, `DT Css`。\n\n\n使用原因：\n\n- 结构清晰， 便于扩展\n- 可以很方便的屏蔽浏览器私有语法的差异\n- 可以轻松实现多重继承\n- 完美的兼容了`CSS`代码，可以应用到老项目中",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-06-25T05:59:33.000Z",
+    "updateAt": "2022-06-25T14:35:15.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 521,
+    "prev": "e894262c-f9eb-495b-bb45-5016337f3af1",
+    "next": "98cd24a6-d666-4ddd-a696-f74fbe1552a1"
+  },
+  "post": {
+    "exerciseKey": "ad2a65d2-9330-4f65-9be7-b61e11e10c02",
+    "category": "QA",
+    "title": "CSS预处理器/后处理器是什么？为什么要使用它们？",
+    "level": 2,
+    "updateAt": "2022-06-25T14:35:15+00:00"
+  },
+  "tag": {
+    "id": 11,
+    "tagName": "CSS",
+    "type": "1",
+    "exerciseCount": 90
+  }
+}

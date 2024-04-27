@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 319,
+    "exerciseKey": "f1de93ec-d1c8-48b0-98a9-bf256dfe2df0",
+    "category": "QA",
+    "renderType": "html",
+    "title": "前端的常规安全策略",
+    "desc": null,
+    "options": null,
+    "explanation": "<p></p><ul><li><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">定期请第三方机构做安全性测试，漏洞扫描</span></span></span></span></li><li><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">使用第三方开源库做上线前的安全测试，可以考虑融合到CI中</span></span></span></span></li><li><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">code review 保证代码质量</span></span></span></span></li><li><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">默认项目中设置对应的 Header 请求头，如 X-XSS-Protection、 X-Content-Type-Options 、X-Frame-Options Header、Content-Security-Policy 等等</span></span></span></span></li><li><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">对第三方包和库做检测：NSP(Node Security Platform)，Snyk</span></span></span></span></li></ul><p></p>",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T11:03:43.000Z",
+    "updateAt": "2021-07-07T00:09:20.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 972,
+    "prev": "549f8d07-a907-4c86-93c1-d3e8fef30613",
+    "next": "5f0460dc-84ca-425e-8629-7aec874d024c"
+  },
+  "post": {
+    "exerciseKey": "f1de93ec-d1c8-48b0-98a9-bf256dfe2df0",
+    "category": "QA",
+    "title": "前端的常规安全策略",
+    "level": 2,
+    "updateAt": "2021-07-07T00:09:20+00:00"
+  },
+  "tag": {
+    "id": 21,
+    "tagName": "前端安全",
+    "type": "1",
+    "exerciseCount": 21
+  }
+}

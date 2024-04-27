@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1596,
+    "exerciseKey": "3c969c35-6d25-4932-977e-d9ba31000ccd",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第二题】下面代码的输出是什么？",
+    "desc": "```js\nconst promise = new Promise((resolve, reject) => {\n  console.log(1);\n  resolve('success')\n  console.log(2);\n});\npromise.then(() => {\n  console.log(3);\n});\nconsole.log(4);\n```",
+    "options": null,
+    "explanation": "## 过程分析\n\n* 从上至下，先遇到`new Promise`，执行其中的同步代码1\n* 再遇到`resolve('success')`， 将promise的状态改为了resolved并且将值保存下来\n* 继续执行同步代码2\n* 跳出promise，往下执行，碰到`promise.then`这个微任务，将其加入微任务队列\n* 执行同步代码4\n* 本轮宏任务全部执行完毕，检查微任务队列，发现`promise.then`这个微任务且状态为resolved，执行它。\n\n## 结果\n\n```\n1 2 4 3\n```",
+    "level": 1.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T14:18:12.000Z",
+    "updateAt": "2022-01-09T22:26:13.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 676,
+    "prev": "1b7efa22-c54d-4dc9-a54e-7faa69f5b821",
+    "next": "c363d879-8557-486c-89ef-2a0e02d2164e"
+  },
+  "post": {
+    "exerciseKey": "3c969c35-6d25-4932-977e-d9ba31000ccd",
+    "category": "QA",
+    "title": "【Promise第二题】下面代码的输出是什么？",
+    "level": 1.5,
+    "updateAt": "2022-01-09T22:26:13+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

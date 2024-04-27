@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1598,
+    "exerciseKey": "1b7efa22-c54d-4dc9-a54e-7faa69f5b821",
+    "category": "QA",
+    "renderType": "md",
+    "title": "【Promise第六题】下面代码的输出是什么？",
+    "desc": "```js\nconst fn = () =>\n  new Promise((resolve, reject) => {\n    console.log(1);\n    resolve(\"success\");\n  });\nconsole.log(\"start\");\nfn().then(res => {\n  console.log(res);\n});\n```",
+    "options": null,
+    "explanation": "## 解析\n\nstart就在1之前打印出来了，因为fn函数是之后执行的。\n\n注意：不要看到new Promise()，就以为执行它的第一个参数函数，我们还需要注意它是不是被包裹在函数当中，如果是的话，只有在函数调用的时候才会执行。\n\n## 答案\n\n```\n\"start\"\n1\n\"success\"\n```",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2022-01-09T14:28:48.000Z",
+    "updateAt": "2022-01-09T23:00:41.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 675,
+    "prev": "c3d12ae7-e074-4072-a07a-aad43ec87e94",
+    "next": "3c969c35-6d25-4932-977e-d9ba31000ccd"
+  },
+  "post": {
+    "exerciseKey": "1b7efa22-c54d-4dc9-a54e-7faa69f5b821",
+    "category": "QA",
+    "title": "【Promise第六题】下面代码的输出是什么？",
+    "level": 2,
+    "updateAt": "2022-01-09T23:00:41+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

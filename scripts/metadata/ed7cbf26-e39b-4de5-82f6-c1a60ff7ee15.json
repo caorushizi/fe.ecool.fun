@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 1570,
+    "exerciseKey": "ed7cbf26-e39b-4de5-82f6-c1a60ff7ee15",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Math.ceil 和 Math.floor 有什么区别？",
+    "desc": null,
+    "options": null,
+    "explanation": "Math.ceil() ： 向上取整，函数返回一个大于或等于给定数字的最小整数。\n\nMath.floor() ： 向下取整，函数返回一个小于或等于给定数字的最大整数。",
+    "level": 0.5,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-11-17T14:44:56.000Z",
+    "updateAt": "2021-11-17T22:50:02.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 715,
+    "prev": "f7192fdf-cbfe-4b62-96af-a614e6a37055",
+    "next": "c860f93c-430e-4813-b534-0fcfda8b64ba"
+  },
+  "post": {
+    "exerciseKey": "ed7cbf26-e39b-4de5-82f6-c1a60ff7ee15",
+    "category": "QA",
+    "title": "Math.ceil 和 Math.floor 有什么区别？",
+    "level": 0.5,
+    "updateAt": "2021-11-17T22:50:02+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 322
+  }
+}

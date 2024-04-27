@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 344,
+    "exerciseKey": "c93c4f3d-e1ff-4fd0-844c-1e610e429532",
+    "category": "QA",
+    "renderType": "md",
+    "title": "怎么用3升和5升的桶量出4升的水？",
+    "desc": null,
+    "options": null,
+    "explanation": "* 首先用三升水桶装满水，倒入五升水桶\n* 再次倒满三升水桶，填满后继续倒入五升水桶，直到五升水桶倒满\n* 清空五升水桶，将三升水桶的一升水倒入\n* 再次填满三升水桶，倒入五升水桶中\n\n此时，5L的水桶中，正好有4L的水\n\n\n",
+    "level": 2,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-04T12:32:50.000Z",
+    "updateAt": "2021-07-04T20:55:14.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 1015,
+    "prev": "e0e9a739-97c8-440b-b37b-41691095002f",
+    "next": "65d6d0c8-c15e-43d2-9e94-4fb86284fbd0"
+  },
+  "post": {
+    "exerciseKey": "c93c4f3d-e1ff-4fd0-844c-1e610e429532",
+    "category": "QA",
+    "title": "怎么用3升和5升的桶量出4升的水？",
+    "level": 2,
+    "updateAt": "2021-07-04T20:55:14+00:00"
+  },
+  "tag": {
+    "id": 17,
+    "tagName": "趣味题",
+    "type": "1",
+    "exerciseCount": 35
+  }
+}

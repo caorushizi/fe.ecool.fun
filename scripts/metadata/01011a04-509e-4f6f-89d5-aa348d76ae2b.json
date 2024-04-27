@@ -1,0 +1,35 @@
+{
+  "data": {
+    "id": 471,
+    "exerciseKey": "01011a04-509e-4f6f-89d5-aa348d76ae2b",
+    "category": "QA",
+    "renderType": "md",
+    "title": "TypeScript中的类型有哪些？",
+    "desc": null,
+    "options": null,
+    "explanation": "类型系统表示语言支持的不同类型的值。它在程序存储或操作所提供的值之前检查其有效性。\n\n它可以分为两种类型，\n\n* 内置：包括数字(number)，字符串(string)，布尔值(boolean)，无效(void)，空值(null)和未定义(undefined)。\n* 用户定义的：它包括枚举(enums)，类(classes)，接口(interfaces)，数组(arrays)和元组(tuple)。",
+    "level": 3,
+    "status": 2,
+    "appId": 7,
+    "createAt": "2021-07-08T15:08:24.000Z",
+    "updateAt": "2021-07-11T11:20:32.000Z",
+    "updateUserId": 11,
+    "isCollected": false,
+    "currentIndex": 872,
+    "prev": "614de7f3-ce19-4359-aeb5-e63f64c8b48e",
+    "next": "59af70f8-871d-4358-aac1-e5dc4a0ca6df"
+  },
+  "post": {
+    "exerciseKey": "01011a04-509e-4f6f-89d5-aa348d76ae2b",
+    "category": "QA",
+    "title": "TypeScript中的类型有哪些？",
+    "level": 3,
+    "updateAt": "2021-07-11T11:20:32+00:00"
+  },
+  "tag": {
+    "id": 19,
+    "tagName": "Typescript",
+    "type": "1",
+    "exerciseCount": 46
+  }
+}
