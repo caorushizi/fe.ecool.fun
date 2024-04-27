@@ -20,7 +20,10 @@ export async function sleep(ms: number = 1000) {
 
 export const projectRoot = process.cwd();
 export const metadataPath = path.join(projectRoot, "metadata");
-export const postsPath = path.join(projectRoot, "posts");
+export const postsPath = path.resolve(
+  projectRoot,
+  "../website/src/content/blog",
+);
 
 export async function getSummary(markdown: string): Promise<string> {
   const html = await marked(markdown);
