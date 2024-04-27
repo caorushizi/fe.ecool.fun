@@ -5,7 +5,7 @@ author: caorushizi
 tags:
   - JavaScript
 postSlug: f555dca6-fcc1-433c-a4b5-bc0de8dba02b
-description: 'NaN：Not a Number，表示非数字 typeof NaN === ''number'' '
+description: "NaN：Not a Number，表示非数字 typeof NaN === 'number' "
 difficulty: 1
 questionNumber: 503
 source: https://fe.ecool.fun/topic/f555dca6-fcc1-433c-a4b5-bc0de8dba02b

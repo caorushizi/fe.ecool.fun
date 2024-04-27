@@ -2,6 +2,7 @@ import path from "path";
 import { marked } from "marked";
 import { load } from "cheerio";
 import moment from "moment";
+import prettier from "prettier";
 
 export function getContent(markdown: null | string | (string | null)[]) {
   if (!markdown) {
@@ -39,4 +40,36 @@ export async function getSummary(markdown: string): Promise<string> {
 
 export function postUpdated(remoteDate: string, localDate: string): boolean {
   return moment(remoteDate).isAfter(localDate);
+}
+
+export function replaceMarkdownCodeFormat(content: string): string {
+  const mappings: Record<string, string> = {
+    "react.js": "jsx",
+    JavaScript: "javascript",
+    react: "jsx",
+    JS: "javascript",
+    pgsql: "sql",
+    mysql: "sql",
+    clang: "c",
+    processing: "css",
+    cons: "jsx",
+  };
+
+  for (const key in mappings) {
+    const origin = new RegExp("```" + key, "g");
+    const target = "```" + mappings[key];
+    content = content.replace(origin, target);
+  }
+
+  return content;
+}
+
+export function fixImageUrl(content: string): string {
+  return content.replace(/!\[\]\((\/\/[^)]+)\)/g, "![](https:$1)");
+}
+
+export async function formatMarkdown(content: string): Promise<string> {
+  return prettier.format(content, {
+    parser: "markdown",
+  });
 }

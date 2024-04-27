@@ -28,7 +28,7 @@ export default defineConfig({
       ],
     ],
     shikiConfig: {
-      theme: "github-dark",
+      theme: "github-dark-default",
       wrap: true,
     },
     extendDefaultPlugins: true,

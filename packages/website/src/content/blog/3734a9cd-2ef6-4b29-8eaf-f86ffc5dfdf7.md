@@ -8,24 +8,24 @@ postSlug: 3734a9cd-2ef6-4b29-8eaf-f86ffc5dfdf7
 description: >-
   var name = '123'; var obj = { name: '456', print: function() { function a() {
   console.log(this.name); } a(); } } obj.print(); 上述代码输出结果为 "123"。解释如下：
-  在全局作用域中声明了变量 name，值为字符串 "123"。 声明一个对象 obj，包含属性 name 
+  在全局作用域中声明了变量 name，值为字符串 "123"。 声明一个对象 obj，包含属性 name
 difficulty: 1
 questionNumber: 2006
 source: https://fe.ecool.fun/topic/3734a9cd-2ef6-4b29-8eaf-f86ffc5dfdf7
 ---
 
 ```js
-var name = '123';
+var name = "123";
 
 var obj = {
- name: '456',
- print: function() {
-  function a() {
-    console.log(this.name);
-  }
-  a();
- }
-}
+  name: "456",
+  print: function () {
+    function a() {
+      console.log(this.name);
+    }
+    a();
+  },
+};
 
 obj.print();
 ```

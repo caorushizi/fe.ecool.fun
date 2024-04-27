@@ -20,9 +20,9 @@ source: https://fe.ecool.fun/topic/a67eec57-8dc1-40ee-9c8a-ccfbe25ca58d
 
 在constructor中可以使用this.props
 
-* 使用props：
+- 使用props：
 
-```react.js
+```jsx
 class MyComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -31,9 +31,9 @@ class MyComponent extends React.Component {
 }
 ```
 
-* 不使用props：
+- 不使用props：
 
-```react.js
+```jsx
 class MyComponent extends React.Component {
     constructor(props) {
         super();

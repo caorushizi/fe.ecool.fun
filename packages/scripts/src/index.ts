@@ -1,11 +1,14 @@
 import { writeFile, readFile } from "fs-extra";
 import yaml from "js-yaml";
 import {
+  fixImageUrl,
+  formatMarkdown,
   getContent,
   getSummary,
   metadataPath,
   postUpdated,
   postsPath,
+  replaceMarkdownCodeFormat,
   sleep,
 } from "./utils";
 import path from "path";
@@ -78,8 +81,12 @@ async function writeMarkdown(meta: Metadata) {
     source: new URL(`topic/${post.exerciseKey}`, host).toString(),
   };
 
-  const metadataString = `---\n${yaml.dump(metadata)}---\n\n${content}`;
-  await writeFile(postPath, metadataString + "\n");
+  // 对 markdown 进行格式化
+  let markdown = `---\n${yaml.dump(metadata)}---\n\n${content}\n`;
+  markdown = await formatMarkdown(markdown);
+  markdown = fixImageUrl(markdown);
+  markdown = replaceMarkdownCodeFormat(markdown);
+  await writeFile(postPath, markdown);
 }
 
 async function parsePage(

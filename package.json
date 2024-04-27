@@ -2,7 +2,6 @@
   "name": "fe.ecool.fun",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "pnpm -F scripts start",
     "dev": "pnpm -F website dev",
