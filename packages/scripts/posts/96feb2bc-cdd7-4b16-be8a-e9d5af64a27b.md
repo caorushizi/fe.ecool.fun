@@ -22,21 +22,22 @@ async function async1() {
 }
 async function async2() {
   setTimeout(() => {
-    console.log('timer')
-  }, 0)
+    console.log("timer");
+  }, 0);
   console.log("async2");
 }
 async1();
-console.log("start")
-
+console.log("start");
 ```
 
 ---
 
 ## 解析
+
 定时器始终还是最后执行的，它被放到下一条宏任务的延迟队列中。
 
 ## 结果
+
 ```
 'async1 start'
 'async2'

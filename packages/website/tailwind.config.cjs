@@ -57,7 +57,14 @@ module.exports = {
       transparent: "transparent",
     },
     fontFamily: {
-      'sans': ['PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      sans: [
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei",
+        "Helvetica Neue",
+        "Arial",
+        "sans-serif",
+      ],
     },
     // },
   },
