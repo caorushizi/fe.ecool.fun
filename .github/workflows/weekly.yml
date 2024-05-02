@@ -4,6 +4,8 @@ on:
   schedule:
     - cron: "45 12 * * 4" # 北京时间每周四 20:10
 
+  workflow_dispatch:
+
 env:
   BUCKET: ziying-web-home
   ENDPOINT: oss-cn-beijing.aliyuncs.com
