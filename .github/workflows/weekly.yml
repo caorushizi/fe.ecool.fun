@@ -2,7 +2,7 @@ name: Weekly Run
 
 on:
   schedule:
-    - cron: "10 12 * * 4" # 北京时间每周四 20:10
+    - cron: "45 12 * * 4" # 北京时间每周四 20:10
 
 env:
   BUCKET: ziying-web-home
