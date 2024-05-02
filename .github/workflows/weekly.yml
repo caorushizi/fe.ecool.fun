@@ -50,6 +50,6 @@ jobs:
           git config --global user.email '84996057@qq.com'
           git add .
           git diff --exit-code && echo "No changes to commit" || git commit -m "Weekly build"
-          git push origin master
+          git push https://${GIT_AUTH_TOKEN}@github.com/caorushizi/fe.ecool.fun.git master
         env:
           GIT_AUTH_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
