@@ -49,7 +49,7 @@ jobs:
           git config --global user.name 'GitHub Actions'
           git config --global user.email '84996057@qq.com'
           git add .
-          git commit -m "Weekly build"
-          git push prigin master
+          git diff --exit-code && echo "No changes to commit" || git commit -m "Weekly build"
+          git push origin master
         env:
           GIT_AUTH_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
