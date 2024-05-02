@@ -1,4 +1,4 @@
-name: Weekly Run
+name: Weekly Deploy Astro site to Pages
 
 on:
   schedule:
@@ -47,7 +47,9 @@ jobs:
       - name: Commit and push changes
         run: |
           git config --global user.name 'GitHub Actions'
-          git config --global user.email 'github-actions@github.com'
+          git config --global user.email '84996057@qq.com'
           git add .
           git commit -m "Weekly build"
-          git push
+          git push prigin master
+        env:
+          GIT_AUTH_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
