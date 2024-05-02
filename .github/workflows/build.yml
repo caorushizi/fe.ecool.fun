@@ -16,7 +16,6 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  BUILD_PATH: "."
   BUCKET: ziying-web-home
   ENDPOINT: oss-cn-beijing.aliyuncs.com
   ACCESS_KEY: LTAI5tLnRgUbF7BHTX91ZihW
