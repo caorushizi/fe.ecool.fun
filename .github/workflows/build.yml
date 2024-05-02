@@ -25,7 +25,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    if: github.event_name != 'schedule' # 如果触发事件的类型是 schedule，就跳过这个工作流
     steps:
       - name: Check out git repository
         uses: actions/checkout@v4
