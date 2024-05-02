@@ -46,7 +46,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --global user.name 'GitHub Actions'
+          git config --global user.name 'caorushizi'
           git config --global user.email '84996057@qq.com'
           git add .
           git diff --exit-code && echo "No changes to commit" || git commit -m "Weekly build"
