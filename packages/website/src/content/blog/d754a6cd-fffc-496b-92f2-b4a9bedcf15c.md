@@ -1,28 +1,14 @@
 ---
 title: mouseEnter 和 mouseOver 有什么区别？
-pubDatetime: 2024-04-19T09:48:28.000Z
+pubDatetime: 2024-05-22T11:13:30.000Z
 author: caorushizi
 tags:
   - JavaScript
 postSlug: d754a6cd-fffc-496b-92f2-b4a9bedcf15c
-description: >-
-  // 比如这个函数输入一个1，那么要求函数返回A const A = [1,2,3]; const B = [4,5,6]; const C =
-  [7,8,9]; function test(num) { } mouseenter 和 mouseover
-  是两个用于处理鼠标进入元素时的事件，但它们在一些关键点上有所不同： 事件冒泡： mouseenter：这个事件在鼠标指针首次进入特定元素（或其子
+description: " mouseenter 和 mouseover 是两个用于处理鼠标进入元素时的事件，但它们在一些关键点上有所不同： 事件冒泡： mouseenter：这个事件在鼠标指针首次进入特定元素（或其子元素）时触发。当鼠标进入元素时，会触发该元素的 mouseenter 事件，但不会在元素的子元素上冒泡。因此，该事件通常用于检测鼠标首次进入元素时的动作。 mouseover：这个事件在鼠标指针移动到某个元素"
 difficulty: 1
 questionNumber: 1978
 source: https://fe.ecool.fun/topic/d754a6cd-fffc-496b-92f2-b4a9bedcf15c
----
-
-```js
-// 比如这个函数输入一个1，那么要求函数返回A
-const A = [1, 2, 3];
-const B = [4, 5, 6];
-const C = [7, 8, 9];
-
-function test(num) {}
-```
-
 ---
 
 `mouseenter` 和 `mouseover` 是两个用于处理鼠标进入元素时的事件，但它们在一些关键点上有所不同：
