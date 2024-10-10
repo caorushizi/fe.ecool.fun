@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2862,
+    "exerciseKey": "3414a818-1951-4db1-9595-9b16bb06a005",
+    "category": "QA",
+    "renderType": "md",
+    "title": "常见数组排序算法有哪些？",
+    "desc": "",
+    "options": "",
+    "explanation": "如图所示：\n![01_10](https://user-images.githubusercontent.com/22188674/222961047-79023840-bd63-4a2c-93fe-2d94f2a8ac04.png)\n\n## 快速排序：\n先从数列中取出一个数作为“基准”。\n\n分区过程：将比这个“基准”大的数全放到“基准”的右边，小于或等于“基准”的数全放到“基准”的左边。\n再对左右区间重复第二步，直到各区间只有一个数。\n```javascript\nvar quickSort = function(arr) {\n    if (arr.length <= 1) { return arr; }\n    var pivotIndex = Math.floor(arr.length / 2);   //基准位置（理论上可任意选取）\n    var pivot = arr.splice(pivotIndex, 1)[0];  //基准数\n    var left = [];\n    var right = [];\n    for (var i = 0; i < arr.length; i++){\n        if (arr[i] < pivot) {\n            left.push(arr[i]);\n        } else {\n            right.push(arr[i]);\n        }\n    }\n    return quickSort(left).concat([pivot], quickSort(right));  //链接左数组、基准数构成的数组、右数组\n};\n```\n\n\n## 选择排序：\n首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置                     \n再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。                     \n重复第二步，直到所有元素均排序完毕。\n```javascript\nfunction selectionSort(arr) {\n    var len = arr.length;\n    var minIndex, temp;\n    for (var i = 0; i < len - 1; i++) {\n        minIndex = i;\n        for (var j = i + 1; j < len; j++) {\n            if (arr[j] < arr[minIndex]) {     // 寻找最小的数\n                minIndex = j;                 // 将最小数的索引保存\n            }\n        }\n        temp = arr[i];\n        arr[i] = arr[minIndex];\n        arr[minIndex] = temp;\n    }\n    return arr;\n}\n```\n\n## 插入排序：\n将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。                    \n从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）\n```javascript\nfunction insertionSort(arr) {\n    var len = arr.length;\n    var preIndex, current;\n    for (var i = 1; i < len; i++) {\n        preIndex = i - 1;\n        current = arr[i];\n        while(preIndex >= 0 && arr[preIndex] > current) {\n            arr[preIndex+1] = arr[preIndex];\n            preIndex--;\n        }\n        arr[preIndex+1] = current;\n    }\n    return arr;\n}\n```\n\n## 冒泡法排序：\n比较相邻的元素。如果第一个比第二个大，就交换他们两个。             \n对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。                            \n针对所有的元素重复以上的步骤，除了最后一个。                  \n持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。\n```javascript\nfunction bubbleSort(arr) {\n    var len = arr.length;\n    for (var i = 0; i < len - 1; i++) {\n        for (var j = 0; j < len - 1 - i; j++) {\n            if (arr[j] > arr[j+1]) {        // 相邻元素两两对比\n                var temp = arr[j+1];        // 元素交换\n                arr[j+1] = arr[j];\n                arr[j] = temp;\n            }\n        }\n    }\n    return arr;\n}\n```\n\n## 希尔排序\n1959年Shell发明，第一个突破O(n2)的排序算法，是简单插入排序的改进版。\n它与插入排序的不同之处在于，它会优先比较距离较远的元素。希尔排序又叫缩小增量排序。\n\n先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，具体算法描述：                                 \n选择一个增量序列t1，t2，…，tk，其中ti>tj，tk=1；                                    \n按增量序列个数k，对序列进行k 趟排序；                                    \n每趟排序，根据对应的增量ti，将待排序列分割成若干长度为m 的子序列，分别对各子表进行直接插入排序。\n仅增量因子为1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。\n```javascript\nfunction shellSort(arr) {\n    var len = arr.length,\n        temp,\n        gap = 1;\n    while (gap < len / 3) {          // 动态定义间隔序列\n        gap = gap * 3 + 1;\n    }\n    for (gap; gap > 0; gap = Math.floor(gap / 3)) {\n        for (var i = gap; i < len; i++) {\n            temp = arr[i];\n            for (var j = i-gap; j > 0 && arr[j]> temp; j-=gap) {\n                arr[j + gap] = arr[j];\n            }\n            arr[j + gap] = temp;\n        }\n    }\n    return arr;\n}\n```\n\n## 归并排序\n直接上代码了\n```js\nfunction mergeSort(arr){\n    var len = arr.length;\n    if(len <2)\n        return arr;\n    var mid = Math.floor(len/2),\n        left = arr.slice(0,mid),\n        right =arr.slice(mid);\n    //send left and right to the mergeSort to broke it down into pieces\n    //then merge those\n    return merge(mergeSort(left),mergeSort(right));\n}\n\nfunction merge(left, right){\n    var result = [],\n        lLen = left.length,\n        rLen = right.length,\n        l = 0,\n        r = 0;\n    while(l < lLen && r < rLen){\n        if(left[l] < right[r]){\n            result.push(left[l++]);\n        }\n        else{\n            result.push(right[r++]);\n        }\n    }\n    //remaining part needs to be addred to the result\n    return result.concat(left.slice(l)).concat(right.slice(r));\n}\n```\n\n",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 0.5,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:45.000Z",
+    "updateAt": "2024-08-14T12:12:51.000Z",
+    "isCollected": false,
+    "currentIndex": 17,
+    "filterTotalNum": 1487,
+    "prev": "5ee52126-6153-4409-a930-a01d2d313605",
+    "next": "6843e240-9534-4371-8b64-ba76b4aa8ed4"
+  },
+  "post": {
+    "exerciseKey": "3414a818-1951-4db1-9595-9b16bb06a005",
+    "category": "QA",
+    "title": "常见数组排序算法有哪些？",
+    "level": 0.5,
+    "createAt": "2024-08-13T08:30:45+00:00",
+    "updateAt": "2024-08-14T12:12:51+00:00"
+  },
+  "tag": {
+    "id": 15,
+    "tagName": "算法",
+    "type": "1",
+    "exerciseCount": 21
+  }
+}

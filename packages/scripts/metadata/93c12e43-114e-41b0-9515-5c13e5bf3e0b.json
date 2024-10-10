@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2415,
+    "exerciseKey": "93c12e43-114e-41b0-9515-5c13e5bf3e0b",
+    "category": "QA",
+    "renderType": "md",
+    "title": "原生 js 如何进行监听路由的变化？",
+    "desc": "",
+    "options": "",
+    "explanation": "在原生 JavaScript 中，可以使用以下方法来监听路由的变化：\n\n### 1. **使用 `hashchange` 事件**\n\n当使用 hash 路由（即 URL 中包含 `#` 部分）时，可以通过监听 `hashchange` 事件来响应路由的变化。\n\n#### 示例：\n\n```javascript\nwindow.addEventListener('hashchange', function() {\n  console.log('Hash changed to:', window.location.hash);\n  // 可以在这里根据 hash 值更新页面内容\n});\n\n// 手动触发 hashchange 事件\nwindow.location.hash = '#section1'; // 会触发 hashchange 事件\n```\n\n### 2. **使用 `popstate` 事件**\n\n当使用 HTML5 的 History API（即 pushState 和 replaceState）时，可以通过监听 `popstate` 事件来响应路由的变化。\n\n#### 示例：\n\n```javascript\nwindow.addEventListener('popstate', function(event) {\n  console.log('Location changed to:', document.location.href);\n  // 可以在这里根据历史记录状态更新页面内容\n});\n\n// 使用 History API 更新 URL\nhistory.pushState({ page: 1 }, 'Title 1', '/page1');\nhistory.pushState({ page: 2 }, 'Title 2', '/page2');\n```\n\n### 3. **手动管理路由状态**\n\n如果需要更复杂的路由管理，可能需要手动维护路由状态并响应 URL 的变化。可以结合 `hashchange` 和 `popstate` 事件来实现更复杂的路由逻辑。\n\n#### 示例：\n\n```javascript\nfunction updatePageContent() {\n  const path = window.location.pathname;\n  console.log('Current path:', path);\n  // 根据路径更新页面内容\n}\n\n// 监听路径变化\nwindow.addEventListener('popstate', updatePageContent);\n\n// 处理初始加载时的路径\nwindow.addEventListener('load', updatePageContent);\n\n// 使用 History API 更新 URL\nfunction navigateTo(path) {\n  history.pushState(null, '', path);\n  updatePageContent();\n}\n```",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 2.5,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:26.000Z",
+    "updateAt": "2024-09-03T01:20:54.000Z",
+    "isCollected": false,
+    "currentIndex": 223,
+    "filterTotalNum": 1487,
+    "prev": "ad98f8b2-58de-446b-a9ec-2660f1c2e581",
+    "next": "b7510525-d358-4b38-a29d-430524dc2dca"
+  },
+  "post": {
+    "exerciseKey": "93c12e43-114e-41b0-9515-5c13e5bf3e0b",
+    "category": "QA",
+    "title": "原生 js 如何进行监听路由的变化？",
+    "level": 2.5,
+    "createAt": "2024-08-13T08:30:26+00:00",
+    "updateAt": "2024-09-03T01:20:54+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 379
+  }
+}

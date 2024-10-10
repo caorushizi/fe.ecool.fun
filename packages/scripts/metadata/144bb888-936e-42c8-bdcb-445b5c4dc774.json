@@ -8,14 +8,15 @@
     "desc": null,
     "options": null,
     "explanation": "IconFont 的使用原理来自于 css 的 `@font-face` 属性。\n\n这个属性用来定义一个新的字体，基本用法如下：\n\n```css\n@font-face {\n  font-family: <YourFontName>;\n  src: <url> [<format>],[<source> [<format>]], *;\n  [font-weight: <weight>];\n  [font-style: <style>];\n}\n```\n\n* font-family：为载入的字体取名字。\n* src：[url]加载字体，可以是相对路径，可以是绝对路径，也可以是网络地址。[format]定义的字体的格式，用来帮助浏览器识别。主要取值为：【truetype(.ttf)、opentype（.otf）、truetype-aat、embedded-opentype(.eot)、svg(.svg)、woff(.woff)】。\n* font-weight：定义加粗样式。\n* font-style：定义字体样式。\n\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-09-25T01:56:32.000Z",
-    "updateAt": "2021-09-25T19:04:54.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-19T16:01:04.000Z",
     "isCollected": false,
-    "currentIndex": 762,
+    "currentIndex": 880,
+    "filterTotalNum": 1487,
     "prev": "b4137265-8ebe-4fc8-be75-8dfaf125af6c",
     "next": "ece0e4b9-112c-4d3c-934c-822e8807fe46"
   },
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "IconFont 的原理是什么",
     "level": 2,
-    "updateAt": "2021-09-25T19:04:54+00:00"
+    "createAt": "2021-09-25T01:56:32+00:00",
+    "updateAt": "2024-07-19T16:01:04+00:00"
   },
   "tag": {
     "id": 11,
     "tagName": "CSS",
     "type": "1",
-    "exerciseCount": 90
+    "exerciseCount": 101
   }
 }

@@ -1,6 +1,6 @@
 ---
 title: 浏览器的同源策略是什么？
-pubDatetime: 2021-09-25T19:05:56.000Z
+pubDatetime: 2024-07-20T11:49:30.000Z
 author: caorushizi
 tags:
   - JavaScript

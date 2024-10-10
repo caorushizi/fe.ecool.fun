@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "## 方法1 ：通过 ES6 中的 Array.isArray 来识别\n\n```\nconsole.log(Array.isArray([]))//true\nconsole.log(Array.isArray({}))//false\n```\n## 方法2 ：通过 instanceof 来识别\n\n```\nconsole.log([] instanceof Array)//true\nconsole.log({} instanceof Array)//false\n```\n## 方法3 ：通过调用 constructor 来识别\n```\nconsole.log([].constructor)//[Function: Array]\nconsole.log({}.constructor)//[Function: Object]\n```\n## 方法4 ：通过 Object.prototype.toString.call 方法来识别\n\n```\nconsole.log(Object.prototype.toString.call([]))//[object Array]  \nconsole.log(Object.prototype.toString.call({}))//[object Object]   \n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-04-17T12:23:45.000Z",
-    "updateAt": "2022-04-17T20:23:53.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-20T10:31:19.000Z",
     "isCollected": false,
-    "currentIndex": 559,
-    "prev": "07bfb2a3-8a44-492e-9dd2-96c8d85b3cb2",
-    "next": "7e8ffb4e-8433-46cc-b45b-d8733a9c4833"
+    "currentIndex": 613,
+    "filterTotalNum": 1487,
+    "prev": "e79d1df5-690b-428c-846d-9f076e2afae3",
+    "next": "07bfb2a3-8a44-492e-9dd2-96c8d85b3cb2"
   },
   "post": {
     "exerciseKey": "c8997d09-6634-4e27-9f3f-5376a6e97f17",
     "category": "QA",
     "title": "如何区分数组和对象？",
     "level": 1,
-    "updateAt": "2022-04-17T20:23:53+00:00"
+    "createAt": "2022-04-17T12:23:45+00:00",
+    "updateAt": "2024-07-20T10:31:19+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

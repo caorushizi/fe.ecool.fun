@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2475,
+    "exerciseKey": "234049cc-fdfc-4f73-ad2c-e1a03b6cea84",
+    "category": "QA",
+    "renderType": "md",
+    "title": "typeof null 的结果是什么，为什么？",
+    "desc": "",
+    "options": "",
+    "explanation": "`typeof null` 的结果是 `\"object\"`。这是一个 JavaScript 的古老错误，源于语言的早期实现。\n\n### 原因\n\n- **历史原因**：\n  - 在 JavaScript 的早期版本中，`null` 的内部表示被实现为一个空对象指针（即所有位都为0）。在 `typeof` 操作符的实现中，空对象的类型被标记为 `\"object\"`，因此 `typeof null` 也返回 `\"object\"`。\n\n- **语言规范**：\n  - 这个行为是 ECMAScript 规范的一部分，尽管这是一个已知的错误，但为了兼容性和避免破坏旧代码，JavaScript 继续保持这个行为。\n\n### 示例\n\n```javascript\nconsole.log(typeof null); // \"object\"\n```",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 0.5,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:26.000Z",
+    "updateAt": "2024-08-22T04:07:57.000Z",
+    "isCollected": false,
+    "currentIndex": 194,
+    "filterTotalNum": 1487,
+    "prev": "25a1d366-42f6-42e2-9a41-b6dd4624fd55",
+    "next": "9c288de3-0f6e-4a95-a243-d9d01e443b79"
+  },
+  "post": {
+    "exerciseKey": "234049cc-fdfc-4f73-ad2c-e1a03b6cea84",
+    "category": "QA",
+    "title": "typeof null 的结果是什么，为什么？",
+    "level": 0.5,
+    "createAt": "2024-08-13T08:30:26+00:00",
+    "updateAt": "2024-08-22T04:07:57+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 379
+  }
+}

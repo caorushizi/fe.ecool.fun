@@ -1,6 +1,6 @@
 ---
 title: document.write和innerHTML有什么区别
-pubDatetime: 2021-09-25T19:05:16.000Z
+pubDatetime: 2024-08-10T17:05:46.000Z
 author: caorushizi
 tags:
   - JavaScript

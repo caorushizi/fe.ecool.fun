@@ -8,14 +8,15 @@
     "desc": "```js\nfunction promise1 () {\n  let p = new Promise((resolve) => {\n    console.log('promise1');\n    resolve('1')\n  })\n  return p;\n}\nfunction promise2 () {\n  return new Promise((resolve, reject) => {\n    reject('error')\n  })\n}\npromise1()\n  .then(res => console.log(res))\n  .catch(err => console.log(err))\n  .finally(() => console.log('finally1'))\n\npromise2()\n  .then(res => console.log(res))\n  .catch(err => console.log(err))\n  .finally(() => console.log('finally2'))\n\n```",
     "options": null,
     "explanation": "## 执行过程\n\n* 首先定义了两个函数`promise1`和`promise2`，先不管接着往下看。\n* `promise1`函数先被调用了，然后执行里面`new Promise`的同步代码打印出`promise1`\n* 之后遇到了`resolve(1)`，将`p`的状态改为了`resolved`并将结果保存下来。\n* 此时`promise1`内的函数内容已经执行完了，跳出该函数\n* 碰到了`promise1().then()`，由于`promise1`的状态已经发生了改变且为`resolved`。因此将·promise1().then()·这条微任务加入本轮的微任务列表(这是第一个微任务)\n* 这时候要注意了，代码并不会接着往链式调用的下面走，也就是不会先将`.finally`加入微任务列表，那是因为`.then`本身就是一个微任务，它链式后面的内容必须得等当前这个微任务执行完才会执行，因此这里我们先不管`.finally()`\n* 再往下走碰到了`promise2()`函数，其中返回的`new Promise`中并没有同步代码需要执行，所以执行`reject('error')`的时候将`promise2`函数中的`Promise`的状态变为了`rejected`\n* 跳出`promise2`函数，遇到了`promise2().catch()`，将其加入当前的微任务队列(这是第二个微任务)，且链式调用后面的内容得等该任务执行完后才执行，和`.then()`一样。\n* 本轮的宏任务全部执行完了，来看看微任务列表，存在`promise1().then()`，执行它，打印出1，然后遇到了`.finally()`这个微任务将它加入微任务列表(这是第三个微任务)等待执行\n* 再执行`promise2().catch()`打印出`error`，执行完后将`finally2`加入微任务加入微任务列表(这是第四个微任务)\n* 本轮又全部执行完了，但是微任务列表还有两个新的微任务没有执行完，因此依次执行`finally1`和`finally2`。\n\n## 结果\n\n```\n'promise1'\n'1'\n'error'\n'finally1'\n'finally2'\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 4,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-01-09T14:58:41.000Z",
-    "updateAt": "2022-01-09T23:02:13.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-20T11:01:23.000Z",
     "isCollected": false,
-    "currentIndex": 658,
+    "currentIndex": 753,
+    "filterTotalNum": 1487,
     "prev": "3489b960-4172-47f8-9ae2-93616d85009f",
     "next": "e233c823-d125-4abe-b1da-878751a92cd9"
   },
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "【Promise第24题】下面代码的输出是什么？",
     "level": 4,
-    "updateAt": "2022-01-09T23:02:13+00:00"
+    "createAt": "2022-01-09T14:58:41+00:00",
+    "updateAt": "2024-07-20T11:01:23+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

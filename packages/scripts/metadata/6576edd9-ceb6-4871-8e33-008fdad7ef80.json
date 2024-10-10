@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2648,
+    "exerciseKey": "6576edd9-ceb6-4871-8e33-008fdad7ef80",
+    "category": "QA",
+    "renderType": "md",
+    "title": "react 中怎么实现下拉菜单场景，要求点击区域外能关闭下拉组件",
+    "desc": "",
+    "options": "",
+    "explanation": "涉及以下几个步骤：\n\n1. **创建下拉菜单组件**\n2. **监听点击事件**\n3. **判断点击事件是否在下拉菜单外部**\n\n### **步骤说明**\n\n#### **1. 创建下拉菜单组件**\n\n```jsx\nimport React, { useState, useRef, useEffect } from 'react';\n\nconst Dropdown = () => {\n  const [isOpen, setIsOpen] = useState(false);\n  const dropdownRef = useRef(null);\n\n  const toggleDropdown = () => {\n    setIsOpen(!isOpen);\n  };\n\n  // 监听点击事件\n  useEffect(() => {\n    const handleClickOutside = (event) => {\n      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {\n        setIsOpen(false);\n      }\n    };\n\n    document.addEventListener('mousedown', handleClickOutside);\n    return () => {\n      document.removeEventListener('mousedown', handleClickOutside);\n    };\n  }, []);\n\n  return (\n    <div ref={dropdownRef}>\n      <button onClick={toggleDropdown}>\n        Toggle Dropdown\n      </button>\n      {isOpen && (\n        <div className=\"dropdown-menu\">\n          <p>Menu Item 1</p>\n          <p>Menu Item 2</p>\n          <p>Menu Item 3</p>\n        </div>\n      )}\n    </div>\n  );\n};\n\nexport default Dropdown;\n```\n\n#### **2. 监听点击事件**\n\n- 在 `useEffect` 钩子中，添加一个全局的 `mousedown` 事件监听器，用于检测点击是否发生在下拉菜单外部。\n- `handleClickOutside` 函数会检查点击事件的目标是否在下拉菜单外部，如果是则关闭下拉菜单。\n\n#### **3. 判断点击事件是否在下拉菜单外部**\n\n- 使用 `useRef` 钩子获取下拉菜单组件的引用（`dropdownRef`）。\n- `handleClickOutside` 函数中使用 `dropdownRef.current.contains(event.target)` 来判断点击的目标是否在下拉菜单的 DOM 结构内。\n\n### **注意事项**\n\n- 确保 `ref` 正确设置在包含下拉菜单的最外层容器上。\n- 在组件卸载时移除事件监听器，以避免内存泄漏。\n- 在大型应用中，可以考虑使用更复杂的事件处理库或工具来处理全局点击事件。\n\n通过上述步骤，你可以实现点击区域外关闭下拉菜单的功能。",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 3.5,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:36.000Z",
+    "updateAt": "2024-08-15T09:26:21.000Z",
+    "isCollected": false,
+    "currentIndex": 110,
+    "filterTotalNum": 1487,
+    "prev": "cc4f1e33-57aa-487b-9bac-6b16ac8457aa",
+    "next": "5ea871ee-7242-4aa3-9684-bb5ac3be2bed"
+  },
+  "post": {
+    "exerciseKey": "6576edd9-ceb6-4871-8e33-008fdad7ef80",
+    "category": "QA",
+    "title": "react 中怎么实现下拉菜单场景，要求点击区域外能关闭下拉组件",
+    "level": 3.5,
+    "createAt": "2024-08-13T08:30:36+00:00",
+    "updateAt": "2024-08-15T09:26:21+00:00"
+  },
+  "tag": {
+    "id": 75,
+    "tagName": "场景题",
+    "type": "1",
+    "exerciseCount": 39
+  }
+}

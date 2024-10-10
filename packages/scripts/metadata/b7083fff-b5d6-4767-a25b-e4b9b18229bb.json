@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "双线程指的是客户端运行时有两个线程，分别是渲染线程和逻辑线程。\n\n- 渲染线程：负责渲染界面，包括解析WXML和WXSS、样式计算、布局排版和绘制视图等操作。\n\n- 逻辑线程：负责处理业务逻辑和数据处理，包括调用小程序API、处理事件、请求网络等操作。\n\n通过双线程协同工作，可以实现小程序的高性能和流畅体验。当界面需要进行更新时，渲染线程会优先响应，避免造成卡顿；而逻辑线程则负责处理复杂的业务逻辑，不会对界面渲染产生影响。这种设计可以有效地提高小程序的运行效率，同时也能够更好地满足用户对于小程序的使用需求。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-05-28T02:30:33.000Z",
-    "updateAt": "2023-05-31T09:22:19.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:23.000Z",
     "isCollected": false,
-    "currentIndex": 350,
+    "currentIndex": 386,
+    "filterTotalNum": 1487,
     "prev": "be1dfffb-1f1b-43b1-9223-4a57efd1d978",
-    "next": "231bf96d-c071-4e8e-9db8-cd0fa0763fc5"
+    "next": "9e7a00c3-a299-487c-92b0-19cf80db1f45"
   },
   "post": {
     "exerciseKey": "b7083fff-b5d6-4767-a25b-e4b9b18229bb",
     "category": "QA",
     "title": "小程序的双线程分别做的什么事情？",
     "level": 1,
-    "updateAt": "2023-05-31T09:22:19+00:00"
+    "createAt": "2023-05-28T02:30:33+00:00",
+    "updateAt": "2024-08-10T17:07:23+00:00"
   },
   "tag": {
     "id": 23,
     "tagName": "小程序",
     "type": "1",
-    "exerciseCount": 9
+    "exerciseCount": 11
   }
 }

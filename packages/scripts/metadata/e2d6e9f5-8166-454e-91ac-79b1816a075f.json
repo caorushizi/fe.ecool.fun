@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "`useReducer` 是 React Hooks 中的一个函数，用于管理和更新组件的状态。它可以被视为 `useState` 的一种替代方案，适用于处理更复杂的状态逻辑。\n\n使用 `useReducer`，我们首先需要定义一个 reducer 函数，该函数接收当前状态（state）和动作（action）作为参数，并返回新的状态。在组件中，可以通过调用 `useReducer` 来创建一个状态值以及与之配套的派发（dispatch）方法。\n\n下面是一个简单的示例：\n\n```javascript\nimport { useReducer } from 'react';\n\nconst initialState = {\n  count: 0,\n};\n\nconst reducer = (state, action) => {\n  switch (action.type) {\n    case 'increment':\n      return { count: state.count + 1 };\n    case 'decrement':\n      return { count: state.count - 1 };\n    default:\n      throw new Error('Unsupported action type');\n  }\n};\n\nfunction Counter() {\n  const [state, dispatch] = useReducer(reducer, initialState);\n\n  const increment = () => {\n    dispatch({ type: 'increment' });\n  };\n\n  const decrement = () => {\n    dispatch({ type: 'decrement' });\n  };\n\n  return (\n    <div>\n      <p>Count: {state.count}</p>\n      <button onClick={increment}>Increment</button>\n      <button onClick={decrement}>Decrement</button>\n    </div>\n  );\n}\n```\n\n上面的代码定义了一个初始状态对象 `initialState` 和一个 reducer 函数 `reducer`。`reducer` 接收当前状态和动作类型，然后根据动作类型返回新的状态对象。\n\n组件中使用 `useReducer` 创建了一个名为 `state` 的状态值和一个 `dispatch` 方法。通过调用 `dispatch` 方法，我们可以向 reducer 发送一个动作，从而触发状态的更新。在示例中，点击 \"Increment\" 或 \"Decrement\" 按钮会分别派发 `increment` 和 `decrement` 动作。\n\n最后，组件渲染时会展示当前计数器的值以及两个按钮，用于增加或减少计数器的值。\n\n相比于 `useState`，`useReducer` 在处理复杂状态逻辑时更有优势，因为它允许我们将状态更新的逻辑封装在 reducer 函数中，并根据不同的动作类型执行相应的逻辑。这样可以使代码更具可读性和可维护性，并且更容易进行状态追踪和调试。",
+    "pivot": "",
+    "vipLimit": 1,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-10-10T12:42:41.000Z",
-    "updateAt": "2023-09-24T08:39:54.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T22:06:04.000Z",
     "isCollected": false,
-    "currentIndex": 291,
-    "prev": "dbf9172e-1193-44cb-a534-3c16ae07de2d",
-    "next": "289617b6-a28f-4528-be36-ac9e08e9d2c1"
+    "currentIndex": 473,
+    "filterTotalNum": 1487,
+    "prev": "b828c477-4689-4a3d-ab51-e41d76bd62e2",
+    "next": "b837af11-c26f-41d2-b2fc-3610a1575ec2"
   },
   "post": {
     "exerciseKey": "e2d6e9f5-8166-454e-91ac-79b1816a075f",
     "category": "QA",
     "title": "说说你对 useReducer 的理解",
     "level": 3,
-    "updateAt": "2023-09-24T08:39:54+00:00"
+    "createAt": "2022-10-10T12:42:41+00:00",
+    "updateAt": "2024-08-10T22:06:04+00:00"
   },
   "tag": {
     "id": 13,
     "tagName": "React.js",
     "type": "1",
-    "exerciseCount": 101
+    "exerciseCount": 129
   }
 }

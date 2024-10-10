@@ -7,16 +7,17 @@
     "title": "ES5怎么实现继承",
     "desc": null,
     "options": null,
-    "explanation": "## 前言\n继承这个概念在面向对象编程思想里面十分重要，也是面试必考的考点之一。\n\njavascript的继承主要是依托其原型与原型链的概念来实现的。\n\n> ECMAscript将原型链作为实现继承的主要方法。\n\n## 先来看看ES6的实现\n\nES6提供了Class关键字来实现类的定义，Class 可以通过extends关键字实现继承，让子类继承父类的属性和方法。\n\n咱们重点讲一下ES5的四种常用的实现方式。\n\n## ES5实现的四种方式\n\n### 1. 原型链继承\n原型链继承的原理很简单，直接让子类的原型对象指向父类实例，当子类实例找不到对应的属性和方法时，就会往它的原型对象，也就是父类实例上找，从而实现对父类的属性和方法的继承\n```js\nfunction Person() {\n    this.name = 'Back_kk';\n}\nPerson.prototype.getName = function() {\n    return this.name;\n}\nfunction Student() {}\nStudent.prototype = new Person();\n// 根据原型链的规则,顺便绑定一下constructor, 这一步不影响继承, 只是在用到constructor时会需要\n// 原型的实例等于自身\nStudent.prototype.constructor = Student;\n\nconst student = new Student();\nconsole.log(student.name); // Back_kk\nconsole.log(student.getName()); // Back_kk\n\n```\n\n#### 缺陷\n1. 由于所有Student实例原型都指向同一个Person实例, 因此对某个Student实例的来自父类的引用类型变量修改会影响所有的Student实例\n\n例如：\n```js\nfunction Person() {\n    this.obj = {\n        name: 'Back_kk',\n        age: 18\n    };\n}\nfunction Student() {}\nStudent.prototype = new Person();\n// 根据原型链的规则,顺便绑定一下constructor, 这一步不影响继承, 只是在用到constructor时会需要\n// 原型的实例等于自身\nStudent.prototype.constructor = Student;\n\nconst student1 = new Student();\nstudent1.obj.name = '佩奇';\nconst student2 = new Student();\nconsole.log(student2.obj.name); // 佩奇\n```\n\n2. 在创建子类实例时无法向父类构造传参, 即没有实现super()的功能\n> 那么能不能实现super()功能呢？大家有兴趣可以思考下。\n\n### 2. 构造函数继承\n构造函数继承，即在子类的构造函数中执行父类的构造函数，并为其绑定子类的this，让父类的构造函数把成员属性和方法都挂到子类的this上去，这样既能避免实例之间共享一个原型实例，又能向父类构造方法传参。\n\n```js\nfunction Person(name) {\n    this.name = name\n}\nPerson.prototype.getName = function() {\n    return this.name;\n}\nfunction Student() {\n    Person.apply(this, arguments);\n}\n\nconst student = new Student('Back_kk');\nconsole.log(student.name); // Back_kk\n```\n#### 缺陷\n- 继承不到父类原型上的属性和方法\n \n  Students类实际上是调用Person类来生成的实例\n\n  ![image.png](https://static.ecool.fun//article/a50f6973-6894-41cb-97c2-cb712923493d.jpeg)\n\n  能否交加修改让其获取到Person原型上的属性和方法呢？\n\n    ```js\n    function Person(name) {\n        this.name = name\n    }\n    Person.prototype.getName = function() {\n        return this.name;\n    }\n    function Student() {\n        // 这里偷偷用了ES6的解构，不影响大局不要在意哈\n       return new Person(...arguments);\n    }\n    const student = new Student('Back_kk');\n    console.log(student); // Back_kk\n    ```\n    \n    这是这样顾此失彼，student的构造方法变成了Person,这显然违背了我们的初衷。\n    \n    ![image.png](https://static.ecool.fun//article/59ac0d6d-bb41-435f-8732-0cf1e631564c.jpeg)\n\n### 3. 组合式继承\n\n组合是继承结合了原型集成和构造函数继承的特点。\n\n```js\nfunction Person(name) {\n    this.name = name;\n}\nPerson.prototype.getName = function() {\n    return this.name;\n}\nfunction Student() {\n    // 构造函数继承\n    Person.apply(this, arguments)\n}\n// 原型式继承\nStudent.prototype = new Person();\n\n// 原型的实例等于自身\nStudent.prototype.constructor = Student;\n\nconst student = new Student('Back_kk');\nconsole.log(student.name); // Back_kk\nconsole.log(student.getName()); // Back_kk\n\n```\n#### 缺陷\n\n- 每次创建子类实例都执行了两次构造函数(Person.apply和new Person())，虽然这并不影响对父类的继承，但子类创建实例时，原型中会存在两份相同的属性和方法，这并不优雅。\n  \n![image.png](https://static.ecool.fun//article/b145ef13-c51d-433f-80c0-0d7022647cab.jpeg)\n\n### 4. 寄生式组合继承\n\n解决构造函数被执行两次的问题, 我们将指向父类实例改为指向父类原型, 减去一次构造函数的执行。\n\n```js\nfunction Person(name) {\n    this.name = name;\n}\nPerson.prototype.getName = function() {\n    return this.name;\n}\nfunction Student() {\n    // 构造函数继承\n    Person.apply(this, arguments)\n}\n// 原型式继承\n// Student.prototype = new Person();\nStudent.prototype = Object.create(Person.prototype);\n\n// 原型的实例等于自身\nStudent.prototype.constructor = Student;\n\nconst student = new Student('Back_kk');\nconsole.log(student.name); // Back_kk\nconsole.log(student.getName()); // Back_kk\n```\n\n这是目前ES5中比较成熟的继承方式了。\n\n\n## 总结\n- 说到js继承，最开始想到的应该是是原型链继承，通过把子类实例的原型指向父类实例来继承父类的属性和方法，但原型链继承的缺陷在于对子类实例继承的引用类型的修改会影响到所有的实例对象以及无法向父类的构造方法传参。\n- 构造函数继承, 通过在子类构造函数中调用父类构造函数并传入子类this来获取父类的属性和方法，但构造函数继承也存在缺陷，构造函数继承不能继承到父类原型链上的属性和方法。\n- 后面有了组合式继承，但也有了新的问题，每次都会执行两次父类的构造方法，最终有了寄生式组合式继承。\n\n",
+    "explanation": "在 ES5 中，实现继承主要有以下几种方式：\n1. **原型链继承**：\n   通过将一个对象的 `__proto__` 属性指向另一个对象的 `prototype` 属性，可以实现继承。\n   ```javascript\n   function Parent() {\n     this.parentProperty = true;\n   }\n   Parent.prototype.getParentProperty = function() {\n     return this.parentProperty;\n   };\n   function Child() {\n     this.childProperty = false;\n   }\n   // 继承 Parent\n   Child.prototype = new Parent();\n   Child.prototype.getChildProperty = function() {\n     return this.childProperty;\n   };\n   var child = new Child();\n   console.log(child.getParentProperty()); // true\n   console.log(child.getChildProperty()); // false\n   ```\n2. **借用构造函数继承**：\n   通过复制一个对象的属性和方法到另一个对象，实现继承。\n   ```javascript\n   function Parent(name) {\n     this.name = name;\n     this.colors = ['red', 'blue', 'green'];\n   }\n   Parent.prototype.sayName = function() {\n     console.log(this.name);\n   };\n   function Child(name, age) {\n     Parent.call(this, name); // 借用构造函数\n     this.age = age;\n   }\n   var child = new Child('Nicholas', 29);\n   console.log(child.colors); // ['red', 'blue', 'green']\n   console.log(child.age); // 29\n   ```\n3. **组合继承**：\n   结合原型链继承和借用构造函数继承的优点。\n   ```javascript\n   function Parent(name) {\n     this.name = name;\n     this.colors = ['red', 'blue', 'green'];\n   }\n   Parent.prototype.sayName = function() {\n     console.log(this.name);\n   };\n   function Child(name, age) {\n     Parent.call(this, name); // 借用构造函数\n     this.age = age;\n   }\n   Child.prototype = new Parent(); // 原型链继承\n   Child.prototype.sayAge = function() {\n     console.log(this.age);\n   };\n   var child = new Child('Nicholas', 29);\n   console.log(child.colors); // ['red', 'blue', 'green']\n   console.log(child.age); // 29\n   console.log(child.sayName()); // Nicholas\n   console.log(child.sayAge()); // 29\n   ```\n4. **原型式继承**（`Object.create()`）：\n   使用 `Object.create()` 方法创建一个新对象，该对象继承自另一个对象。\n   ```javascript\n   var parent = {\n     colors: ['red', 'blue', 'green']\n   };\n   var child = Object.create(parent);\n   child.name = 'Nicholas';\n   console.log(child.colors); // ['red', 'blue', 'green']\n   ```\n5. **寄生式继承**：\n   通过创建一个继承自原型的对象，然后扩展这个对象，最后返回这个扩展后的对象。\n   ```javascript\n   function createAnother(original) {\n     var clone = Object.create(original);\n     clone.sayHi = function() {\n       console.log('hi');\n     };\n     return clone;\n   }\n   var person = {\n     name: 'Nicholas'\n   };\n   var anotherPerson = createAnother(person);\n   anotherPerson.sayHi(); // hi\n   ```\n6. **寄生组合式继承**：\n   结合原型链继承和寄生式继承的优点，通过调用超类型的构造函数来继承属性，然后通过原型链继承方法。\n   ```javascript\n   function inheritPrototype(subType, superType) {\n     var prototype = Object.create(superType.prototype);\n     prototype.constructor = subType;\n     subType.prototype = prototype;\n   }\n   function Parent(name) {\n     this.name = name;\n     this.colors = ['red', 'blue', 'green'];\n   }\n   Parent.prototype.sayName\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-03-27T14:25:19.000Z",
-    "updateAt": "2024-01-25T19:45:55.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:06:23.000Z",
     "isCollected": false,
-    "currentIndex": 38,
-    "prev": "6201f33e-f962-4cdc-ab01-59d03993fed8",
+    "currentIndex": 654,
+    "filterTotalNum": 1487,
+    "prev": "485b5052-3119-4ced-9473-940489629f99",
     "next": "be6f7f8b-d386-4f99-a0bc-f9b5a0512f99"
   },
   "post": {
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "ES5怎么实现继承",
     "level": 3,
-    "updateAt": "2024-01-25T19:45:55+00:00"
+    "createAt": "2022-03-27T14:25:19+00:00",
+    "updateAt": "2024-08-10T17:06:23+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

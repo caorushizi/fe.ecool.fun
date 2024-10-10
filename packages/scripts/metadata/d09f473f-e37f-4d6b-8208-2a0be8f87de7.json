@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "`Proxy`可以监听到对象中的对象的引用。\n\n当使用`Proxy`包装一个对象时，可以为该对象的任何属性创建一个拦截器，包括属性值为对象的情况。\n\n下面展示了如何使用`Proxy`来监听对象中对象引用的变化：\n\n```javascript\nconst obj = {\n  nestedObj: { foo: 'bar' }\n}\n\nconst handler = {\n  get(target, prop, receiver) {\n    const value = Reflect.get(target, prop, receiver)\n    if (typeof value === 'object' && value !== null) {\n      return new Proxy(value, handler)\n    }\n    console.log('get', prop, target[prop])\n    return value\n  },\n  set(target, property, value) {\n    target[property] = value\n    console.log(`Setting property '${property}' to '${value}'`)\n    return true\n  }\n}\n\nconst proxyObj = new Proxy(obj, handler)\nproxyObj.nestedObj.foo = 'baz'  // 输出: Setting property 'foo' to 'baz'\n```\n\n我们通过`Proxy`创建了一个代理对象`proxyObj`，它包装了原始的`obj`。然后，我们对`proxyObj`中的`nestedObj.foo`进行赋值操作，这会触发`set`拦截器，并打印相应的信息。\n\n通过使用适当的拦截器函数，可以实现对对象中对象引用的监听和修改。这使得我们可以在需要时执行自定义的操作，例如记录更改、验证或触发其他事件等。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-12-17T10:03:02.000Z",
-    "updateAt": "2024-03-25T23:12:25.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:31.000Z",
     "isCollected": false,
-    "currentIndex": 3,
-    "prev": "26e22fa9-becc-4552-b79a-da2f67451455",
-    "next": "0de1d7b2-794c-4867-a61c-7840ae0eafdc"
+    "currentIndex": 331,
+    "filterTotalNum": 1487,
+    "prev": "6d66ddb0-f53a-4286-b5e1-bf7ca3bcd34e",
+    "next": "7053c84f-1316-43f2-a2ba-23fb00318220"
   },
   "post": {
     "exerciseKey": "d09f473f-e37f-4d6b-8208-2a0be8f87de7",
     "category": "QA",
     "title": "Proxy 能够监听到对象中的对象的引用吗？",
     "level": 2,
-    "updateAt": "2024-03-25T23:12:25+00:00"
+    "createAt": "2023-12-17T10:03:02+00:00",
+    "updateAt": "2024-08-10T17:07:31+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

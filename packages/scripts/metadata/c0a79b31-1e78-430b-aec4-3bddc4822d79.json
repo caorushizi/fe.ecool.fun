@@ -8,14 +8,15 @@
     "desc": null,
     "options": null,
     "explanation": "## 什么是 HTTP 队头阻塞？\n\nHTTP 传输是基于`请求-应答`的模式进行的，报文必须是一发一收，但值得注意的是，里面的任务被放在一个任务队列中串行执行，一旦队首的请求处理太慢，就会阻塞后面请求的处理。这就是著名的 **HTTP队头阻塞** 问题。\n\n## 并发连接\n\n对于一个域名允许分配多个长连接，那么相当于增加了任务队列，不至于一个队伍的任务阻塞其它所有任务。在RFC2616规定过客户端最多并发 2 个连接，不过事实上在现在的浏览器标准中，这个上限要多很多，Chrome 中是 6 个。\n\n但其实，即使是提高了并发连接，还是不能满足人们对性能的需求。\n\n## 域名分片\n\n一个域名不是可以并发 6 个长连接吗？那我就多分几个域名。\n\n比如 static1.test.com 、static2.test.com。\n\n这样一个 test.com 域名下可以分出非常多的二级域名，而它们都指向同样的一台服务器，能够并发的长连接数更多了，事实上也更好地解决了队头阻塞的问题。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-02-06T13:27:30.000Z",
-    "updateAt": "2022-02-06T21:48:01.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:06:08.000Z",
     "isCollected": false,
-    "currentIndex": 612,
+    "currentIndex": 703,
+    "filterTotalNum": 1487,
     "prev": "596630fb-95e6-43c4-a1cc-48683233ae76",
     "next": "2efd0e6a-c70c-4df5-965d-4e13b48fbd21"
   },
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "HTTP1.1 中如何解决 HTTP 的队头阻塞问题？",
     "level": 2,
-    "updateAt": "2022-02-06T21:48:01+00:00"
+    "createAt": "2022-02-06T13:27:30+00:00",
+    "updateAt": "2024-08-10T17:06:08+00:00"
   },
   "tag": {
     "id": 16,
     "tagName": "计算机网络",
     "type": "1",
-    "exerciseCount": 72
+    "exerciseCount": 95
   }
 }

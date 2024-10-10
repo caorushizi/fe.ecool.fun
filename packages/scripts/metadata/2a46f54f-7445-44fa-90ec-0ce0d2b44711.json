@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "## 参数\n\n首先，map和filter函数的参数，是完全相同的\n\n> array.map(function(currentValue,index,arr), thisValue)\n> \n> array.filter(function(currentValue,index,arr), thisValue)\n\n* currentValue：数组元素；\n* index：索引\n* arr：原数组；\n* thisValue：作为该执行回调时使用，传递给函数，用作 \"this\" 的值\n\n## 用途\n\n但是在用途上，它们是有区别的：  \n\n1. map方法返回的新数组是原数组的映射，何为映射？就是和原数组的长度相同，数值做相应处理。  \n2. filter方法返回的值是过滤原数组后的新数组，和原数组长度不同，数值不变。  \n\n**示例**：\n\n```\nlet arr = [\"1\",\"2\",\"3\"];\nlet a = arr.map((item,index,a) =>{\n    return item + 1\n});\nconsole.log(a);//[\"11\", \"21\", \"31\"]\nlet b = arr.filter((item,index,a) =>{\n    return item > 1\n})\nconsole.log(b);//[\"2\", \"3\"]\n```\n\n另外，filter可过滤NaN、null、undefined、0\n\n```js\nlet arr = [NaN,null,undefined,\"0\",0,1,2,3];\nlet newArr = arr.filter(item => item);\nconsole.log(newArr);//[\"0\", 1, 2, 3]\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-10-09T11:46:06.000Z",
-    "updateAt": "2022-10-09T19:46:10.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:00.000Z",
     "isCollected": false,
-    "currentIndex": 482,
+    "currentIndex": 493,
+    "filterTotalNum": 1487,
     "prev": "0ea76a47-8e0f-4d79-81a6-7ca371b1ea8c",
-    "next": "bae25a07-be25-4857-ae96-9f9e1130286e"
+    "next": "da41ddaa-57d7-405e-83d8-8cc56fca6ec1"
   },
   "post": {
     "exerciseKey": "2a46f54f-7445-44fa-90ec-0ce0d2b44711",
     "category": "QA",
     "title": "map和 filter 有什么区别？",
     "level": 1,
-    "updateAt": "2022-10-09T19:46:10+00:00"
+    "createAt": "2022-10-09T11:46:06+00:00",
+    "updateAt": "2024-08-10T17:07:00+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

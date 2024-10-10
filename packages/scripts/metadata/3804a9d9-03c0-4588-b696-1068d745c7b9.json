@@ -8,15 +8,16 @@
     "desc": null,
     "options": null,
     "explanation": "## 一、是什么\n\nImmutable，不可改变的，在计算机中，即指一旦创建，就不能再被更改的数据\n\n对 `Immutable `对象的任何修改或添加删除操作都会返回一个新的 `Immutable `对象\n\n`Immutable` 实现的原理是 `Persistent Data Structure`（持久化数据结构）:\n\n- 用一种数据结构来保存数据\n- 当数据被修改时，会返回一个对象，但是新的对象会尽可能的利用之前的数据结构而不会对内存造成浪费\n\n也就是使用旧数据创建新数据时，要保证旧数据同时可用且不变，同时为了避免 `deepCopy `把所有节点都复制一遍带来的性能损耗，`Immutable` 使用了 `Structural Sharing`（结构共享）\n\n如果对象树中一个节点发生变化，只修改这个节点和受它影响的父节点，其它节点则进行共享\n\n![](https://pic4.zhimg.com/80/2b4c801a7b40eefcd4ee6767fb984fdf_720w.gif)\n\n\n\n## 二、如何使用\n\n使用`Immutable`对象最主要的库是`immutable.js`\n\nimmutable.js 是一个完全独立的库，无论基于什么框架都可以用它\n\n其出现场景在于弥补 Javascript 没有不可变数据结构的问题，通过 structural sharing来解决的性能问题\n\n内部提供了一套完整的 Persistent Data Structure，还有很多易用的数据类型，如`Collection`、`List`、`Map`、`Set`、`Record`、`Seq`，其中：\n\n- List: 有序索引集，类似 JavaScript 中的 Array\n\n- Map: 无序索引集，类似 JavaScript 中的 Object\n\n- Set: 没有重复值的集合\n\n\n\n主要的方法如下：\n\n- fromJS()：将一个js数据转换为Immutable类型的数据\n\n```js\nconst obj = Immutable.fromJS({a:'123',b:'234'})\n```\n\n- toJS()：将一个Immutable数据转换为JS类型的数据\n- is()：对两个对象进行比较\n\n```js\nimport { Map, is } from 'immutable'\nconst map1 = Map({ a: 1, b: 1, c: 1 })\nconst map2 = Map({ a: 1, b: 1, c: 1 })\nmap1 === map2   //false\nObject.is(map1, map2) // false\nis(map1, map2) // true\n```\n\n- get(key)：对数据或对象取值\n\n- getIn([]) ：对嵌套对象或数组取值，传参为数组，表示位置\n\n```js\nlet abs = Immutable.fromJS({a: {b:2}});\nabs.getIn(['a', 'b']) // 2\nabs.getIn(['a', 'c']) // 子级没有值\n\nlet arr = Immutable.fromJS([1 ,2, 3, {a: 5}]);\narr.getIn([3, 'a']); // 5\narr.getIn([3, 'c']); // 子级没有值\n```\n\n- \n\n如下例子：使用方法如下：\n\n```js\nimport Immutable from 'immutable';\nfoo = Immutable.fromJS({a: {b: 1}});\nbar = foo.setIn(['a', 'b'], 2);   // 使用 setIn 赋值\nconsole.log(foo.getIn(['a', 'b']));  // 使用 getIn 取值，打印 1\nconsole.log(foo === bar);  //  打印 false\n```\n\n如果换到原生的`js`，则对应如下：\n\n```js\nlet foo = {a: {b: 1}};\nlet bar = foo;\nbar.a.b = 2;\nconsole.log(foo.a.b);  // 打印 2\nconsole.log(foo === bar);  //  打印 true\n```\n\n\n\n## 三、在React中应用\n\n使用 `Immutable `可以给 `React` 应用带来性能的优化，主要体现在减少渲染的次数\n\n在做`react`性能优化的时候，为了避免重复渲染，我们会在`shouldComponentUpdate()`中做对比，当返回`true`执行`render`方法\n\n`Immutable`通过`is`方法则可以完成对比，而无需像一样通过深度比较的方式比较\n\n在使用`redux`过程中也可以结合`Immutable`，不使用`Immutable`前修改一个数据需要做一个深拷贝\n\n```jsx\nimport '_' from 'lodash';\n\nconst Component = React.createClass({\n  getInitialState() {\n    return {\n      data: { times: 0 }\n    }\n  },\n  handleAdd() {\n    let data = _.cloneDeep(this.state.data);\n    data.times = data.times + 1;\n    this.setState({ data: data });\n  }\n}\n```\n\n使用 Immutable 后：\n\n```jsx\ngetInitialState() {\n  return {\n    data: Map({ times: 0 })\n  }\n},\n  handleAdd() {\n    this.setState({ data: this.state.data.update('times', v => v + 1) });\n    // 这时的 times 并不会改变\n    console.log(this.state.data.get('times'));\n  }\n```\n\n同理，在`redux`中也可以将数据进行`fromJS`处理\n\n```js\nimport * as constants from './constants'\nimport {fromJS} from 'immutable'\nconst defaultState = fromJS({ //将数据转化成immutable数据\n    home:true,\n    focused:false,\n    mouseIn:false,\n    list:[],\n    page:1,\n    totalPage:1\n})\nexport default(state=defaultState,action)=>{\n    switch(action.type){\n        case constants.SEARCH_FOCUS:\n            return state.set('focused',true) //更改immutable数据\n        case constants.CHANGE_HOME_ACTIVE:\n            return state.set('home',action.value)\n        case constants.SEARCH_BLUR:\n            return state.set('focused',false)\n        case constants.CHANGE_LIST:\n            // return state.set('list',action.data).set('totalPage',action.totalPage)\n            //merge效率更高，执行一次改变多个数据\n            return state.merge({\n                list:action.data,\n                totalPage:action.totalPage\n            })\n        case constants.MOUSE_ENTER:\n            return state.set('mouseIn',true)\n        case constants.MOUSE_LEAVE:\n            return state.set('mouseIn',false)\n        case constants.CHANGE_PAGE:\n            return state.set('page',action.page)\n        default:\n            return state\n    }\n}\n```\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-10-24T04:21:08.000Z",
-    "updateAt": "2024-01-25T19:26:42.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:52.000Z",
     "isCollected": false,
-    "currentIndex": 62,
-    "prev": "5438d05b-ec3b-42f6-8819-1f73213d654b",
+    "currentIndex": 847,
+    "filterTotalNum": 1487,
+    "prev": "44c29904-83b1-4e51-905e-2bd3599f9e45",
     "next": "6eec7f26-3bdc-4015-86fc-a75d495311a6"
   },
   "post": {
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "说说你对immutable的理解？如何应用在react项目中？",
     "level": 3,
-    "updateAt": "2024-01-25T19:26:42+00:00"
+    "createAt": "2021-10-24T04:21:08+00:00",
+    "updateAt": "2024-08-10T17:05:52+00:00"
   },
   "tag": {
     "id": 13,
     "tagName": "React.js",
     "type": "1",
-    "exerciseCount": 101
+    "exerciseCount": 129
   }
 }

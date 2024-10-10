@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "在 Vue2.x 的版本中，双向绑定是基于 Object.defineProperty 方式实现的。而 Vue3.x 版本中，使用了 ES6 中的 Proxy 代理的方式实现。\n\n## Object.defineProperty(obj, prop, descriptor)\n\n使用 Object.defineProperty 会产生三个主要的问题：\n\n* 不能监听数组的变化\n\n在 Vue2.x 中解决数组监听的方法是将能够改变原数组的方法进行重写实现（比如：push、 pop、shift、unshift、splice、sort、reverse），举例：\n\n```javascript\n// 我们重写 push 方法\nconst originalPush = Array.prototype.push\n\nArray.prototype.push = function() {\n  // 我们在这个位置就可以进行 数据劫持 了\n  console.log('数组被改变了')\n\n  originalPush.apply(this, arguments)\n}\n```\n\n* 必须遍历对象的每个属性\n\n可以通过 Object.keys() 来实现\n\n* 必须深层遍历嵌套的对象\n\n通过递归深层遍历嵌套对象，然后通过 Object.keys() 来实现对每个属性的劫持\n\n## Proxy\n\n* Proxy 针对的整个对象，Object.defineProperty 针对单个属性，这就解决了 需要对对象进行深度递归（支持嵌套的复杂对象劫持）实现对每个属性劫持的问题\n\n```javascript\n// 定义一个复杂对象\nconst obj = {\n    obj: {\n        children: {\n            a: 1\n        }\n    }\n}\n\nconst objProxy = new Proxy(obj, {\n    get(target, property, receiver){\n        console.log('-- target --')\n        return Reflect.get(target, property, receiver)\n    },\n\n    set(target, property, value, receiver) {\n        console.log('-- set --')\n        return Reflect.set(target, property, value, receiver)\n    }\n})\n\nconsole.log(objProxy.obj) // 输出 '-- target --'\nconsole.log(objProxy.a = 2) // 输出 '-- set --'\n```\n\n* Proxy 解决了 Object.defineProperty 无法劫持数组的问题\n\n```javascript\nconst ary = [1, 2, 3]\n\nconst aryProxy = new Proxy(ary, {\n    get(target, property, receiver){\n        console.log('-- target --')\n        return Reflect.get(target, property, receiver)\n    },\n    set(target, property, value, receiver) {\n        console.log('-- set --')\n        return Reflect.set(target, property, value, receiver)\n    }\n})\n\nconsole.log(aryProxy[0]) // 输出 '-- target --'\nconsole.log(aryProxy.push(1)) // 输出 '-- set --'\n```\n\n*  比 Object.defineProperty 有更多的拦截方法，对比一些新的浏览器，可能会对 Proxy 针正对性的优化，有助于性能提升\n\n\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-08-07T08:36:38.000Z",
-    "updateAt": "2021-08-08T18:51:51.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:38.000Z",
     "isCollected": false,
-    "currentIndex": 797,
+    "currentIndex": 924,
+    "filterTotalNum": 1487,
     "prev": "c6db446a-bbc3-42a9-bc4a-aeecfde8bcbc",
-    "next": "394752d7-88aa-4512-bd7e-91711a3904b7"
+    "next": "a93416a5-73ab-49be-98d0-42c829616f9a"
   },
   "post": {
     "exerciseKey": "09420ad4-4cd0-4c3d-9b56-970e21c8f208",
     "category": "QA",
     "title": "谈谈 Object.defineProperty 与 Proxy 的区别",
     "level": 3,
-    "updateAt": "2021-08-08T18:51:51+00:00"
+    "createAt": "2021-08-07T08:36:38+00:00",
+    "updateAt": "2024-08-10T17:05:38+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

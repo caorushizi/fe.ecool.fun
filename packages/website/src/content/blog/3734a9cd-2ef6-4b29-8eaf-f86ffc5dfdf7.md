@@ -1,6 +1,6 @@
 ---
 title: 下面代码的输出是什么？
-pubDatetime: 2023-05-31T09:23:49.000Z
+pubDatetime: 2024-08-10T17:07:24.000Z
 author: caorushizi
 tags:
   - JavaScript

@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2534,
+    "exerciseKey": "aca0e222-cb95-4ea8-a763-fd9a0fa65f28",
+    "category": "QA",
+    "renderType": "md",
+    "title": "React 中的 createContext 和 useContext 分别有什么用？",
+    "desc": "",
+    "options": "",
+    "explanation": "在 React 中，`createContext` 和 `useContext` 是处理上下文的两个相关 API，但它们的功能和用途有所不同：\n\n### **1. `createContext`**\n\n- **作用**：用于创建一个新的上下文对象。\n- **用法**：调用 `createContext` 会返回一个上下文对象，这个对象包含 `Provider` 和 `Consumer` 组件。`Provider` 用于提供上下文的值，而 `Consumer` 用于消费上下文的值。\n- **示例**：\n  ```jsx\n  // 创建上下文对象\n  const MyContext = createContext(defaultValue);\n\n  // 提供上下文的值\n  <MyContext.Provider value={someValue}>\n    {/* 子组件 */}\n  </MyContext.Provider>\n\n  // 消费上下文的值\n  <MyContext.Consumer>\n    {value => /* 使用上下文的值 */}\n  </MyContext.Consumer>\n  ```\n\n### **2. `useContext`**\n\n- **作用**：用于在函数组件中访问上下文的值。\n- **用法**：`useContext` 是一个 Hook，用于在函数组件中消费上下文的值，而不需要使用 `Consumer` 组件。\n- **示例**：\n  ```jsx\n  import { useContext } from 'react';\n\n  // 在函数组件中访问上下文\n  const value = useContext(MyContext);\n  ```",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 3,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:31.000Z",
+    "updateAt": "2024-08-17T05:01:44.000Z",
+    "isCollected": false,
+    "currentIndex": 172,
+    "filterTotalNum": 1487,
+    "prev": "4a14911d-182b-469d-986f-ad13b95e195e",
+    "next": "e4212521-3153-49c6-82ed-5f708c720a03"
+  },
+  "post": {
+    "exerciseKey": "aca0e222-cb95-4ea8-a763-fd9a0fa65f28",
+    "category": "QA",
+    "title": "React 中的 createContext 和 useContext 分别有什么用？",
+    "level": 3,
+    "createAt": "2024-08-13T08:30:31+00:00",
+    "updateAt": "2024-08-17T05:01:44+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 129
+  }
+}

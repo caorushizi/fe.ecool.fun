@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2658,
+    "exerciseKey": "adefec84-bbf1-4d1e-995f-cc5b75638e43",
+    "category": "QA",
+    "renderType": "md",
+    "title": "怎么实现同一个链接，PC 访问是 web 应用，而手机打开是一个 H5 应用？",
+    "desc": "",
+    "options": "",
+    "explanation": "要实现同一个链接在 PC 上打开 Web 应用，在手机上打开 H5 应用，可以利用用户代理检测和条件渲染。以下是常见的实现方法：\n\n### **1. 服务器端检测用户代理**\n\n在服务器端，根据用户的请求头中的 `User-Agent` 字段来判断是 PC 还是手机访问，并返回不同的应用内容。\n\n#### **示例（Node.js/Express）**\n\n```javascript\nconst express = require('express');\nconst app = express();\n\napp.get('/', (req, res) => {\n  const userAgent = req.headers['user-agent'];\n  const isMobile = /mobile/i.test(userAgent);\n\n  if (isMobile) {\n    // 返回 H5 应用\n    res.sendFile(__dirname + '/path/to/mobile/index.html');\n  } else {\n    // 返回 Web 应用\n    res.sendFile(__dirname + '/path/to/pc/index.html');\n  }\n});\n\napp.listen(3000, () => {\n  console.log('Server running on http://localhost:3000');\n});\n```\n\n### **2. 客户端检测用户代理**\n\n在客户端使用 JavaScript 检测用户设备类型，然后动态加载适合的内容或重定向到不同的页面。\n\n#### **示例（客户端 JavaScript）**\n\n```javascript\nif (/mobile/i.test(navigator.userAgent)) {\n  // 重定向到 H5 应用\n  window.location.href = 'https://m.example.com';\n} else {\n  // 继续显示 Web 应用\n}\n```\n\n### **3. 使用响应式设计**\n\n通过响应式设计来适配不同设备，所有内容都可以在同一 URL 上访问，但会根据设备的屏幕尺寸和特性显示不同的内容。\n\n#### **示例（CSS 媒体查询）**\n\n```css\n/* 手机样式 */\n@media only screen and (max-width: 600px) {\n  .web-app {\n    display: none;\n  }\n  .h5-app {\n    display: block;\n  }\n}\n\n/* PC 样式 */\n@media only screen and (min-width: 601px) {\n  .web-app {\n    display: block;\n  }\n  .h5-app {\n    display: none;\n  }\n}\n```\n\n### **4. 使用框架或库**\n\n有些前端框架和库支持根据设备类型动态加载不同的内容。你可以利用这些工具进行设备适配。\n\n#### **示例（React）**\n\n```javascript\nimport React from 'react';\nimport { useMediaQuery } from 'react-responsive';\n\nconst App = () => {\n  const isMobile = useMediaQuery({ query: '(max-width: 600px)' });\n\n  return (\n    <div>\n      {isMobile ? <MobileApp /> : <PCApp />}\n    </div>\n  );\n};\n```",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 2,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:36.000Z",
+    "updateAt": "2024-08-15T09:14:20.000Z",
+    "isCollected": false,
+    "currentIndex": 104,
+    "filterTotalNum": 1487,
+    "prev": "6af76893-a110-42f3-ba2c-3b82b42a87e2",
+    "next": "892f8cb0-4fab-4d43-8586-90b83e9da3aa"
+  },
+  "post": {
+    "exerciseKey": "adefec84-bbf1-4d1e-995f-cc5b75638e43",
+    "category": "QA",
+    "title": "怎么实现同一个链接，PC 访问是 web 应用，而手机打开是一个 H5 应用？",
+    "level": 2,
+    "createAt": "2024-08-13T08:30:36+00:00",
+    "updateAt": "2024-08-15T09:14:20+00:00"
+  },
+  "tag": {
+    "id": 75,
+    "tagName": "场景题",
+    "type": "1",
+    "exerciseCount": 39
+  }
+}

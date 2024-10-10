@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2724,
+    "exerciseKey": "3c436b0a-3f53-4b66-a5cf-3ce6aef339c8",
+    "category": "QA",
+    "renderType": "md",
+    "title": "实现 table header 吸顶， 有哪些实现方式？",
+    "desc": "",
+    "options": "",
+    "explanation": "实现 table header 吸顶的效果有几种方法，主要包括使用 CSS 的 `position: sticky` 属性、JavaScript 的滚动监听、以及使用第三方库。\n\n以下是常见的实现方式：\n\n### **1. 使用 `position: sticky`**\n\n- **定义**：CSS `position: sticky` 属性使元素在滚动到一定位置时固定在视口的某个位置。\n- **实现**：\n  ```html\n  <style>\n    .table-container {\n      max-height: 400px; /* 限制表格容器的高度 */\n      overflow-y: auto;  /* 启用垂直滚动条 */\n    }\n    table {\n      width: 100%;\n      border-collapse: collapse;\n    }\n    th {\n      position: sticky;\n      top: 0; /* 吸顶位置 */\n      background: #f1f1f1; /* 背景色以遮盖滚动内容 */\n      z-index: 1; /* 确保 th 在内容之上 */\n    }\n  </style>\n  <div class=\"table-container\">\n    <table>\n      <thead>\n        <tr>\n          <th>Header 1</th>\n          <th>Header 2</th>\n          <th>Header 3</th>\n        </tr>\n      </thead>\n      <tbody>\n        <!-- Table rows go here -->\n      </tbody>\n    </table>\n  </div>\n  ```\n\n### **2. 使用 JavaScript 滚动监听**\n\n- **定义**：通过监听滚动事件，将表头的 `position` 设置为 `fixed` 来实现吸顶效果。\n- **实现**：\n  ```html\n  <style>\n    .table-container {\n      max-height: 400px; /* 限制表格容器的高度 */\n      overflow-y: auto;  /* 启用垂直滚动条 */\n    }\n    table {\n      width: 100%;\n      border-collapse: collapse;\n    }\n    th.fixed {\n      position: fixed;\n      top: 0; /* 吸顶位置 */\n      background: #f1f1f1; /* 背景色以遮盖滚动内容 */\n      z-index: 1; /* 确保 th 在内容之上 */\n    }\n  </style>\n  <div class=\"table-container\" id=\"tableContainer\">\n    <table>\n      <thead>\n        <tr id=\"header\">\n          <th>Header 1</th>\n          <th>Header 2</th>\n          <th>Header 3</th>\n        </tr>\n      </thead>\n      <tbody>\n        <!-- Table rows go here -->\n      </tbody>\n    </table>\n  </div>\n\n  <script>\n    const tableContainer = document.getElementById('tableContainer');\n    const header = document.getElementById('header');\n\n    tableContainer.addEventListener('scroll', () => {\n      if (tableContainer.scrollTop > 0) {\n        header.classList.add('fixed');\n      } else {\n        header.classList.remove('fixed');\n      }\n    });\n  </script>\n  ```\n\n### **3. 使用第三方库**\n\n- **例子**：可以使用像 [DataTables](https://datatables.net/) 或 [Sticky Table Headers](https://github.com/wycats/sticky-table-headers) 这样的库，它们提供了更复杂的表头固定功能和其他表格功能。\n- **实现**：通常只需要引入库和配置选项即可实现固定表头的效果。例如，使用 DataTables 的配置选项：\n  ```javascript\n  $(document).ready(function() {\n    $('#example').DataTable({\n      scrollY: '400px',\n      scrollCollapse: true,\n      paging: false\n    });\n  });\n  ```",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 3,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:41.000Z",
+    "updateAt": "2024-08-14T20:34:21.000Z",
+    "isCollected": false,
+    "currentIndex": 69,
+    "filterTotalNum": 1487,
+    "prev": "afa95f31-3fde-4017-b247-c901df3c8fc9",
+    "next": "de824eed-a719-4325-9c5e-143ac50891df"
+  },
+  "post": {
+    "exerciseKey": "3c436b0a-3f53-4b66-a5cf-3ce6aef339c8",
+    "category": "QA",
+    "title": "实现 table header 吸顶， 有哪些实现方式？",
+    "level": 3,
+    "createAt": "2024-08-13T08:30:41+00:00",
+    "updateAt": "2024-08-14T20:34:21+00:00"
+  },
+  "tag": {
+    "id": 75,
+    "tagName": "场景题",
+    "type": "1",
+    "exerciseCount": 39
+  }
+}

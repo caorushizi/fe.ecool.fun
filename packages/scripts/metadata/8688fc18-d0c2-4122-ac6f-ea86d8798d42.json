@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "## 一、作用\n\n`v-if` 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 `true`值的时候被渲染\n\n`v-for` 指令基于一个数组来渲染一个列表。`v-for` 指令需要使用 `item in items` 形式的特殊语法，其中 `items` 是源数据数组或者对象，而 `item` 则是被迭代的数组元素的别名\n\n在 `v-for` 的时候，建议设置`key`值，并且保证每个`key`值是独一无二的，这便于`diff`算法进行优化\n\n两者在用法上\n\n```js\n<Modal v-if=\"isShow\" />\n\n<li v-for=\"item in items\" :key=\"item.id\">\n    {{ item.label }}\n</li>\n```\n\n## 二、优先级\n\n`v-if`与`v-for`都是`vue`模板系统中的指令\n\n在`vue`模板编译的时候，会将指令系统转化成可执行的`render`函数\n\n在 `Vue2` 当中，v-for的优先级更高，而在 `Vue3` 当中，则是v-if的优先级更高。\n\n在 `Vue3` 当中，做了v-if的提升优化，去除了没有必要的计算，但同时也会带来一个无法取到 `v-for` 当中遍历的item问题，这就需要开发者们采取其他灵活的方式去解决这种问题。\n\n## 三、注意事项\n\n1. 永远不要把 `v-if` 和 `v-for` 同时用在同一个元素上，带来性能方面的浪费（每次渲染都会先循环再进行条件判断）\n2. 如果避免出现这种情况，则在外层嵌套`template`（页面渲染不生成`dom`节点），在这一层进行v-if判断，然后在内部进行v-for循环\n\n```js\n<template v-if=\"isShow\">\n    <p v-for=\"item in items\">\n</template>\n```\n\n3. 如果条件出现在循环内部，可通过计算属性`computed`提前过滤掉那些不需要显示的项\n\n```js\ncomputed: {\n    items: function() {\n      return this.list.filter(function (item) {\n        return item.isShow\n      })\n    }\n}\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T03:32:53.000Z",
-    "updateAt": "2023-04-18T09:04:00.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:04:39.000Z",
     "isCollected": false,
-    "currentIndex": 402,
-    "prev": "fa381450-0faf-4395-9207-7fa114c27440",
-    "next": "63d73ae0-ea78-4b4c-8a85-6be7513a62a4"
+    "currentIndex": 1270,
+    "filterTotalNum": 1487,
+    "prev": "a5032eb9-6a53-4792-852f-3f9417631c47",
+    "next": "cf1e843f-9005-42dc-b204-194dd3d1fc42"
   },
   "post": {
     "exerciseKey": "8688fc18-d0c2-4122-ac6f-ea86d8798d42",
     "category": "QA",
     "title": "为什么Vue中的v-if和v-for不建议一起用?",
     "level": 1,
-    "updateAt": "2023-04-18T09:04:00+00:00"
+    "createAt": "2021-07-04T03:32:53+00:00",
+    "updateAt": "2024-08-10T17:04:39+00:00"
   },
   "tag": {
     "id": 14,
     "tagName": "Vue.js",
     "type": "1",
-    "exerciseCount": 68
+    "exerciseCount": 97
   }
 }

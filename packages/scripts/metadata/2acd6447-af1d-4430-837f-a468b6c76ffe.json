@@ -8,14 +8,15 @@
     "desc": null,
     "options": null,
     "explanation": "在 HTML 中会遇到以下三类 script：\n\n```\n<script src='xxx'></script>\n<script src='xxx' async></script>\n<script src='xxx' defer></script>\n```\n\nscript标签用于加载脚本与执行脚本，直接使用script脚本时，html会按照顺序来加载并执行脚本，在脚本加载&执行的过程中，会阻塞后续的DOM渲染。\n\n比如现在大家习惯于在页面中引用各种第三方脚本，但如果第三方服务商出现了一些小问题，比如延迟之类的，就会使得页面白屏。\n\n针对上述情况，script标签提供了两种方式来解决问题，就是加入属性async以及defer，这两个属性使得script标签加载都不会阻塞DOM的渲染。\n\n```\ndefer：此布尔属性被设置为向浏览器指示脚本在文档被解析后执行。\nasync：设置此布尔属性，以指示浏览器如果可能的话，应异步执行脚本。\n```\n\n## defer\n\n如果script标签设置了defer属性，则浏览器会异步下载该文件并且不会影响后续DOM的渲染。\n\n如果有多个设置了defer属性的script标签存在，则会按照顺序执行所有的script，defer脚本会在文档渲染完毕后，DOMContentLoaded事件调用前执行。\n\n## async\n\nasync属性会使得script脚本异步的加载并在允许的情况下执行，而async的执行并不会按照script标签在页面中的顺序来执行，而是谁先加载完谁先执行。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T05:25:30.000Z",
-    "updateAt": "2021-07-04T16:01:10.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:04:52.000Z",
     "isCollected": false,
-    "currentIndex": 1058,
+    "currentIndex": 1238,
+    "filterTotalNum": 1487,
     "prev": "a75b1e9d-9359-47b0-8614-1088eee4b085",
     "next": "c849aa25-0dae-49aa-8148-b1c410a7aa1e"
   },
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "script 标签中， async 和 defer 两个属性有什么用途和区别？",
     "level": 2,
-    "updateAt": "2021-07-04T16:01:10+00:00"
+    "createAt": "2021-07-04T05:25:30+00:00",
+    "updateAt": "2024-08-10T17:04:52+00:00"
   },
   "tag": {
     "id": 12,
     "tagName": "HTML",
     "type": "1",
-    "exerciseCount": 57
+    "exerciseCount": 68
   }
 }

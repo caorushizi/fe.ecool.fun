@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2882,
+    "exerciseKey": "d95319f5-e060-4727-a7a4-d4996c00a6c7",
+    "category": "QA",
+    "renderType": "md",
+    "title": "现在要开发一个响应式的网站，怎么实现根据设备的尺寸和分辨率，加载不同尺寸的 banner？要求不使用 JavaScript",
+    "desc": null,
+    "options": null,
+    "explanation": "### 使用 `<picture>` 元素\n\n```html\n<picture>\n    <source media=\"(min-width: 1200px)\" srcset=\"banner-large.jpg\">\n    <source media=\"(min-width: 600px)\" srcset=\"banner-medium.jpg\">\n    <img src=\"banner-small.jpg\" alt=\"Banner Image\">\n</picture>\n```\n\n使用多个 `<source>` 元素，根据屏幕的最小宽度来选择不同的图片。\n\n### 使用 `srcset` 属性\n\n如果只想使用 `<img>` 标签，可以这样做：\n\n```html\n<img src=\"banner-small.jpg\"\n     srcset=\"banner-medium.jpg 600w,\n             banner-large.jpg 1200w\"\n     sizes=\"(min-width: 1200px) 100vw,\n            (min-width: 600px) 50vw,\n            100vw\"\n     alt=\"Banner Image\">\n```\n\n在 `<img>` 标签中使用 `srcset` 定义多个图片及其宽度，结合 `sizes` 属性指定如何选择图片。\n\n是的，媒体查询和 `image-set()` 也可以用于实现响应式图片，下面是如何使用它们：\n\n### 媒体查询\n\n你可以使用 CSS 媒体查询来根据屏幕尺寸设置背景图像。例如：\n\n```css\n.banner {\n    background-image: url('banner-small.jpg');\n}\n\n@media (min-width: 600px) {\n    .banner {\n        background-image: url('banner-medium.jpg');\n    }\n}\n\n@media (min-width: 1200px) {\n    .banner {\n        background-image: url('banner-large.jpg');\n    }\n}\n```\n\n通过不同的屏幕宽度定义样式，使得不同尺寸的背景图像在相应的设备上加载。\n\n### `image-set()`\n\n如果你使用 CSS，可以利用 `image-set()` 来根据设备像素比加载不同的图片：\n\n```css\n.banner {\n    background-image: image-set(\n        url('banner-small.jpg') 1x,\n        url('banner-medium.jpg') 2x,\n        url('banner-large.jpg') 3x\n    );\n}\n```\n\n根据设备的像素比自动选择合适的图像，提升图像清晰度和加载性能。",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 3,
+    "appId": 7,
+    "createAt": "2024-09-27T01:42:33.000Z",
+    "updateAt": "2024-09-27T01:42:39.000Z",
+    "isCollected": false,
+    "currentIndex": 4,
+    "filterTotalNum": 1487,
+    "prev": "d2fa61c7-ccd8-47db-b26e-0647fafd87a5",
+    "next": "f8da672c-4231-4dff-990d-9a4a6daebe2c"
+  },
+  "post": {
+    "exerciseKey": "d95319f5-e060-4727-a7a4-d4996c00a6c7",
+    "category": "QA",
+    "title": "现在要开发一个响应式的网站，怎么实现根据设备的尺寸和分辨率，加载不同尺寸的 banner？要求不使用 JavaScript",
+    "level": 3,
+    "createAt": "2024-09-27T01:42:33+00:00",
+    "updateAt": "2024-09-27T01:42:39+00:00"
+  },
+  "tag": {
+    "id": 75,
+    "tagName": "场景题",
+    "type": "1",
+    "exerciseCount": 39
+  }
+}

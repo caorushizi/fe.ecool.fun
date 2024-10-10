@@ -1,6 +1,6 @@
 ---
 title: Nginx支持哪些负载均衡调度算法？
-pubDatetime: 2021-07-25T10:31:37.000Z
+pubDatetime: 2024-08-10T17:05:28.000Z
 author: caorushizi
 tags:
   - 计算机网络

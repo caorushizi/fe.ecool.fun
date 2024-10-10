@@ -1,23 +1,111 @@
 ---
 title: Electron 中的主进程和渲染进程分别是什么？
-pubDatetime: 2023-05-20T20:50:16.000Z
+pubDatetime: 2024-08-10T17:07:19.000Z
 author: caorushizi
 tags:
   - 跨端技术
 postSlug: bce3670f-ad2c-4b8f-bd0a-f3448eabc84f
 description: >-
-  在 Electron 中，主进程和渲染进程是两个不同的进程。 主进程是 Electron
-  应用程序的入口，它负责创建和管理应用程序中的所有窗口，并且可以访问底层系统资源。主进程通常是一个 Node.js 进程，可以使用 Node.js 的 API
-  和第三方模块来实现各种功能，如文件操作、网络通信和数据库连接等。主进程还可以通过 IPC（进程间通信）机制与渲染进程进行通信。 渲染进程是 Electr
+  在 Electron 中，应用程序的架构分为两个主要进程：主进程和渲染进程。这两个进程分别承担不同的职责，并且有不同的角色和功能。 1. 主进程（Main
+  Process） 定义：主进程是 Electron 应用的核心进程，它负责创建和管理应用窗口，以及控制整个应用的生命周期。 职责： 创建窗口：主进程使用
+  BrowserWindow 类创建和管理应用窗口。 管理窗口：处理窗口的创建、关闭、最小化
 difficulty: 1.5
 questionNumber: 1991
 source: https://fe.ecool.fun/topic/bce3670f-ad2c-4b8f-bd0a-f3448eabc84f
 ---
 
-在 Electron 中，**主进程**和**渲染进程**是两个不同的进程。
+在 Electron 中，应用程序的架构分为两个主要进程：**主进程**和**渲染进程**。这两个进程分别承担不同的职责，并且有不同的角色和功能。
 
-- 主进程是 Electron 应用程序的入口，它负责创建和管理应用程序中的所有窗口，并且可以访问底层系统资源。主进程通常是一个 Node.js 进程，可以使用 Node.js 的 API 和第三方模块来实现各种功能，如文件操作、网络通信和数据库连接等。主进程还可以通过 IPC（进程间通信）机制与渲染进程进行通信。
+### **1. 主进程（Main Process）**
 
-- 渲染进程是 Electron 应用程序中的 Web 页面所在的进程，每个页面都会对应一个渲染进程。渲染进程可以使用 HTML、CSS 和 JavaScript 等技术来构建用户界面，并且可以通过 JavaScript 访问底层系统资源，例如打印机、摄像头和本地存储等。渲染进程通常是一个 Chromium 渲染引擎进程，它提供了一组标准的 Web API，可以与页面进行交互。
+- **定义**：主进程是 Electron 应用的核心进程，它负责创建和管理应用窗口，以及控制整个应用的生命周期。
+- **职责**：
 
-在 Electron 应用程序中，主进程和渲染进程之间采用 IPC 机制进行通信。主进程可以向渲染进程发送消息，也可以接收来自渲染进程的消息。渲染进程可以通过 IPC 机制请求主进程执行特定的任务，例如读取文件或访问系统资源。这种分离的设计使得 Electron 应用程序可以充分利用 Web 技术的优势，同时又保持了对底层系统资源的访问能力。
+  - **创建窗口**：主进程使用 `BrowserWindow` 类创建和管理应用窗口。
+  - **管理窗口**：处理窗口的创建、关闭、最小化、最大化等操作。
+  - **处理系统事件**：例如，处理应用程序的启动、退出、系统托盘图标等。
+  - **与渲染进程通信**：通过 IPC（进程间通信）与渲染进程进行通信。
+  - **访问 Node.js API**：可以使用 Node.js 的核心模块，如文件系统、网络、进程管理等。
+
+- **示例代码**：
+
+  ```javascript
+  // main.js
+  const { app, BrowserWindow } = require("electron");
+
+  function createWindow() {
+    const mainWindow = new BrowserWindow({
+      width: 800,
+      height: 600,
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+      },
+    });
+    mainWindow.loadFile("index.html");
+  }
+
+  app.whenReady().then(() => {
+    createWindow();
+    app.on("activate", () => {
+      if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    });
+  });
+
+  app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") app.quit();
+  });
+  ```
+
+### **2. 渲染进程（Renderer Process）**
+
+- **定义**：渲染进程是为每个应用窗口创建的独立进程，它负责渲染窗口的内容并处理用户界面（UI）的逻辑。
+- **职责**：
+
+  - **渲染内容**：负责显示 HTML、CSS 和 JavaScript 内容，类似于传统的浏览器渲染页面。
+  - **处理用户交互**：处理用户的输入事件，如点击、键盘输入等。
+  - **与主进程通信**：通过 IPC 与主进程进行通信，实现数据交换和功能调用。
+  - **访问 Web API**：使用浏览器环境提供的 API，如 `document`、`window`、`fetch` 等。
+
+- **示例代码**：
+
+  ```javascript
+  // renderer.js
+  const { ipcRenderer } = require("electron");
+
+  // 发送消息到主进程
+  ipcRenderer.send("message", "Hello from renderer");
+
+  // 监听主进程的消息
+  ipcRenderer.on("reply", (event, data) => {
+    console.log(`Received reply: ${data}`);
+  });
+  ```
+
+### **进程间通信（IPC）**
+
+- **主进程与渲染进程通信**：使用 IPC 模块进行进程间通信。主进程和渲染进程通过 `ipcMain` 和 `ipcRenderer` 对象发送和接收消息。
+
+  - **主进程发送消息**：
+
+    ```javascript
+    // main.js
+    const { ipcMain } = require("electron");
+
+    ipcMain.on("message", (event, arg) => {
+      console.log(arg); // 'Hello from renderer'
+      event.reply("reply", "Hello from main");
+    });
+    ```
+
+  - **渲染进程发送消息**：
+
+    ```javascript
+    // renderer.js
+    const { ipcRenderer } = require("electron");
+
+    ipcRenderer.send("message", "Hello from renderer");
+    ipcRenderer.on("reply", (event, arg) => {
+      console.log(arg); // 'Hello from main'
+    });
+    ```

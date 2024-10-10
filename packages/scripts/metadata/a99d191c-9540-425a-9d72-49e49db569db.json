@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2304,
+    "exerciseKey": "a99d191c-9540-425a-9d72-49e49db569db",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Webpack 怎么配置多入口应用， 并实现公共依赖的提取？",
+    "desc": "",
+    "options": "",
+    "explanation": "可以通过以下步骤实现：\n\n### **1. 配置多入口**\n\n在 Webpack 配置中，可以定义多个入口点，每个入口对应一个输出文件。\n\n```javascript\nconst path = require('path');\n\nmodule.exports = {\n  entry: {\n    app1: './src/app1/index.js',\n    app2: './src/app2/index.js',\n  },\n  output: {\n    filename: '[name].bundle.js', // 使用入口名称生成文件名\n    path: path.resolve(__dirname, 'dist'),\n  },\n};\n```\n\n### **2. 提取公共依赖**\n\n使用 `SplitChunksPlugin` 来提取公共依赖，确保不同入口点共享的模块只打包一次，减少重复代码。\n\n```javascript\nmodule.exports = {\n  // ...其他配置\n  optimization: {\n    splitChunks: {\n      chunks: 'all', // 从所有块中提取公共模块\n      cacheGroups: {\n        vendor: {\n          test: /[\\\\/]node_modules[\\\\/]/, // 只提取来自 node_modules 的模块\n          name: 'vendor', // 公共依赖的名称\n          chunks: 'all',\n        },\n      },\n    },\n  },\n};\n```\n\n### **3. 处理输出文件**\n\n通过以上配置，Webpack 将生成多个入口文件以及一个包含公共依赖的文件。例如：\n\n- `app1.bundle.js`\n- `app2.bundle.js`\n- `vendor.bundle.js`（公共依赖）\n\n### **4. HTML 文件引入**\n\n可以使用 `HtmlWebpackPlugin` 来生成 HTML 文件，自动引入打包生成的 JavaScript 文件。\n\n```javascript\nconst HtmlWebpackPlugin = require('html-webpack-plugin');\n\nmodule.exports = {\n  // ...其他配置\n  plugins: [\n    new HtmlWebpackPlugin({\n      template: './src/app1/index.html',\n      filename: 'app1.html',\n      chunks: ['vendor', 'app1'], // 引入公共依赖和 app1\n    }),\n    new HtmlWebpackPlugin({\n      template: './src/app2/index.html',\n      filename: 'app2.html',\n      chunks: ['vendor', 'app2'], // 引入公共依赖和 app2\n    }),\n  ],\n};\n```\n\n### **总结**\n\n通过上述配置，Webpack 能够有效管理多入口应用，提取公共依赖，确保代码的复用性和加载效率。每个入口点都可以独立打包，并且公共依赖仅打包一次，优化了整体性能。",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 2,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:14.000Z",
+    "updateAt": "2024-09-21T02:11:41.000Z",
+    "isCollected": false,
+    "currentIndex": 284,
+    "filterTotalNum": 1487,
+    "prev": "99db3b1f-f8e2-4e2a-8ad0-33c5d1c57a60",
+    "next": "a18d9351-fc9a-45b4-8ccd-3870299d5cd8"
+  },
+  "post": {
+    "exerciseKey": "a99d191c-9540-425a-9d72-49e49db569db",
+    "category": "QA",
+    "title": "Webpack 怎么配置多入口应用， 并实现公共依赖的提取？",
+    "level": 2,
+    "createAt": "2024-08-13T08:30:14+00:00",
+    "updateAt": "2024-09-21T02:11:41+00:00"
+  },
+  "tag": {
+    "id": 28,
+    "tagName": "工程化",
+    "type": "1",
+    "exerciseCount": 58
+  }
+}

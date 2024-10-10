@@ -7,24 +7,26 @@
     "title": "Electron 中的主进程和渲染进程分别是什么？",
     "desc": null,
     "options": null,
-    "explanation": "在 Electron 中，**主进程**和**渲染进程**是两个不同的进程。\n\n* 主进程是 Electron 应用程序的入口，它负责创建和管理应用程序中的所有窗口，并且可以访问底层系统资源。主进程通常是一个 Node.js 进程，可以使用 Node.js 的 API 和第三方模块来实现各种功能，如文件操作、网络通信和数据库连接等。主进程还可以通过 IPC（进程间通信）机制与渲染进程进行通信。\n\n* 渲染进程是 Electron 应用程序中的 Web 页面所在的进程，每个页面都会对应一个渲染进程。渲染进程可以使用 HTML、CSS 和 JavaScript 等技术来构建用户界面，并且可以通过 JavaScript 访问底层系统资源，例如打印机、摄像头和本地存储等。渲染进程通常是一个 Chromium 渲染引擎进程，它提供了一组标准的 Web API，可以与页面进行交互。\n\n在 Electron 应用程序中，主进程和渲染进程之间采用 IPC 机制进行通信。主进程可以向渲染进程发送消息，也可以接收来自渲染进程的消息。渲染进程可以通过 IPC 机制请求主进程执行特定的任务，例如读取文件或访问系统资源。这种分离的设计使得 Electron 应用程序可以充分利用 Web 技术的优势，同时又保持了对底层系统资源的访问能力。",
+    "explanation": "在 Electron 中，应用程序的架构分为两个主要进程：**主进程**和**渲染进程**。这两个进程分别承担不同的职责，并且有不同的角色和功能。\n\n### **1. 主进程（Main Process）**\n\n- **定义**：主进程是 Electron 应用的核心进程，它负责创建和管理应用窗口，以及控制整个应用的生命周期。\n- **职责**：\n  - **创建窗口**：主进程使用 `BrowserWindow` 类创建和管理应用窗口。\n  - **管理窗口**：处理窗口的创建、关闭、最小化、最大化等操作。\n  - **处理系统事件**：例如，处理应用程序的启动、退出、系统托盘图标等。\n  - **与渲染进程通信**：通过 IPC（进程间通信）与渲染进程进行通信。\n  - **访问 Node.js API**：可以使用 Node.js 的核心模块，如文件系统、网络、进程管理等。\n\n- **示例代码**：\n  ```javascript\n  // main.js\n  const { app, BrowserWindow } = require('electron');\n  \n  function createWindow() {\n    const mainWindow = new BrowserWindow({\n      width: 800,\n      height: 600,\n      webPreferences: {\n        nodeIntegration: true,\n        contextIsolation: false,\n      },\n    });\n    mainWindow.loadFile('index.html');\n  }\n  \n  app.whenReady().then(() => {\n    createWindow();\n    app.on('activate', () => {\n      if (BrowserWindow.getAllWindows().length === 0) createWindow();\n    });\n  });\n\n  app.on('window-all-closed', () => {\n    if (process.platform !== 'darwin') app.quit();\n  });\n  ```\n\n### **2. 渲染进程（Renderer Process）**\n\n- **定义**：渲染进程是为每个应用窗口创建的独立进程，它负责渲染窗口的内容并处理用户界面（UI）的逻辑。\n- **职责**：\n  - **渲染内容**：负责显示 HTML、CSS 和 JavaScript 内容，类似于传统的浏览器渲染页面。\n  - **处理用户交互**：处理用户的输入事件，如点击、键盘输入等。\n  - **与主进程通信**：通过 IPC 与主进程进行通信，实现数据交换和功能调用。\n  - **访问 Web API**：使用浏览器环境提供的 API，如 `document`、`window`、`fetch` 等。\n\n- **示例代码**：\n  ```javascript\n  // renderer.js\n  const { ipcRenderer } = require('electron');\n\n  // 发送消息到主进程\n  ipcRenderer.send('message', 'Hello from renderer');\n\n  // 监听主进程的消息\n  ipcRenderer.on('reply', (event, data) => {\n    console.log(`Received reply: ${data}`);\n  });\n  ```\n\n### **进程间通信（IPC）**\n\n- **主进程与渲染进程通信**：使用 IPC 模块进行进程间通信。主进程和渲染进程通过 `ipcMain` 和 `ipcRenderer` 对象发送和接收消息。\n  - **主进程发送消息**：\n    ```javascript\n    // main.js\n    const { ipcMain } = require('electron');\n\n    ipcMain.on('message', (event, arg) => {\n      console.log(arg); // 'Hello from renderer'\n      event.reply('reply', 'Hello from main');\n    });\n    ```\n  - **渲染进程发送消息**：\n    ```javascript\n    // renderer.js\n    const { ipcRenderer } = require('electron');\n\n    ipcRenderer.send('message', 'Hello from renderer');\n    ipcRenderer.on('reply', (event, arg) => {\n      console.log(arg); // 'Hello from main'\n    });\n    ```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1.5,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-05-20T01:05:37.000Z",
-    "updateAt": "2023-05-20T20:50:16.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:19.000Z",
     "isCollected": false,
-    "currentIndex": 380,
-    "prev": "073219e8-a8df-4ccd-9fc8-fd0dfd9e7c35",
-    "next": "f1502312-3ac7-4089-b306-f64c301b7dd4"
+    "currentIndex": 398,
+    "filterTotalNum": 1487,
+    "prev": "97758079-03f4-40ce-9b71-8c3c4e5db338",
+    "next": "073219e8-a8df-4ccd-9fc8-fd0dfd9e7c35"
   },
   "post": {
     "exerciseKey": "bce3670f-ad2c-4b8f-bd0a-f3448eabc84f",
     "category": "QA",
     "title": "Electron 中的主进程和渲染进程分别是什么？",
     "level": 1.5,
-    "updateAt": "2023-05-20T20:50:16+00:00"
+    "createAt": "2023-05-20T01:05:37+00:00",
+    "updateAt": "2024-08-10T17:07:19+00:00"
   },
   "tag": {
     "id": 74,

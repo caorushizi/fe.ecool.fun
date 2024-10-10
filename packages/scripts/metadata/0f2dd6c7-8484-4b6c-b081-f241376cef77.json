@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "在 Vue 组件中，如果你使用 `addEventListener` 添加了原生的 DOM 事件监听器，通常需要在组件销毁时手动移除这些监听器。\n\n原因如下：\n\n1. **内存泄漏**：\n   如果不手动移除事件监听器，监听器会继续存在于内存中，即使对应的 DOM 元素已经被移除。这会导致内存泄漏，因为监听器持有对 DOM 元素的引用，导致垃圾回收机制无法回收这些元素。\n\n2. **意外行为**：\n   如果监听器没有被移除，在组件销毁后这些监听器可能会继续响应事件，这可能导致应用程序的意外行为或错误。\n\n3. **性能问题**：\n   随着时间的推移，未移除的事件监听器会堆积，导致性能下降，尤其是在频繁创建和销毁组件的情况下。\n\n在 Vue 组件中，可以利用生命周期钩子来添加和移除事件监听器：\n\n```vue\n<template>\n  <div ref=\"myElement\">点击我</div>\n</template>\n\n<script>\nexport default {\n  mounted() {\n    // 在组件挂载时添加事件监听器\n    this.$refs.myElement.addEventListener('click', this.handleClick);\n  },\n  beforeDestroy() {\n    // 在组件销毁前移除事件监听器\n    this.$refs.myElement.removeEventListener('click', this.handleClick);\n  },\n  methods: {\n    handleClick(event) {\n      console.log('元素被点击了');\n    }\n  }\n};\n</script>\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2024-06-06T01:21:42.000Z",
-    "updateAt": "2024-06-06T09:21:49.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:43.000Z",
     "isCollected": false,
-    "currentIndex": 2,
-    "prev": "289617b6-a28f-4528-be36-ac9e08e9d2c1",
-    "next": "b9a0ceb2-84b5-4a79-8548-d043a97d0096"
+    "currentIndex": 294,
+    "filterTotalNum": 1487,
+    "prev": "126917b6-56bc-4c94-81b7-f39263395546",
+    "next": "a9e3ac89-9ecf-4b22-bcbb-e51d0197005b"
   },
   "post": {
     "exerciseKey": "0f2dd6c7-8484-4b6c-b081-f241376cef77",
     "category": "QA",
     "title": "vue组件里写的原生addEventListeners监听事件，要手动去销毁吗？为什么？",
     "level": 1,
-    "updateAt": "2024-06-06T09:21:49+00:00"
+    "createAt": "2024-06-06T01:21:42+00:00",
+    "updateAt": "2024-08-10T17:07:43+00:00"
   },
   "tag": {
     "id": 14,
     "tagName": "Vue.js",
     "type": "1",
-    "exerciseCount": 72
+    "exerciseCount": 97
   }
 }

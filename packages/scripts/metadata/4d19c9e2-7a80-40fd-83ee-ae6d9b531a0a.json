@@ -8,15 +8,16 @@
     "desc": null,
     "options": null,
     "explanation": "一句话概括`Promise.allSettled`和`Promise.all`的最大不同：`Promise.allSettled`永远不会被**reject**。\n\n## Promise.all的痛点\n\n当需要处理多个Promise并行时，大多数情况下Promise.all用起来是非常顺手的，比如下面这样\n\n```js\nconst delay = n => new Promise(resolve => setTimeout(resolve, n));\n\nconst promises = [\n  delay(100).then(() => 1),\n  delay(200).then(() => 2),\n  ]\n\nPromise.all(promises).then(values=>console.log(values))\n// 最终输出： [1, 2]\n```\n\n可是，是一旦有一个promise出现了异常，被reject了，情况就会变的麻烦。\n\n```js\nconst promises = [\n  delay(100).then(() => 1),\n  delay(200).then(() => 2),\n  Promise.reject(3)\n  ]\n\nPromise.all(promises).then(values=>console.log(values))\n// 最终输出： Uncaught (in promise) 3\n\nPromise.all(promises)\n.then(values=>console.log(values))\n.catch(err=>console.log(err))\n// 加入catch语句后，最终输出：3\n```\n\n尽管能用catch捕获其中的异常，但你会发现其他执行成功的Promise的消息都丢失了，仿佛石沉大海一般。\n\n要么全部成功，要么全部重来，这是Promise.all本身的强硬逻辑，也是痛点的来源，不能说它错，但这的确给Promise.allSettled留下了立足的空间。\n\n## Promise.allSettled\n\n假如使用Promise.allSettled来处理这段逻辑会怎样呢?\n\n```js\nconst promises = [\n  delay(100).then(() => 1),\n  delay(200).then(() => 2),\n  Promise.reject(3)\n  ]\n\nPromise.allSettled(promises).then(values=>console.log(values))\n// 最终输出： \n//    [\n//      {status: \"fulfilled\", value: 1},\n//      {status: \"fulfilled\", value: 2},\n//      {status: \"rejected\", value: 3},\n//    ]\n```\n\n可以看到所有promise的数据都被包含在then语句中，且每个promise的返回值多了一个status字段，表示当前promise的状态，没有任何一个promise的信息被丢失。\n\n因此，当用Promise.allSettled时，我们只需专注在then语句里，当有promise被异常打断时，我们依然能妥善处理那些已经成功了的promise，不必全部重来。\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-10-12T10:20:48.000Z",
-    "updateAt": "2021-10-18T22:52:30.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:49.000Z",
     "isCollected": false,
-    "currentIndex": 747,
-    "prev": "f24683ac-0366-41a2-a763-f90f447a78ee",
+    "currentIndex": 863,
+    "filterTotalNum": 1487,
+    "prev": "d428fd54-972b-44de-b0ab-cb8ac1ed27ca",
     "next": "1592fd61-1555-4646-a2a0-438828b5b8e5"
   },
   "post": {
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "Promise.all 和 Promise.allSettled 有什么区别？",
     "level": 3,
-    "updateAt": "2021-10-18T22:52:30+00:00"
+    "createAt": "2021-10-12T10:20:48+00:00",
+    "updateAt": "2024-08-10T17:05:49+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

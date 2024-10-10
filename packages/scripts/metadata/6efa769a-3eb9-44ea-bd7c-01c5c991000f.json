@@ -7,29 +7,31 @@
     "title": "怎么使用 js 实现拖拽功能？\n",
     "desc": null,
     "options": null,
-    "explanation": "一个元素的拖拽过程，我们可以分为三个步骤:\n1. 第一步是鼠标按下目标元素\n2. 第二步是鼠标保持按下的状态移动鼠标\n3. 第三步是鼠标抬起，拖拽过程结束\n\n这三步分别对应了三个事件，mousedown 事件，mousemove 事件和 mouseup 事件。只有在鼠标按下的状态移动鼠标我们才会执行拖拽事件，因此我们需要在 mousedown 事件中设置一个状态来标识鼠标已经按下，然后在 mouseup 事件中再取消这个状态。在 mousedown 事件中我们首先应该判断，目标元素是否为拖拽元素，如果是拖拽元素，我们就设置状态并且保存这个时候鼠标的位置。然后在 mousemove 事件中，我们通过判断鼠标现在的位置和以前位置的相对移动，来确定拖拽元素在移动中的坐标。最后 mouseup 事件触发后，清除状态，结束拖拽事件。",
+    "explanation": "在JavaScript中实现拖拽功能，通常需要监听几个关键的事件：`mousedown`（或`touchstart`对于移动设备）、`mousemove`（或`touchmove`）、`mouseup`（或`touchend` 和 `touchcancel`）以及`mouseover`（可选，用于处理元素边界外的移动）。以下是一个基本的拖拽功能的实现步骤：\n\n### 1. HTML 结构\n\n首先，你需要一个可以拖拽的元素。\n\n```html\n<div id=\"draggable\" style=\"width: 100px; height: 100px; background-color: red; position: absolute; cursor: pointer;\">拖拽我</div>\n```\n\n### 2. CSS 样式\n\n在上面的HTML中，我已经简单设置了样式，使元素可拖动并有一个明显的背景色。\n\n### 3. JavaScript 实现\n\n接下来，我们用JavaScript来添加拖拽逻辑。\n\n```javascript\nlet selected = null; // 当前被选中的拖拽元素\nlet x_pos = 0; // 初始X位置\nlet y_pos = 0; // 初始Y位置\nlet x_elem = 0; // 鼠标按下时的X位置\nlet y_elem = 0; // 鼠标按下时的Y位置\n\n// 绑定mousedown事件\ndocument.getElementById(\"draggable\").addEventListener(\"mousedown\", dragMouseDown, false);\n\nfunction dragMouseDown(e) {\n    e = e || window.event;\n    e.preventDefault(); // 阻止默认行为（如链接的跳转）\n    // 获取拖拽的元素\n    selected = this;\n    x_elem = x_pos = e.clientX - parseInt(selected.style.left, 10);\n    y_elem = y_pos = e.clientY - parseInt(selected.style.top, 10);\n\n    // 绑定mousemove和mouseup事件到整个文档，以便在整个页面上拖动\n    document.documentElement.addEventListener(\"mousemove\", dragMouseMove, false);\n    document.documentElement.addEventListener(\"mouseup\", closeDragElement, false);\n}\n\nfunction dragMouseMove(e) {\n    e = e || window.event;\n    e.preventDefault();\n    // 计算新的位置\n    x_pos = e.clientX - x_elem;\n    y_pos = e.clientY - y_elem;\n\n    // 设置元素的新位置\n    selected.style.left = x_pos + \"px\";\n    selected.style.top = y_pos + \"px\";\n}\n\nfunction closeDragElement() {\n    // 停止移动时，移除mousemove和mouseup事件监听器\n    document.documentElement.removeEventListener(\"mousemove\", dragMouseMove, false);\n    document.documentElement.removeEventListener(\"mouseup\", closeDragElement, false);\n    selected = null;\n}\n```\n\n### 说明\n\n- **mousedown**: 当鼠标按下时，获取当前元素和鼠标相对于元素的位置。然后，将`mousemove`和`mouseup`的监听器绑定到整个文档上，这样你就可以在文档的任何地方拖动元素。\n- **mousemove**: 当鼠标移动时，计算元素的新位置，并更新元素的样式。\n- **mouseup**: 当鼠标释放时，移除`mousemove`和`mouseup`的监听器，避免不必要的性能消耗。\n\n以上就是在JavaScript中实现拖拽功能的基本方法。你可以根据需要调整样式和逻辑。例如，添加拖拽的边界限制，或者支持触摸设备的拖拽等。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3.5,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-11-17T14:39:59.000Z",
-    "updateAt": "2021-11-17T22:49:44.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:06:01.000Z",
     "isCollected": false,
-    "currentIndex": 718,
+    "currentIndex": 806,
+    "filterTotalNum": 1487,
     "prev": "1ea15cb6-7aa1-4d94-8bae-f20fa5594c87",
-    "next": "d9ddb08c-beb1-4aa4-8c54-cbccc0395fc5"
+    "next": "ecd8b4c8-cbb9-47c4-84e3-167e209637ae"
   },
   "post": {
     "exerciseKey": "6efa769a-3eb9-44ea-bd7c-01c5c991000f",
     "category": "QA",
     "title": "怎么使用 js 实现拖拽功能？\n",
     "level": 3.5,
-    "updateAt": "2021-11-17T22:49:44+00:00"
+    "createAt": "2021-11-17T14:39:59+00:00",
+    "updateAt": "2024-08-10T17:06:01+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

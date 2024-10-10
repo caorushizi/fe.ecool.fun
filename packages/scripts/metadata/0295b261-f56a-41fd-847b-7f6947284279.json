@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "`useTimeout` 是可以在函数式组件中，处理 `setTimeout` 计时器函数\n\n## 解决了什么问题？\n\n如果直接在函数式组件中使用 `setTimeout` ，会遇到以下问题：\n\n* 多次调用setTimeout  \n\n```js  \n function App() {  \n    const [state, setState] = useState(1);  \n    setTimeout(() => {  \n        setState(state + 1);  \n    }, 3000);  \n    return (  \n        // 我们原本的目的是在页面渲染完3s后修改一下state，但是你会发现当state+1后，触发了页面的重新渲染，就会重新有一个3s的定时器出现来给state+1，既而变成了每3秒+1。  \n        <div> {state} </div>  \n    );  \n  }; \n```\n\n* hooks 的闭包缺陷  \n\n```js  \nfunction App() {  \n  const [count, setCount] = useState(0)  \n  const [countTimeout, setCountTimeout] = useState(0)  \n  useEffect(() => {  \n      setTimeout(() => {  \n          setCountTimeout(count)  \n      }, 3000)  \n      setCount(5)  \n  }, [])  \n  return (  \n       //count发生了变化，但是3s后setTimout的count却还是0  \n      <div>  \n          Count: {count}  \n          <br />  \n          setTimeout Count: {countTimeout}  \n      </div>  \n  )  \n}\n```\n\n## useTimeout 实现\n\n```js\nfunction useTimeout(callback, delay) {\n  const memorizeCallback = useRef();\n\n  useEffect(() => {\n    memorizeCallback.current = callback;\n  }, [callback]);\n\n  useEffect(() => {\n    if (delay !== null) {\n      const timer = setTimeout(() => {\n        memorizeCallback.current();\n      }, delay);\n      return () => {\n        clearTimeout(timer);\n      };\n    }\n  }, [delay]);\n};\n```\n\n## 如何使用\n\n```js\n  // callback 回调函数， delay 延迟时间\n  useTimeout(callback, delay);\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-12-30T01:35:40.000Z",
-    "updateAt": "2023-03-12T17:32:45.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-23T09:54:20.000Z",
     "isCollected": false,
-    "currentIndex": 429,
-    "prev": "2e0cedc6-3c76-438a-8677-27b8ea9c0e61",
-    "next": "478e5483-7797-4844-be41-c7b96a383c00"
+    "currentIndex": 462,
+    "filterTotalNum": 1487,
+    "prev": "720ce14b-029d-41fb-8501-5894d98a8a74",
+    "next": "2e0cedc6-3c76-438a-8677-27b8ea9c0e61"
   },
   "post": {
     "exerciseKey": "0295b261-f56a-41fd-847b-7f6947284279",
     "category": "QA",
     "title": "实现一个 useTimeout Hook",
     "level": 3,
-    "updateAt": "2023-03-12T17:32:45+00:00"
+    "createAt": "2022-12-30T01:35:40+00:00",
+    "updateAt": "2024-07-23T09:54:20+00:00"
   },
   "tag": {
     "id": 13,
     "tagName": "React.js",
     "type": "1",
-    "exerciseCount": 101
+    "exerciseCount": 129
   }
 }

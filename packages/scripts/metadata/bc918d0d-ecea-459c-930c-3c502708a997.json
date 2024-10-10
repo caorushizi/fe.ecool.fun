@@ -8,28 +8,30 @@
     "desc": "```html\n<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\" />\n    <title>Static Template</title>\n\n    <style>\n      .parent {\n        display: flex;\n        flex-direction: column;\n        height: 600px;\n        width: 300px;\n        background: yellow;\n      }\n      div {\n        width: 100%;\n      }\n      .header {\n        height: 200px;\n        background: red;\n      }\n      .content {\n        height: 100%;\n        background: blue;\n      }\n      .footer {\n        height: 200px;\n        background: black;\n      }\n    </style>\n  </head>\n  <body>\n    <div class=\"parent\">\n      <div class=\"header\"></div>\n      <div class=\"content\"></div>\n      <div class=\"footer\"></div>\n    </div>\n  </body>\n</html>\n```",
     "options": null,
     "explanation": "答案： 不是\n\n首先，content元素的 height 设置为 “100%”，在父级的高度为固定值时，直接继承该高度，也就是600px。\n\n但父级设置了 display:flex ，在高度固定的前提下，子元素的高度会按比例进行缩放，所以content元素最后的高度应该是 600 * (600/(200+600+200)) = 360px\n\n在线demo可访问查看： https://codesandbox.io/s/strange-curran-3kci7i?file=/index.html\n\n> 本题目答案由“前端面试题宝典”整理，PC端可访问 https://fe.ecool.fun/ ",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-03-24T02:51:54.000Z",
-    "updateAt": "2022-06-11T10:39:41.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-19T15:42:08.000Z",
     "isCollected": false,
-    "currentIndex": 527,
-    "prev": "c25081e4-6374-4e78-abec-1a31999e528e",
-    "next": "b9bab51e-ab87-400a-9284-b996e853ecec"
+    "currentIndex": 657,
+    "filterTotalNum": 1487,
+    "prev": "d30220bd-9c6c-4e4d-bb4f-11e780c82d94",
+    "next": "ffd21d04-15d9-4f94-9167-5edf63a42741"
   },
   "post": {
     "exerciseKey": "bc918d0d-ecea-459c-930c-3c502708a997",
     "category": "QA",
     "title": "下面这段代码中，class为content的元素，实际高度是100px吗？",
     "level": 3,
-    "updateAt": "2022-06-11T10:39:41+00:00"
+    "createAt": "2022-03-24T02:51:54+00:00",
+    "updateAt": "2024-07-19T15:42:08+00:00"
   },
   "tag": {
     "id": 11,
     "tagName": "CSS",
     "type": "1",
-    "exerciseCount": 90
+    "exerciseCount": 101
   }
 }

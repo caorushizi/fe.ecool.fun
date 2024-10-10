@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2859,
+    "exerciseKey": "ce6357ce-cce3-4ccc-90d8-7fe7704f3312",
+    "category": "QA",
+    "renderType": "md",
+    "title": "CORS 是如何实现跨域的？",
+    "desc": "",
+    "options": "",
+    "explanation": "CORS（Cross-Origin Resource Sharing）是一种用于实现跨域请求的机制，允许浏览器和服务器之间在不同源之间共享资源。CORS 通过在 HTTP 头部添加特定的字段来控制跨域访问。以下是 CORS 的工作原理及实现细节：\n\n### **1. CORS 工作原理**\n\n**1.1 浏览器发起跨域请求**\n\n当浏览器发起一个跨域请求时，它会先发送一个预检请求（preflight request），以检查服务器是否允许实际请求。这是通过发送一个 `OPTIONS` 请求来实现的，主要用于确认目标服务器是否允许跨域请求。\n\n**1.2 服务器响应**\n\n服务器需要在响应中包含适当的 CORS 头部，以指示是否允许跨域请求。主要的 CORS 头部包括：\n\n- **`Access-Control-Allow-Origin`**：指定允许的源。可以是具体的域名，如 `https://example.com`，或通配符 `*`（允许所有源）。\n- **`Access-Control-Allow-Methods`**：指定允许的方法，如 `GET`, `POST`, `PUT`, `DELETE`。\n- **`Access-Control-Allow-Headers`**：指定允许的请求头，如 `Content-Type`, `Authorization`。\n- **`Access-Control-Allow-Credentials`**：指示是否允许发送带有凭据（如 Cookies）的请求。\n- **`Access-Control-Max-Age`**：指示预检请求的结果可以缓存的时间（以秒为单位）。\n\n**1.3 客户端处理响应**\n\n- **简单请求**：如果请求满足 CORS 规则（如使用 `GET` 或 `POST` 方法，且请求头仅包括简单头部），浏览器会直接发送实际请求并处理响应。\n- **预检请求**：对于复杂请求（如使用 `PUT` 方法或带有自定义头部），浏览器会先发送 `OPTIONS` 请求，然后根据服务器的响应决定是否发送实际请求。\n\n### **2. 请求类型**\n\n**2.1 简单请求**\n\n满足以下条件的请求被认为是简单请求，不需要预检请求：\n\n- 方法：`GET`, `POST`, `HEAD`\n- 请求头：`Accept`, `Accept-Language`, `Content-Language`, `Content-Type`（值为 `application/x-www-form-urlencoded`, `multipart/form-data`, `text/plain`）\n\n**2.2 复杂请求**\n\n不符合简单请求条件的请求会被认为是复杂请求，需要先发送预检请求。复杂请求包括：\n\n- 方法：`PUT`, `DELETE`, `OPTIONS`\n- 请求头：`Authorization`, `Content-Type`（值为其他非简单值）\n\n### **3. 服务器设置**\n\n**3.1 响应 CORS 头部**\n\n服务器需要在响应中包含必要的 CORS 头部。例如：\n\n```http\nHTTP/1.1 200 OK\nAccess-Control-Allow-Origin: https://example.com\nAccess-Control-Allow-Methods: GET, POST, PUT\nAccess-Control-Allow-Headers: Content-Type, Authorization\n```\n\n**3.2 处理预检请求**\n\n对于预检请求，服务器需要回应适当的 CORS 头部：\n\n```http\nHTTP/1.1 204 No Content\nAccess-Control-Allow-Origin: https://example.com\nAccess-Control-Allow-Methods: GET, POST, PUT\nAccess-Control-Allow-Headers: Content-Type, Authorization\nAccess-Control-Max-Age: 3600\n```\n\n### **4. CORS 的安全性**\n\n- **`Access-Control-Allow-Origin`**：避免使用通配符 `*`，特别是当使用 `Credentials` 时，以确保跨域请求只被信任的源访问。\n- **`Access-Control-Allow-Credentials`**：当设置为 `true` 时，`Access-Control-Allow-Origin` 不能为 `*`，必须为具体的源。\n- **`Access-Control-Allow-Headers`** 和 **`Access-Control-Allow-Methods`**：应限制仅允许必要的头部和方法，以减少安全风险。\n",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 1.5,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:45.000Z",
+    "updateAt": "2024-08-14T12:22:10.000Z",
+    "isCollected": false,
+    "currentIndex": 19,
+    "filterTotalNum": 1487,
+    "prev": "6843e240-9534-4371-8b64-ba76b4aa8ed4",
+    "next": "20f1385d-4442-43c5-bb20-2a53a9bfc6c6"
+  },
+  "post": {
+    "exerciseKey": "ce6357ce-cce3-4ccc-90d8-7fe7704f3312",
+    "category": "QA",
+    "title": "CORS 是如何实现跨域的？",
+    "level": 1.5,
+    "createAt": "2024-08-13T08:30:45+00:00",
+    "updateAt": "2024-08-14T12:22:10+00:00"
+  },
+  "tag": {
+    "id": 16,
+    "tagName": "计算机网络",
+    "type": "1",
+    "exerciseCount": 95
+  }
+}

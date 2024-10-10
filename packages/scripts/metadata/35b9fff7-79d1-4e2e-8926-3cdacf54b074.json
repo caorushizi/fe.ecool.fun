@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": " Node.js 提供了多种调试方式，以下是常用的几种：\n\n1. 使用 `console.log()` 输出调试信息：在代码中使用 `console.log()` 输出一些变量和状态信息，以便在运行时跟踪代码执行流程。这种方式简单易用，但需要手动添加和删除调试代码，不适合调试复杂程序和性能瓶颈。\n\n2. 使用 Node.js 自带的调试器：Node.js 自带了一个内置的调试器，可以通过命令行参数 `--inspect` 或者 `--inspect-brk` 来启动。然后在 Chrome 浏览器中打开 `chrome://inspect` 页面，即可连接到 Node.js 调试器，并可以进行断点调试、查看变量和堆栈信息等操作。这种方式需要安装相应的 IDE 或者编辑器插件，并且需要一定的配置和调试经验。\n\n3. 使用第三方调试工具：除了 Node.js 自带的调试器外，还有一些第三方调试工具，例如 node-inspector、ndb、WebStorm、VS Code 等，它们提供了更加强大和友好的调试功能，例如调试控制台、堆栈跟踪、性能分析等。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-05-15T13:27:35.000Z",
-    "updateAt": "2023-05-26T09:36:05.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:16.000Z",
     "isCollected": false,
-    "currentIndex": 362,
-    "prev": "9491596e-4423-4426-b300-a31ded121bc1",
-    "next": "a2443317-c9d1-408a-856e-d8ec18558a7a"
+    "currentIndex": 413,
+    "filterTotalNum": 1487,
+    "prev": "8fd9b84e-356e-4db8-b3b3-4a6532c5825f",
+    "next": "a823157e-329e-4327-8d39-da935c091f20"
   },
   "post": {
     "exerciseKey": "35b9fff7-79d1-4e2e-8926-3cdacf54b074",
     "category": "QA",
     "title": "Node.js 如何调试？",
     "level": 2,
-    "updateAt": "2023-05-26T09:36:05+00:00"
+    "createAt": "2023-05-15T13:27:35+00:00",
+    "updateAt": "2024-08-10T17:07:16+00:00"
   },
   "tag": {
     "id": 18,
     "tagName": "Node.js",
     "type": "1",
-    "exerciseCount": 26
+    "exerciseCount": 37
   }
 }

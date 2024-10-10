@@ -1,6 +1,6 @@
 ---
 title: TypeScript 中的 getter/setter 是什么？你如何使用它们？
-pubDatetime: 2021-07-11T10:59:11.000Z
+pubDatetime: 2024-08-10T17:05:17.000Z
 author: caorushizi
 tags:
   - Typescript

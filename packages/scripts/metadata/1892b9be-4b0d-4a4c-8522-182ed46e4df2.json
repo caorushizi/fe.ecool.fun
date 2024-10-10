@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "将样式应用于React组件有三种方法。\n\n## 外部样式表\n\n在此方法中，你可以将外部样式表导入到组件使用类中。 但是你应该使用className而不是class来为React元素应用样式, 这里有一个例子。\n\n```react.js\nimport React from 'react';\nimport './App.css';\nimport { Header } from './header/header';\nimport { Footer } from './footer/footer';\nimport { Dashboard } from './dashboard/dashboard';\nimport { UserDisplay } from './userdisplay';\n\nfunction App() {\n  return (\n    <div className=\"App\">\n      <Header />\n      <Dashboard />\n      <UserDisplay />\n      <Footer />\n    </div>\n  );\n}\n\nexport default App;\n```\n\n## 内联样式\n\n在这个方法中，我们可以直接将 props 传递给HTML元素，属性为style。这里有一个例子。这里需要注意的重要一点是，我们将javascript对象传递给style，这就是为什么我们使用 `backgroundColor` 而不是CSS方法`backbackground-color`。\n\n```react.js\nimport React from 'react';\n\nexport const Header = () => {\n\n    const heading = 'TODO App'\n\n    return(\n        <div style={{backgroundColor:'orange'}}>\n            <h1>{heading}</h1>\n        </div>\n    )\n}\n```\n\n## 定义样式对象并使用它\n\n因为我们将javascript对象传递给style属性，所以我们可以在组件中定义一个style对象并使用它。下面是一个示例，你也可以将此对象作为 props 传递到组件树中。\n\n```react.js\nimport React from 'react';\n\nconst footerStyle = {\n    width: '100%',\n    backgroundColor: 'green',\n    padding: '50px',\n    font: '30px',\n    color: 'white',\n    fontWeight: 'bold'\n}\n\nexport const Footer = () => {\n    return(\n        <div style={footerStyle}>\n            All Rights Reserved 2019\n        </div>\n    )\n}\n```\n\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T11:10:40.000Z",
-    "updateAt": "2021-07-04T19:25:19.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:04:58.000Z",
     "isCollected": false,
-    "currentIndex": 1018,
-    "prev": "e246ac60-73f0-4e33-b0f9-b0d1e6c15af8",
-    "next": "ffc383ed-5d5e-4313-8fa4-8c940d423b37"
+    "currentIndex": 1178,
+    "filterTotalNum": 1487,
+    "prev": "f59d29a2-7ff8-41ca-8176-a24f1ca6d0f5",
+    "next": "b97ddbf9-57fd-493f-888d-1ffb7981f10a"
   },
   "post": {
     "exerciseKey": "1892b9be-4b0d-4a4c-8522-182ed46e4df2",
     "category": "QA",
     "title": "如何在React中应用样式？",
     "level": 2,
-    "updateAt": "2021-07-04T19:25:19+00:00"
+    "createAt": "2021-07-04T11:10:40+00:00",
+    "updateAt": "2024-08-10T17:04:58+00:00"
   },
   "tag": {
     "id": 13,
     "tagName": "React.js",
     "type": "1",
-    "exerciseCount": 101
+    "exerciseCount": 129
   }
 }

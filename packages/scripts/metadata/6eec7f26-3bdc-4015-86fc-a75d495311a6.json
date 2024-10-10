@@ -8,14 +8,15 @@
     "desc": null,
     "options": null,
     "explanation": "## 一、是什么\n\n`react`通过将组件编写的`JSX`映射到屏幕，以及组件中的状态发生了变化之后 `React`会将这些「变化」更新到屏幕上\n\n在前面文章了解中，`JSX`通过`babel`最终转化成`React.createElement`这种形式，例如：\n\n```jsx\n<div>\n  <img src=\"avatar.png\" className=\"profile\" />\n  <Hello />\n</div>\n```\n\n会被`babel`转化成如下：\n\n```jsx\nReact.createElement(\n  \"div\",\n  null,\n  React.createElement(\"img\", {\n    src: \"avatar.png\",\n    className: \"profile\"\n  }),\n  React.createElement(Hello, null)\n);\n```\n\n在转化过程中，`babel`在编译时会判断 JSX 中组件的首字母：\n\n- 当首字母为小写时，其被认定为原生 `DOM` 标签，`createElement` 的第一个变量被编译为字符串\n\n- 当首字母为大写时，其被认定为自定义组件，createElement 的第一个变量被编译为对象\n\n最终都会通过`RenderDOM.render(...)`方法进行挂载，如下：\n\n```jsx\nReactDOM.render(<App />,  document.getElementById(\"root\"));\n```\n\n\n\n## 二、过程\n\n在`react`中，节点大致可以分成四个类别：\n\n- 原生标签节点\n- 文本节点\n- 函数组件\n- 类组件\n\n如下所示：\n\n```jsx\nclass ClassComponent extends Component {\n  static defaultProps = {\n    color: \"pink\"\n  };\n  render() {\n    return (\n      <div className=\"border\">\n        <h3>ClassComponent</h3>\n        <p className={this.props.color}>{this.props.name}</p >\n      </div>\n    );\n  }\n}\n\nfunction FunctionComponent(props) {\n  return (\n    <div className=\"border\">\n      FunctionComponent\n      <p>{props.name}</p >\n    </div>\n  );\n}\n\nconst jsx = (\n  <div className=\"border\">\n    <p>xx</p >\n    < a href=\" \">xxx</ a>\n    <FunctionComponent name=\"函数组件\" />\n    <ClassComponent name=\"类组件\" color=\"red\" />\n  </div>\n);\n```\n\n这些类别最终都会被转化成`React.createElement`这种形式\n\n`React.createElement`其被调用时会传⼊标签类型`type`，标签属性`props`及若干子元素`children`，作用是生成一个虚拟`Dom`对象，如下所示：\n\n```js\nfunction createElement(type, config, ...children) {\n    if (config) {\n        delete config.__self;\n        delete config.__source;\n    }\n    // ! 源码中做了详细处理，⽐如过滤掉key、ref等\n    const props = {\n        ...config,\n        children: children.map(child =>\n   typeof child === \"object\" ? child : createTextNode(child)\n  )\n    };\n    return {\n        type,\n        props\n    };\n}\nfunction createTextNode(text) {\n    return {\n        type: TEXT,\n        props: {\n            children: [],\n            nodeValue: text\n        }\n    };\n}\nexport default {\n    createElement\n};\n```\n\n`createElement`会根据传入的节点信息进行一个判断：\n\n- 如果是原生标签节点， type 是字符串，如div、span\n- 如果是文本节点， type就没有，这里是 TEXT\n- 如果是函数组件，type 是函数名\n- 如果是类组件，type 是类名\n\n虚拟`DOM`会通过`ReactDOM.render`进行渲染成真实`DOM`，使用方法如下：\n\n```jsx\nReactDOM.render(element, container[, callback])\n```\n\n当首次调用时，容器节点里的所有 `DOM` 元素都会被替换，后续的调用则会使用 `React` 的 `diff`算法进行高效的更新\n\n如果提供了可选的回调函数`callback`，该回调将在组件被渲染或更新之后被执行\n\n`render`大致实现方法如下：\n\n```js\nfunction render(vnode, container) {\n    console.log(\"vnode\", vnode); // 虚拟DOM对象\n    // vnode _> node\n    const node = createNode(vnode, container);\n    container.appendChild(node);\n}\n\n// 创建真实DOM节点\nfunction createNode(vnode, parentNode) {\n    let node = null;\n    const {type, props} = vnode;\n    if (type === TEXT) {\n        node = document.createTextNode(\"\");\n    } else if (typeof type === \"string\") {\n        node = document.createElement(type);\n    } else if (typeof type === \"function\") {\n        node = type.isReactComponent\n            ? updateClassComponent(vnode, parentNode)\n        : updateFunctionComponent(vnode, parentNode);\n    } else {\n        node = document.createDocumentFragment();\n    }\n    reconcileChildren(props.children, node);\n    updateNode(node, props);\n    return node;\n}\n\n// 遍历下子vnode，然后把子vnode->真实DOM节点，再插入父node中\nfunction reconcileChildren(children, node) {\n    for (let i = 0; i < children.length; i++) {\n        let child = children[i];\n        if (Array.isArray(child)) {\n            for (let j = 0; j < child.length; j++) {\n                render(child[j], node);\n            }\n        } else {\n            render(child, node);\n        }\n    }\n}\nfunction updateNode(node, nextVal) {\n    Object.keys(nextVal)\n        .filter(k => k !== \"children\")\n        .forEach(k => {\n        if (k.slice(0, 2) === \"on\") {\n            let eventName = k.slice(2).toLocaleLowerCase();\n            node.addEventListener(eventName, nextVal[k]);\n        } else {\n            node[k] = nextVal[k];\n        }\n    });\n}\n\n// 返回真实dom节点\n// 执行函数\nfunction updateFunctionComponent(vnode, parentNode) {\n    const {type, props} = vnode;\n    let vvnode = type(props);\n    const node = createNode(vvnode, parentNode);\n    return node;\n}\n\n// 返回真实dom节点\n// 先实例化，再执行render函数\nfunction updateClassComponent(vnode, parentNode) {\n    const {type, props} = vnode;\n    let cmp = new type(props);\n    const vvnode = cmp.render();\n    const node = createNode(vvnode, parentNode);\n    return node;\n}\nexport default {\n    render\n};\n```\n\n\n\n\n\n## 三、总结\n\n在`react`源码中，虚拟`Dom`转化成真实`Dom`整体流程如下图所示：\n\n ![](https://static.ecool.fun//article/9331978c-279d-4074-bc08-053046a4faff.png)\n\n其渲染流程如下所示：\n\n- 使用React.createElement或JSX编写React组件，实际上所有的 JSX 代码最后都会转换成React.createElement(...) ，Babel帮助我们完成了这个转换的过程。\n- createElement函数对key和ref等特殊的props进行处理，并获取defaultProps对默认props进行赋值，并且对传入的孩子节点进行处理，最终构造成一个虚拟DOM对象\n- ReactDOM.render将生成好的虚拟DOM渲染到指定容器上，其中采用了批处理、事务等机制并且对特定浏览器进行了性能优化，最终转换为真实DOM\n\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-10-24T04:20:00.000Z",
-    "updateAt": "2024-01-25T19:25:49.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:51.000Z",
     "isCollected": false,
-    "currentIndex": 63,
+    "currentIndex": 848,
+    "filterTotalNum": 1487,
     "prev": "3804a9d9-03c0-4588-b696-1068d745c7b9",
     "next": "6515d22e-88eb-4a3f-9d02-2950cf35cb85"
   },
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "说说React Jsx转换成真实DOM过程？",
     "level": 2,
-    "updateAt": "2024-01-25T19:25:49+00:00"
+    "createAt": "2021-10-24T04:20:00+00:00",
+    "updateAt": "2024-08-10T17:05:51+00:00"
   },
   "tag": {
     "id": 13,
     "tagName": "React.js",
     "type": "1",
-    "exerciseCount": 101
+    "exerciseCount": 129
   }
 }

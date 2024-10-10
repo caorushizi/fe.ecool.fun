@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "connect负责连接React和Redux\n\n## 获取state\nconnect 通过 context获取 Provider 中的 store，通过 store.getState() 获取整个store tree 上所有state\n\n## 包装原组件\n\n将state和action通过props的方式传入到原组件内部 `wrapWithConnect` 返回—个 `ReactComponent` 对象 Connect，Connect重新 render 外部传入的原组件 `WrappedComponent` ，并把 connect 中传入的 `mapStateToProps`，`mapDispatchToProps`与组件上原有的 props 合并后，通过属性的方式传给 `WrappedComponent`\n\n## 监听store tree变化\n\nconnect缓存了`store tree`中state的状态，通过当前state状态 和变更前 state 状态进行比较，从而确定是否调用 `this.setState()`方法触发 Connect 及其子组件的重新渲染",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-01-16T14:49:28.000Z",
-    "updateAt": "2022-01-16T23:27:15.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-23T10:24:31.000Z",
     "isCollected": false,
-    "currentIndex": 636,
+    "currentIndex": 727,
+    "filterTotalNum": 1487,
     "prev": "d7dc9c83-0fa2-4510-b098-e92de7637209",
-    "next": "10e0441f-d709-427d-975b-f0026556ae7e"
+    "next": "48ea6174-729d-4d41-ab63-eeaa3781068b"
   },
   "post": {
     "exerciseKey": "2476ee50-e484-4416-88a7-4c506f84de9a",
     "category": "QA",
     "title": "Redux中的connect有什么作用？",
     "level": 3,
-    "updateAt": "2022-01-16T23:27:15+00:00"
+    "createAt": "2022-01-16T14:49:28+00:00",
+    "updateAt": "2024-07-23T10:24:31+00:00"
   },
   "tag": {
     "id": 13,
     "tagName": "React.js",
     "type": "1",
-    "exerciseCount": 101
+    "exerciseCount": 129
   }
 }

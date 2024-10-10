@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2711,
+    "exerciseKey": "c5f7ff93-7de3-4ebd-bfaa-bcaeebcd7f56",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Promise then 第二个参数和 Promise.catch 的区别是什么?",
+    "desc": "",
+    "options": "",
+    "explanation": "`Promise.then` 的第二个参数和 `Promise.catch` 都用于处理 Promise 的拒绝（rejected）情况，但它们的使用方式和作用有所不同。以下是它们的区别：\n\n### **1. `Promise.then` 的第二个参数**\n\n- **作用**：用于处理 Promise 被拒绝（rejected）时的情况。\n- **用法**：\n  ```javascript\n  promise.then(onFulfilled, onRejected);\n  ```\n  - `onFulfilled`：可选的回调函数，Promise 被解决（fulfilled）时调用。\n  - `onRejected`：可选的回调函数，Promise 被拒绝（rejected）时调用。\n\n- **示例**：\n  ```javascript\n  new Promise((resolve, reject) => reject('Error'))\n    .then(\n      value => console.log('Fulfilled:', value),\n      error => console.log('Rejected:', error) // 处理拒绝的情况\n    );\n  ```\n\n- **特点**：`then` 方法接收两个参数，第一个是成功回调，第二个是失败回调。只有当 `then` 的第一个参数不为 `undefined` 时，第二个参数才会被触发。\n\n### **2. `Promise.catch`**\n\n- **作用**：专门用于处理 Promise 被拒绝（rejected）时的情况。\n- **用法**：\n  ```javascript\n  promise.catch(onRejected);\n  ```\n  - `onRejected`：回调函数，当 Promise 被拒绝时调用。\n\n- **示例**：\n  ```javascript\n  new Promise((resolve, reject) => reject('Error'))\n    .catch(error => console.log('Caught Error:', error)); // 处理拒绝的情况\n  ```\n\n- **特点**：`catch` 方法是 `then` 方法的语法糖，专门用于处理拒绝的情况。它可以与 `then` 链式调用配合使用，使得代码更加清晰和符合逻辑。",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 2,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:41.000Z",
+    "updateAt": "2024-08-14T23:21:48.000Z",
+    "isCollected": false,
+    "currentIndex": 75,
+    "filterTotalNum": 1487,
+    "prev": "015d6008-c1c2-4b86-8db3-e3baa1ff0327",
+    "next": "f18218c8-4c74-4631-b66d-e7ac65929f35"
+  },
+  "post": {
+    "exerciseKey": "c5f7ff93-7de3-4ebd-bfaa-bcaeebcd7f56",
+    "category": "QA",
+    "title": "Promise then 第二个参数和 Promise.catch 的区别是什么?",
+    "level": 2,
+    "createAt": "2024-08-13T08:30:41+00:00",
+    "updateAt": "2024-08-14T23:21:48+00:00"
+  },
+  "tag": {
+    "id": 24,
+    "tagName": "ES6",
+    "type": "1",
+    "exerciseCount": 40
+  }
+}

@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "\n他们都是 CSS 预处理器，是 CSS 上的一种抽象层。他们是一种特殊的语法/语言编译成 CSS。 例如 Less 是一种动态样式语言，将 CSS 赋予了动态语言的特性，如变量，继承，运算， 函数，LESS 既可以在客户端上运行 (支持 IE 6+, Webkit, Firefox)，也可以在服务端运行 (借助 Node.js)。 \n\n\n**为什么要使用它们？**\n\n- 结构清晰，便于扩展。 可以方便地屏蔽浏览器私有语法差异。封装对浏览器语法差异的重复处理， 减少无意义的机械劳动。 \n- 可以轻松实现多重继承。 完全兼容 CSS 代码，可以方便地应用到老项目中。LESS 只是在 CSS 语法上做了扩展，所以老的 CSS 代码也可以与 LESS 代码一同编译。\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-06-25T06:18:13.000Z",
-    "updateAt": "2022-06-25T14:35:28.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:06:45.000Z",
     "isCollected": false,
-    "currentIndex": 520,
-    "prev": "84f9d3f9-88aa-4441-8868-b7c834f796fc",
-    "next": "ad2a65d2-9330-4f65-9be7-b61e11e10c02"
+    "currentIndex": 559,
+    "filterTotalNum": 1487,
+    "prev": "a603e82b-8b27-41af-9cbd-2f1baa38d922",
+    "next": "38fbd4c0-d294-4bf5-9041-250449fe0f6a"
   },
   "post": {
     "exerciseKey": "e894262c-f9eb-495b-bb45-5016337f3af1",
     "category": "QA",
     "title": "Sass、Less 是什么？为什么要使用他们？ ",
     "level": 1,
-    "updateAt": "2022-06-25T14:35:28+00:00"
+    "createAt": "2022-06-25T06:18:13+00:00",
+    "updateAt": "2024-08-10T17:06:45+00:00"
   },
   "tag": {
     "id": 11,
     "tagName": "CSS",
     "type": "1",
-    "exerciseCount": 90
+    "exerciseCount": 101
   }
 }

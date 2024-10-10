@@ -1,6 +1,6 @@
 ---
 title: 堆与栈有什么区别？
-pubDatetime: 2021-08-01T15:34:34.000Z
+pubDatetime: 2024-08-10T17:05:34.000Z
 author: caorushizi
 tags:
   - JavaScript

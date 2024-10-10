@@ -1,6 +1,6 @@
 ---
 title: 【Promise第11题】下面代码的输出是什么？
-pubDatetime: 2022-01-09T23:01:15.000Z
+pubDatetime: 2024-07-20T11:01:31.000Z
 author: caorushizi
 tags:
   - JavaScript

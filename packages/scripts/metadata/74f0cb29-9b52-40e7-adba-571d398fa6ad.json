@@ -7,16 +7,17 @@
     "title": "列举几个常见的 Hook?",
     "desc": null,
     "options": null,
-    "explanation": "* 状态钩子 (useState): 用于定义组件的 State，类似类定义中 this.state 的功能\n* 生命周期钩子 (useEffect): 类定义中有许多生命周期函数，而在 React Hooks 中也提供了一个相应的函数 (useEffect)，这里可以看做componentDidMount、componentDidUpdate和componentWillUnmount的结合。\n* useContext: 获取 context 对象\n* useCallback: 缓存回调函数，避免传入的回调每次都是新的函数实例而导致依赖组件重新渲染，具有性能优化的效果；\n* useMemo: 用于缓存传入的 props，避免依赖的组件每次都重新渲染；\n* useRef: 获取组件的真实节点；\n",
+    "explanation": "在 React 中，Hooks 是一组可以让函数组件拥有状态和副作用的 API。\n\n以下是一些常见的 Hook 及其用途：\n\n### 1. **`useState`**\n\n- **用途**：在函数组件中添加状态。\n- **示例**：\n  ```javascript\n  import React, { useState } from 'react';\n\n  function Counter() {\n    const [count, setCount] = useState(0);\n\n    return (\n      <div>\n        <p>You clicked {count} times</p>\n        <button onClick={() => setCount(count + 1)}>Click me</button>\n      </div>\n    );\n  }\n  ```\n\n### 2. **`useEffect`**\n\n- **用途**：在函数组件中处理副作用，如数据获取、订阅和手动 DOM 操作。\n- **示例**：\n  ```javascript\n  import React, { useEffect, useState } from 'react';\n\n  function Example() {\n    const [data, setData] = useState(null);\n\n    useEffect(() => {\n      fetch('https://api.example.com/data')\n        .then(response => response.json())\n        .then(data => setData(data));\n    }, []); // 空数组表示只在组件挂载时执行一次\n\n    return <div>{data ? `Data: ${data}` : 'Loading...'}</div>;\n  }\n  ```\n\n### 3. **`useContext`**\n\n- **用途**：在组件中访问 React 的 Context。\n- **示例**：\n  ```javascript\n  import React, { useContext, createContext } from 'react';\n\n  const MyContext = createContext('defaultValue');\n\n  function Display() {\n    const value = useContext(MyContext);\n    return <div>{value}</div>;\n  }\n\n  function App() {\n    return (\n      <MyContext.Provider value=\"Hello, World!\">\n        <Display />\n      </MyContext.Provider>\n    );\n  }\n  ```\n\n### 4. **`useReducer`**\n\n- **用途**：管理复杂状态逻辑，类似于 Redux 的 reducer。\n- **示例**：\n  ```javascript\n  import React, { useReducer } from 'react';\n\n  const initialState = { count: 0 };\n\n  function reducer(state, action) {\n    switch (action.type) {\n      case 'increment':\n        return { count: state.count + 1 };\n      case 'decrement':\n        return { count: state.count - 1 };\n      default:\n        throw new Error();\n    }\n  }\n\n  function Counter() {\n    const [state, dispatch] = useReducer(reducer, initialState);\n\n    return (\n      <div>\n        <p>Count: {state.count}</p>\n        <button onClick={() => dispatch({ type: 'increment' })}>Increment</button>\n        <button onClick={() => dispatch({ type: 'decrement' })}>Decrement</button>\n      </div>\n    );\n  }\n  ```\n\n### 5. **`useMemo`**\n\n- **用途**：优化性能，通过记忆化计算结果，避免不必要的重新计算。\n- **示例**：\n  ```javascript\n  import React, { useMemo, useState } from 'react';\n\n  function ExpensiveComponent({ compute }) {\n    const result = useMemo(() => compute(), [compute]);\n    return <div>Result: {result}</div>;\n  }\n\n  function App() {\n    const [count, setCount] = useState(0);\n\n    const compute = () => {\n      // 模拟一个计算过程\n      return count * 2;\n    };\n\n    return (\n      <div>\n        <button onClick={() => setCount(count + 1)}>Increment</button>\n        <ExpensiveComponent compute={compute} />\n      </div>\n    );\n  }\n  ```\n\n### 6. **`useCallback`**\n\n- **用途**：记忆化回调函数，避免在依赖项变化时重新创建函数。\n- **示例**：\n  ```javascript\n  import React, { useCallback, useState } from 'react';\n\n  function Button({ onClick }) {\n    console.log('Button rendered');\n    return <button onClick={onClick}>Click me</button>;\n  }\n\n  function App() {\n    const [count, setCount] = useState(0);\n\n    const handleClick = useCallback(() => {\n      alert('Button clicked!');\n    }, []); // 依赖项为空数组表示回调函数不会变化\n\n    return (\n      <div>\n        <p>Count: {count}</p>\n        <button onClick={() => setCount(count + 1)}>Increment</button>\n        <Button onClick={handleClick} />\n      </div>\n    );\n  }\n  ```\n\n### 7. **`useRef`**\n\n- **用途**：在函数组件中创建可变的引用，通常用于访问 DOM 元素或保存任何可变数据。\n- **示例**：\n  ```javascript\n  import React, { useRef } from 'react';\n\n  function FocusInput() {\n    const inputRef = useRef(null);\n\n    const handleClick = () => {\n      inputRef.current.focus();\n    };\n\n    return (\n      <div>\n        <input ref={inputRef} type=\"text\" />\n        <button onClick={handleClick}>Focus the input</button>\n      </div>\n    );\n  }\n  ```\n\n这些 Hooks 提供了处理状态、副作用、上下文、性能优化等常见需求的功能，使得函数组件变得更加灵活和强大。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T12:27:35.000Z",
-    "updateAt": "2021-07-04T21:30:18.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:10.000Z",
     "isCollected": false,
-    "currentIndex": 993,
-    "prev": "4caa6281-4592-4f6b-ac70-73effa2bcf0d",
+    "currentIndex": 1158,
+    "filterTotalNum": 1487,
+    "prev": "35528a50-c820-4037-beec-ec309c4f2a46",
     "next": "37ab3a5b-b59d-433c-8db9-b6a7444337c3"
   },
   "post": {
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "列举几个常见的 Hook?",
     "level": 2,
-    "updateAt": "2021-07-04T21:30:18+00:00"
+    "createAt": "2021-07-04T12:27:35+00:00",
+    "updateAt": "2024-08-10T17:05:10+00:00"
   },
   "tag": {
     "id": 13,
     "tagName": "React.js",
     "type": "1",
-    "exerciseCount": 101
+    "exerciseCount": 129
   }
 }

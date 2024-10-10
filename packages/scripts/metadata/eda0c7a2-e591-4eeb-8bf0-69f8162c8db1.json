@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "可迭代对象（Iterable object）是数组的泛化，这个概念是在说任何对象都可以被定制为可在 `for..of` 循环中使用的对象。\n\n也就是说，可以应用 `for..of` 的对象被称为 `可迭代对象`。\n\n## 迭代器\n\n在 JavaScript 中，**迭代器**是一个对象，它定义一个序列，并在终止时可能返回一个返回值。\n\n更具体地说，迭代器是通过使用 `next()` 方法实现 `Iterator protocol` 的任何一个对象，该方法返回具有两个属性的对象： \n\n* `value`，这是序列中的 `next` 值\n* `done`，如果已经迭代到序列中的最后一个值，则它为 `true` \n\n如果 `value` 和 `done` 一起存在，则它是迭代器的返回值。\n\n一旦创建，迭代器对象可以通过重复调用 `next() `显式地迭代。\n\n迭代一个迭代器被称为消耗了这个迭代器，因为它通常只能执行一次。\n\n在产生终止值之后，对 `next()` 的额外调用应该继续返回 `{done: true}`。\n\nJavascript 中最常见的迭代器是 Array 迭代器，它只是按顺序返回关联数组中的每个值。\n\n虽然很容易想象所有迭代器都可以表示为数组，但事实并非如此。数组必须完整分配，但迭代器仅在必要时使用，因此可以表示无限大小的序列，例如 0 和无穷大之间的整数范围。\n\n这是一个可以做到这一点的例子。它允许创建一个简单的范围迭代器，它定义了从开始（包括）到结束（独占）间隔步长的整数序列。它的最终返回值是它创建的序列的大小，由变量 iterationCount 跟踪。\n\n```js\nlet index = 0\nconst bears = ['ice', 'panda', 'grizzly']\n\nlet iterator = {\n  next() {\n    if (index < bears.length) {\n      return { done: false, value: bears[index++] }\n    }\n\n    return { done: true, value: undefined }\n  }\n}\n\nconsole.log(iterator.next()) //{ done: false, value: 'ice' }\nconsole.log(iterator.next()) //{ done: false, value: 'panda' }\nconsole.log(iterator.next()) //{ done: false, value: 'grizzly' }\nconsole.log(iterator.next()) //{ done: true, value: undefined }\n```\n\n## 实现可迭代对象\n\n如果一个对象拥有 `[Symbol.iterator]` 方法，并且该方法返回一个迭代器对象，这样的对象即可称为`可迭代对象`。\n\n```js\nlet info = {\n  bears: ['ice', 'panda', 'grizzly'],\n  [Symbol.iterator]: function() {\n    let index = 0\n    let _iterator = {\n       //这里一定要箭头函数，或者手动保存上层作用域的this\n       next: () => {\n        if (index < this.bears.length) {\n          return { done: false, value: this.bears[index++] }\n        }\n  \n        return { done: true, value: undefined }\n      }\n    }\n\n    return _iterator\n  }\n}\n\nlet iter = info[Symbol.iterator]()\nconsole.log(iter.next())\nconsole.log(iter.next())\nconsole.log(iter.next())\nconsole.log(iter.next())\n\n//符合可迭代对象协议 就可以利用 for of 遍历\nfor (let bear of info) {\n  console.log(bear)\n}\n//ice panda grizzly\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-01-09T11:42:26.000Z",
-    "updateAt": "2023-03-12T17:05:37.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:07.000Z",
     "isCollected": false,
-    "currentIndex": 433,
-    "prev": "69360791-290f-44c8-ba87-6bfe7a5260ad",
-    "next": "d66f9477-309f-4af7-b667-d39ad3525a5b"
+    "currentIndex": 455,
+    "filterTotalNum": 1487,
+    "prev": "460a9714-1001-4beb-b12a-be8fec732879",
+    "next": "e4c43a21-1621-4281-9340-1839ec880382"
   },
   "post": {
     "exerciseKey": "eda0c7a2-e591-4eeb-8bf0-69f8162c8db1",
     "category": "QA",
     "title": "如何把一个对象变成可迭代对象？",
     "level": 3,
-    "updateAt": "2023-03-12T17:05:37+00:00"
+    "createAt": "2023-01-09T11:42:26+00:00",
+    "updateAt": "2024-08-10T17:07:07+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

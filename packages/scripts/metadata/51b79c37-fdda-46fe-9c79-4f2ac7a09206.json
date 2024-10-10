@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2472,
+    "exerciseKey": "51b79c37-fdda-46fe-9c79-4f2ac7a09206",
+    "category": "QA",
+    "renderType": "md",
+    "title": "什么是伪数组和类数组？",
+    "desc": "",
+    "options": "",
+    "explanation": "伪数组（Pseudo-array）和类数组（Array-like）是描述具有类似数组结构的对象的术语，虽然它们并不是真正的数组。它们通常具有下列特性：\n\n### 伪数组（Pseudo-array）\n\n伪数组指的是一种对象，它看起来像数组，因为它具有索引属性和 `length` 属性，但并不具备数组的所有方法（如 `push`, `pop`, `forEach`）。伪数组的关键特征包括：\n\n- **索引属性**：对象的属性名是数字，通常从0开始递增。\n- **`length` 属性**：包含一个表示对象元素个数的 `length` 属性。\n\n### 类数组（Array-like）\n\n类数组是指任何具有 `length` 属性和索引属性的对象，这些对象看起来像数组，但并不真正是数组。类数组对象可以是：\n\n- **HTMLCollection**：例如，`document.getElementsByTagName()` 返回的对象。\n- **NodeList**：例如，`document.querySelectorAll()` 返回的对象。\n- **函数的 `arguments` 对象**：函数内部的 `arguments` 对象也是类数组。\n\n### 示例\n\n**HTMLCollection（类数组）**：\n```javascript\nconst elements = document.getElementsByTagName('div');\nconsole.log(elements instanceof Array); // false\nconsole.log(elements.length); // 结果为 div 元素的数量\nconsole.log(elements[0]); // 第一个 div 元素\n```\n\n**函数的 `arguments` 对象（伪数组）**：\n```javascript\nfunction example() {\n    console.log(arguments instanceof Array); // false\n    console.log(arguments.length); // 参数个数\n    console.log(arguments[0]); // 第一个参数\n}\nexample(1, 2, 3);\n```\n\n### 区别\n\n- **伪数组**：\n  - 具备数组的外观（索引和 `length` 属性），但不具备数组的方法。\n  - 例如，`arguments` 对象。\n\n- **类数组**：\n  - 具备 `length` 属性和数值索引属性，但不具备数组的方法。\n  - 例如，`document.getElementsByTagName()` 返回的对象。\n\n### 转换为真正的数组\n\n可以使用 `Array.from()` 或扩展运算符（spread operator）将伪数组或类数组转换为真正的数组：\n\n**使用 `Array.from()`**：\n```javascript\nconst array = Array.from(arguments);\n```\n\n**使用扩展运算符**：\n```javascript\nconst array = [...arguments];\n```",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 2,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:26.000Z",
+    "updateAt": "2024-08-22T10:55:32.000Z",
+    "isCollected": false,
+    "currentIndex": 196,
+    "filterTotalNum": 1487,
+    "prev": "9c288de3-0f6e-4a95-a243-d9d01e443b79",
+    "next": "b006d9ef-a87e-47c4-b5f9-6314204730e5"
+  },
+  "post": {
+    "exerciseKey": "51b79c37-fdda-46fe-9c79-4f2ac7a09206",
+    "category": "QA",
+    "title": "什么是伪数组和类数组？",
+    "level": 2,
+    "createAt": "2024-08-13T08:30:26+00:00",
+    "updateAt": "2024-08-22T10:55:32+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 379
+  }
+}

@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "<p><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">使用 内容分发网络 (CDNs) 在多个站点之间共享脚本和样式表等文件可以提高站点性能并节省带宽。然而，使用CDN也存在风险，如果攻击者获得对 CDN 的控制权，则可以将任意恶意内容注入到 CDN 上的文件中 （或完全替换掉文件），因此可能潜在地攻击所有从该 CDN 获取文件的站点。</span></span></span></span></p><p><br/><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\"><span style=\"font-size:14ptpx\"><strong>预防方案</strong></span></span></span></span></p><p><br/><span style=\"font-size:10.5ptpx\"><span style=\"color:#24292e\"><span style=\"background-color:#ffffff\"><span style=\"letter-spacing:0ptpx\">将使用 base64 编码过后的文件哈希值写入你所引用的 &lt;script&gt; 或 标签的 integrity 属性值中即可启用子资源完整性能。</span></span></span></span><br/><br/></p>",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2.5,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T10:59:20.000Z",
-    "updateAt": "2021-07-07T00:09:17.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-18T23:40:48.000Z",
     "isCollected": false,
-    "currentIndex": 973,
-    "prev": "f1de93ec-d1c8-48b0-98a9-bf256dfe2df0",
-    "next": "a4b9ded4-e430-4df9-8857-4d870e9c35cc"
+    "currentIndex": 1189,
+    "filterTotalNum": 1487,
+    "prev": "1176d873-74da-4e0d-87b9-034c1287488a",
+    "next": "748b2bec-7e35-4d5b-81e1-c6fb29f00464"
   },
   "post": {
     "exerciseKey": "5f0460dc-84ca-425e-8629-7aec874d024c",
     "category": "QA",
     "title": "静态资源完整性校验",
     "level": 2.5,
-    "updateAt": "2021-07-07T00:09:17+00:00"
+    "createAt": "2021-07-04T10:59:20+00:00",
+    "updateAt": "2024-07-18T23:40:48+00:00"
   },
   "tag": {
     "id": 21,
     "tagName": "前端安全",
     "type": "1",
-    "exerciseCount": 21
+    "exerciseCount": 25
   }
 }

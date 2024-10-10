@@ -1,6 +1,6 @@
 ---
 title: 怎么让Chrome支持小于12px 的文字？
-pubDatetime: 2023-12-18T20:51:00.000Z
+pubDatetime: 2024-07-22T09:52:45.000Z
 author: caorushizi
 tags:
   - CSS

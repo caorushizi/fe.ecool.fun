@@ -2,7 +2,7 @@
 title: >-
   React 为什么要废弃  componentWillMount、componentWillReceiveProps、componentWillUpdate
   这三个生命周期钩子？它们有哪些问题呢？React 又是如何解决的呢？
-pubDatetime: 2024-03-18T19:23:04.000Z
+pubDatetime: 2024-07-22T10:11:32.000Z
 author: caorushizi
 tags:
   - React.js

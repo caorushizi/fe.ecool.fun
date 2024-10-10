@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "<ul><li>content方面<br/></li><ul><li>减少HTTP请求：合并文件、CSS精灵、inline Image</li><li>减少DNS查询：DNS查询完成之前浏览器不能从这个主机下载任何任何文件。方法：DNS缓存、将资源分布到恰当数量的主机名，平衡并行下载和DNS查询</li><li>避免重定向：多余的中间访问</li><li>使Ajax可缓存</li><li>非必须组件延迟加载</li><li>未来所需组件预加载</li><li>减少DOM元素数量</li><li>将资源放到不同的域下：浏览器同时从一个域下载资源的数目有限，增加域可以提高并行下载量</li><li>减少iframe数量</li><li>不要404</li></ul></ul><p></p><ul><li>Server方面<br/></li><ul><li>使用CDN</li><li>添加Expires或者Cache-Control响应头</li><li>对组件使用Gzip压缩</li><li>配置ETag</li><li>Flush Buffer Early</li><li>Ajax使用GET进行请求</li><li>避免空src的img标签</li></ul></ul><p></p><ul><li>Cookie方面<br/></li><ul><li>减小cookie大小</li><li>引入资源的域名不要包含cookie</li></ul></ul><p></p><ul><li>css方面<br/></li><ul><li>将样式表放到页面顶部</li><li>不使用CSS表达式</li><li>不使用IE的Filter</li></ul></ul><p></p><ul><li>Javascript方面<br/></li><ul><li>将脚本放到页面底部</li><li>将javascript和css从外部引入</li><li>压缩javascript和css</li><li>删除不需要的脚本</li><li>减少DOM访问</li><li>合理设计事件监听器</li></ul></ul><p></p><ul><li>图片方面<br/></li><ul><li>优化图片：根据实际颜色需要选择色深、压缩</li><li>优化css精灵</li><li>不要在HTML中拉伸图片</li><li>保证favicon.ico小并且可缓存</li></ul></ul><p></p><p></p>",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T15:37:40.000Z",
-    "updateAt": "2021-07-07T00:09:24.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-18T18:24:32.000Z",
     "isCollected": false,
-    "currentIndex": 971,
-    "prev": "4ce73150-a0ff-495a-a669-191b7bd7c830",
-    "next": "f1de93ec-d1c8-48b0-98a9-bf256dfe2df0"
+    "currentIndex": 1140,
+    "filterTotalNum": 1487,
+    "prev": "d627f91c-d910-447b-88b5-4f424799aa84",
+    "next": "a1c9963f-fb40-4d8a-aa47-e5cca8c885b7"
   },
   "post": {
     "exerciseKey": "549f8d07-a907-4c86-93c1-d3e8fef30613",
     "category": "QA",
     "title": "说说常规的前端性能优化手段",
     "level": 3,
-    "updateAt": "2021-07-07T00:09:24+00:00"
+    "createAt": "2021-07-04T15:37:40+00:00",
+    "updateAt": "2024-07-18T18:24:32+00:00"
   },
   "tag": {
     "id": 20,
     "tagName": "性能优化",
     "type": "1",
-    "exerciseCount": 25
+    "exerciseCount": 41
   }
 }

@@ -8,28 +8,30 @@
     "desc": "<p></p>",
     "options": null,
     "explanation": "HTTPS并非绝对安全，掌握根证书的机构、掌握加密算法的组织同样可以进行中间人形式的攻击，但HTTPS仍是现行架构下最安全的解决方案，主要有以下几个好处：\n\n* 使用 HTTPS 协议可认证用户和服务器，确保数据发送到正确的客户机和服务器。\n* HTTPS 协议是由SSL+HTTP 协议构建的可进行加密传输、身份认证的网络协议，要比 HTTP 协议安全，可防止数据在传输过程中不被窃取、修改，确保数据的完整性。\n* HTTPS 是现行架构下最安全的解决方案，虽然不是绝对安全，相比于http，https可以提供更加优质保密的信息，保证了用户数据的安全性，此外https同时也一定程度上保护了服务端，使用恶意攻击和伪装数据的成本大大提高。\n* 谷歌曾在2014年8月份调整搜索引擎算法，并称“比起同等HTTP网站，采用HTTPS加密的网站在搜索结果中的排名将会更高”。\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2.5,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T10:58:29.000Z",
-    "updateAt": "2022-11-13T19:47:55.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:04:57.000Z",
     "isCollected": false,
-    "currentIndex": 464,
-    "prev": "8bf5ed84-131a-405e-9385-0b3b75a42723",
-    "next": "c3faa4b5-e73e-47f6-af7b-1f9c73d74126"
+    "currentIndex": 1190,
+    "filterTotalNum": 1487,
+    "prev": "5f0460dc-84ca-425e-8629-7aec874d024c",
+    "next": "4caa6281-4592-4f6b-ac70-73effa2bcf0d"
   },
   "post": {
     "exerciseKey": "748b2bec-7e35-4d5b-81e1-c6fb29f00464",
     "category": "QA",
     "title": "HTTPS 有哪些优点？",
     "level": 2.5,
-    "updateAt": "2022-11-13T19:47:55+00:00"
+    "createAt": "2021-07-04T10:58:29+00:00",
+    "updateAt": "2024-08-10T17:04:57+00:00"
   },
   "tag": {
     "id": 21,
     "tagName": "前端安全",
     "type": "1",
-    "exerciseCount": 21
+    "exerciseCount": 25
   }
 }

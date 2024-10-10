@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "1. 使用 `let` 关键字：\n   ```typescript\n   let x: number = 10;\n   ```\n\n2. 使用 `const` 关键字来声明常量：\n   ```typescript\n   const pi: number = 3.14;\n   ```\n\n3. 使用 `var` 关键字（不推荐，通常在ES6之前使用）：\n   ```typescript\n   var name: string = \"John\";\n   ```\n\n4. 使用函数作用域声明变量：\n   ```typescript\n   function example() {\n       var localVar: number = 42;\n   }\n   ```\n\n5. 使用函数参数的方式声明变量：\n   ```typescript\n   function greet(name: string) {\n       console.log(`Hello, ${name}!`);\n   }\n   ```\n\n6. 使用对象字面量声明变量：\n   ```typescript\n   let person: { name: string, age: number } = { name: \"Alice\", age: 30 };\n   ```\n\n7. 使用数组字面量声明数组变量：\n   ```typescript\n   let numbers: number[] = [1, 2, 3, 4, 5];\n   ```\n\n8. 使用接口声明对象的结构：\n   ```typescript\n   interface Person {\n       name: string;\n       age: number;\n   }\n   \n   let person: Person = { name: \"Bob\", age: 25 };\n   ```\n\n9. 使用类来声明对象：\n   ```typescript\n   class Animal {\n       constructor(public name: string, public species: string) {}\n   }\n   \n   let cat: Animal = new Animal(\"Fluffy\", \"Cat\");\n   ```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-11T03:22:04.000Z",
-    "updateAt": "2023-09-06T11:55:18.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:22.000Z",
     "isCollected": false,
-    "currentIndex": 294,
-    "prev": "94393532-0d43-407f-8168-73bc6fd523a3",
-    "next": "94b843ea-1ede-4fa4-81ae-a92e612b4439"
+    "currentIndex": 1016,
+    "filterTotalNum": 1487,
+    "prev": "fa381450-0faf-4395-9207-7fa114c27440",
+    "next": "c50852c5-6471-4bd3-8392-02ab58e4c726"
   },
   "post": {
     "exerciseKey": "72489e71-cf2d-4c98-8fd3-d43f7bfe217e",
     "category": "QA",
     "title": "TypeScript中有哪些声明变量的方式？",
     "level": 1,
-    "updateAt": "2023-09-06T11:55:18+00:00"
+    "createAt": "2021-07-11T03:22:04+00:00",
+    "updateAt": "2024-08-10T17:05:22+00:00"
   },
   "tag": {
     "id": 19,
     "tagName": "Typescript",
     "type": "1",
-    "exerciseCount": 46
+    "exerciseCount": 55
   }
 }

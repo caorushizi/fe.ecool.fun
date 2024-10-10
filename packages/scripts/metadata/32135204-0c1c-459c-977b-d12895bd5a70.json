@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "使用 refs 获取。组件被调用时会新建一个该组件的实例。refs 会指向这个实例，可以是一个回调函数，回调函数会在组件被挂载后立即执行。\n\n如果把 refs 放到原生 DOM 组件的 input 中，我们就可以通过 refs 得到 DOM 节点；如果把 refs 放到 React 组件中，那么我们获得的就是组件的实例，因此就可以调用实例的方法（如果想访问该组件的真实 DOM，那么可以用 React.findDOMNode 来找到 DOM 节点，但是不推崇此方法）。\n\nrefs 无法用于无状态组件，无状态组件挂载时只是方法调用，没有新建实例。在 v16 之后，可以使用 useRef。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T12:12:41.000Z",
-    "updateAt": "2023-03-26T08:45:04.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:03.000Z",
     "isCollected": false,
-    "currentIndex": 409,
-    "prev": "13d7618b-87b1-41c1-9dbe-dbc9991d71c5",
-    "next": "eb1b05fa-d58b-4d72-bf81-3cd8bab13f55"
+    "currentIndex": 1164,
+    "filterTotalNum": 1487,
+    "prev": "b19c5c77-658d-4004-a9c5-028fd81b3a9e",
+    "next": "e203426f-23a1-4872-8ff7-1d0d27e57a81"
   },
   "post": {
     "exerciseKey": "32135204-0c1c-459c-977b-d12895bd5a70",
     "category": "QA",
     "title": "React 中的 ref 有什么用？",
     "level": 2,
-    "updateAt": "2023-03-26T08:45:04+00:00"
+    "createAt": "2021-07-04T12:12:41+00:00",
+    "updateAt": "2024-08-10T17:05:03+00:00"
   },
   "tag": {
     "id": 13,
     "tagName": "React.js",
     "type": "1",
-    "exerciseCount": 101
+    "exerciseCount": 129
   }
 }

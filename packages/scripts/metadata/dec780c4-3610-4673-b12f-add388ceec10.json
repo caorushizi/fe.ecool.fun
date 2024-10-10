@@ -8,15 +8,16 @@
     "desc": "```js\nconst p1 = new Promise((resolve) => {\n  setTimeout(() => {\n    resolve('resolve3');\n    console.log('timer1')\n  }, 0)\n  resolve('resovle1');\n  resolve('resolve2');\n}).then(res => {\n  console.log(res)\n  setTimeout(() => {\n    console.log(p1)\n  }, 1000)\n}).finally(res => {\n  console.log('finally', res)\n})\n\n```",
     "options": null,
     "explanation": "## 解析\n\n* Promise的状态一旦改变就无法改变\n* finally不管Promise的状态是`resolved`还是`rejected`都会执行，且它的回调函数是接收不到Promise的结果的，所以finally()中的res是一个迷惑项。\n* 最后一个定时器打印出的p1其实是`.finally`的返回值，我们知道`.finally`的返回值如果在没有抛出错误的情况下默认会是上一个Promise的返回值，而这道题中`.finally`上一个Promise是`.then()`，但是这个`.then()`并没有返回值，所以p1打印出来的Promise的值会是`undefined`，如果你在定时器的下面加上一个`return 1`，则值就会变成1。\n\n## 结果\n```\n'resolve1'\n'finally' undefined\n'timer1'\nPromise{<resolved>: undefined}\n\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 4,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-01-09T15:23:27.000Z",
-    "updateAt": "2022-01-09T23:24:15.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-20T11:01:12.000Z",
     "isCollected": false,
-    "currentIndex": 642,
-    "prev": "9f0dbfc0-bd61-4956-8093-d604ac401983",
+    "currentIndex": 737,
+    "filterTotalNum": 1487,
+    "prev": "446d36f9-0845-432d-957a-7a9a2997a276",
     "next": "41c2b7e0-3ab2-4a94-8017-1804b0ddf868"
   },
   "post": {
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "【Promise第40题】下面代码的输出是什么？",
     "level": 4,
-    "updateAt": "2022-01-09T23:24:15+00:00"
+    "createAt": "2022-01-09T15:23:27+00:00",
+    "updateAt": "2024-07-20T11:01:12+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

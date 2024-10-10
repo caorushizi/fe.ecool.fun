@@ -7,29 +7,31 @@
     "title": "common.js和es6中模块引入的区别？",
     "desc": null,
     "options": null,
-    "explanation": "CommonJS 和 ES6 模块系统在语法和行为上有显著的区别：\n\n### CommonJS\n\nCommonJS 是一种模块系统，主要用于 Node.js 环境。它使用 `require` 函数来引入模块，并使用 `module.exports` 来导出模块。\n\n#### 语法\n\n- **导出模块：**\n\n```javascript\n// moduleA.js\nconst name = 'John';\nmodule.exports = name;\n\n// 或者导出一个对象\nconst person = { name: 'John', age: 30 };\nmodule.exports = person;\n```\n\n- **引入模块：**\n\n```javascript\n// main.js\nconst name = require('./moduleA');\nconsole.log(name); // 'John'\n\n// 引入对象\nconst person = require('./moduleA');\nconsole.log(person.name); // 'John'\nconsole.log(person.age);  // 30\n```\n\n#### 特点\n\n1. **动态引入：** `require` 可以在函数体内、条件语句中动态引入模块。\n    ```javascript\n    if (condition) {\n        const moduleA = require('./moduleA');\n    }\n    ```\n\n2. **同步加载：** `require` 是同步的，模块在执行 `require` 时会立即加载并返回结果。\n\n3. **导出的是值的拷贝：** 但对于对象和数组等引用类型，修改引用类型的属性会在所有引用中反映出来。\n    ```javascript\n    const obj = require('./moduleA');\n    obj.newProp = 'new';\n    console.log(require('./moduleA').newProp); // 'new'\n    ```\n\n### ES6 模块\n\nES6 模块系统是 ECMAScript 标准的一部分，使用 `import` 和 `export` 语法来定义模块，广泛用于现代前端开发以及一些支持 ES6 的服务器环境。\n\n#### 语法\n\n- **导出模块：**\n\n```javascript\n// moduleA.js\nexport const name = 'John';\n\n// 导出默认值\nconst person = { name: 'John', age: 30 };\nexport default person;\n```\n\n- **引入模块：**\n\n```javascript\n// main.js\nimport { name } from './moduleA';\nconsole.log(name); // 'John'\n\n// 引入默认导出\nimport person from './moduleA';\nconsole.log(person.name); // 'John'\nconsole.log(person.age);  // 30\n```\n\n#### 特点\n\n1. **静态引入：** `import` 必须在文件的顶部声明，不能在函数体内或条件语句中使用。这使得 ES6 模块可以在编译时确定依赖关系和优化。\n    ```javascript\n    // 错误的用法\n    if (condition) {\n        import { name } from './moduleA';\n    }\n    ```\n\n2. **异步加载：** 浏览器中的 ES6 模块是异步加载的，这意味着它们不会阻塞页面的其他加载过程。\n\n3. **导出的是值的引用：** 导出值的引用意味着当导出模块中的值发生变化时，所有引用该值的地方都会反映出这些变化。\n    ```javascript\n    // moduleA.js\n    export let count = 1;\n    setTimeout(() => { count += 1; }, 1000);\n\n    // main.js\n    import { count } from './moduleA';\n    setTimeout(() => { console.log(count); }, 2000); // 2\n    ```\n\n### 兼容性和转换\n\n- **CommonJS 和 ES6 模块的互操作性：** 在 Node.js 环境中，可以使用工具如 Babel 或 Webpack 将 ES6 模块转换为 CommonJS 模块，从而实现兼容性。\n- **双向兼容：** 使用工具链（如 Babel、Webpack）可以同时支持 CommonJS 和 ES6 模块语法，并在构建过程中根据目标环境进行转换。\n\n### 总结\n\n- **语法区别：** CommonJS 使用 `require` 和 `module.exports`，而 ES6 模块使用 `import` 和 `export`。\n- **加载方式：** CommonJS 是同步加载，ES6 模块是静态分析和异步加载。\n- **使用场景：** CommonJS 主要用于 Node.js 环境，而 ES6 模块是 ECMAScript 标准的一部分，更适合现代前端开发。\n\n选择使用哪种模块系统取决于项目需求和运行环境。对于现代前端开发，推荐使用 ES6 模块。对于 Node.js 项目，传统上使用 CommonJS，但也可以逐渐迁移到 ES6 模块。",
+    "explanation": "CommonJS 和 ES6 模块系统在语法和行为上有显著的区别：\n\n### CommonJS\n\nCommonJS 是一种模块系统，主要用于 Node.js 环境。它使用 `require` 函数来引入模块，并使用 `module.exports` 来导出模块。\n\n#### 语法\n\n- **导出模块：**\n\n```javascript\n// moduleA.js\nconst name = 'John';\nmodule.exports = name;\n\n// 或者导出一个对象\nconst person = { name: 'John', age: 30 };\nmodule.exports = person;\n```\n\n- **引入模块：**\n\n```javascript\n// main.js\nconst name = require('./moduleA');\nconsole.log(name); // 'John'\n\n// 引入对象\nconst person = require('./moduleA');\nconsole.log(person.name); // 'John'\nconsole.log(person.age);  // 30\n```\n\n#### 特点\n\n1. **动态引入：** `require` 可以在函数体内、条件语句中动态引入模块。\n    ```javascript\n    if (condition) {\n        const moduleA = require('./moduleA');\n    }\n    ```\n\n2. **同步加载：** `require` 是同步的，模块在执行 `require` 时会立即加载并返回结果。\n\n3. **导出的是值的拷贝：** 但对于对象和数组等引用类型，修改引用类型的属性会在所有引用中反映出来。\n    ```javascript\n    const obj = require('./moduleA');\n    obj.newProp = 'new';\n    console.log(require('./moduleA').newProp); // 'new'\n    ```\n\n### ES6 模块\n\nES6 模块系统是 ECMAScript 标准的一部分，使用 `import` 和 `export` 语法来定义模块，广泛用于现代前端开发以及一些支持 ES6 的服务器环境。\n\n#### 语法\n\n- **导出模块：**\n\n```javascript\n// moduleA.js\nexport const name = 'John';\n\n// 导出默认值\nconst person = { name: 'John', age: 30 };\nexport default person;\n```\n\n- **引入模块：**\n\n```javascript\n// main.js\nimport { name } from './moduleA';\nconsole.log(name); // 'John'\n\n// 引入默认导出\nimport person from './moduleA';\nconsole.log(person.name); // 'John'\nconsole.log(person.age);  // 30\n```\n\n#### 特点\n\n1. **静态引入：** `import` 必须在文件的顶部声明，不能在函数体内或条件语句中使用（**注意，这里有个例外，动态import()是可以在函数或者条件语句中使用的，这也是我们通常code splitting所依赖的特性**）。这使得 ES6 模块可以在编译时确定依赖关系和优化。\n    ```javascript\n    // 错误的用法\n    if (condition) {\n        import { name } from './moduleA';\n    }\n    ```\n\n2. **异步加载：** 浏览器中的 ES6 模块是异步加载的，这意味着它们不会阻塞页面的其他加载过程。\n\n3. **导出的是值的引用：** 导出值的引用意味着当导出模块中的值发生变化时，所有引用该值的地方都会反映出这些变化。\n    ```javascript\n    // moduleA.js\n    export let count = 1;\n    setTimeout(() => { count += 1; }, 1000);\n\n    // main.js\n    import { count } from './moduleA';\n    setTimeout(() => { console.log(count); }, 2000); // 2\n    ```\n\n### 兼容性和转换\n\n- **CommonJS 和 ES6 模块的互操作性：** 在 Node.js 环境中，可以使用工具如 Babel 或 Webpack 将 ES6 模块转换为 CommonJS 模块，从而实现兼容性。\n- **双向兼容：** 使用工具链（如 Babel、Webpack）可以同时支持 CommonJS 和 ES6 模块语法，并在构建过程中根据目标环境进行转换。\n\n### 总结\n\n- **语法区别：** CommonJS 使用 `require` 和 `module.exports`，而 ES6 模块使用 `import` 和 `export`。\n- **加载方式：** CommonJS 是同步加载，ES6 模块是静态分析和异步加载。\n- **使用场景：** CommonJS 主要用于 Node.js 环境，而 ES6 模块是 ECMAScript 标准的一部分，更适合现代前端开发。\n\n选择使用哪种模块系统取决于项目需求和运行环境。对于现代前端开发，推荐使用 ES6 模块。对于 Node.js 项目，传统上使用 CommonJS，但也可以逐渐迁移到 ES6 模块。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-11T08:03:18.000Z",
-    "updateAt": "2024-06-04T12:22:22.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-18T12:59:54.000Z",
     "isCollected": false,
-    "currentIndex": 3,
-    "prev": "0f2dd6c7-8484-4b6c-b081-f241376cef77",
-    "next": "ea676360-c8f5-4ce4-bc66-5c3e4f7eddb6"
+    "currentIndex": 989,
+    "filterTotalNum": 1487,
+    "prev": "c6027c9d-6c64-4765-9358-5d01c37149c4",
+    "next": "cf3a9965-7761-4d5e-8b0a-cbde804517b8"
   },
   "post": {
     "exerciseKey": "b9a0ceb2-84b5-4a79-8548-d043a97d0096",
     "category": "QA",
     "title": "common.js和es6中模块引入的区别？",
     "level": 2,
-    "updateAt": "2024-06-04T12:22:22+00:00"
+    "createAt": "2021-07-11T08:03:18+00:00",
+    "updateAt": "2024-08-18T12:59:54+00:00"
   },
   "tag": {
     "id": 18,
     "tagName": "Node.js",
     "type": "1",
-    "exerciseCount": 27
+    "exerciseCount": 37
   }
 }

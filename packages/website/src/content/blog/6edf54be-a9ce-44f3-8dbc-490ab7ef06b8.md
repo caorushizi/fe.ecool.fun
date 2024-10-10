@@ -1,6 +1,6 @@
 ---
 title: Http 3.0 是基于 udp 的，那么它是如何保证传输可靠性的?
-pubDatetime: 2023-05-31T20:20:57.000Z
+pubDatetime: 2024-08-10T17:07:28.000Z
 author: caorushizi
 tags:
   - 计算机网络

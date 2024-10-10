@@ -8,15 +8,16 @@
     "desc": null,
     "options": null,
     "explanation": "## （1）typeof\n\n```js\nconsole.log(typeof 2);               // number\nconsole.log(typeof true);            // boolean\nconsole.log(typeof 'str');           // string\nconsole.log(typeof []);              // object    \nconsole.log(typeof function(){});    // function\nconsole.log(typeof {});              // object\nconsole.log(typeof undefined);       // undefined\nconsole.log(typeof null);            // object\n```\n\n其中数组、对象、null都会被判断为object，其他判断都正确。\n\n## （2）instanceof\n\ninstanceof可以正确判断对象的类型，其内部运行机制是判断在其原型链中能否找到该类型的原型。\n\n```js\nconsole.log(2 instanceof Number);                    // false\nconsole.log(true instanceof Boolean);                // false \nconsole.log('str' instanceof String);                // false \n \nconsole.log([] instanceof Array);                    // true\nconsole.log(function(){} instanceof Function);       // true\nconsole.log({} instanceof Object);                   // true\n```\n\n可以看到，instanceof只能正确判断引用数据类型，而不能判断基本数据类型。instanceof 运算符可以用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。\n\n## （3）constructor\n\n```js\nconsole.log((2).constructor === Number); // true\nconsole.log((true).constructor === Boolean); // true\nconsole.log(('str').constructor === String); // true\nconsole.log(([]).constructor === Array); // true\nconsole.log((function() {}).constructor === Function); // true\nconsole.log(({}).constructor === Object); // true\n```\n\nconstructor有两个作用，一是判断数据的类型，二是对象实例通过 constrcutor 对象访问它的构造函数。需要注意，如果创建一个对象来改变它的原型，constructor就不能用来判断数据类型了：\n\n```js\nfunction Fn(){};\n \nFn.prototype = new Array();\n \nvar f = new Fn();\n \nconsole.log(f.constructor===Fn);    // false\nconsole.log(f.constructor===Array); // true\n```\n\n## （4）Object.prototype.toString.call()\n\nObject.prototype.toString.call() 使用 Object 对象的原型方法 toString 来判断数据类型：\n\n```js\nvar a = Object.prototype.toString;\n \nconsole.log(a.call(2));\nconsole.log(a.call(true));\nconsole.log(a.call('str'));\nconsole.log(a.call([]));\nconsole.log(a.call(function(){}));\nconsole.log(a.call({}));\nconsole.log(a.call(undefined));\nconsole.log(a.call(null));\n```\n\n同样是检测对象obj调用toString方法，obj.toString()的结果和Object.prototype.toString.call(obj)的结果不一样，这是为什么？\n\n这是因为toString是Object的原型方法，而Array、function等类型作为Object的实例，都重写了toString方法。不同的对象类型调用toString方法时，根据原型链的知识，调用的是对应的重写之后的toString方法（function类型返回内容为函数体的字符串，Array类型返回元素组成的字符串…），而不会去调用Object上原型toString方法（返回对象的具体类型），所以采用obj.toString()不能得到其对象类型，只能将obj转换为字符串类型；因此，在想要得到对象的具体类型时，应该调用Object原型上的toString方法。\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-08-22T10:15:07.000Z",
-    "updateAt": "2021-08-22T18:37:49.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:44.000Z",
     "isCollected": false,
-    "currentIndex": 780,
-    "prev": "0bd0c9bd-9e5f-47af-8a7d-3ba7aaa28dcd",
+    "currentIndex": 903,
+    "filterTotalNum": 1487,
+    "prev": "13d7618b-87b1-41c1-9dbe-dbc9991d71c5",
     "next": "c29d2196-388f-48a1-9715-70f39cc92f4d"
   },
   "post": {
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "数据类型检测的方式有哪些？",
     "level": 2,
-    "updateAt": "2021-08-22T18:37:49+00:00"
+    "createAt": "2021-08-22T10:15:07+00:00",
+    "updateAt": "2024-08-10T17:05:44+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

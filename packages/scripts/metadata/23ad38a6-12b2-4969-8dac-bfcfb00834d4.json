@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "对于 TCP 而言，在传输的时候分为两个部分:TCP头和数据部分。\n\n而 HTTP 类似，也是header + body的结构，具体而言:\n\n> 起始行 + 头部 + 空行 + 实体\n\n由于 http 请求报文和响应报文是有一定区别，因此我们分开介绍。\n\n## 起始行\n\n对于请求报文来说，起始行类似下面这样:\n\n> GET /home HTTP/1.1\n\n也就是方法 + 路径 + http版本。\n\n对于响应报文来说，起始行一般长这个样:\n\n> HTTP/1.1 200 OK\n\n响应报文的起始行也叫做状态行，由http版本、状态码和原因三部分组成。\n\n值得注意的是，在起始行中，每两个部分之间用空格隔开，最后一个部分后面应该接一个换行，严格遵循ABNF语法规范。\n\n## 头部\n\n展示一下请求头和响应头在报文中的位置:\n\n![请求报文](https://static.ecool.fun//article/3821b8ee-153c-401f-94fd-623db5b8294e.png)\n\n![响应报文](https://static.ecool.fun//article/8ffdcd99-d3c3-4366-ab9f-080e690cf2fc.png)\n\n不管是请求头还是响应头，其中的字段是相当多的，而且牵扯到http非常多的特性，这里就不一一列举的，重点看看这些头部字段的格式：\n\n* 字段名不区分大小写\n* 字段名不允许出现空格，不可以出现下划线_\n* 字段名后面必须紧接着冒号 **:**\n\n## 空行\n\n很重要，用来区分开头部和实体。\n\n如果说在头部中间故意加一个空行，那么空行后的内容全部被视为实体。\n\n## 实体\n\n就是具体的数据了，也就是body部分。请求报文对应请求体, 响应报文对应响应体。\n\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1.5,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-02-06T13:15:43.000Z",
-    "updateAt": "2024-01-25T19:31:11.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:06:07.000Z",
     "isCollected": false,
-    "currentIndex": 53,
-    "prev": "4a9fb879-6110-4b46-9c4a-abc068a27a09",
-    "next": "977b3a64-29e7-4085-a05a-26e78bdefcea"
+    "currentIndex": 706,
+    "filterTotalNum": 1487,
+    "prev": "dc610274-b10d-40ec-a8dc-ddad15196978",
+    "next": "482d976d-6697-4456-b0f5-8af4dd060dfc"
   },
   "post": {
     "exerciseKey": "23ad38a6-12b2-4969-8dac-bfcfb00834d4",
     "category": "QA",
     "title": "HTTP 报文结构是怎样的？",
     "level": 1.5,
-    "updateAt": "2024-01-25T19:31:11+00:00"
+    "createAt": "2022-02-06T13:15:43+00:00",
+    "updateAt": "2024-08-10T17:06:07+00:00"
   },
   "tag": {
     "id": 16,
     "tagName": "计算机网络",
     "type": "1",
-    "exerciseCount": 72
+    "exerciseCount": 95
   }
 }

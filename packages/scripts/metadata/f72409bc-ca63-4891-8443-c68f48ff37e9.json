@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "## 解法1：for 循环 + await\n \n简单的 for 循环是依次进行循环的，不像 Array.forEach，Array.map 方法是并发执行的，利用这一特点加 async / await 很容易写出下面这样的代码：\n\n```js\n(async () => {\n  const sleep = delay => {\n    return new Promise((resolve, reject) => {\n      setTimeout(_ => resolve(), delay)\n    })\n  }\n  \n  const task = (i) => {\n    return new Promise(async (resolve, reject) => {\n      await sleep(500)\n      console.log(`now is ${i}`)\n      ++i\n      resolve(i)\n    })\n  }\n  \n  let param = 0\n  for (let i = 0; i < 4; i++) {\n    param = await task(param)\n  }  \n})()\n```\n\n输出：\n\n```\nnow is 0\nnow is 1\nnow is 2\nnow is 3\n```\n\n## 解法2：Array.prototype.reduce\n\n关于 Array.prototype.reduce 方法相信大部分小伙伴初见时都是用来数组求和。\n\nreduce有`初始值`，`积累值`，以及`当前值`的概念。其中 `积累值`可以看作是前一个值，通过返回`积累值`又可以看作是 下一个值。使用reduce来解决问题的代码为：\n\n```js\nconst sleep = delay => {\n  return new Promise((resolve, reject) => {\n    setTimeout(_ => resolve(), delay)\n  })\n}\n\nconst task = (i) => {\n  return new Promise(async (resolve, reject) => {\n    await sleep(500)\n    console.log(`now is ${i}`)\n    ++i\n    resolve(i)\n  })\n}\n\n[task, task, task, task].reduce(async (prev, task) => {\n  const res = await prev\n  return task(res)\n}, 0)\n```\n\n输出：\n\n```\nnow is 0\nnow is 1\nnow is 2\nnow is 3\n```\n\n可以这样理解 `prev` 和 `task`：\n\n* prev：前一个 异步任务（promise）\n* task：当前的异步任务\n\n当前的异步任务需要上一个异步任务的结果作参数，故很显然要 await prev。\n\n\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2.5,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-08-07T14:46:47.000Z",
-    "updateAt": "2022-10-06T20:48:48.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:06:56.000Z",
     "isCollected": false,
-    "currentIndex": 484,
-    "prev": "bae25a07-be25-4857-ae96-9f9e1130286e",
-    "next": "1e753e43-2b36-405f-8267-f00afc7656c1"
+    "currentIndex": 511,
+    "filterTotalNum": 1487,
+    "prev": "1e753e43-2b36-405f-8267-f00afc7656c1",
+    "next": "983ff108-fded-4272-96b6-24a0a20af286"
   },
   "post": {
     "exerciseKey": "f72409bc-ca63-4891-8443-c68f48ff37e9",
     "category": "QA",
     "title": "如何顺序执行10个异步任务？",
     "level": 2.5,
-    "updateAt": "2022-10-06T20:48:48+00:00"
+    "createAt": "2022-08-07T14:46:47+00:00",
+    "updateAt": "2024-08-10T17:06:56+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

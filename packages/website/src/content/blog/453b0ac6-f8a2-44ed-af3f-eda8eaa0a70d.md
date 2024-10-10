@@ -1,6 +1,6 @@
 ---
 title: mobx 和 redux 有什么区别？
-pubDatetime: 2022-01-17T14:30:37.000Z
+pubDatetime: 2024-08-10T19:53:12.000Z
 author: caorushizi
 tags:
   - React.js

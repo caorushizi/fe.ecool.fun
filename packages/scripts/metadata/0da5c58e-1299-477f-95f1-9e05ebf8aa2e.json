@@ -8,28 +8,30 @@
     "desc": "```ts\n/**\n * @file 二叉树所有路径\n */\n\ntype Tree = {\n    value: number;\n    left?: Tree;\n    right?: Tree;\n}\nconst tree: Tree = {\n    value: 1,\n    left: {\n        value: 2,\n        right: { value: 5 }\n    },\n    right: { value: 3 }\n};\nfunction treePath(root: Tree): string[] {\n    // 补全此处代码\n    throw new Error('功能待实现');\n}\nconsole.log(treePath(tree)) // [ '1->2->5', '1->3' ]\n\nexport default {}\n```",
     "options": null,
     "explanation": "```ts\n/**\n * @file 二叉树所有路径\n */\n\ntype Tree = {\n  value: number;\n  left?: Tree;\n  right?: Tree;\n};\n\nconst tree: Tree = {\n  value: 1,\n  left: {\n    value: 2,\n    right: { value: 5 },\n  },\n  right: { value: 3 },\n};\n\nfunction treePath(root: Tree): string[] {\n  const answer: [] = [];\n  let tmp: [][] = [];\n  const travel = (r: Tree) => {\n    if (r == null) {\n      return;\n    }\n    //@ts-ignore\n    tmp.push(r.value);\n    if (r.left == null && r.right == null) {\n      //@ts-ignore\n      answer.push(tmp);\n      tmp = [tmp[0]];\n      return;\n    }\n    if (r.left) travel(r.left);\n    if (r.right) travel(r.right);\n  };\n  travel(root);\n  //@ts-ignore\n  return answer.map((t) => t.join(\"->\"));\n}\nconsole.log(treePath(tree)); // [ '1->2->5', '1->3' ]\n\nexport default {};\n```\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-03-12T15:26:34.000Z",
-    "updateAt": "2023-03-12T23:30:39.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:10.000Z",
     "isCollected": false,
-    "currentIndex": 416,
-    "prev": "32a7006f-143a-4490-baf1-c903f98d826b",
-    "next": "6d0bf8a4-24f0-4794-84c9-19e0c811b3ed"
+    "currentIndex": 440,
+    "filterTotalNum": 1487,
+    "prev": "6d0bf8a4-24f0-4794-84c9-19e0c811b3ed",
+    "next": "75022926-8fe3-4f93-bab2-4e3c8e31c170"
   },
   "post": {
     "exerciseKey": "0da5c58e-1299-477f-95f1-9e05ebf8aa2e",
     "category": "QA",
     "title": "请实现下面的 treePath 方法",
     "level": 1,
-    "updateAt": "2023-03-12T23:30:39+00:00"
+    "createAt": "2023-03-12T15:26:34+00:00",
+    "updateAt": "2024-08-10T17:07:10+00:00"
   },
   "tag": {
     "id": 19,
     "tagName": "Typescript",
     "type": "1",
-    "exerciseCount": 46
+    "exerciseCount": 55
   }
 }

@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": " pnpm 的官方文档是这样说的:\n\n> Fast, disk space efficient package manager\n\npnpm 本质上就是一个包管理器，这一点跟 npm/yarn 没有区别，但它作为杀手锏的两个优势在于:\n\n* 包安装速度极快；\n* 磁盘空间利用非常高效。\n\npnpm 与 npm/yarn 相似，也是一个包管理器，但与他们不同的是，作者设计了一套理论上更完善的依赖结构以及高效的文件复用，来解决 npm/yarn 未打算解决或还不够完善的问题。\n\n### 嵌套 + 扁平 + pnpm-lock.yaml\n\n打开通过 pnpm 安装的项目 node\\_modules 文件夹，你会发现几乎只会有当前 **package.json** 中所声明的各个依赖（的软连接），而 \"真正\" 的模块文件，存在于 **node\\_modules/.pnpm**，由 **模块名@版本号** 形式的文件夹**扁平化**存储（解决依赖重复安装）。\n\n这样的设计，很好的避免了项目中 **跨声明访问** 的问题，因为当前项目 **node\\_modules** 只有声明的依赖可以访问。\n\n而 **pnpm-lock.yaml** 文件如同 yarn.lock、package-lock.json 一样，可以为项目提供一份各个依赖稳定的版本信息。\n\n### 硬链接与更高效的复用\n\n与 yarn 的 **PnP模式** 效果类似，为了提升**文件存储效率**以及降低文件**IO开销**，**node\\_modules/.pnpm** 中存储的文件其实是 pnpm 实际缓存文件的 **硬链接**，从而避免了多个项目带来多份相同文件引起的空间浪费问题。\n\npnpm 还额外的使用了 **内容寻址的文件系统** 来存储依赖文件。当遇到**两个版本**的 **a模块** 依赖，但两个版本之前只有**一个文件**存在差异时，pnpm 只会新增一个差异文件，最大化的提升文件存储效率。\n\n\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3.5,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-10-09T12:34:22.000Z",
-    "updateAt": "2022-10-11T09:35:20.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:01.000Z",
     "isCollected": false,
-    "currentIndex": 474,
-    "prev": "841bfe02-d07d-45db-9e65-b9c250595d80",
-    "next": "9464fd89-1578-4f3b-a103-840b73b1987e"
+    "currentIndex": 488,
+    "filterTotalNum": 1487,
+    "prev": "b6d72acf-0360-4fc1-8835-6a6f8a3a4025",
+    "next": "664e2875-26fa-45b0-89cd-9cb961ec8046"
   },
   "post": {
     "exerciseKey": "92fa7f2d-4f03-469b-84bd-82d693022802",
     "category": "QA",
     "title": "说说你对 pnpm 的了解",
     "level": 3.5,
-    "updateAt": "2022-10-11T09:35:20+00:00"
+    "createAt": "2022-10-09T12:34:22+00:00",
+    "updateAt": "2024-08-10T17:07:01+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

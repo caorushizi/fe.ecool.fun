@@ -8,14 +8,15 @@
     "desc": null,
     "options": null,
     "explanation": "内存泄露的解释：程序中己动态分配的堆内存由于某种原因未释放或无法释放。\n\n* 根据JS的垃圾回收机制，当内存中引用的次数为0的时候内存才会被回收\n* 全局执行上下文中的对象被标记为不再使用才会被释放\n\n## 内存泄露的几种场景\n\n* 全局变量过多。**通常是变量未被定义或者胡乱引用了全局变量**\n```js\n// main.js\n// 场景1\nfunction a(){\n    b=10;\n}\na();\nb++;\n\n// 场景2\nsetTimeout(()=>{\n    console.log(b)\n},1000)\n```\n\n* 闭包。 未手动解决必包遗留的内存引用。**定义了闭包就要消除闭包带来的副作用**。\n\n```js\n\nfunction closuer (){\n    const b = 0;\n    return (c)=> b + c\n}\n\nconst render = closuer();\n\nrender();\nrender = null; // 手动设置为null，GC会自己去清除\n```\n\n* 事件监听未被移除\n```js\n\nfunction addEvent (){\n const node =  document.getElementById('warp');\n    node.addEventListener('touchmove',()=>{\n        console.log('In Move');\n    })\n}\n\nconst onTouchEnd = (){\n   const node =  document.getElementById('warp');\n   node.\n}\n\nuseEffect(()=>()=>{\n     const node =  document.getElementById('warp');\n     node.removeEventListener('touchmove');\n}) // 类似react 生命周期函数： componentWillUnmount\nrender(<div id='warp' onTouchEnd={onTouchEnd}>\n // code...\n</div>)\n```\n\n* 缓存。建议所有缓存都设置好过期时间。\n\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-06T15:55:39.000Z",
-    "updateAt": "2021-07-07T00:14:11.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:14.000Z",
     "isCollected": false,
-    "currentIndex": 919,
+    "currentIndex": 1065,
+    "filterTotalNum": 1487,
     "prev": "2caef7c7-6f12-4104-9a51-b360dc775357",
     "next": "393c70e6-3652-45e0-b1a9-d03eb27641b6"
   },
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "什么是内存泄漏？什么原因会导致呢？",
     "level": 3,
-    "updateAt": "2021-07-07T00:14:11+00:00"
+    "createAt": "2021-07-06T15:55:39+00:00",
+    "updateAt": "2024-08-10T17:05:14+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

@@ -8,28 +8,30 @@
     "desc": "```js\ntrans(123456) —— 十二万三千四百五十六\ntrans（100010001）—— 一亿零一万零一\n```",
     "options": null,
     "explanation": "> 23.12.18 更新，有同学投稿提供了自己的答案，更加简洁\n\n```js\nfunction NumToChina(n) {\n  n = n.toString();\n  let numbers = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];\n  if (n === '0') return numbers[0];\n  let units = ['', '十', '百', '千'];\n  let len = n.length;\n  let res = '';\n  for (let i = 0; i < len; i++) {\n    let num = Number(n[i]);\n    if (num != 0) {\n      if (n[i - 1] === '0') res = res + numbers[0];\n      res = res + numbers[num] + units[len - i - 1];\n    }\n  }\n  if (len == 2 && n[0] == '1') res = res.slice(1);\n  return res;\n}\n\nfunction numTo(n) {\n  const isLose = n < 0;\n  n = Math.abs(n).toString();\n  let res = [];\n  let len = n.length;\n  for (let i = len; i > 0; i -= 4) {\n    res.push(NumToChina(n.slice(Math.max(0, i - 4), i)));\n  }\n  const units = ['', '万', '亿'];\n  for (let i = 0; i < res.length; i++) {\n    if (res[i] == '') continue;\n    res[i] = res[i] + units[i];\n  }\n  isLose && res.push('负');\n  return res.reverse().join('');\n}\nnumTo(12345);\n```\n\n---\n\n以下是原答案：\n\n\n```javascript\n/**\n * 阿拉伯数字转中文数字,\n * 如果传入数字时则最多处理到21位，超过21位js会自动将数字表示成科学计数法，导致精度丢失和处理出错\n * 传入数字字符串则没有限制\n * @param {number|string} digit\n */\nfunction toZhDigit(digit) {\n  digit = typeof digit === 'number' ? String(digit) : digit;\n  const zh = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];\n  const unit = ['千', '百', '十', ''];\n  const quot = ['万', '亿', '兆', '京', '垓', '秭', '穰', '沟', '涧', '正', '载', '极', '恒河沙', '阿僧祗', '那由他', '不可思议', '无量', '大数'];\n\n  let breakLen = Math.ceil(digit.length / 4);\n  let notBreakSegment = digit.length % 4 || 4;\n  let segment;\n  let zeroFlag = [], allZeroFlag = [];\n  let result = '';\n\n  while (breakLen > 0) {\n    if (!result) { // 第一次执行\n      segment = digit.slice(0, notBreakSegment);\n      let segmentLen = segment.length;\n      for (let i = 0; i < segmentLen; i++) {\n        if (segment[i] != 0) {\n          if (zeroFlag.length > 0) {\n            result += '零' + zh[segment[i]] + unit[4 - segmentLen + i];\n            // 判断是否需要加上 quot 单位\n            if (i === segmentLen - 1 && breakLen > 1) {\n              result += quot[breakLen - 2];\n            }\n            zeroFlag.length = 0;\n          } else {\n            result += zh[segment[i]] + unit[4 - segmentLen + i];\n            if (i === segmentLen - 1 && breakLen > 1) {\n              result += quot[breakLen - 2];\n            }\n          }\n        } else {\n          // 处理为 0 的情形\n          if (segmentLen == 1) {\n            result += zh[segment[i]];\n            break;\n          }\n          zeroFlag.push(segment[i]);\n          continue;\n        }\n      }\n    } else {\n      segment = digit.slice(notBreakSegment, notBreakSegment + 4);\n      notBreakSegment += 4;\n\n      for (let j = 0; j < segment.length; j++) {\n        if (segment[j] != 0) {\n          if (zeroFlag.length > 0) {\n            // 第一次执行zeroFlag长度不为0，说明上一个分区最后有0待处理\n            if (j === 0) {\n              result += quot[breakLen - 1] + zh[segment[j]] + unit[j];\n            } else {\n              result += '零' + zh[segment[j]] + unit[j];\n            }\n            zeroFlag.length = 0;\n          } else {\n            result += zh[segment[j]] + unit[j];\n          }\n          // 判断是否需要加上 quot 单位\n          if (j === segment.length - 1 && breakLen > 1) {\n            result += quot[breakLen - 2];\n          }\n        } else {\n          // 第一次执行如果zeroFlag长度不为0, 且上一划分不全为0\n          if (j === 0 && zeroFlag.length > 0 && allZeroFlag.length === 0) {\n            result += quot[breakLen - 1];\n            zeroFlag.length = 0;\n            zeroFlag.push(segment[j]);\n          } else if (allZeroFlag.length > 0) {\n            // 执行到最后\n            if (breakLen == 1) {\n              result += '';\n            } else {\n              zeroFlag.length = 0;\n            }\n          } else {\n            zeroFlag.push(segment[j]);\n          }\n\n          if (j === segment.length - 1 && zeroFlag.length === 4 && breakLen !== 1) {\n            // 如果执行到末尾\n            if (breakLen === 1) {\n              allZeroFlag.length = 0;\n              zeroFlag.length = 0;\n              result += quot[breakLen - 1];\n            } else {\n              allZeroFlag.push(segment[j]);\n            }\n          }\n          continue;\n        }\n      }\n\n    --breakLen;\n  }\n\n  return result;\n}\n\n```\n\n从左至右，先把数字按万分位分组，每组加上对应的单位(万，亿, ...)，然后每个分组进行迭代。\n\nbreakLen表示能够分成多少个分组，notBreakSegment表示当前已处理过的分组长度。\n\nwhile循环中有一个if判断，如果不存在result，则说明是第一次处理，那么在处理上是有些不同的。\n\n* 首先，在segment的赋值上，第一次是从0开始，取notBreakSegment的长度，后面每迭代一次notBreakSegment都要在上一个值上加4\n* 其次，第一次处理不用判断上一个分组是否全为0的情形，这里zeroFlag表示每一个分组内存在0的个数，allZeroFalg表示当前分组前面出现的全为0的分组的个数。\n* 此外，在第一次执行时，还处理了只传入为0的情形。\n\n每次处理segment[i]时，都要先判断当前值是否为0，为0时则直接记录到zeroFlag，然后进入下一次迭代，如果不为0，首先得判断上一个数字是否为0, 然后还得根据上一个0是否位于上一个分组的末位，来添加quot，最后还需要清空标志位。如果当前分组全为0，则标记allZeroFlag，所以在下一个分组处理时，还需要判断上一个分组是否全为0。\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 4,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-05-15T13:21:06.000Z",
-    "updateAt": "2023-12-18T15:51:10.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-07-20T17:28:51.000Z",
     "isCollected": false,
-    "currentIndex": 242,
-    "prev": "45affa79-be16-4489-b403-bf3d614fcf03",
-    "next": "c51ba9d2-f3d9-4b38-8f33-f962fa4983ea"
+    "currentIndex": 415,
+    "filterTotalNum": 1487,
+    "prev": "a823157e-329e-4327-8d39-da935c091f20",
+    "next": "0003100e-5f40-499e-9e00-8bbbc5e90976"
   },
   "post": {
     "exerciseKey": "903ad6ce-2c81-4d82-a356-536e4629cfa3",
     "category": "QA",
     "title": "写出一个函数trans，将数字转换成汉语的输出，输入为不超过10000亿的数字。",
     "level": 4,
-    "updateAt": "2023-12-18T15:51:10+00:00"
+    "createAt": "2023-05-15T13:21:06+00:00",
+    "updateAt": "2024-07-20T17:28:51+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

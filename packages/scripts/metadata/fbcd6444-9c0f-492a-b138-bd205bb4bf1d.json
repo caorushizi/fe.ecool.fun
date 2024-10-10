@@ -8,15 +8,16 @@
     "desc": null,
     "options": null,
     "explanation": "## Promise\n\n> Promise 对象是一个代理对象（代理一个值），被代理的值在Promise对象创建时可能是未知的。它允许你为异步操作的成功和失败分别绑定相应的处理方法（handlers）。 这让异步方法可以像同步方法那样返回值，但并不是立即返回最终执行结果，而是一个能代表未来出现的结果的promise对象\n\n## async/await\n\nes2017的新语法，async/await就是generator + promise的语法糖\n\nasync/await 和 Promise 的关系非常的巧妙，await必须在async内使用，并装饰一个Promise对象，async返回的也是一个Promise对象。\n\nasync/await中的return/throw会代理自己返回的Promise的resolve/reject，而一个Promise的resolve/reject会使得await得到返回值或抛出异常。\n\n* 如果方法内无await节点\n\t* return 一个字面量则会得到一个{PromiseStatus: resolved}的Promise。\n\t* throw 一个Error则会得到一个{PromiseStatus: rejected}的Promise。\n\n* 如果方法内有await节点\n\t* async会返回一个{PromiseStatus: pending}的Promise（发生切换，异步等待Promise的执行结果）。\n\t* Promise的resolve会使得await的代码节点获得相应的返回结果，并继续向下执行。\n\t* Promise的reject 会使得await的代码节点自动抛出相应的异常，终止向下继续执行。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-11T07:29:11.000Z",
-    "updateAt": "2021-07-11T16:10:17.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T21:18:39.000Z",
     "isCollected": false,
-    "currentIndex": 854,
-    "prev": "097902c0-17b4-4416-9926-3ad88a55416e",
+    "currentIndex": 1000,
+    "filterTotalNum": 1487,
+    "prev": "43972778-bd1d-4ff4-a153-6c6df65242e3",
     "next": "aaee81ad-a128-4bbf-b60b-aa2c9c3396c3"
   },
   "post": {
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "async/await 和 Promise 有什么关系？",
     "level": 3,
-    "updateAt": "2021-07-11T16:10:17+00:00"
+    "createAt": "2021-07-11T07:29:11+00:00",
+    "updateAt": "2024-08-10T21:18:39+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

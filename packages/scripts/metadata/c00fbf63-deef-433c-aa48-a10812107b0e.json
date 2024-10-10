@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "> Tree shaking 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 Dead code elimination。\n\n## tree shaking如何工作的呢？\n\n虽然 tree shaking 的概念在 1990 就提出了，但直到 ES6 的 `ES6-style` 模块出现后才真正被利用起来。\n\n在ES6以前，我们可以使用CommonJS引入模块：require()，这种引入是动态的，也意味着我们可以基于条件来导入需要的代码：\n\n```javascript\nlet dynamicModule;\n// 动态导入\nif (condition) {\n  myDynamicModule = require(\"foo\");\n} else {\n  myDynamicModule = require(\"bar\");\n}\n```\n\n但是CommonJS规范无法确定在实际运行前需要或者不需要某些模块，所以CommonJS不适合tree-shaking机制。在 ES6 中，引入了完全静态的导入语法：import。这也意味着下面的导入是不可行的：\n\n```javascript\n// 不可行，ES6 的import是完全静态的\nif (condition) {\n  myDynamicModule = require(\"foo\");\n} else {\n  myDynamicModule = require(\"bar\");\n}\n```\n\n我们只能通过导入所有的包后再进行条件获取。如下：\n\n```\nimport foo from \"foo\";\nimport bar from \"bar\";\n\nif (condition) {\n  // foo.xxxx\n} else {\n  // bar.xxx\n}\n```\n\nES6的import语法可以完美使用tree shaking，因为可以在代码不运行的情况下就能分析出不需要的代码。\n\n看完上面的分析，你可能还是有点懵，这里我简单做下总结：因为tree shaking只能在静态modules下工作。ECMAScript 6 模块加载是静态的,因此整个依赖树可以被静态地推导出解析语法树。所以在 ES6 中使用 tree shaking 是非常容易的。\n\n## tree shaking的原理是什么?\n\n看完上面的分析，相信这里你可以很容易的得出题目的答案了：\n\n* ES6 Module引入进行静态分析，故而编译的时候正确判断到底加载了那些模块\n* 静态分析程序流，判断那些模块和变量未被使用或者引用，进而删除对应代码",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-08-13T02:26:53.000Z",
-    "updateAt": "2021-08-13T10:27:07.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:42.000Z",
     "isCollected": false,
-    "currentIndex": 792,
+    "currentIndex": 911,
+    "filterTotalNum": 1487,
     "prev": "c8d54253-ca08-4d87-b64c-33dcdd369073",
-    "next": "f1dfb420-8c92-4210-98af-130b79133d82"
+    "next": "bff513af-f95f-481f-8bda-03f3515d0e08"
   },
   "post": {
     "exerciseKey": "c00fbf63-deef-433c-aa48-a10812107b0e",
     "category": "QA",
     "title": "介绍一下 tree shaking 及其工作原理",
     "level": 3,
-    "updateAt": "2021-08-13T10:27:07+00:00"
+    "createAt": "2021-08-13T02:26:53+00:00",
+    "updateAt": "2024-08-10T17:05:42+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

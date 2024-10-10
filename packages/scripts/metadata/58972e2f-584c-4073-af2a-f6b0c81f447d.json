@@ -8,14 +8,15 @@
     "desc": null,
     "options": null,
     "explanation": "装饰器是一种特殊的声明，它允许你通过使用@<name>注释标记来一次性修改类或类成员。每个装饰器都必须引用一个将在运行时评估的函数。\n\n例如，装饰器@sealed将对应于sealed函数。任何标有 的@sealed都将用于评估sealed函数。\n```\nfunction sealed(target) {\n  // do something with 'target' ...\n}\n```\n\n它们可以附加到：\n\n* 类声明\n* 方法\n* 配件\n* 特性\n* 参数\n\n注意：默认情况下不启用装饰器。要启用它们，你必须`experimentalDecorators从tsconfig.json`文件或命令行编辑编译器选项中的字段。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-07T15:35:08.000Z",
-    "updateAt": "2021-07-11T10:58:48.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:16.000Z",
     "isCollected": false,
-    "currentIndex": 891,
+    "currentIndex": 1042,
+    "filterTotalNum": 1487,
     "prev": "ffbc9199-6e3a-4e6f-a2dd-b77c339aef2c",
     "next": "b19b40b5-e032-482f-8520-25affc3b02db"
   },
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "Typescript中什么是装饰器，它们可以应用于什么？",
     "level": 1,
-    "updateAt": "2021-07-11T10:58:48+00:00"
+    "createAt": "2021-07-07T15:35:08+00:00",
+    "updateAt": "2024-08-10T17:05:16+00:00"
   },
   "tag": {
     "id": 19,
     "tagName": "Typescript",
     "type": "1",
-    "exerciseCount": 46
+    "exerciseCount": 55
   }
 }

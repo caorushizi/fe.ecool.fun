@@ -1,6 +1,6 @@
 ---
 title: e.target 和 e.currentTarget  有什么区别？
-pubDatetime: 2024-01-25T19:56:56.000Z
+pubDatetime: 2024-08-10T17:06:34.000Z
 author: caorushizi
 tags:
   - JavaScript

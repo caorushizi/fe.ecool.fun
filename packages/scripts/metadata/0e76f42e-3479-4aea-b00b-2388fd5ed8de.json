@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "ToPrimitive 是一个抽象操作，用于将一个值转换为原始值（primitive value），即字符串、数字或布尔值。\n\n在 JavaScript 中，当需要将一个非原始值用作原始值时，会自动调用 `ToPrimitive` 操作。例如，在使用加法运算符时，如果其中一个操作数不是原始值，则会将其转换为原始值，这就是通过调用 `ToPrimitive` 来实现的。\n\nToPrimitive 操作的实现方式如下：\n\n* 如果该值已经是原始类型，则直接返回该值。\n* 如果该值是对象，则按照以下步骤进行转换：\n\t* 调用 valueOf() 方法并返回结果，如果结果是原始类型则直接返回该结果。\n\t* 调用 toString() 方法并返回结果，如果结果是原始类型则直接返回该结果。\n* 如果都不是原始类型，则抛出 TypeError 异常。\n\n示例：\n\n```js\nlet obj = {\n  [Symbol.toPrimitive](hint) {\n    switch (hint) {\n      case 'number':\n        return 123;\n      case 'string':\n        return 'str';\n      case 'default':\n        return 'default';\n      default:\n        throw new Error();\n     }\n   }\n};\n\n2 * obj // 246\n3 + obj // '3default'\nobj == 'default' // true\nString(obj) // 'str'\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-04-25T01:09:53.000Z",
-    "updateAt": "2023-05-24T09:13:36.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:14.000Z",
     "isCollected": false,
-    "currentIndex": 369,
+    "currentIndex": 430,
+    "filterTotalNum": 1487,
     "prev": "8555928b-fc6d-48dd-967f-dab7e44d2744",
-    "next": "7db251c9-6744-4f92-be55-8ebfab19d72b"
+    "next": "212703a8-43a2-426e-b9c4-b51053436d23"
   },
   "post": {
     "exerciseKey": "0e76f42e-3479-4aea-b00b-2388fd5ed8de",
     "category": "QA",
     "title": "说说你对 ToPrimitive 的理解",
     "level": 1,
-    "updateAt": "2023-05-24T09:13:36+00:00"
+    "createAt": "2023-04-25T01:09:53+00:00",
+    "updateAt": "2024-08-10T17:07:14+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

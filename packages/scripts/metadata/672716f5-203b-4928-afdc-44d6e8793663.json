@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "如果在条件语句中使用hooks，React会抛出 error。\n\n这与React Hooks的底层设计的数据结构相关，先抛出结论：**react用链表来严格保证hooks的顺序**。\n\n一个典型的useState使用场景：\n\n```js\nconst [name,setName] = useState('leo');\n\n......\n\nsetName('Lily');\n```\n\n那么hooks在这两条语句分别作了什么？\n\n![](https://static.ecool.fun//article/cb476f45-25ec-4a1c-a691-b838566be824.png)\n\n上图是 `useState` 首次渲染的路径，其中，跟我们问题相关的是 `mountState` 这个过程，简而言之，这个过程初始化了一个hooks，并且将其追加到链表结尾。\n\n```js\n// 进入 mounState 逻辑\n\nfunction mountState(initialState) {\n\n  // 将新的 hook 对象追加进链表尾部\n  var hook = mountWorkInProgressHook();\n\n  // initialState 可以是一个回调，若是回调，则取回调执行后的值\n\n  if (typeof initialState === 'function') {\n\n    // $FlowFixMe: Flow doesn't like mixed types\n\n    initialState = initialState();\n  }\n\n  // 创建当前 hook 对象的更新队列，这一步主要是为了能够依序保留 dispatch\n\n  const queue = hook.queue = {\n\n    last: null,\n\n    dispatch: null,\n\n    lastRenderedReducer: basicStateReducer,\n\n    lastRenderedState: (initialState: any),\n\n  };\n\n  // 将 initialState 作为一个“记忆值”存下来\n\n  hook.memoizedState = hook.baseState = initialState;\n\n  // dispatch 是由上下文中一个叫 dispatchAction 的方法创建的，这里不必纠结这个方法具体做了什么\n\n  var dispatch = queue.dispatch = dispatchAction.bind(null, currentlyRenderingFiber$1, queue);\n\n  // 返回目标数组，dispatch 其实就是示例中常常见到的 setXXX 这个函数，想不到吧？哈哈\n\n  return [hook.memoizedState, dispatch];\n}\n\n```\n\n从这段源码中我们可以看出，mounState 的主要工作是初始化 Hooks。在整段源码中，最需要关注的是 `mountWorkInProgressHook` 方法，它为我们道出了 Hooks 背后的数据结构组织形式。以下是 `mountWorkInProgressHook` 方法的源码：\n\n```js\nfunction mountWorkInProgressHook() {\n\n  // 注意，单个 hook 是以对象的形式存在的\n  var hook = {\n\n    memoizedState: null,\n\n    baseState: null,\n\n    baseQueue: null,\n\n    queue: null,\n\n    next: null\n\n  };\n\n  if (workInProgressHook === null) {\n    // 这行代码每个 React 版本不太一样，但做的都是同一件事：将 hook 作为链表的头节点处理\n    firstWorkInProgressHook = workInProgressHook = hook;\n  } else {\n    // 若链表不为空，则将 hook 追加到链表尾部\n    workInProgressHook = workInProgressHook.next = hook;\n  }\n  // 返回当前的 hook\n  return workInProgressHook;\n}\n\n```\n\n到这里可以看出，hook 相关的所有信息收敛在一个 hook 对象里，而 hook 对象之间以单向链表的形式相互串联。\n\n接着，我们来看更新过程 \n\n![](https://static.ecool.fun//article/b5214d4c-658d-4dc7-89cf-489eba66a58b.png)\n\n上图中，需要注意的是updateState的过程：按顺序去遍历之前构建好的链表，取出对应的数据信息进行渲染。\n\n我们把 mountState 和 updateState 做的事情放在一起来看：mountState（首次渲染）构建链表并渲染；updateState 依次遍历链表并渲染。\n\nhooks 的渲染是通过“依次遍历”来定位每个 hooks 内容的。如果前后两次读到的链表在顺序上出现差异，那么渲染的结果自然是不可控的。\n\n这个现象有点像我们构建了一个长度确定的数组，数组中的每个坑位都对应着一块确切的信息，后续每次从数组里取值的时候，只能够通过索引（也就是位置）来定位数据。也正因为如此，在许多文章里，都会直截了当地下这样的定义：Hooks 的本质就是数组。但读完这一课时的内容你就会知道，Hooks 的本质其实是链表。\n\n我们举个例子：\n\n```js\n    let mounted = false;\n    \n    if(!mounted){\n        // eslint-disable-next-line\n        const [name,setName] = useState('leo');\n        const [age,setAge] = useState(18);\n        mounted = true;\n    }\n    const [career,setCareer] = useState('码农');\n    console.log('career',career);\n    ......\n    \n    <div onClick={()=>setName('Lily')}>\n    点我点我点我\n    <div>\n```\n\n点击div后，我们期望的输出是 \"码农\"，然而事实上(尽管会error，但是打印还是执行)打印的为 \"Lily\"\n\n原因是，三个useState在初始化的时候已经构建好了一个三个节点的链表结构，依次为：\n`name('leo') --> age(18) --> career('码农')`\n\n每个节点都已经派发了一个与之对应的update操作，因此执行setName时候，三个节点就修改为了\n`name('Lily') --> age(18) --> career('码农')`\n\n然后执行update渲染操作，从链表依次取出值，此时，条件语句的不再执行，第一个取值操作会从链表的第一个，也就是name对应的hooks对象进行取值：此时取到的为 `name:Lily`\n\n必须按照顺序调用从根本上来说是因为 useState 这个钩子在设计层面并没有“状态命名”这个动作，也就是说你每生成一个新的状态，React 并不知道这个状态名字叫啥，所以需要通过顺序来索引到对应的状态值\n\n\n\n\n\n",
+    "pivot": "",
+    "vipLimit": 1,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-05-29T12:58:22.000Z",
-    "updateAt": "2024-01-24T17:21:13.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:06:41.000Z",
     "isCollected": false,
-    "currentIndex": 193,
-    "prev": "9eebcbe5-2c34-482e-9198-36f750aa3555",
-    "next": "1b4bdc45-8a73-42b2-a304-872ddee851ab"
+    "currentIndex": 572,
+    "filterTotalNum": 1487,
+    "prev": "1b4bdc45-8a73-42b2-a304-872ddee851ab",
+    "next": "7621c335-6645-4da0-bd71-cb81fe106f8f"
   },
   "post": {
     "exerciseKey": "672716f5-203b-4928-afdc-44d6e8793663",
     "category": "QA",
     "title": "为什么不能在循环、条件或嵌套函数中调用 Hooks？",
     "level": 3,
-    "updateAt": "2024-01-24T17:21:13+00:00"
+    "createAt": "2022-05-29T12:58:22+00:00",
+    "updateAt": "2024-08-10T17:06:41+00:00"
   },
   "tag": {
     "id": 13,
     "tagName": "React.js",
     "type": "1",
-    "exerciseCount": 101
+    "exerciseCount": 129
   }
 }

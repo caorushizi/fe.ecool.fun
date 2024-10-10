@@ -8,14 +8,15 @@
     "desc": "```ts\n/**\n * @file 找出字符串中第一个只出现一次的字符\n */\n\nfunction firstSingleChar(str: string) {\n    // 补全此处代码\n    throw new Error('功能待实现');\n}\n\n// a 和 b 都出现了两次，只有 c 出现了一次，返回 c\nconsole.log(firstSingleChar('abcba')) // c\n// b c d 都出现了一次，返回第一个\nconsole.log(firstSingleChar('aabcdee')) // b\n// a 和 b 都出现了多次，没有只出现一次的元素，返回 undefined\nconsole.log(firstSingleChar('aaaabbbb')) // undefined\n\nexport default {}\n```",
     "options": null,
     "explanation": "```ts\n/**\n * @file 找出字符串中第一个只出现一次的字符\n */\n\nfunction firstSingleChar(str: string) {\n  // 参考答案\n  return str.split(\"\").filter((item: string, index: number, arr: string[]) => {\n    arr.splice(index, 1);\n    return !arr.includes(item);\n  })[0];\n}\n\n// a 和 b 都出现了两次，只有 c 出现了一次，返回 c\nconsole.log(firstSingleChar(\"abcba\")); // c\n// b c d 都出现了一次，返回第一个\nconsole.log(firstSingleChar(\"aabcdee\")); // b\n// a 和 b 都出现了多次，没有只出现一次的元素，返回 undefined\nconsole.log(firstSingleChar(\"aaaabbbb\")); // undefined\nconsole.log(firstSingleChar(\"dabvb\"));\n\nexport default {};\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-03-12T15:23:32.000Z",
-    "updateAt": "2023-03-12T23:23:40.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:10.000Z",
     "isCollected": false,
-    "currentIndex": 421,
+    "currentIndex": 443,
+    "filterTotalNum": 1487,
     "prev": "a27dcf10-1b97-4bb5-926e-b32c2e24ba67",
     "next": "d1c0644f-24d4-4f5f-b599-bb3b34f2d10e"
   },
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "实现下面的 firstSingleChar 方法",
     "level": 1,
-    "updateAt": "2023-03-12T23:23:40+00:00"
+    "createAt": "2023-03-12T15:23:32+00:00",
+    "updateAt": "2024-08-10T17:07:10+00:00"
   },
   "tag": {
     "id": 19,
     "tagName": "Typescript",
     "type": "1",
-    "exerciseCount": 46
+    "exerciseCount": 55
   }
 }

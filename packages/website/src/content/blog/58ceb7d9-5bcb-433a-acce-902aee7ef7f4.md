@@ -1,6 +1,6 @@
 ---
 title: 前端路由 `a -> b -> c`这样前进，也可以返回 `c -> b -> a`，用什么数据结构来存比较高效
-pubDatetime: 2023-05-31T20:26:38.000Z
+pubDatetime: 2024-07-19T10:44:28.000Z
 author: caorushizi
 tags:
   - JavaScript
@@ -27,3 +27,5 @@ source: https://fe.ecool.fun/topic/58ceb7d9-5bcb-433a-acce-902aee7ef7f4
 - 可扩展性：栈数据结构可以很容易地扩展到支持浏览器的前进和后退按钮。
 
 在使用栈数据结构来存储前端路由信息时，还需要考虑如何处理浏览器刷新、从历史记录中跳转等特殊情况，并进行相应的错误处理。
+
+> 面试题由“前端面试题宝典”（官网： https://fe.ecool.fun ）整理维护，如果您在其他网站或者小程序中使用，请向小助手（微信号：interview-fe）反馈。

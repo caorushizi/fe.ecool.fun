@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2698,
+    "exerciseKey": "08d4f63d-6d32-4a94-be36-75aa55e09730",
+    "category": "QA",
+    "renderType": "md",
+    "title": "前端如何实现截图？",
+    "desc": "",
+    "options": "",
+    "explanation": "下面是一些常见的实现方案：\n\n### **1. 使用 `html2canvas`**\n\n- **描述**：`html2canvas` 是一个流行的 JavaScript 库，可以将 HTML 元素渲染成画布（Canvas），从而实现截图。\n- **使用方法**：\n  ```html\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js\"></script>\n  <script>\n    html2canvas(document.body).then(canvas => {\n      document.body.appendChild(canvas); // 将截图的 Canvas 添加到页面中\n    });\n  </script>\n  ```\n\n### **2. 使用 `html2pdf`**\n\n- **描述**：`html2pdf` 是基于 `html2canvas` 的扩展库，用于将 HTML 元素转换为 PDF 文件。\n- **使用方法**：\n  ```html\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js\"></script>\n  <script>\n    const element = document.getElementById('capture');\n    html2pdf().from(element).save('screenshot.pdf');\n  </script>\n  ```\n\n### **3. 使用 `canvas` API**\n\n- **描述**：使用 `canvas` API 可以手动绘制和截图页面的部分内容。\n- **使用方法**：\n  ```html\n  <canvas id=\"myCanvas\" width=\"500\" height=\"500\"></canvas>\n  <script>\n    const canvas = document.getElementById('myCanvas');\n    const ctx = canvas.getContext('2d');\n    // 绘制图像或文本到 Canvas 上\n    ctx.fillText('Hello, World!', 10, 50);\n    // 获取截图数据 URL\n    const dataURL = canvas.toDataURL();\n    // 将数据 URL 作为图像显示\n    const img = new Image();\n    img.src = dataURL;\n    document.body.appendChild(img);\n  </script>\n  ```\n\n### **4. 使用 `navigator.mediaDevices.getDisplayMedia`**\n\n- **描述**：`getDisplayMedia` API 可以捕获整个屏幕或应用窗口的内容，适用于录屏或截图。\n- **使用方法**：\n  ```html\n  <script>\n    async function captureScreen() {\n      try {\n        const stream = await navigator.mediaDevices.getDisplayMedia({\n          video: { mediaSource: 'screen' }\n        });\n        const [track] = stream.getVideoTracks();\n        const imageCapture = new ImageCapture(track);\n        const bitmap = await imageCapture.grabFrame();\n        document.body.appendChild(bitmap); // 添加截图到页面中\n      } catch (err) {\n        console.error('Error: ', err);\n      }\n    }\n    captureScreen();\n  </script>\n  ```\n\n### **5. 使用浏览器扩展**\n\n- **描述**：有些浏览器扩展（如 Chrome 的 \"Full Page Screen Capture\"）可以用于截图整个网页。\n- **使用方法**：安装相关扩展，按照扩展的使用说明进行操作。",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 2.5,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:36.000Z",
+    "updateAt": "2024-08-14T23:38:06.000Z",
+    "isCollected": false,
+    "currentIndex": 85,
+    "filterTotalNum": 1487,
+    "prev": "360dfbe1-ae7c-4b59-8774-9a93be4bf01e",
+    "next": "de043b5a-d621-4278-abb8-b467310306a9"
+  },
+  "post": {
+    "exerciseKey": "08d4f63d-6d32-4a94-be36-75aa55e09730",
+    "category": "QA",
+    "title": "前端如何实现截图？",
+    "level": 2.5,
+    "createAt": "2024-08-13T08:30:36+00:00",
+    "updateAt": "2024-08-14T23:38:06+00:00"
+  },
+  "tag": {
+    "id": 75,
+    "tagName": "场景题",
+    "type": "1",
+    "exerciseCount": 39
+  }
+}

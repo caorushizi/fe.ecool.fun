@@ -7,16 +7,17 @@
     "title": "HTML 标签中的 src 和 href 有什么区别",
     "desc": null,
     "options": null,
-    "explanation": "* href 是超文本引用，它是指向资源的位置，建立与目标文件的联系；\n* src 目的是把资源下载到页面中；\n\n浏览器解析 href 不会阻塞对文档的处理（这就是官方建议使用 link 引入而不是 @ import 的原因），src 会阻塞对文档的处理。",
+    "explanation": "`src` 和 `href` 是 HTML 中用于不同目的的属性，各自有其特定的使用场景和功能：\n\n### `src` 属性\n\n- **用途**：用于指定外部资源的 URL，通常用在 `<img>`、`<script>`、`<iframe>`、`<audio>` 和 `<video>` 等标签中。\n- **功能**：告诉浏览器从哪个 URL 加载资源。加载的资源会嵌入到当前页面中或执行。例如：\n  - `<img src=\"image.jpg\" alt=\"Description\">`：加载并显示图像。\n  - `<script src=\"script.js\"></script>`：加载并执行 JavaScript 文件。\n  - `<iframe src=\"https://example.com\"></iframe>`：嵌入外部网页。\n\n### `href` 属性\n\n- **用途**：用于定义超链接的目标 URL，通常用在 `<a>`（锚点）和 `<link>`（链接） 标签中。\n- **功能**：指定链接或引用的资源地址。用于页面间的导航、资源引入等。例如：\n  - `<a href=\"https://example.com\">Visit Example</a>`：创建一个指向外部网站的超链接。\n  - `<link rel=\"stylesheet\" href=\"styles.css\">`：引入外部 CSS 样式表。\n\n### 区别\n\n1. **应用场景**：\n   - **`src`**：用于嵌入或加载外部资源（如图像、脚本、音频等）。\n   - **`href`**：用于定义超链接和引用外部资源（如导航链接、样式表等）。\n\n2. **资源加载方式**：\n   - **`src`**：浏览器会立即请求并加载指定的资源，这会影响页面的呈现或功能。\n   - **`href`**：主要用于超链接或资源引用，浏览器会在用户点击链接时进行导航或加载资源。\n\n3. **标签支持**：\n   - **`src`**：用于 `<img>`、`<script>`、`<iframe>`、`<audio>`、`<video>` 等标签。\n   - **`href`**：用于 `<a>` 和 `<link>` 标签。\n\n### 示例\n\n**`src` 示例**：\n```html\n<img src=\"logo.png\" alt=\"Website Logo\">\n<script src=\"main.js\"></script>\n<iframe src=\"https://example.com\"></iframe>\n```\n\n**`href` 示例**：\n```html\n<a href=\"https://example.com\">Go to Example</a>\n<link rel=\"stylesheet\" href=\"styles.css\">\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 0.5,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T05:52:56.000Z",
-    "updateAt": "2021-07-04T16:01:38.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-22T01:29:04.000Z",
     "isCollected": false,
-    "currentIndex": 1053,
-    "prev": "ba6327df-ba59-4870-921c-36b8516c4451",
+    "currentIndex": 1231,
+    "filterTotalNum": 1487,
+    "prev": "6f693f1d-67f6-4b01-aae8-dfeb47a444b5",
     "next": "06af30a2-e542-4cf0-9793-999267a4007d"
   },
   "post": {
@@ -24,12 +25,13 @@
     "category": "QA",
     "title": "HTML 标签中的 src 和 href 有什么区别",
     "level": 0.5,
-    "updateAt": "2021-07-04T16:01:38+00:00"
+    "createAt": "2021-07-04T05:52:56+00:00",
+    "updateAt": "2024-08-22T01:29:04+00:00"
   },
   "tag": {
     "id": 12,
     "tagName": "HTML",
     "type": "1",
-    "exerciseCount": 57
+    "exerciseCount": 68
   }
 }

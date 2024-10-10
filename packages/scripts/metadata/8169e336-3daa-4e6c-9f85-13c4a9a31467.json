@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "Promise 的 then 方法和 catch 方法都是用于处理 Promise 的 rejected 状态的情况。它们的区别在于：\n\n1. then 方法的第二个参数\n\n如果 Promise 的状态变为 rejected，then 方法的第二个参数会被调用。该参数是一个函数，可以接收一个参数，即 Promise 返回的错误信息。\n\n例如：\n\n```js\nfunction asyncFunction() {\n  return new Promise((resolve, reject) => {\n    setTimeout(() => {\n      reject(new Error('Something went wrong'));\n    }, 1000);\n  });\n}\n\nasyncFunction()\n  .then(\n    result => console.log(result), \n    error => console.error(error)\n  );\n```\n\n在上述代码中，当 Promise 被 reject 时，then 方法的第二个参数会被调用，并打印出错误信息。\n\n2. catch 方法\n\ncatch 方法相当于 then 方法的第二个参数，也是用于处理 Promise 的 rejected 状态的情况。不同之处在于，catch 方法可以链式调用，而不需要在每次调用 then 方法时都传递第二个参数。\n\n例如：\n\n```js\nfunction asyncFunction() {\n  return new Promise((resolve, reject) => {\n    setTimeout(() => {\n      reject(new Error('Something went wrong'));\n    }, 1000);\n  });\n}\n\nasyncFunction()\n  .then(result => console.log(result))\n  .catch(error => console.error(error));\n```\n\n在上述代码中，当 Promise 被 reject 时，catch 方法会被调用，并打印出错误信息。\n\n因此，then 方法的第二个参数和 catch 方法都是用于处理 Promise 的 rejected 状态的情况，但前者需要在每次调用 then 方法时都传递第二个参数，而后者则可以链式调用。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 2,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-05-28T02:46:37.000Z",
-    "updateAt": "2023-05-31T19:59:48.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:25.000Z",
     "isCollected": false,
-    "currentIndex": 346,
+    "currentIndex": 380,
+    "filterTotalNum": 1487,
     "prev": "7b82de7c-5c47-4e5a-9630-df2721d17edb",
-    "next": "684fd560-4d1b-4c3f-ac15-1e1bff86c443"
+    "next": "5c91b3fc-775e-4782-a262-7684487d5196"
   },
   "post": {
     "exerciseKey": "8169e336-3daa-4e6c-9f85-13c4a9a31467",
     "category": "QA",
     "title": "Promise then 第二个参数和catch的区别是什么？",
     "level": 2,
-    "updateAt": "2023-05-31T19:59:48+00:00"
+    "createAt": "2023-05-28T02:46:37+00:00",
+    "updateAt": "2024-08-10T17:07:25+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

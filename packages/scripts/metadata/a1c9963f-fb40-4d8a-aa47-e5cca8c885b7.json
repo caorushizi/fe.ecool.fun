@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "<ul><li>跨站点请求伪造（Cross-Site Request Forgeries），冒充用户发起请求（在用户不知情的情况下）， 完成一些违背用户意愿的事情（如修改用户信息，删初评论等）。</li></ul><p></p><ul><li><strong>1、可能造成危害：</strong><br/></li><ol><li>利用已通过认证的用户权限更新设定信息等；</li><li>利用已通过认证的用户权限购买商品；</li><li>利用已通过的用户权限在留言板上发表言论。</li></ol></ul><p></p><ul><li><strong>2、防御：</strong><br/></li><ol><li>验证码；强制用户必须与应用进行交互，才能完成最终请求。</li><li>尽量使用 post ，限制 get 使用；get 太容易被拿来做 csrf 攻击；</li><li>请求来源限制，此种方法成本最低，但是并不能保证 100% 有效，因为服务器并不是什么时候都能取到 Referer，而且低版本的浏览器存在伪造 Referer 的风险。</li><li>token 验证 CSRF 防御机制是公认最合适的方案。</li></ol></ul><p></p><ul><li><strong>使用token的原理：</strong><br/></li><ol><li>第一步：后端随机产生一个 token，把这个token 保存到 session 状态中；同时后端把这个token 交给前端页面；</li><li>第二步：前端页面提交请求时，把 token 加入到请求数据或者头信息中，一起传给后端；</li><li>后端验证前端传来的 token 与 session 是否一致，一致则合法，否则是非法请求。</li></ol></ul><p></p>",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-04T15:33:42.000Z",
-    "updateAt": "2021-07-05T00:08:14.000Z",
-    "updateUserId": 9,
+    "updateAt": "2024-07-18T23:22:04.000Z",
     "isCollected": false,
-    "currentIndex": 982,
-    "prev": "1176d873-74da-4e0d-87b9-034c1287488a",
-    "next": "825e3009-688d-43d4-ba62-0c4940d90ce9"
+    "currentIndex": 1141,
+    "filterTotalNum": 1487,
+    "prev": "549f8d07-a907-4c86-93c1-d3e8fef30613",
+    "next": "7b581439-bd9d-486d-a045-ff33f1d32b99"
   },
   "post": {
     "exerciseKey": "a1c9963f-fb40-4d8a-aa47-e5cca8c885b7",
     "category": "QA",
     "title": "CSRF攻击及防护",
     "level": 3,
-    "updateAt": "2021-07-05T00:08:14+00:00"
+    "createAt": "2021-07-04T15:33:42+00:00",
+    "updateAt": "2024-07-18T23:22:04+00:00"
   },
   "tag": {
     "id": 21,
     "tagName": "前端安全",
     "type": "1",
-    "exerciseCount": 21
+    "exerciseCount": 25
   }
 }

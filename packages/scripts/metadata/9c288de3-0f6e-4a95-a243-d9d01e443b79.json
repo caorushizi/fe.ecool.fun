@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2474,
+    "exerciseKey": "9c288de3-0f6e-4a95-a243-d9d01e443b79",
+    "category": "QA",
+    "renderType": "md",
+    "title": "js 函数参数有默认值时，如果传递的参数是 undefined 那么会被默认值赋值吗？",
+    "desc": "",
+    "options": "",
+    "explanation": "在 JavaScript 中，如果函数参数有默认值，并且调用函数时传递的参数是 `undefined`，那么该参数会被赋予默认值。这是由于 JavaScript 的参数默认值机制的设计。\n\n### 默认值机制\n\n当函数参数具有默认值时，默认值机制会在以下情况下生效：\n\n- **未传递参数**：如果调用函数时没有提供该参数，则会使用默认值。\n- **传递 `undefined`**：如果显式地将 `undefined` 作为参数传递，默认值机制会将其视为未提供参数，从而使用默认值。\n\n### 示例\n\n```javascript\nfunction greet(name = 'Guest') {\n    console.log(`Hello, ${name}!`);\n}\n\ngreet();             // 输出: Hello, Guest!\ngreet('Alice');      // 输出: Hello, Alice!\ngreet(undefined);    // 输出: Hello, Guest!\n```\n\n### 解释\n\n- **`greet()`**：没有传递参数，因此 `name` 使用默认值 `'Guest'`。\n- **`greet('Alice')`**：传递了 `'Alice'`，因此 `name` 的值是 `'Alice'`。\n- **`greet(undefined)`**：显式传递了 `undefined`，所以 `name` 使用默认值 `'Guest'`。\n\n### 注意事项\n\n- 如果传递其他假值（如 `null`, `0`, `false`）作为参数，它们不会触发默认值机制，除非明确传递 `undefined`。\n\n```javascript\nfunction test(value = 'default') {\n    console.log(value);\n}\n\ntest(null);  // 输出: null\ntest(0);     // 输出: 0\ntest(false); // 输出: false\n```",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 1.5,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:26.000Z",
+    "updateAt": "2024-08-22T10:50:36.000Z",
+    "isCollected": false,
+    "currentIndex": 195,
+    "filterTotalNum": 1487,
+    "prev": "234049cc-fdfc-4f73-ad2c-e1a03b6cea84",
+    "next": "51b79c37-fdda-46fe-9c79-4f2ac7a09206"
+  },
+  "post": {
+    "exerciseKey": "9c288de3-0f6e-4a95-a243-d9d01e443b79",
+    "category": "QA",
+    "title": "js 函数参数有默认值时，如果传递的参数是 undefined 那么会被默认值赋值吗？",
+    "level": 1.5,
+    "createAt": "2024-08-13T08:30:26+00:00",
+    "updateAt": "2024-08-22T10:50:36+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 379
+  }
+}

@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "在 CSS 中伪类一直用 : 表示，如 :hover, :active 等\n\n伪元素在 CSS1 中已存在，当时语法是用 `:` 表示，如 `:before` 和 `:after`\n\n后来在 CSS3 中修订，伪元素用 `::` 表示，如 `::before` 和 `::after`，以此区分伪元素和伪类\n\n由于低版本 IE 对双冒号不兼容，开发者为了兼容性各浏览器，可以继续使用 `:after` 这种老语法表示伪元素\n\n* 单冒号（:）用于 css3 的伪类\n* 双冒号（::）用于 css3 的伪元素\n\n作用：`::before` 和 `::after` 的主要作用是在元素内容前后加上指定内容。\n\n另外，伪类与伪元素的区别有：\n* 伪类与伪元素都是用于向选择器加特殊效果\n* 伪类与伪元素的本质区别就是是否抽象创造了新元素\n* 伪类只要不是互斥可以叠加使用\n* 伪元素在一个选择器中只能出现一次，并且只能出现在末尾\n* 伪类与伪元素优先级分别与类、标签优先级相同\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-04-02T11:12:16.000Z",
-    "updateAt": "2023-04-02T19:12:22.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:12.000Z",
     "isCollected": false,
-    "currentIndex": 406,
-    "prev": "23cebacc-48d3-4b48-9393-5c424afffab0",
-    "next": "718abe6b-08ab-4669-bc33-187fabad8fec"
+    "currentIndex": 434,
+    "filterTotalNum": 1487,
+    "prev": "44e472a3-ebf2-4009-8403-4ec15020e0f2",
+    "next": "b9ca2e1f-d720-4b6a-ab77-acc5edd03c99"
   },
   "post": {
     "exerciseKey": "77778585-d890-4a84-9d69-4a9042f571d7",
     "category": "QA",
     "title": "::before 和::after 中双冒号和单冒号有什么区别、作用？",
     "level": 1,
-    "updateAt": "2023-04-02T19:12:22+00:00"
+    "createAt": "2023-04-02T11:12:16+00:00",
+    "updateAt": "2024-08-10T17:07:12+00:00"
   },
   "tag": {
     "id": 11,
     "tagName": "CSS",
     "type": "1",
-    "exerciseCount": 90
+    "exerciseCount": 101
   }
 }

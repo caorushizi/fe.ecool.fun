@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "一般来说，URL只能使用英文字母、阿拉伯数字和某些标点符号，不能使用其他文字和符号。\n\n这是因为网络标准RFC 1738做了硬性规定：\n\n> \"...Only alphanumerics [0-9a-zA-Z], the special characters \"$-_.+!*'(),\" [not including the quotes - ed], and reserved characters used for their reserved purposes may be used unencoded within a URL.\"\n\n这意味着，如果URL中有汉字，就必须编码后使用。但是麻烦的是，RFC 1738没有规定具体的编码方法，而是交给应用程序（浏览器）自己决定。这导致\"URL编码\"成为了一个混乱的领域。\n\n不同的操作系统、不同的浏览器、不同的网页字符集，将导致完全不同的编码结果。如果程序员要把每一种结果都考虑进去，是不是太恐怖了？有没有办法，能够保证客户端只用一种编码方法向服务器发出请求？\n\n就是使用Javascript先对URL编码，然后再向服务器提交，不要给浏览器插手的机会。因为Javascript的输出总是一致的，所以就保证了服务器得到的数据是格式统一的。\n\nJavascript语言用于编码的函数，一共有三个，最古老的一个就是escape()。虽然这个函数现在已经不提倡使用了，但是由于历史原因，很多地方还在使用它，所以有必要先从它讲起。\n\n它的具体规则是，除了ASCII字母、数字、标点符号\"@ * _ + - . /\"以外，对其他所有字符进行编码。\n\nencodeURI()是Javascript中真正用来对URL编码的函数。\n\n它着眼于对整个URL进行编码，因此除了常见的符号以外，对其他一些在网址中有特殊含义的符号\"; / ? : @ & = + $ , #\"，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。\n\n最后一个Javascript编码函数是encodeURIComponent()。与encodeURI()的区别是，它用于对URL的组成部分进行个别编码，而不用于对整个URL进行编码。\n\n因此，\"; / ? : @ & = + $ , #\"，这些在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码。至于具体的编码方法，两者是一样。\n\n它对应的解码函数是decodeURIComponent()。",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2021-07-19T13:40:09.000Z",
-    "updateAt": "2021-07-25T10:31:23.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:05:26.000Z",
     "isCollected": false,
-    "currentIndex": 824,
+    "currentIndex": 969,
+    "filterTotalNum": 1487,
     "prev": "b7956f38-87f5-4db6-958a-7ae47d60da9b",
-    "next": "0e5e7b73-c27f-4e4f-a8ff-c39927175a55"
+    "next": "f799e353-d998-4570-8a57-8c403caaf649"
   },
   "post": {
     "exerciseKey": "ea7dbe32-726d-4d21-a9bc-3df77e1ec853",
     "category": "QA",
     "title": "为什么部分请求中，参数需要使用 encodeURIComponent 进行转码？",
     "level": 3,
-    "updateAt": "2021-07-25T10:31:23+00:00"
+    "createAt": "2021-07-19T13:40:09+00:00",
+    "updateAt": "2024-08-10T17:05:26+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

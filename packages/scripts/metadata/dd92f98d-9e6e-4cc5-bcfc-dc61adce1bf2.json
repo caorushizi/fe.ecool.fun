@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2799,
+    "exerciseKey": "dd92f98d-9e6e-4cc5-bcfc-dc61adce1bf2",
+    "category": "QA",
+    "renderType": "md",
+    "title": "虚拟 dom 原理是什么，手写一个简单的虚拟 dom 实现",
+    "desc": "",
+    "options": "",
+    "explanation": "**虚拟 DOM（Virtual DOM）** 是一种通过用 JavaScript 对象来模拟真实 DOM 的机制。它可以提高网页的性能和响应速度，减少直接对 DOM 的操作，从而优化 UI 渲染。\n\n### **虚拟 DOM 的原理**\n\n1. **创建虚拟 DOM**：\n   - 使用 JavaScript 对象来表示 DOM 元素。虚拟 DOM 结构类似于真实 DOM，但它是轻量级的，可以在内存中快速操作。\n\n2. **比较差异（Diffing）**：\n   - 当组件状态或属性发生变化时，生成一个新的虚拟 DOM 树。\n   - 通过对比新旧虚拟 DOM 树，找到差异（diff）。\n\n3. **更新真实 DOM**：\n   - 将差异应用到真实 DOM 上，进行最小化的更新，以提高性能。\n\n### **手写一个简单的虚拟 DOM 实现**\n\n以下是一个简化版的虚拟 DOM 实现示例：\n\n```javascript\n// 创建虚拟 DOM 节点\nfunction createElement(tag, props, ...children) {\n    return {\n        tag,\n        props: props || {},\n        children: children.flat().map(child =>\n            typeof child === 'object' ? child : createTextNode(child)\n        )\n    };\n}\n\n// 创建虚拟 DOM 文本节点\nfunction createTextNode(text) {\n    return { tag: 'TEXT', props: { nodeValue: text } };\n}\n\n// 渲染虚拟 DOM 节点到真实 DOM\nfunction render(vnode, container) {\n    if (vnode.tag === 'TEXT') {\n        const textNode = document.createTextNode(vnode.props.nodeValue);\n        container.appendChild(textNode);\n        return;\n    }\n\n    const element = document.createElement(vnode.tag);\n    Object.keys(vnode.props).forEach(prop => {\n        element[prop] = vnode.props[prop];\n    });\n\n    vnode.children.forEach(child => render(child, element));\n\n    container.appendChild(element);\n}\n\n// 比较两个虚拟 DOM 树，更新差异\nfunction diff(oldVNode, newVNode) {\n    if (!oldVNode) {\n        return newVNode;\n    }\n    if (!newVNode) {\n        return null;\n    }\n    if (oldVNode.tag !== newVNode.tag) {\n        return newVNode;\n    }\n    if (oldVNode.tag === 'TEXT') {\n        if (oldVNode.props.nodeValue !== newVNode.props.nodeValue) {\n            return newVNode;\n        }\n        return null;\n    }\n\n    const patch = {};\n    const propChanges = Object.keys(newVNode.props).reduce((acc, prop) => {\n        if (oldVNode.props[prop] !== newVNode.props[prop]) {\n            acc[prop] = newVNode.props[prop];\n        }\n        return acc;\n    }, {});\n\n    if (Object.keys(propChanges).length > 0) {\n        patch.props = propChanges;\n    }\n\n    const childPatches = [];\n    const maxLength = Math.max(oldVNode.children.length, newVNode.children.length);\n    for (let i = 0; i < maxLength; i++) {\n        const childPatch = diff(oldVNode.children[i], newVNode.children[i]);\n        if (childPatch) {\n            childPatches[i] = childPatch;\n        }\n    }\n\n    if (childPatches.length > 0) {\n        patch.children = childPatches;\n    }\n\n    return Object.keys(patch).length > 0 ? patch : null;\n}\n\n// 应用虚拟 DOM 差异到真实 DOM\nfunction patch(node, patch) {\n    if (patch === null) {\n        return;\n    }\n\n    if (patch.props) {\n        Object.keys(patch.props).forEach(prop => {\n            node[prop] = patch.props[prop];\n        });\n    }\n\n    if (patch.children) {\n        patch.children.forEach((childPatch, index) => {\n            const childNode = node.childNodes[index];\n            if (childNode) {\n                patch(childNode, childPatch);\n            }\n        });\n    }\n}\n\n// 使用示例\nconst oldVNode = createElement('div', { id: 'container' },\n    createElement('h1', null, 'Hello, World!'),\n    createElement('p', null, 'This is a virtual DOM example.')\n);\n\nconst newVNode = createElement('div', { id: 'container' },\n    createElement('h1', null, 'Hello, Virtual DOM!'),\n    createElement('p', null, 'Updated example.')\n);\n\nconst container = document.getElementById('app');\nrender(oldVNode, container);\n\nsetTimeout(() => {\n    const patch = diff(oldVNode, newVNode);\n    patch(container, patch);\n}, 2000);\n```\n\n### **解释**\n\n1. **`createElement`**：创建虚拟 DOM 节点。\n2. **`createTextNode`**：创建虚拟文本节点。\n3. **`render`**：将虚拟 DOM 渲染到真实 DOM。\n4. **`diff`**：对比虚拟 DOM 树，找出差异。\n5. **`patch`**：将差异应用到真实 DOM 上。\n",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 4,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:41.000Z",
+    "updateAt": "2024-08-14T19:46:37.000Z",
+    "isCollected": false,
+    "currentIndex": 43,
+    "filterTotalNum": 1487,
+    "prev": "64279d15-4a32-42a1-809a-6e35d59c6e62",
+    "next": "0d79b365-4f76-4bf2-9ec1-f55fdfc83fb7"
+  },
+  "post": {
+    "exerciseKey": "dd92f98d-9e6e-4cc5-bcfc-dc61adce1bf2",
+    "category": "QA",
+    "title": "虚拟 dom 原理是什么，手写一个简单的虚拟 dom 实现",
+    "level": 4,
+    "createAt": "2024-08-13T08:30:41+00:00",
+    "updateAt": "2024-08-14T19:46:37+00:00"
+  },
+  "tag": {
+    "id": 26,
+    "tagName": "编程题",
+    "type": "1",
+    "exerciseCount": 124
+  }
+}

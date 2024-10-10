@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2709,
+    "exerciseKey": "f18218c8-4c74-4631-b66d-e7ac65929f35",
+    "category": "QA",
+    "renderType": "md",
+    "title": "WebWorker、SharedWorker 和 ServiceWorker 有哪些区别？",
+    "desc": "",
+    "options": "",
+    "explanation": "`WebWorker`、`SharedWorker` 和 `ServiceWorker` 都是 Web API 提供的用于在后台线程执行 JavaScript 代码的机制，但它们有不同的用途和特性。下面是它们的主要区别：\n\n### **1. WebWorker**\n\n- **作用**：用于在后台线程中执行 JavaScript 代码，避免阻塞主线程（UI线程）。\n- **生命周期**：与页面的生命周期关联，当页面关闭时，WebWorker 也会终止。\n- **通信**：通过 `postMessage` 和 `onmessage` 进行通信，只能与创建它的页面进行通信，不能与其他页面或 Worker 进行直接通信。\n- **共享数据**：不能直接与其他 WebWorkers 或页面共享数据。\n- **应用场景**：适用于需要在后台执行计算密集型任务的场景，如数据处理、图像处理等。\n\n**示例**：\n```javascript\n// main.js\nconst worker = new Worker('worker.js');\nworker.postMessage('Hello, worker!');\nworker.onmessage = (event) => console.log(event.data);\n\n// worker.js\nself.onmessage = (event) => {\n  self.postMessage(`Received: ${event.data}`);\n};\n```\n\n### **2. SharedWorker**\n\n- **作用**：允许多个浏览器上下文（如不同的页面或 iframe）共享一个 Worker 实例。\n- **生命周期**：与浏览器会话关联，不会随页面关闭而销毁，只要有一个页面或 iframe 仍在使用 SharedWorker，它就会保持活跃。\n- **通信**：通过 `postMessage` 和 `onmessage` 进行通信，但可以在不同的页面或 iframe 之间进行通信。\n- **共享数据**：可以在多个页面或 iframe 之间共享数据。\n- **应用场景**：适用于需要在多个页面或 iframe 之间共享数据或状态的场景，如实时应用、共享缓存等。\n\n**示例**：\n```javascript\n// main1.js\nconst worker = new SharedWorker('shared-worker.js');\nworker.port.postMessage('Hello from page 1!');\nworker.port.onmessage = (event) => console.log(event.data);\n\n// main2.js\nconst worker = new SharedWorker('shared-worker.js');\nworker.port.postMessage('Hello from page 2!');\nworker.port.onmessage = (event) => console.log(event.data);\n\n// shared-worker.js\nself.onconnect = (event) => {\n  const port = event.ports[0];\n  port.onmessage = (event) => {\n    port.postMessage(`Received: ${event.data}`);\n  };\n};\n```\n\n### **3. ServiceWorker**\n\n- **作用**：主要用于拦截和处理网络请求，缓存资源，实现离线功能和推送通知等功能。\n- **生命周期**：与页面的生命周期无关，可以在后台长时间运行，不会随页面的关闭而结束。可以在浏览器关闭时继续运行，用于处理推送通知等。\n- **通信**：通过 `postMessage` 和 `onmessage` 与页面进行通信，但不能直接访问 DOM。\n- **共享数据**：通过缓存机制（Cache API）和 IndexedDB 进行数据存储和共享。\n- **应用场景**：适用于实现离线支持、缓存优化、后台同步、推送通知等功能。\n\n**示例**：\n```javascript\n// service-worker.js\nself.addEventListener('install', (event) => {\n  // Perform install steps\n  event.waitUntil(\n    caches.open('my-cache').then((cache) => {\n      return cache.addAll([\n        '/',\n        '/styles/main.css',\n        '/script/main.js'\n      ]);\n    })\n  );\n});\n\nself.addEventListener('fetch', (event) => {\n  event.respondWith(\n    caches.match(event.request).then((response) => {\n      return response || fetch(event.request);\n    })\n  );\n});\n```",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 2,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:41.000Z",
+    "updateAt": "2024-08-14T23:23:12.000Z",
+    "isCollected": false,
+    "currentIndex": 76,
+    "filterTotalNum": 1487,
+    "prev": "c5f7ff93-7de3-4ebd-bfaa-bcaeebcd7f56",
+    "next": "fbe1ba95-3c26-4d09-b65d-c2dda661b280"
+  },
+  "post": {
+    "exerciseKey": "f18218c8-4c74-4631-b66d-e7ac65929f35",
+    "category": "QA",
+    "title": "WebWorker、SharedWorker 和 ServiceWorker 有哪些区别？",
+    "level": 2,
+    "createAt": "2024-08-13T08:30:41+00:00",
+    "updateAt": "2024-08-14T23:23:12+00:00"
+  },
+  "tag": {
+    "id": 10,
+    "tagName": "JavaScript",
+    "type": "1",
+    "exerciseCount": 379
+  }
+}

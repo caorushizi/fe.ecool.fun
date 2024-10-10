@@ -8,28 +8,30 @@
     "desc": null,
     "options": null,
     "explanation": "在处理多个并发请求时，我们一般会用`Promise.all()`方法。\n\n该方法指当所有在可迭代参数中的 `promises` 已完成，或者第一个传递的 promise（指 reject）失败时，返回 promise。\n\n但是当其中任何一个被拒绝的话。`Promise.all([..])`就会立即被拒绝，并丢弃来自其他所有promis的全部结果。\n\n也就是说，`promise.all` 中任何一个 `promise` 出现错误的时候都会执行reject，导致其它正常返回的数据也无法使用。\n\n如何让Promise.all在抛出异常后依然有效呢？\n\n# 方案一\n\n在promise.all队列中，使用map每一个过滤每一个promise任务，其中任意一个报错后，return一个返回值，确保promise能正常执行走到.then中。\n\n```js\nvar p1 = new Promise((resolve, reject) => {\n\tresolve('p1');\n});\nvar p2 = new Promise((resolve, reject) => {\n\tresolve('p2');\n});\nvar p3 = new Promise((resolve, reject) => {\n\treject('p3');\n});\nPromise.all([p1, p2, p3].map(p => p.catch(e => '出错后返回的值' )))\n  .then(values => {\n    console.log(values);\n  }).catch(err => {\n    console.log(err);\n  })\n```\n\n# 方案二\n\n使用 `Promise.allSettled` 替代 `Promise.all()`。\n\n> `Promise.allSettled()`方法返回一个promise，该promise在所有给定的promise已被解析或被拒绝后解析，并且每个对象都描述每个promise的结果。\n\n\n\n\n",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 3,
-    "status": 2,
     "appId": 7,
     "createAt": "2022-08-07T14:44:01.000Z",
-    "updateAt": "2022-08-10T10:06:36.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:06:55.000Z",
     "isCollected": false,
-    "currentIndex": 499,
-    "prev": "255b920d-ba6d-4e6a-85ac-58c78d2e0773",
-    "next": "696a79c6-1e6d-4e66-ad11-2e072c9c62d7"
+    "currentIndex": 516,
+    "filterTotalNum": 1487,
+    "prev": "1aa28332-a1a6-4778-812f-3226a2003614",
+    "next": "38114327-a110-4a75-8745-534924338657"
   },
   "post": {
     "exerciseKey": "3526fff1-d92d-4568-b6dd-549bc6c2a92e",
     "category": "QA",
     "title": "如何让Promise.all在抛出异常后依然有效",
     "level": 3,
-    "updateAt": "2022-08-10T10:06:36+00:00"
+    "createAt": "2022-08-07T14:44:01+00:00",
+    "updateAt": "2024-08-10T17:06:55+00:00"
   },
   "tag": {
     "id": 10,
     "tagName": "JavaScript",
     "type": "1",
-    "exerciseCount": 322
+    "exerciseCount": 379
   }
 }

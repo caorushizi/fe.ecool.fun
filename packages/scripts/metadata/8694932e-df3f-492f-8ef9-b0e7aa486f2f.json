@@ -8,28 +8,30 @@
     "desc": "```ts\n/**\n * @file 实现 PromiseAll 方法\n */\n\nimport { sleep } from \"./8.sleep\";\n\nasync function myAll<T extends unknown[] | []>(values: T): Promise<{ [P in keyof T]: Awaited<T[P]> }> {\n    // 补全此处代码，使用 Promise.all 以外的语法完成\n    throw new Error('功能待实现');\n}\n\n// 一秒钟后返回结果 value\nasync function request(value: string) {\n    await sleep(1000);\n    return value;\n}\nasync function main() {\n    console.log('start');\n    const res = await myAll([\n        request('a'),\n        request('b'),\n        request('c'),\n    ])\n    console.log(res); // 预期输出 start 一秒后输出 ['a', 'b', 'c']\n}\nmain()\n\nexport default {}\n```",
     "options": null,
     "explanation": "```ts\n/**\n * @file 实现 PromiseAll 方法\n */\n\nimport { sleep } from \"./8.sleep\";\n\nasync function myAll<T extends unknown[] | []>(\n  values: T\n): Promise<{ [P in keyof T]: Awaited<T[P]> }> {\n  // 补全此处代码，使用 Promise.all 以外的语法完成\n  // throw new Error('功能待实现');\n  var arr = [];\n  for (var i = 0; i < values.length; i++) {\n    arr.push(await values[i]);\n  }\n  return arr as { [P in keyof T]: Awaited<T[P]> };\n}\n\n// 一秒钟后返回结果 value\nasync function request(value: string) {\n  await sleep(1000);\n  return value;\n}\nasync function main() {\n  console.log(\"start\");\n  const res = await myAll([request(\"a\"), request(\"b\"), request(\"c\")]);\n  console.log(res); // 预期输出 start 一秒后输出 ['a', 'b', 'c']\n}\nmain();\n\nexport default {};\n\n```",
+    "pivot": "",
+    "vipLimit": 0,
     "level": 1,
-    "status": 2,
     "appId": 7,
     "createAt": "2023-03-12T15:28:47.000Z",
-    "updateAt": "2023-03-12T23:30:29.000Z",
-    "updateUserId": 11,
+    "updateAt": "2024-08-10T17:07:11.000Z",
     "isCollected": false,
-    "currentIndex": 418,
-    "prev": "6d0bf8a4-24f0-4794-84c9-19e0c811b3ed",
-    "next": "b773eb98-1739-43a4-b0fc-4c0deed6cb13"
+    "currentIndex": 437,
+    "filterTotalNum": 1487,
+    "prev": "b773eb98-1739-43a4-b0fc-4c0deed6cb13",
+    "next": "5bd5fdd4-706a-49dd-9cbe-1f2a05779ffe"
   },
   "post": {
     "exerciseKey": "8694932e-df3f-492f-8ef9-b0e7aa486f2f",
     "category": "QA",
     "title": "请实现下面的 myAll 方法",
     "level": 1,
-    "updateAt": "2023-03-12T23:30:29+00:00"
+    "createAt": "2023-03-12T15:28:47+00:00",
+    "updateAt": "2024-08-10T17:07:11+00:00"
   },
   "tag": {
     "id": 19,
     "tagName": "Typescript",
     "type": "1",
-    "exerciseCount": 46
+    "exerciseCount": 55
   }
 }

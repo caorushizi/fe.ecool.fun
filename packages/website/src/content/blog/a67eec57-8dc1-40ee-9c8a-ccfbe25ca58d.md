@@ -1,6 +1,6 @@
 ---
 title: constructor中super与props参数一起使用的目的是什么？
-pubDatetime: 2021-07-04T19:24:45.000Z
+pubDatetime: 2024-08-10T17:04:55.000Z
 author: caorushizi
 tags:
   - React.js

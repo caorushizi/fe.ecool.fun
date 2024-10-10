@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2880,
+    "exerciseKey": "ead2f5e6-525a-4faf-956f-d97d90e933fe",
+    "category": "QA",
+    "renderType": "md",
+    "title": "Vue 中的 h 函数有什么用？",
+    "desc": null,
+    "options": null,
+    "explanation": "### **1. `h` 函数概述**\n\n在 Vue 中，`h` 函数是一个用于创建虚拟 DOM 节点的工厂函数。它的全称是 `createElement`，在 Vue 3 中，它通常被直接引用为 `h`。\n\n### **2. 基本用法**\n\n`h` 函数的基本语法如下：\n\n```javascript\nh(tag, props, children)\n```\n\n- **tag**: 字符串或组件对象，表示要创建的 HTML 标签或组件。\n- **props**: 可选的属性对象，包含要传递给组件或元素的属性。\n- **children**: 可选的子节点，可以是字符串、虚拟 DOM 节点数组或嵌套的 `h` 函数调用。\n\n### **3. 创建虚拟 DOM 示例**\n\n下面是一个简单的使用 `h` 函数创建虚拟 DOM 的示例：\n\n```javascript\nimport { defineComponent, h } from 'vue';\n\nexport default defineComponent({\n  name: 'MyComponent',\n  render() {\n    return h('div', { class: 'my-class' }, [\n      h('h1', 'Hello World'),\n      h('p', 'This is a paragraph.'),\n    ]);\n  },\n});\n```\n\n在这个例子中，`h` 函数用于创建一个 `div` 元素，包含一个 `h1` 和一个 `p` 标签。返回的结果是一个虚拟 DOM 树。\n\n### **4. 动态组件示例**\n\n使用 `h` 函数可以方便地创建动态组件。例如：\n\n```javascript\nimport { defineComponent, h, ref } from 'vue';\n\nconst MyButton = { template: '<button>Button</button>' };\nconst MyLink = { template: '<a href=\"#\">Link</a>' };\n\nexport default defineComponent({\n  name: 'DynamicComponent',\n  setup() {\n    const isButton = ref(true);\n    \n    return { isButton };\n  },\n  render() {\n    const component = this.isButton ? MyButton : MyLink;\n    return h(component);\n  },\n});\n```\n\n在这个例子中，根据 `isButton` 的值动态决定渲染哪个组件。\n\n### **5. 与 JSX 结合**\n\n在 Vue 3 中，可以使用 JSX 来书写组件，`h` 函数在这里起到关键作用。示例如下：\n\n```javascript\n/** @jsx h */\nimport { defineComponent } from 'vue';\n\nexport default defineComponent({\n  name: 'MyComponent',\n  render() {\n    return (\n      <div class=\"my-class\">\n        <h1>Hello World</h1>\n        <p>This is a paragraph.</p>\n      </div>\n    );\n  },\n});\n```\n\n在 JSX 中，每个标签会被转换为 `h` 函数的调用。\n\n### **6. 性能优化**\n\n`h` 函数通过创建虚拟 DOM，Vue 可以在数据变化时比较新旧虚拟 DOM，计算出最小的 DOM 更新，优化性能。这种方式避免了频繁的实际 DOM 操作，从而提升了应用的性能。",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 2,
+    "appId": 7,
+    "createAt": "2024-09-21T01:58:05.000Z",
+    "updateAt": "2024-09-21T01:58:11.000Z",
+    "isCollected": false,
+    "currentIndex": 6,
+    "filterTotalNum": 1487,
+    "prev": "f8da672c-4231-4dff-990d-9a4a6daebe2c",
+    "next": "58f33dfb-be76-4251-ad48-d661d65c4b28"
+  },
+  "post": {
+    "exerciseKey": "ead2f5e6-525a-4faf-956f-d97d90e933fe",
+    "category": "QA",
+    "title": "Vue 中的 h 函数有什么用？",
+    "level": 2,
+    "createAt": "2024-09-21T01:58:05+00:00",
+    "updateAt": "2024-09-21T01:58:11+00:00"
+  },
+  "tag": {
+    "id": 14,
+    "tagName": "Vue.js",
+    "type": "1",
+    "exerciseCount": 97
+  }
+}

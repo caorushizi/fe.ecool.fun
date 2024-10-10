@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2576,
+    "exerciseKey": "adaef090-b8ea-4696-bc9b-313156f6b460",
+    "category": "QA",
+    "renderType": "md",
+    "title": "说说 React commit 阶段的执行过程",
+    "desc": "",
+    "options": "",
+    "explanation": "在 React 的 Fiber 架构中，`commit` 阶段是将更新应用到实际 DOM 的关键步骤。这个阶段处理在 `render` 阶段中计算出的所有副作用，并实际更新页面内容。以下是 `commit` 阶段的详细执行过程：\n\n### 1. **提交 Fiber 树**\n\n- **获取 Fiber 树**：`commit` 阶段开始时，React 会获取从 `render` 阶段生成的 Fiber 树。这棵树包含所有需要更新的 Fiber 节点及其副作用标记。\n\n### 2. **遍历 Fiber 树**\n\n- **递归遍历**：React 会递归遍历 Fiber 树，从根节点开始，逐层处理每个 Fiber 节点。每个节点会根据其 `effectTag` 属性执行相应的操作。\n- **处理副作用**：副作用包括插入、更新和删除 DOM 元素、执行生命周期方法、调用 `useEffect` 和 `useLayoutEffect` 的回调函数等。\n\n### 3. **应用副作用**\n\n- **插入节点**：对于标记为插入的 Fiber 节点，React 会在实际 DOM 中插入对应的节点。这包括创建新的 DOM 元素、设置属性和插入到正确的位置。\n- **更新节点**：对于标记为更新的 Fiber 节点，React 会更新现有的 DOM 元素。这包括更新元素的属性、文本内容和样式等。\n- **删除节点**：对于标记为删除的 Fiber 节点，React 会从实际 DOM 中移除对应的节点。这包括删除元素、清理事件监听器等。\n\n### 4. **处理生命周期方法和副作用**\n\n- **调用生命周期方法**：在 `commit` 阶段，React 会调用组件的生命周期方法，如 `componentDidMount`、`componentDidUpdate` 和 `componentWillUnmount`。\n- **执行 `useEffect` 和 `useLayoutEffect`**：React 会执行 `useEffect` 和 `useLayoutEffect` 的回调函数。这些回调函数在组件挂载和更新后执行，用于处理副作用操作（如数据获取、事件绑定等）。\n\n### 5. **更新 Fiber 树**\n\n- **更新 Fiber 节点**：在 `commit` 阶段完成后，React 会更新 Fiber 节点的状态和属性，将 `current` 树指向新的 Fiber 树。\n- **清理工作**：完成副作用处理后，React 会清理 Fiber 节点上的副作用标记和临时状态，为下一次渲染做好准备。\n\n### 6. **浏览器布局和绘制**\n\n- **布局计算**：在实际 DOM 更新后，浏览器会进行布局计算，确定元素的最终位置和尺寸。\n- **绘制**：浏览器会根据布局计算结果绘制页面内容。这个过程包括将元素绘制到屏幕上，并处理样式、颜色和图像等。",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 4,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:31.000Z",
+    "updateAt": "2024-08-15T19:11:11.000Z",
+    "isCollected": false,
+    "currentIndex": 149,
+    "filterTotalNum": 1487,
+    "prev": "7969396f-fd4f-4d33-96af-c95c0840d201",
+    "next": "bd1d3517-7b88-46a3-a077-6865e0b96b27"
+  },
+  "post": {
+    "exerciseKey": "adaef090-b8ea-4696-bc9b-313156f6b460",
+    "category": "QA",
+    "title": "说说 React commit 阶段的执行过程",
+    "level": 4,
+    "createAt": "2024-08-13T08:30:31+00:00",
+    "updateAt": "2024-08-15T19:11:11+00:00"
+  },
+  "tag": {
+    "id": 13,
+    "tagName": "React.js",
+    "type": "1",
+    "exerciseCount": 129
+  }
+}

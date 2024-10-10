@@ -1,0 +1,37 @@
+{
+  "data": {
+    "id": 2552,
+    "exerciseKey": "98bc1edf-2899-40cb-a2b2-93e053024218",
+    "category": "QA",
+    "renderType": "md",
+    "title": "怎么在前端页面中添加水印？",
+    "desc": "",
+    "options": "",
+    "explanation": "在前端页面中添加水印可以通过以下几种方法实现：\n\n### **1. 使用 CSS 实现**\n\n使用 CSS 伪元素和 `background` 属性来添加水印。\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Watermark Example</title>\n<style>\n  .watermarked {\n    position: relative;\n  }\n  .watermarked::before {\n    content: \"Watermark\";\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%) rotate(-30deg);\n    font-size: 3rem;\n    color: rgba(0, 0, 0, 0.1);\n    pointer-events: none;\n    z-index: 1000;\n  }\n</style>\n</head>\n<body>\n<div class=\"watermarked\">\n  <!-- Your content here -->\n  <p>Some content with a watermark.</p>\n</div>\n</body>\n</html>\n```\n\n### **2. 使用 Canvas**\n\n通过在 `canvas` 上绘制水印来实现。\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Canvas Watermark Example</title>\n</head>\n<body>\n<canvas id=\"watermarkCanvas\" width=\"600\" height=\"400\"></canvas>\n<script>\n  const canvas = document.getElementById('watermarkCanvas');\n  const ctx = canvas.getContext('2d');\n\n  // Draw background\n  ctx.fillStyle = '#fff';\n  ctx.fillRect(0, 0, canvas.width, canvas.height);\n\n  // Draw watermark text\n  ctx.font = '48px Arial';\n  ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';\n  ctx.textAlign = 'center';\n  ctx.textBaseline = 'middle';\n  ctx.save();\n  ctx.translate(canvas.width / 2, canvas.height / 2);\n  ctx.rotate(-Math.PI / 6);\n  ctx.fillText('Watermark', 0, 0);\n  ctx.restore();\n</script>\n</body>\n</html>\n```\n\n### **3. 使用 HTML 的 `background` 属性**\n\n将水印作为背景图像设置到页面的某个容器上。\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Background Watermark Example</title>\n<style>\n  .watermarked {\n    background-image: url('watermark.png');\n    background-repeat: no-repeat;\n    background-size: 200px 100px;\n    background-position: center;\n  }\n</style>\n</head>\n<body>\n<div class=\"watermarked\">\n  <!-- Your content here -->\n  <p>Some content with a watermark.</p>\n</div>\n</body>\n</html>\n```\n\n### **4. 使用 JavaScript 动态生成水印**\n\n通过 JavaScript 在 DOM 中添加水印元素。\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Dynamic Watermark Example</title>\n<style>\n  .watermark {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    pointer-events: none;\n    z-index: 9999;\n    text-align: center;\n    font-size: 3rem;\n    color: rgba(0, 0, 0, 0.1);\n    transform: rotate(-30deg);\n  }\n</style>\n</head>\n<body>\n<div id=\"content\">\n  <!-- Your content here -->\n  <p>Some content with a watermark.</p>\n</div>\n<script>\n  const watermark = document.createElement('div');\n  watermark.className = 'watermark';\n  watermark.textContent = 'Watermark';\n  document.body.appendChild(watermark);\n</script>\n</body>\n</html>\n```\n",
+    "pivot": "",
+    "vipLimit": 1,
+    "level": 3.5,
+    "appId": 7,
+    "createAt": "2024-08-13T08:30:31.000Z",
+    "updateAt": "2024-08-15T23:20:18.000Z",
+    "isCollected": false,
+    "currentIndex": 164,
+    "filterTotalNum": 1487,
+    "prev": "5426fc5b-0f7d-4095-98bf-f76016ca090e",
+    "next": "efc1bdba-4ded-4d08-846c-cc98cd1d0d58"
+  },
+  "post": {
+    "exerciseKey": "98bc1edf-2899-40cb-a2b2-93e053024218",
+    "category": "QA",
+    "title": "怎么在前端页面中添加水印？",
+    "level": 3.5,
+    "createAt": "2024-08-13T08:30:31+00:00",
+    "updateAt": "2024-08-15T23:20:18+00:00"
+  },
+  "tag": {
+    "id": 75,
+    "tagName": "场景题",
+    "type": "1",
+    "exerciseCount": 39
+  }
+}
